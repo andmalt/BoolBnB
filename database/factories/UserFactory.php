@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use Faker\Generator as Faker;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
