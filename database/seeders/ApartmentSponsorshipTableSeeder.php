@@ -26,19 +26,19 @@ class ApartmentSponsorshipTableSeeder extends Seeder
             $sponsorship = Arr::random($sponsorship_ids);
 
             if($sponsorship == 1){
-                $apartment->sponsorships()->attach($apartment,[
+                $apartment->sponsorships()->attach($apartment->id,[
                     'sponsorship_id' => 1,
                     'start_date' => Carbon::now(),
                     'end_date' => Carbon::now()->addHours(24),
                 ]);
             }elseif($sponsorship == 2){
-                $apartment->sponsorships()->attach($apartment, [
+                $apartment->sponsorships()->attach($apartment->id, [
                     'sponsorship_id' => 2,
                     'start_date' => Carbon::now(),
                     'end_date' => Carbon::now()->addHours(72),
                 ]);
             }elseif($sponsorship == 3){
-                $apartment->sponsorships()->attach($apartment, [
+                $apartment->sponsorships()->attach($apartment->id, [
                     'sponsorship_id' => 3,
                     'start_date' => Carbon::now(),
                     'end_date' => Carbon::now()->addHours(144),

@@ -42,6 +42,7 @@ class ApartmentFactory extends Factory
         return [
             'user_id' => Arr::random($users_id),
             'title' => $this->faker->sentence(5),
+            'description' => $this->faker->paragraph(4),
             'rooms' => $this->faker->numberBetween(1,15),
             'beds' =>  $this->faker->numberBetween(1,25),
             'bathrooms' => $this->faker->numberBetween(1,10),

@@ -15,16 +15,18 @@ class DatabaseSeeder extends Seeder
     {
         // examples
         // 
-        // \App\Models\User::factory(10)->create();
-        // \App\Models\Apartment::factory(30)->create();
-        // \App\Models\Photo::factory(100)->create();
-        // \App\Models\Message::factory(80)->create();
-        // \App\Models\Stat::factory(350)->create();
-        // 
-        //         
-        // $this->call([
-        //     SponsorshipTableSeeder::class,
-        //     ApartmentSponsorshipTableSeeder::class,
-        // ]);
+        \App\Models\User::factory(10)->create();
+        \App\Models\Apartment::factory(30)->create();
+        \App\Models\Photo::factory(100)->create();
+        \App\Models\Message::factory(80)->create();
+        \App\Models\Stat::factory(650)->create();
+        
+                
+        $this->call([
+            SponsorshipTableSeeder::class,
+            ApartmentSponsorshipTableSeeder::class,
+            FacilityTableSeeder::class,
+            ApartmentFacilityTableSeeder::class,
+        ]);
     }
 }
