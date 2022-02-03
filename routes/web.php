@@ -22,6 +22,6 @@ Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::resource('/guest/apartment', ApartmentController::class)->only(['index','show']);
+Route::resource('/guest/apartment', ApartmentController::class)->names('guest.apartment')->only(['index','show']);
 
 require __DIR__.'/auth.php';

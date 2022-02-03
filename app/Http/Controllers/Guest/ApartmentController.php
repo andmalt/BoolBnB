@@ -17,7 +17,7 @@ class ApartmentController extends Controller
     {
         $apartments = Apartment::all();
 
-        return view('guest.apartments.index',compact('apartments'));
+        return view('guest.apartment.index',compact('apartments'));
     }
 
     /**
@@ -47,9 +47,9 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Apartment $apartment)
     {
-        //
+        return view('guest.apartment.show',compact('apartment'));
     }
 
     /**
