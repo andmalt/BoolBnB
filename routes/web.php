@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Guest\ApartmentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,5 +21,7 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::resource('/guest/apartment', ApartmentController::class)->only(['index','show']);
 
 require __DIR__.'/auth.php';
