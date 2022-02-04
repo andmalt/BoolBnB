@@ -48,7 +48,7 @@ class ApartmentFactory extends Factory
             'bathrooms' => $this->faker->numberBetween(1,10),
             'square' => $this->faker->numberBetween(50,900),
             'visible' => $this->faker->boolean(),
-            'country' => 'Italia',
+            // 'country' => 'Italia',
             'region' => Arr::random($regions),
             'city' => $this->faker->city(),
             'address' => $this->faker->address(),

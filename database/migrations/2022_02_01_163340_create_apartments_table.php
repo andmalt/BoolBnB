@@ -23,8 +23,8 @@ class CreateApartmentsTable extends Migration
             $table->tinyInteger('bathrooms');
             $table->smallInteger('square');
             $table->boolean('visible')->default(false);
-            $table->string('country',100);
-            $table->string('region',100);
+            $table->string('country',20)->default('Italia');
+            $table->string('region',60);
             $table->string('city',100);
             $table->string('address');
             $table->decimal('lat',8,6)->nullable();

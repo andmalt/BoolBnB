@@ -9,6 +9,8 @@ class Apartment extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['title','description','rooms','beds','bathrooms','square','region','city','address','lat','lon'];
+
     public function user(){
         return $this->belongsTo(User::class,'user_id');
     }
@@ -19,6 +21,10 @@ class Apartment extends Model
 
     public function stats(){
         return $this->hasMany(Stat::class);
+    }
+
+    public function reviews(){
+        return $this->hasMany(ApartmentReview::class);
     }
 
     public function photos(){
