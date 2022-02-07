@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\ApartmentController as AdminApartmentController;
 use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Guest\ApartmentController;
+use App\Http\Controllers\Guest\MessageController as GuestMessageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,17 +17,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// guest
 Route::get('/', function () {
     return view('guest.welcome');
 });
 
+Route::resource('/guest/apartment', ApartmentController::class)->names('guest.apartment')->only(['index', 'show']);
+Route::namespace('Guest')
+->name('guest.')
+->prefix('guest')
+->group(function () {
+    Route::get('/message', [GuestMessageController::class, 'contact'])->name('message');
+    Route::post('/message/send', [GuestMessageController::class, 'sendEmail'])->name('message.send');
+});
+
+// admin
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::resource('/guest/apartment', ApartmentController::class)->names('guest.apartment')->only(['index','show']);
-Route::resource('/apartment', AdminApartmentController::class)->names('admin.apartment')->middleware(['auth']);
-
+Route::resource('/admin/apartment', AdminApartmentController::class)->names('admin.apartment')->middleware(['auth']);
 Route::middleware(['auth'])
 ->namespace('Admin')
 ->name('admin.')
