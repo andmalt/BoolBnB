@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\ApartmentController as AdminApartmentController;
+use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Guest\ApartmentController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,5 +25,15 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::resource('/guest/apartment', ApartmentController::class)->names('guest.apartment')->only(['index','show']);
+Route::resource('/apartment', AdminApartmentController::class)->names('admin.apartment')->middleware(['auth']);
+
+Route::middleware(['auth'])
+->namespace('Admin')
+->name('admin.')
+->prefix('admin')
+->group(function(){
+   Route::get('/contact', [MessageController::class, 'show'])->name('show.contact');
+   Route::delete('/contact/{contact}', [MessageController::class, 'delete'])->name('delete.contact');
+});
 
 require __DIR__.'/auth.php';
