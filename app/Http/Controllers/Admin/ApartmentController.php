@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Apartment;
 use Illuminate\Http\Request;
 
 class ApartmentController extends Controller
@@ -14,7 +15,8 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        //
+
+        return view('admin.apartment.index');
     }
 
     /**
@@ -24,7 +26,7 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        //
+        return \view('admin.apartment.create');
     }
 
     /**
@@ -44,9 +46,9 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Apartment $apartment)
     {
-        //
+        return \view('admin.apartment.show');
     }
 
     /**
