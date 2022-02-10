@@ -2,4 +2,5 @@
 
 @section('content')
     <h1>Sono Admin Index</h1>
+    {{session('test')}}
 @endsection
