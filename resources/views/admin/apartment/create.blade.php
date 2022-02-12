@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Inserisci la tua casa</h1>
-    <form action="{{ route('admin.apartment.store')}}" method="post">
+    <form action="{{ route('admin.apartment.store')}}" method="post" enctype="multipart/form-data" >
         @csrf
        <label class="block mt-3">
             <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
@@ -33,6 +33,13 @@
                 Metri quadri
             </span>
             <input type="text" name="square" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="numero di metri quadri" />
+        </label>
+
+         <label class="block mt-3">
+            <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+                Immagini
+            </span>
+            <input type="file" name="images[]" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-1/4 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="inserire le immagini della casa" multiple/>
         </label>
 
         <div class="block mt-3">

@@ -21,7 +21,7 @@ class ApartmentReviewFactory extends Factory
             'apartment_id' => Arr::random($apartment_ids),
             'vote' => $this->faker->randomFloat(1,0,5),
             'name' => $this->faker->name(),
-            'review' => $this->faker->paragraph(3),
+            'review' => $this->faker->paragraph(2),
         ];
     }
 }

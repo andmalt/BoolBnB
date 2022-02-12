@@ -19,7 +19,7 @@ class PhotoFactory extends Factory
         
         return [
             'apartment_id' => Arr::random($apartment_ids),
-            'image_url' => $this->faker->imageUrl(),
+            'image' => $this->faker->imageUrl(),
         ];
     }
 }

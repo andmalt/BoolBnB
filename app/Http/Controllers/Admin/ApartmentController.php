@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use App\Models\Facility;
+use App\Models\Photo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ApartmentController extends Controller
 {
@@ -18,9 +20,9 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $apartments = DB::table('apartments')->where('user_id','=', Auth::user()->id);
+        $apartments = DB::table('apartments')->where('user_id','=', Auth::user()->id)->get();
 
-        return view('admin.apartment.index',\compact('apartments'));
+        return view('admin.apartment.index',compact('apartments'));
     }
 
     /**
@@ -66,6 +68,13 @@ class ApartmentController extends Controller
      */
     public function store(Request $request)
     {
+        // $request->validate([
+        //     'images' => 'required',
+        //     'images.*' => 'mimes:jpg,png,jpeg,gif,svg'
+        // ]);
+
+
+
         $data = $request->all();
         $data['user_id'] = Auth::user()->id;
         $address = str_replace(' ', '-', $data['address']);
@@ -78,13 +87,27 @@ class ApartmentController extends Controller
 
         $apartment = new Apartment();
         $apartment->fill($data);
-        $apartment->save();
+        // $apartment->save();
 
-        if(array_key_exists('facilities', $data)){
-            $apartment->facilities()->sync($data['facilities']);
+        // if(array_key_exists('facilities', $data)){
+        //     $apartment->facilities()->sync($data['facilities']);
+        // }
+
+        if ($request->hasfile('images') && $request->file('images')->isValid()) {
+
+
+            // dd('file valido');
+            // foreach ($request->file('images') as $image) {
+            //     $photo = new Photo();
+            //     $name = $image->getClientOriginalName();
+            //     $image->move(public_path().'/storage/apartments/images/', $name);
+            //     $photo->image = $name;
+            //     $photo->apartment_id = $apartment->id;
+            //     $photo->save();
+            // }
         }
 
-       return redirect()->route('admin.apartment.show', $apartment->id);
+    //    return redirect()->route('admin.apartment.show', $apartment->id);
     }
 
     /**
@@ -95,7 +118,10 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        return \view('admin.apartment.show');
+        $facilities = Facility::all();
+
+
+        return view('admin.apartment.show',compact('apartment'));
     }
 
     /**

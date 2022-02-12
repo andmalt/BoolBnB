@@ -16,7 +16,7 @@ class CreatePhotosTable extends Migration
         Schema::create('photos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('apartment_id');
-            $table->text('image_url');
+            $table->text('image');
             $table->timestamps();
 
             $table->foreign('apartment_id')
