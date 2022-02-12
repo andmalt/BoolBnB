@@ -1,7 +1,16 @@
 @extends('admin.dashboard')
 
 @section('content')
-    <h1>Inserisci la tua casa</h1>
+    <h1 class="mb-10">INSERISCI LA TUA CASA</h1>
+        @if ($errors->any())
+            <div class="text-red-700 py-2 my-4">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
     <form action="{{ route('admin.apartment.store')}}" method="post" enctype="multipart/form-data" >
         @csrf
        <label class="block mt-3">
@@ -42,8 +51,8 @@
             <input type="file" name="images[]" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-1/4 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="inserire le immagini della casa" multiple/>
         </label>
 
-        <div class="block mt-3">
-            <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+        <div class="block mt-5">
+            <span class=" block text-sm font-bold text-slate-700">
                 Servizi
             </span>
             <div class="flex flex-row flex-auto flex-wrap">

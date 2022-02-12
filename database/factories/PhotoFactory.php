@@ -16,10 +16,10 @@ class PhotoFactory extends Factory
     public function definition()
     {
         $apartment_ids = Apartment::pluck('id')->toArray();
-        
+
         return [
             'apartment_id' => Arr::random($apartment_ids),
-            'image' => $this->faker->imageUrl(),
+            'image_url' => $this->faker->imageUrl(),
         ];
     }
 }

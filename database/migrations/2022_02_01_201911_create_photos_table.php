@@ -16,13 +16,13 @@ class CreatePhotosTable extends Migration
         Schema::create('photos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('apartment_id');
-            $table->text('image');
+            $table->text('image_url');
             $table->timestamps();
 
             $table->foreign('apartment_id')
-            ->references('id')
-            ->on('apartments')
-            ->onDelete('cascade');
+                ->references('id')
+                ->on('apartments')
+                ->onDelete('cascade');
         });
     }
 
@@ -33,7 +33,7 @@ class CreatePhotosTable extends Migration
      */
     public function down()
     {
-        Schema::table('photos', function(Blueprint $table){
+        Schema::table('photos', function (Blueprint $table) {
             $table->dropForeign('photos_apartment_id_foreign');
         });
         Schema::dropIfExists('photos');
