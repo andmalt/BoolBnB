@@ -134,7 +134,16 @@ class ApartmentController extends Controller
      */
     public function destroy(Apartment $apartment)
     {
+
         if ($apartment->facilities) $apartment->facilities()->detach();
+
+        foreach ($apartment->photos() as $photo) {
+            $path = $photo->image_url;
+            Storage::disk('public')->delete('apartments/images/' . $path);
+            $photo->delete();
+        }
+
+        $apartment->delete();
 
         return redirect()->route('admin.apartment.index')->with('delete-message', "$apartment->title è stato eliminato con successo");
     }
