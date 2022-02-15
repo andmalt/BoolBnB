@@ -1,0 +1,51 @@
+<?php
+
+$request->validate(
+    [
+        'title' => 'required|string|unique:apartments|min:5|max:255',
+        'city' => 'required|string|min:2|max:100',
+        'region' => 'required|string|min:5|max:100',
+        'address' => 'required|string|min:5|max:150',
+        'images' => "required",
+        'images.*' => 'mimes:jpg,png,jpeg,gif,svg',
+        'rooms' => "required|integer|between:1,20",
+        'bathrooms' => "required|integer|between:1,20",
+        'beds' => "required|integer|between:1,40",
+        'square' => "required|integer|between:15,500",
+        'facilities' => 'nullable|exists:facilities,id',
+        'description' => 'required|string|min:10|max:1500'
+    ],
+    [
+        "title.required" => 'Non è possibile inserire un appartamento senza titolo',
+        "title.min" => 'Inserisci almeno 5 caratteri per la descrizione del titolo',
+        "title.max" => 'Puoi inserire massimo 255 caratteri per la descrizione del titolo',
+        "title.unique" => 'Questa descrizione già esiste',
+        "city.required" => 'Inserisci la città',
+        "city.min" => 'Inserisci almeno 2 caratteri per il campo città',
+        "city.max" => 'Puoi inserire massimo 100 caratteri per il campo città',
+        "region.required" => 'Inserisci la regione',
+        "region.min" => 'Inserisci almeno 5 caratteri per il campo regione',
+        "region.max" => 'Puoi inserire massimo 100 caratteri per il campo regione',
+        "address.required" => 'Non è possibile inserire un appartamento senza indirizzo',
+        "address.min" => 'Inserisci almeno 5 caratteri per l\'indirizzo',
+        "address.max" => 'Puoi inserire massimo 150 caratteri per l\'indirizzo',
+        "images.required" => 'Non è possibile inserire un appartamento senza immagine',
+        "images.*.mimes" => 'Devi inserire un file immagine valido',
+        "rooms.required" => 'Inserisci il numero di camere',
+        "rooms.between" => 'Inserisci un numero di camere compreso tra 1 e 20',
+        "rooms.integer" => 'Puoi inserire solo numeri nel campo camere',
+        "bathrooms.required" => 'Inserisci il numero di bagni',
+        "bathrooms.between" => 'Inserisci un numero di bagni compreso tra 1 e 20',
+        "bathrooms.integer" => 'Puoi inserire solo numeri nel campo bagni',
+        "beds.required" => 'Inserisci il numero di posti letto',
+        "beds.between" => 'Inserisci un numero di posti letto compreso tra 1 e 40',
+        "beds.integer" => 'Puoi inserire solo numeri nel campo posti letto',
+        "square.required" => 'Inserisci i metri quadri',
+        "square.between" => 'I metri quadri devono essere compresi tra 15 e 500',
+        "square.integer" => 'Puoi inserire solo numeri nel campo metri quadri',
+        "description.required" => 'inserisci una breve descrizione',
+        "description.string" => 'la descrizione deve essere una stringa',
+        "description.min" => 'la descrizione deve essere minimo di 10 caratteri',
+        "description.max" => 'la descrizione deve essere massimo di 1500 caratteri'
+    ]
+);

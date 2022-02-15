@@ -1,7 +1,7 @@
 @extends('admin.dashboard')
 
 @section('content')
-    <h1 class="mb-10">INSERISCI LA TUA CASA</h1>
+    <h1 class="mb-10 font-bold">INSERISCI LA TUA CASA</h1>
         @if ($errors->any())
             <div class="text-red-700 py-2 my-4">
                 <ul>
