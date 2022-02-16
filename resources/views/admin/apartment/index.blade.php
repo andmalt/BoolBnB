@@ -1,12 +1,12 @@
 @extends('admin.dashboard')
 
 @section('content')
-    <h1>Sono Admin Index</h1>
+    <h1 class="mb-5 text-3xl">Le mie Case</h1>
     @forelse ($apartments as $apartment)
-        <div class="my-5">
-            <h5>{{$apartment->title}}</h5>
-            <p>{{$apartment->description}}</p>
-            <div class="flex">
+        <div class="my-5 p-2">
+            <h5 class="my-2">{{$apartment->title}}</h5>
+            <p class="my-1">{{$apartment->description}}</p>
+            <div class="flex my-1 p-2">
                 <a class=" bg-blue-500 py-3 px-5" href="{{route('admin.apartment.show', $apartment->id)}}">visualizza</a>
                 <form action="{{route('admin.apartment.destroy', $apartment->id )}}" method="post">
                     @csrf
@@ -17,6 +17,6 @@
             
         </div>
     @empty
-        <h2>Non ci sono case inserite</h2>
+        <h2 class="my-3">Non ci sono case inserite</h2>
     @endforelse
 @endsection

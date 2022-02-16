@@ -137,10 +137,9 @@ class ApartmentController extends Controller
 
         if ($apartment->facilities) $apartment->facilities()->detach();
 
-        foreach ($apartment->photos() as $photo) {
+        foreach ($apartment->photos as $photo) {
             $path = $photo->image_url;
             Storage::disk('public')->delete('apartments/images/' . $path);
-            $photo->delete();
         }
 
         $apartment->delete();
