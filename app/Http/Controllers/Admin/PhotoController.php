@@ -14,7 +14,7 @@ class PhotoController extends Controller
 {
     
     /**
-     * get all Images to an apartment
+     * get all images of an apartment
      *
      * @param  mixed $apartment
      * @return void
@@ -23,7 +23,7 @@ class PhotoController extends Controller
     {
         $allImages = DB::table('photos')->where('apartment_id','=',$apartment->id)->get();
 
-        return view('', compact('allImages'));
+        return view('admin.apartmentImages.index', compact('allImages'));
     }
 
     /**
