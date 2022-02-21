@@ -43,15 +43,15 @@ Route::middleware(['auth'])
 ->name('admin.')
 ->prefix('admin')
 ->group(function(){
-    Route::get('apartment/{apartment}/images',[PhotoController::class,'getImages'])->name('index.images');
-    Route::post('apartment/images',[PhotoController::class, 'uploadImage'])->name('image.store');
-    Route::delete('apartment/image/{image}',[PhotoController::class, 'deleteImage'])->name('image.destroy');
-    Route::get('message', [MessageController::class, 'show'])->name('show.message');
-    Route::delete('message/{message}', [MessageController::class, 'delete'])->name('delete.message');
+    Route::get('apartment/{apartment}/images',[PhotoController::class,'getImages'])->name('images.index');
+    Route::post('apartment/{apartment}/images',[PhotoController::class, 'uploadImage'])->name('image.store');
+    Route::delete('apartment/images/{photo}',[PhotoController::class, 'deleteImage'])->name('image.destroy');
+    Route::get('message', [MessageController::class, 'show'])->name('message.show');
+    Route::delete('message/{message}', [MessageController::class, 'delete'])->name('message.delete');
 });
 
-Route::get("{any?}", function () {
-    return view('guest.welcome');
-})->where("any", ".*");
+// Route::get("{any?}", function () {
+//     return view('guest.welcome');
+// })->where("any", ".*");
 
 require __DIR__.'/auth.php';

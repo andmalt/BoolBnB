@@ -21,9 +21,7 @@ class PhotoController extends Controller
      */
     public function getImages(Apartment $apartment)
     {
-        $allImages = DB::table('photos')->where('apartment_id','=',$apartment->id)->get();
-
-        return view('admin.apartmentImages.index', compact('allImages'));
+        return view('admin.apartmentImages.index', compact('apartment'));
     }
 
     /**
@@ -67,9 +65,11 @@ class PhotoController extends Controller
      */
     public function deleteImage(Photo $photo)
     {
+        // \dd($photo->apartment->id);
+
         Storage::disk('public')->delete('apartments/images/'.$photo->image_url);
         $photo->delete();
 
-        return with('delete-image',"la foto numero $photo->id è stata eliminata con successo" );
+        return redirect()->route('admin.images.index',$photo->apartment->id)->with('delete-image',"la foto è stata eliminata con successo" );
     }
 }
