@@ -54,7 +54,7 @@ class PhotoController extends Controller
                 $photo->save();
             }
         }
-        return redirect()->route('admin.apartment.show',$apartment->id);
+        return redirect()->route('admin.apartment.show',$apartment->id)->with('ok_message','L\'immagine è stata inserita con successo');
     }
     
     /**

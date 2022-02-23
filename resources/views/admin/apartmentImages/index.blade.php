@@ -33,15 +33,16 @@
     </div>
     <div class="flex flex-row flex-wrap">
         @forelse ($apartment->photos as $photo)
-            <div class="shadow-xl m-2 rounded-md">  
+            <div class="shadow-xl m-2 rounded-md
+            ">  
                 <div class="">
                     <img class="h-36" src="{{$photo->getImagePrefix().$photo->image_url}}" alt="foto casa numero {{$photo->id}}">
                 </div>             
                 <div class="text-center my-3">
-                    <form action="{{route('admin.image.destroy', $photo->id )}}" method="post">
+                    <form class="delete_image" action="{{route('admin.image.destroy', $photo->id )}}" method="post">
                         @csrf
                         @method('DELETE')
-                        <button class="bg-red-700 hover:bg-red-800 rounded-md py-2 px-4 hover:text-white" type="submit">cancella foto</button>
+                        <button class="bg-red-700 hover:bg-red-800 rounded-md py-2 px-4 hover:text-white " type="submit">cancella foto</button>
                     </form> 
                 </div>   
             </div>
@@ -52,4 +53,25 @@
     <div class="text-center mt-6 p-2">
         <a class="bg-yellow-500 hover:bg-yellow-700 hover:text-white rounded-lg py-2 px-4" href="{{route('admin.apartment.show',$apartment->id)}}">torna nella pagina della casa</a>
     </div>
+@endsection
+@section('script')
+<script type="text/javascript">
+
+    
+    let deleteImage = document.querySelectorAll(".delete_image");
+    // console.log(deleteImage);
+
+    deleteImage.forEach(form => {
+        form.addEventListener('submit',function(event){
+
+            event.preventDefault();
+
+            const confirm = window.confirm('Sei sicuro di voler cancellare la foto?');
+
+            if(confirm) this.submit();
+        })
+    });
+
+
+</script>
 @endsection
