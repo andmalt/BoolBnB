@@ -11,6 +11,6 @@
                     <img class="object-cover object-center flex-auto" src="{{$photo->getImagePrefix().$photo->image_url}}" alt="{{$photo->id}} image apartment">         
             </div>
         @endforeach
-        <a class="rounded-lg bg-gray-600 hover:bg-gray-800 text-white py-2 px-5" href="{{route('admin.images.index',$apartment->id)}}">vai nelle foto della casa</a>
+        <a class="rounded-lg bg-gray-600 hover:bg-gray-800 text-white py-2 px-5" href="{{route('admin.images.index',$apartment->id)}}">inserisci e cancella foto</a>
     </div>
 @endsection
