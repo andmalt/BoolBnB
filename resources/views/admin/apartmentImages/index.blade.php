@@ -2,7 +2,8 @@
 
 @section('content')
     <div class="mb-5 p-2">
-        <h1>Ecco tutte le foto della casa {{$apartment->title}}</h1>
+        <h2 class="mb-3"> <strong>Ecco tutte le foto della casa:</strong> </h2>
+        <h1 class="uppercase">{{$apartment->title}}</h1>
     </div>
     @if ($errors->any())
         <div class="text-red-700 py-2 my-4">

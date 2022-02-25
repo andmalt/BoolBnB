@@ -49,7 +49,7 @@ class ApartmentController extends Controller
     public function store(Request $request)
     {
         // validations
-        require __DIR__ . '../../../../Validations/apartmentValidations.php';
+        require __DIR__ . '../../../../Validations/createApartment.php';
 
 
         $data = $request->all();
@@ -110,7 +110,12 @@ class ApartmentController extends Controller
     {
         require __DIR__ . '../../../../variables/apartmentVariables.php';
 
-        return view('admin.apartment.edit', compact('regions'));
+        $facilities = Facility::all();
+
+        $facilityIds = $apartment->facilities->pluck('id')->toArray();
+        
+
+        return view('admin.apartment.edit', compact('regions','apartment','facilities','facilityIds'));
     }
 
     /**
@@ -123,7 +128,12 @@ class ApartmentController extends Controller
     public function update(Request $request, Apartment $apartment)
     {
         // validations
-        require __DIR__ . '../../../../Validations/apartmentValidations.php';
+        require __DIR__ . '../../../../Validations/updateApartment.php';
+
+        $data = $request->all();
+        $apartment->update($data);
+
+        return redirect()->route('admin.apartment.show',$apartment->id);
     }
 
     /**

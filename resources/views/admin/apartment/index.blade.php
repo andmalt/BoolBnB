@@ -26,8 +26,8 @@
     
     const deleteHouse = document.querySelectorAll(".delete-house");
 
-    deleteHouse.forEach(house => {
-        house.addEventListener('submit',function(event){
+    deleteHouse.forEach(form => {
+        form.addEventListener('submit',function(event){
 
             event.preventDefault();
 
