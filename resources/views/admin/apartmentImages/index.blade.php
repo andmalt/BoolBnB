@@ -54,6 +54,7 @@
         <a class="bg-yellow-500 hover:bg-yellow-700 hover:text-white rounded-lg py-2 px-4" href="{{route('admin.apartment.show',$apartment->id)}}">torna nella pagina della casa</a>
     </div>
 @endsection
+
 @section('script')
 <script type="text/javascript">
 

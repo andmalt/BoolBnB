@@ -13,7 +13,8 @@ $request->validate(
         'beds' => "required|integer|between:1,40",
         'square' => "required|integer|between:15,500",
         'facilities' => 'nullable|exists:facilities,id',
-        'description' => 'required|string|min:10|max:1500'
+        'description' => 'required|string|min:10|max:1500',
+        'price' => 'required|numeric|min:1.00|max:9999.00',
     ],
     [
         "title.required" => 'Non è possibile inserire un appartamento senza titolo',
@@ -46,6 +47,10 @@ $request->validate(
         "description.required" => 'inserisci una breve descrizione',
         "description.string" => 'la descrizione deve essere una stringa',
         "description.min" => 'la descrizione deve essere minimo di 10 caratteri',
-        "description.max" => 'la descrizione deve essere massimo di 1500 caratteri'
+        "description.max" => 'la descrizione deve essere massimo di 1500 caratteri',
+        "price.required" => 'devi inserire il prezzo per notte della casa',
+        "price.numeric" => 'il prezzo deve essere un numero',
+        "price.min" => 'il prezzo min è di un euro per notte',
+        "price.max" => 'il prezzo massimo è di 9999.00 euro per notte',
     ]
 );

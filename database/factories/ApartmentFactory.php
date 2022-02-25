@@ -54,6 +54,7 @@ class ApartmentFactory extends Factory
             'address' => $this->faker->address(),
             'lat' => $this->faker->latitude(),
             'lon' => $this->faker->longitude(),
+            'price' => $this->faker->randomFloat(2,29,2999),
         ];
     }
 }
