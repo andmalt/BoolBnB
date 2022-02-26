@@ -33,7 +33,7 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        require __DIR__ . '../../../../variables/apartmentVariables.php';
+        require __DIR__ . '../../../../Variables/apartmentVariables.php';
 
         $facilities = Facility::all();
 
@@ -108,7 +108,7 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
-        require __DIR__ . '../../../../variables/apartmentVariables.php';
+        require __DIR__ . '../../../../Variables/apartmentVariables.php';
 
         $facilities = Facility::all();
 

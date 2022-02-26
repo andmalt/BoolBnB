@@ -1,6 +1,7 @@
 @extends('admin.dashboard')
 
 @section('content')
+@if ($apartment->user_id == Auth::user()->id)
         <h1 class="mb-4 font-bold">MODIFICA LA TUA CASA</h1>
         <h2 class="mb-10 uppercase">{{$apartment->title}}</h2>
         @if ($errors->any())
@@ -105,6 +106,9 @@
         <button class="bg-green-700 hover:bg-green-800 text-white rounded-xl py-2 px-6 m-5" type="submit">Modifica</button>
         <a class="bg-blue-500 hover:bg-blue-600 rounded-xl py-2 px-4 m-5" href="{{route('admin.apartment.show',$apartment->id)}}">Torna indietro</a>
     </form>
+@else
+    <h1 class=" uppercase underline text-4xl text-red-600">Non sei autorizzato/a ad entrare in questa pagina</h1>
+@endif
 @endsection
 
 @section('script')
