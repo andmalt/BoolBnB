@@ -46,8 +46,9 @@ Route::middleware(['auth'])
     Route::get('apartment/{apartment}/images',[PhotoController::class,'getImages'])->name('images.index');
     Route::post('apartment/{apartment}/images',[PhotoController::class, 'uploadImage'])->name('image.store');
     Route::delete('apartment/images/{photo}',[PhotoController::class, 'deleteImage'])->name('image.destroy');
-    Route::get('message', [MessageController::class, 'show'])->name('message.show');
-    Route::delete('message/{message}', [MessageController::class, 'delete'])->name('message.delete');
+    Route::get('apartment/{apartment}/messages', [MessageController::class, 'getMessages'])->name('messages.index');
+    Route::get('apartment/messages/{message}', [MessageController::class, 'viewMessage'])->name('message.show');
+    Route::delete('apartment/message/{message}', [MessageController::class, 'deleteMessage'])->name('message.destroy');
 });
 
 // Route::get("{any?}", function () {

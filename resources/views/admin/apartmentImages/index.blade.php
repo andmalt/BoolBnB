@@ -14,6 +14,10 @@
             </ul>
         </div>
     @endif
+    {{-- session --}}
+    @if (Session::has('delete-image'))
+        <p class="text-red-700 py-2 my-4">{{Session::get('delete-image')}}</p>
+    @endif
     <div class="my-5 p-2 flex flex-row flex-wrap">
         <div class="w-full">
             <form action="{{route('admin.image.store',$apartment->id)}}" method="post" enctype="multipart/form-data">

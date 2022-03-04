@@ -7,9 +7,11 @@
         <h1 class="uppercase text-2xl text-lime-900 mb-8">{{$apartment->title}}</h1>
 
         <div class="columns-3xs mb-5">
-            @foreach ($apartment->photos as $photo)
-                <img class="w-full aspect-video mb-3 shadow-xl rounded-md" src="{{$photo->getImagePrefix().$photo->image_url}}" alt="{{$photo->id}} image apartment">         
-            @endforeach
+            @forelse ($apartment->photos as $photo)
+                <img class="w-full aspect-video mb-3 shadow-xl rounded-md" src="{{$photo->getImagePrefix().$photo->image_url}}" alt="{{$photo->id}} image apartment">
+            @empty
+                <h1>La casa non ha foto</h1>
+            @endforelse
         </div>
 
         <a class="rounded-lg bg-gray-600 hover:bg-gray-800 text-white py-2 px-5" href="{{route('admin.images.index',$apartment->id)}}">inserisci e cancella foto</a>

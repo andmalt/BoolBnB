@@ -70,6 +70,6 @@ class PhotoController extends Controller
         Storage::disk('public')->delete('apartments/images/'.$photo->image_url);
         $photo->delete();
 
-        return redirect()->route('admin.images.index',$photo->apartment->id)->with('delete-image',"la foto è stata eliminata con successo" );
+        return redirect()->route('admin.images.index',$photo->apartment->id)->with('delete-image',"La foto è stata eliminata con successo" );
     }
 }
