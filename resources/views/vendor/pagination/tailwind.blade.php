@@ -2,21 +2,21 @@
     <nav role="navigation" aria-label="{{ __('Pagination Navigation') }}" class="flex items-center justify-between">
         <div class="flex justify-between flex-1 sm:hidden">
             @if ($paginator->onFirstPage())
-                <span class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-blue-500 bg-white border border-blue-300 cursor-default leading-5 rounded-md">
+                <span class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-300 border border-blue-300 cursor-default leading-5 rounded-md">
                     {!! __('pagination.previous') !!}
                 </span>
             @else
-                <a href="{{ $paginator->previousPageUrl() }}" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-blue-700 bg-white border border-blue-300 leading-5 rounded-md hover:text-blue-500 focus:outline-none focus:ring ring-blue-300 focus:border-blue-300 active:bg-blue-100 active:text-blue-700 transition ease-in-out duration-150">
+                <a href="{{ $paginator->previousPageUrl() }}" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-blue-700 bg-white hover:bg-blue-400 hover:text-white border border-blue-300 leading-5 rounded-md focus:outline-none focus:ring ring-blue-300 focus:border-blue-300 active:bg-blue-100 active:text-blue-700 transition ease-in-out duration-150">
                     {!! __('pagination.previous') !!}
                 </a>
             @endif
 
             @if ($paginator->hasMorePages())
-                <a href="{{ $paginator->nextPageUrl() }}" class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-blue-700 bg-white border border-blue-300 leading-5 rounded-md hover:text-blue-500 focus:outline-none focus:ring ring-blue-300 focus:border-blue-300 active:bg-blue-100 active:text-blue-700 transition ease-in-out duration-150">
+                <a href="{{ $paginator->nextPageUrl() }}" class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-blue-700 bg-white hover:bg-blue-400 border border-blue-300 leading-5 rounded-md hover:text-white focus:outline-none focus:ring ring-blue-300 focus:border-blue-300 active:bg-blue-100 active:text-blue-700 transition ease-in-out duration-150">
                     {!! __('pagination.next') !!}
                 </a>
             @else
-                <span class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-blue-500 bg-white border border-blue-300 cursor-default leading-5 rounded-md">
+                <span class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-white bg-blue-300 border border-blue-300 cursor-default leading-5 rounded-md">
                     {!! __('pagination.next') !!}
                 </span>
             @endif

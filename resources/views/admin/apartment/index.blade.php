@@ -3,12 +3,13 @@
 @section('content')
     <h1 class="mb-5 text-3xl">Le mie Case</h1>
     @forelse ($apartments as $apartment)
-        <div class="my-6 p-4 flex justify-between shadow-lg">
-            <div class="flex flex-col">
+        <div class="sm:grid sm:grid-cols-1 md:flex my-6 p-4 justify-between items-center shadow-lg">
+            <div class="flex flex-col flex-wrap">
                 <h4 class="my-2 uppercase font-bold">{{$apartment->title}}</h4>
                 <p class="my-1">{{$apartment->description}}</p>
+                <p class="my-1">{{$apartment->price}}&euro; per notte</p>
             </div>
-            <div class="flex my-1 p-2">
+            <div class=" flex my-1 p-2 ">
                 <a class=" bg-blue-500 hover:bg-blue-600 py-3 px-5 rounded-l-md" href="{{route('admin.apartment.show', $apartment->id)}}">visualizza</a>
                 <form class="delete-house" action="{{route('admin.apartment.destroy', $apartment->id )}}" method="post">
                     @csrf
