@@ -21,7 +21,7 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $apartments = DB::table('apartments')->where('user_id', '=', Auth::user()->id)->get();
+        $apartments = DB::table('apartments')->where('user_id', '=', Auth::user()->id)->paginate(2);
 
         return view('admin.apartment.index', compact('apartments'));
     }

@@ -3,15 +3,17 @@
 @section('content')
     <h1 class="mb-5 text-3xl">Le mie Case</h1>
     @forelse ($apartments as $apartment)
-        <div class="my-5 p-2">
-            <h5 class="my-2">{{$apartment->title}}</h5>
-            <p class="my-1">{{$apartment->description}}</p>
+        <div class="my-6 p-4 flex justify-between shadow-lg">
+            <div class="flex flex-col">
+                <h4 class="my-2 uppercase font-bold">{{$apartment->title}}</h4>
+                <p class="my-1">{{$apartment->description}}</p>
+            </div>
             <div class="flex my-1 p-2">
-                <a class=" bg-blue-500 py-3 px-5" href="{{route('admin.apartment.show', $apartment->id)}}">visualizza</a>
+                <a class=" bg-blue-500 hover:bg-blue-600 py-3 px-5 rounded-l-md" href="{{route('admin.apartment.show', $apartment->id)}}">visualizza</a>
                 <form class="delete-house" action="{{route('admin.apartment.destroy', $apartment->id )}}" method="post">
                     @csrf
                     @method('DELETE')
-                    <button class=" bg-red-600 py-3 px-5" type="submit">cancella</button>
+                    <button class=" bg-red-600 hover:bg-red-700 py-3 px-5 rounded-r-md" type="submit">cancella</button>
                 </form>
             </div>
             
@@ -19,6 +21,7 @@
     @empty
         <h2 class="my-3">Non ci sono case inserite</h2>
     @endforelse
+    {{ $apartments->links() }}
 @endsection
 
 @section('script')
