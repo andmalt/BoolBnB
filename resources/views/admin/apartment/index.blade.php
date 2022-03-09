@@ -3,7 +3,7 @@
 @section('content')
     <h1 class="mb-5 text-3xl">Le mie Case</h1>
     @forelse ($apartments as $apartment)
-        <div class="sm:grid sm:grid-cols-1 md:flex my-6 p-4 justify-between items-center shadow-lg">
+        <div class="sm:grid sm:grid-cols-1 md:flex my-6 p-4 justify-between items-center shadow-lg border border-slate-200">
             <div class="flex flex-col flex-wrap">
                 <h4 class="my-2 uppercase font-bold">{{$apartment->title}}</h4>
                 <p class="my-1">{{$apartment->description}}</p>

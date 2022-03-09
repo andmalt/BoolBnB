@@ -96,8 +96,11 @@ class ApartmentController extends Controller
     {
         $facilities = Facility::all();
 
-
-        return view('admin.apartment.show', compact('apartment'));
+        if(Auth::user()->id == $apartment->user_id){
+            return view('admin.apartment.show', compact('apartment'));
+        }else{
+            return view('guest.welcome');
+        }
     }
 
     /**
@@ -112,10 +115,15 @@ class ApartmentController extends Controller
 
         $facilities = Facility::all();
 
-        $facilityIds = $apartment->facilities->pluck('id')->toArray();
         
+        
+        $facilityIds = $apartment->facilities->pluck('id')->toArray();
 
-        return view('admin.apartment.edit', compact('regions','apartment','facilities','facilityIds'));
+        if (Auth::user()->id == $apartment->user_id) {
+            return view('admin.apartment.edit', compact('regions', 'apartment', 'facilities', 'facilityIds'));
+        } else {
+            return view('guest.welcome');
+        }    
     }
 
     /**
