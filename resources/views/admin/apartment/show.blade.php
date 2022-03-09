@@ -14,7 +14,11 @@
             @endforelse
         </div>
 
-        <a class="rounded-lg bg-gray-600 hover:bg-gray-800 text-white py-2 px-5" href="{{route('admin.images.index',$apartment->id)}}">inserisci e cancella foto</a>
+        <a class="rounded-lg bg-gray-600 hover:bg-gray-800 text-white py-2 px-5" href="{{route('admin.images.index',$apartment->id)}}">inserisci e/o cancella foto</a>
+    </div>
+
+    <div>
+        <a class="text-orange-500 underline hover:text-orange-600 active:text-orange-800" href="{{route('admin.messages.index',$apartment->id)}}">Visualizza i messaggi di questa casa</a>
     </div>
 
     <div class="py-4">

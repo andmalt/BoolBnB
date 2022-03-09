@@ -17,7 +17,7 @@
             <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
                 Titolo
             </span>
-            <input type="text" name="title"  class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1"  placeholder="titolo che descrive brevemente la casa" />
+            <input type="text" name="title"  class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1"  placeholder="titolo che descrive brevemente la casa" value="{{old('title')}}" >
             @error('title')
                 <small class="text-red-500">{{$message}}</small>
             @enderror
@@ -26,7 +26,7 @@
             <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
                 Camere
             </span>
-            <input type="text" name="rooms" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="numero di camere" />
+            <input type="text" name="rooms" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="numero di camere" value="{{old('rooms')}}"/>
             @error('rooms')
                 <small class="text-red-500">{{$message}}</small>
             @enderror
@@ -35,7 +35,7 @@
             <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
                 Posti letto
             </span>
-            <input type="text" name="beds" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="numero massimo di posti letto" />
+            <input type="text" name="beds" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="numero massimo di posti letto" value="{{old('beds')}}"/>
             @error('beds')
                 <small class="text-red-500">{{$message}}</small>
             @enderror
@@ -44,7 +44,7 @@
             <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
                 Bagni
             </span>
-            <input type="text" name="bathrooms" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="numero di bagni" />
+            <input type="text" name="bathrooms" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="numero di bagni" value="{{old('bathrooms')}}"/>
             @error('bathrooms')
                 <small class="text-red-500">{{$message}}</small>
             @enderror
@@ -53,7 +53,7 @@
             <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
                 Metri quadri
             </span>
-            <input type="text" name="square" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="numero di metri quadri" />
+            <input type="text" name="square" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="numero di metri quadri" value="{{old('square')}}"/>
             @error('square')
                 <small class="text-red-500">{{$message}}</small>
             @enderror
@@ -79,7 +79,10 @@
                         <label for="facility-{{ $facility->id }}" class=" block text-sm font-medium text-slate-700">
                         {{ $facility->name }}
                         </label>
-                        <input type="checkbox" name="facilities[]" id="facility-{{$facility->id}}" value="{{ $facility->id }}" class="mt-1 px-2 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1"/>
+                        <input type="checkbox" name="facilities[]" id="facility-{{$facility->id}}" value="{{$facility->id}}" class="mt-1 px-2 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1"
+                        {{ in_array($facility->id, old('facilities',[])) ? 'checked' : '' }}
+                        />
+
                         @error('facilities')
                             <small class="text-red-500">{{$message}}</small>
                         @enderror
@@ -94,7 +97,7 @@
             </span>
             <select name="region" id="region" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1">
                 @foreach ($regions as $region)
-                    <option value="{{$region}}">{{$region}}</option>
+                    <option value="{{old('region',$region)}}">{{$region}}</option>
                 @endforeach
             </select>
             @error('region')
@@ -106,7 +109,7 @@
             <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
                 Città
             </span>
-            <input type="text" name="city" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="in quale città si trova" />
+            <input type="text" name="city" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="in quale città si trova" value="{{old('city')}}"/>
             @error('city')
                 <small class="text-red-500">{{$message}}</small>
             @enderror
@@ -115,7 +118,7 @@
             <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
                 Indirizzo
             </span>
-            <input type="text" name="address" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="indirizzo della casa" />
+            <input type="text" name="address" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="indirizzo della casa" value="{{old('address')}}"/>
             @error('address')
                 <small class="text-red-500">{{$message}}</small>
             @enderror
@@ -124,7 +127,7 @@
             <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
                 Descrivi la casa
             </span>
-            <textarea cols="30" rows="5"  name="description" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="una breve descrizione dell'abitazione"></textarea>
+            <textarea cols="30" rows="5"  name="description" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="una breve descrizione dell'abitazione">{{old('description')}}</textarea>
             @error('description')
                 <small class="text-red-500">{{$message}}</small>
             @enderror
@@ -133,7 +136,7 @@
             <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
                 Prezzo
             </span>
-            <input type="text" name="price" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="prezzo in euro per notte" />
+            <input type="text" name="price" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="prezzo in euro per notte" value="{{old('price')}}"/>
             @error('price')
                 <small class="text-red-500">{{$message}}</small>
             @enderror

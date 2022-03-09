@@ -11,7 +11,7 @@ class MessageController extends Controller
 {
     public function getMessages(Apartment $apartment)
     {
-        return view('',compact('apartment'));
+        return view('admin.messages.index',compact('apartment'));
     }
 
     public function viewMessage(Message $message)
