@@ -47,7 +47,7 @@ class PhotoController extends Controller
         if($request->hasFile('images')){
             foreach($request->file('images') as $image){
                 $photo = new Photo();
-                $name = time() . Str::random(35) . '.' . $image->getClientOriginalExtension();
+                $name = time() . Str::random(20) . '.' . $image->getClientOriginalExtension();
                 $image->move(storage_path('app/public/apartments/images/'), $name);
                 $photo->apartment_id = $apartment->id;
                 $photo->image_url = $name;

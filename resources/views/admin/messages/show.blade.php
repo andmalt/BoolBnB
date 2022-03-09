@@ -11,11 +11,11 @@
     </div>
 
     <div class="mt-6 p-2 flex flex-wrap justify-between items-center">
-        <a class="bg-yellow-500 hover:bg-yellow-700 hover:text-white rounded-lg py-2 px-4" href="{{route('admin.messages.index',$message->apartment_id)}}">torna indietro</a>
+        <a class="bg-yellow-500 hover:bg-yellow-700 active:bg-yellow-900 hover:text-white rounded-lg py-2 px-4" href="{{route('admin.messages.index',$message->apartment_id)}}">torna indietro</a>
         <form id="delete_message" action="{{route('admin.message.destroy', $message->id )}}" method="post">
             @csrf
             @method('DELETE')
-            <button class="bg-red-700 hover:bg-red-800 rounded-md py-2 px-4 hover:text-white" type="submit">cancella messaggio</button>
+            <button class="bg-red-700 hover:bg-red-800 active:bg-red-900 active:text-black rounded-md py-2 px-4 hover:text-white" type="submit">cancella messaggio</button>
         </form> 
     </div>
 @endsection

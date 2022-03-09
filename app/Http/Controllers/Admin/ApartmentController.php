@@ -75,7 +75,7 @@ class ApartmentController extends Controller
 
             foreach ($request->file('images') as $image) {
                 $photo = new Photo();
-                $name = time() . Str::random(35) . '.' . $image->getClientOriginalExtension();
+                $name = time() . Str::random(20) . '.' . $image->getClientOriginalExtension();
                 $image->move(storage_path('app/public/apartments/images/'), $name);
                 $photo->image_url = $name;
                 $photo->apartment_id = $apartment->id;
@@ -139,6 +139,14 @@ class ApartmentController extends Controller
         require __DIR__ . '../../../../Validations/updateApartment.php';
 
         $data = $request->all();
+
+        $address = str_replace(' ', '-', $data['address']);
+        $call = file_get_contents('https://api.tomtom.com/search/2/geocode/' . $data['region'] . '-' . $data['city'] . '-' . $address . '.JSON?key=CskONgb89uswo1PwlNDOtG4txMKrp1yQ');
+        $response = json_decode($call);
+        // inserted in data the results lat,lon in the response 
+        $data['lat'] = $response->results[0]->position->lat;
+        $data['lon'] = $response->results[0]->position->lon;
+
         $apartment->update($data);
 
         return redirect()->route('admin.apartment.show',$apartment->id);

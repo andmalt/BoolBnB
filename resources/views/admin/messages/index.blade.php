@@ -32,11 +32,11 @@
                 <td class="p-4">{{$message->email}}</td>
                 <td class="p-4">{{$message->created_at}}</td>
                 <td class="flex justify-center items-center flex-wrap p-4">
-                    <a class="bg-blue-500 py-2 px-4 rounded-md mr-3 my-3" href="{{route('admin.message.show',$message->id)}}">visualizza</a>
-                    <form class="delete_image" action="{{route('admin.message.destroy', $message->id )}}" method="post">
+                    <a class="bg-blue-500 hover:bg-blue-600 active:bg-blue-700 py-2 px-4 rounded-md mr-3 my-3" href="{{route('admin.message.show',$message->id)}}">visualizza</a>
+                    <form class="delete_messages" action="{{route('admin.message.destroy', $message->id )}}" method="post">
                         @csrf
                         @method('DELETE')
-                        <button class="bg-red-700 hover:bg-red-800 rounded-md py-2 px-4 hover:text-white" type="submit">cancella messaggio</button>
+                        <button class="bg-red-700 hover:bg-red-800 active:bg-red-900 active:text-black rounded-md py-2 px-4 hover:text-white" type="submit">cancella messaggio</button>
                     </form> 
                 </td>
             </tr>
@@ -50,7 +50,7 @@
 
 
     <div class="mt-6 p-2">
-        <a class="bg-yellow-500 hover:bg-yellow-700 hover:text-white rounded-lg py-2 px-4" href="{{route('admin.apartment.show',$apartment->id)}}">torna nella pagina della casa</a>
+        <a class="bg-yellow-500 hover:bg-yellow-700 active:bg-yellow-900 hover:text-white rounded-lg py-2 px-4" href="{{route('admin.apartment.show',$apartment->id)}}">torna nella pagina della casa</a>
     </div>
 @endsection
 
@@ -58,8 +58,7 @@
 <script type="text/javascript">
 
     
-    let deleteMessages = document.querySelectorAll(".delete_image");
-    // console.log(deleteImage);
+    let deleteMessages = document.querySelectorAll(".delete_messages");
 
     deleteMessages.forEach(message => {
         message.addEventListener('submit',function(event){
