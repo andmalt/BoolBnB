@@ -94,7 +94,6 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        $facilities = Facility::all();
 
         if(Auth::user()->id == $apartment->user_id){
             return view('admin.apartment.show', compact('apartment'));
@@ -140,6 +139,7 @@ class ApartmentController extends Controller
 
         $data = $request->all();
 
+        // call api to TomTom and response decoding
         $address = str_replace(' ', '-', $data['address']);
         $call = file_get_contents('https://api.tomtom.com/search/2/geocode/' . $data['region'] . '-' . $data['city'] . '-' . $address . '.JSON?key=CskONgb89uswo1PwlNDOtG4txMKrp1yQ');
         $response = json_decode($call);
