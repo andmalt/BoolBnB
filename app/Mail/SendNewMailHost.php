@@ -11,14 +11,16 @@ class SendNewMailHost extends Mailable
 {
     use Queueable, SerializesModels;
 
+    protected $message;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($message)
     {
-        //
+        $this->message = $message;
     }
 
     /**
@@ -28,6 +30,6 @@ class SendNewMailHost extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->view('guest.mail.contact');
     }
 }

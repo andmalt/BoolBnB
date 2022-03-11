@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Guest;
 use App\Http\Controllers\Controller;
 use App\Mail\SendNewMailHost;
 use App\Models\Apartment;
+use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -25,7 +26,7 @@ class MessageController extends Controller
      * @param  mixed $request
      * @return void
      */
-    public function sendEmail(Request $request)
+    public function sendEmail(Request $request,Apartment $apartment)
     {
         $request->validate(
             [
@@ -48,10 +49,17 @@ class MessageController extends Controller
             ]
         );
 
+
         $data = $request->all();
+        $newMessage = new Message();
+        $newMessage->apartment_id = $data['apartment_id'];
+        $newMessage->fill($data);
+        $newMessage->save();
+
+        Mail::to($newMessage->apartment->user->email)->send(new SendNewMailHost($newMessage));
 
 
-        Mail::to()->send(new SendNewMailHost());
+        return redirect()->route('guest.apartment.show',$newMessage->apartment->id)->with('send-mail','La mail è stata inviata con successo');
     }
     
 }

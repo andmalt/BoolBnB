@@ -15,7 +15,7 @@
             </div>
         </div>
 
-        <div class="py-4">
+        <div class="py-4 mb-8">
             <h2 class="mb-3"><strong> Descrizione:</strong></h2>
             <p class="mb-6">{{$apartment->description}}</p>
             <h2 class="mb-3"><strong>Prezzo:</strong></h2>
@@ -23,8 +23,12 @@
         </div> 
 
         <div class="mb-14">
+            @if (Session::has('send-mail'))
+                <p class="text-green-700 py-2 my-4">{{Session::get('send-mail')}}</p>
+            @endif
+
             <h2 class="mb-4 uppercase">Se desideri ulteriori informazioni per questa casa manda un messaggio al propretario</h2>
-            <form action="" method="post">
+            <form action="{{route('guest.message.send',['apartment_id' => $apartment->id])}}" method="post">
             @csrf
                 <label class="block mb-4">
                     <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
@@ -48,7 +52,7 @@
                     <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
                         Email
                     </span>
-                    <input type="email" name="email" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="la tua email" value="{{old('email')}}"/>
+                    <input type="email" name="email" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="La tua email" value="{{old('email')}}"/>
                     @error('email')
                         <small class="text-red-500">{{$message}}</small>
                     @enderror
@@ -62,7 +66,7 @@
                         <small class="text-red-500">{{$message}}</small>
                     @enderror
                 </label>
-                <button class="bg-blue-500 hover:bg-blue-600 active:bg-blue-700 py-2 px-6 rounded-md" type="submit">Invia email</button>
+                <button class="bg-blue-500 hover:bg-blue-600 active:bg-blue-700 py-2 px-6 rounded-md" type="submit">Invia messaggio</button>
             </form>
         </div>
         <div class="flex justify-end">
