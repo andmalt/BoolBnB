@@ -14,7 +14,7 @@
     @php
         $i=1;
     @endphp
-    <table class="shadow-2xl border border-slate-300 w-full table-auto">
+    <table class="shadow-2xl border border-slate-300 w-full table-auto mb-16">
         <thead class="mb-4">
             <tr class="border-slate-300 border bg-slate-200">
                 <th class="p-4">#</th>
@@ -25,12 +25,12 @@
             </tr>
         </thead>
         <tbody class="">
-            @forelse ($apartment->messages as $message)
+            @forelse ($messages as $message)
             <tr class="border-slate-300 border">
                 <td class="font-bold p-4">{{$i++}}</td>
                 <td class="p-4">{{$message->name}} {{$message->surname}}</td>
                 <td class="p-4">{{$message->email}}</td>
-                <td class="p-4">{{$message->created_at}}</td>
+                <td class="p-4">{{ date('d-m-Y H:i:s',strtotime($message->created_at))}}</td>
                 <td class="flex justify-center items-center flex-wrap p-4">
                     <a class="bg-blue-500 hover:bg-blue-600 active:bg-blue-700 py-2 px-4 rounded-md mr-3 my-3" href="{{route('admin.message.show',$message->id)}}">visualizza</a>
                     <form class="delete_messages" action="{{route('admin.message.destroy', $message->id )}}" method="post">

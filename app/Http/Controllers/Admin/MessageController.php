@@ -7,14 +7,19 @@ use App\Models\Apartment;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class MessageController extends Controller
 {
     public function getMessages(Apartment $apartment)
     {
-        
+        $messages = DB::table('messages')
+        ->where('apartment_id','=',$apartment->id)
+        ->orderBy('created_at','desc')->get();
+
+
         if($apartment->user_id == Auth::user()->id){
-            return view('admin.messages.index', compact('apartment'));
+            return view('admin.messages.index', compact('messages','apartment'));
         }else{
             return view('guest.welcome');
         }       

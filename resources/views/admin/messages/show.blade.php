@@ -6,7 +6,7 @@
             <span class="font-semibold"> Scritto da: </span> <span class="underline">{{$message->name}} {{$message->surname}}</span> 
         </h3>
         <h4 class="mb-3"> <span class="font-semibold">Email: </span> <span class="underline">{{$message->email}}</span> </h4>
-        <p class=" text-slate-500 mb-6">{{$message->created_at}}</p>
+        <p class=" text-slate-500 mb-6">{{date('d-m-Y H:i:s',strtotime($message->created_at))}}</p>
         <p>{{$message->message_content}}</p>
     </div>
 
