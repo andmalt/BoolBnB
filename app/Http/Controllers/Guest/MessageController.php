@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\Controller;
 use App\Mail\SendNewMailHost;
-use App\Models\Apartment;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -26,7 +25,7 @@ class MessageController extends Controller
      * @param  mixed $request
      * @return void
      */
-    public function sendEmail(Request $request,Apartment $apartment)
+    public function sendEmail(Request $request)
     {
         $request->validate(
             [

@@ -2,23 +2,29 @@
 
 namespace App\Mail;
 
+use App\Models\Message;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
 class SendNewMailHost extends Mailable
 {
     use Queueable, SerializesModels;
-
-    protected $message;
+    
+    /**
+     * the message
+     *
+     * @var mixed
+     */
+    public $message;
 
     /**
      * Create a new message instance.
      *
+     * @param  \App\Models\Message $message
      * @return void
      */
-    public function __construct($message)
+    public function __construct(Message $message)
     {
         $this->message = $message;
     }
@@ -30,6 +36,8 @@ class SendNewMailHost extends Mailable
      */
     public function build()
     {
-        return $this->view('guest.mail.contact');
+        $messageHost = $this->message;
+
+        return $this->view('guest.mail.contact', compact('messageHost'))->with(['home'=> $messageHost->apartment->title]);
     }
 }

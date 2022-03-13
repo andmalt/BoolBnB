@@ -28,7 +28,7 @@ Route::namespace('Guest')
 ->name('guest.')
 ->prefix('guest')
 ->group(function () {
-    Route::get('/message', [GuestMessageController::class, 'contact'])->name('message');
+    // Route::get('/message', [GuestMessageController::class, 'contact'])->name('message.contact');
     Route::post('/message/send', [GuestMessageController::class, 'sendEmail'])->name('message.send');
 });
 
