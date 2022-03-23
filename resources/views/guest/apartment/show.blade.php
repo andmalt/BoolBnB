@@ -1,9 +1,8 @@
 @extends('layouts.guestPages')
 
 @section('content')
-    <div >
+    <div class="mt-10">
          <div class="py-5 mb-4">
-            <h2><strong>La casa:</strong></h2>
             <h1 class="uppercase text-2xl text-lime-900 mb-8">{{$apartment->title}}</h1>
 
             <div class="columns-3xs mb-5">
@@ -20,13 +19,26 @@
             <p class="mb-6">{{$apartment->description}}</p>
             <h2 class="mb-3"><strong>Prezzo:</strong></h2>
             <p class="mb-5">{{$apartment->price}}&euro; per notte</p>
+            <h2 class="mb-3"><strong>Indirizzo:</strong></h2>
+            <p>{{$apartment->city}}</p>
+            <p>{{$apartment->address}}</p>
         </div> 
+
+        <div class="flex flex-wrap items-center mb-8">
+            <p>
+            @foreach ($apartment->facilities as $facility)
+                {{$facility->name}},
+            @endforeach
+            </p>
+        </div>
 
         <div class="mb-14">
             @if (Session::has('send-mail'))
                 <p class="text-green-700 py-2 my-4">{{Session::get('send-mail')}}</p>
             @endif
 
+
+            {{-- Form Message --}}
             <h2 class="mb-4 uppercase">Se desideri ulteriori informazioni per questa casa manda un messaggio al propretario</h2>
             <form action="{{route('guest.message.send',['apartment_id' => $apartment->id])}}" method="post">
             @csrf
@@ -69,7 +81,7 @@
                 <button class="bg-blue-500 hover:bg-blue-600 active:bg-blue-700 py-2 px-6 rounded-md" type="submit">Invia messaggio</button>
             </form>
         </div>
-        <div class="flex justify-end">
+        <div class="flex justify-end mb-8">
             <a class="bg-red-500 hover:bg-red-600 active:bg-red-700 rounded-md py-3 px-8" href="{{route('guest.apartment.index')}}">torna indietro</a>
         </div>
 

@@ -17,27 +17,36 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
     <body class="antialiased">
-        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-            @if (Route::has('login'))
-                <div class="fixed top-0 right-0 px-6 py-4 sm:block">
-                    @auth
-                        <div class="">
-                            <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">{{ Auth::user()->name }} Dashboard</a>
-                        </div>
-                        
-                    @else
-                        <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
+    <div class="bg-gray-300 dark:bg-gray-900 sm:pt-0 mb-9">
+        
+        @if (Route::has('login'))
+            <div class="flex justify-between items-center h-16 bg-gray-300 w-full px-4 flex-wrap">
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-                        @endif
-                    @endauth
+                <div class="logo w-72">
+                    <a href="{{url('/')}}"><img class="w-full" src="{{asset('images/logo/logo.png')}}" alt="logo"></a>
                 </div>
-            @endif
+                
+                @auth
+                <div class="text-right">
+                    <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">{{ Auth::user()->name }} Dashboard</a>
+                </div>  
+                    
+                @else
+                <div class="text-right">
+                    <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
 
-            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-                <a class="bg-green-600 hover:bg-green-700 active:bg-green-800 py-3 px-6 rounded-lg" href="{{route('guest.apartment.index')}}">visualizza case</a>
+                    @if (Route::has('register'))
+                        <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
+                    @endif
+                </div>      
+                @endauth
             </div>
+        @endif
+
+        
+    </div>
+        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 mt-20">
+            <a class="bg-green-600 hover:bg-green-700 active:bg-green-800 py-3 px-6 rounded-lg" href="{{route('guest.apartment.index')}}">visualizza case</a>
         </div>
     </body>
 </html>

@@ -1,7 +1,7 @@
 @extends('layouts.guestPages')
 
 @section('content')
-    <div>
+    <div class=" h-full">
         @forelse ($apartments as $apartment)
             <div class="sm:grid sm:grid-cols-1 md:flex my-6 p-8 justify-between items-center shadow-lg border border-slate-200">
                 <div class="flex flex-col flex-wrap">

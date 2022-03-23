@@ -39,6 +39,7 @@ class MessageController extends Controller
     {
         $message->delete();
 
-        return redirect()->route('admin.messages.index', $message->apartment->id)->with('delete-message',"Il messaggio di $message->name $message->surname è stato cancellato con successo");
+        return redirect()->route('admin.messages.index', $message->apartment->id)
+        ->with('delete-message',"Il messaggio di $message->name $message->surname è stato cancellato con successo");
     }
 }
