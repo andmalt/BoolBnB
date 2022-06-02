@@ -18,7 +18,7 @@ class MessageController extends Controller
         //
     }
 
-        
+
     /**
      * send a email
      *
@@ -58,7 +58,6 @@ class MessageController extends Controller
         Mail::to($newMessage->apartment->user->email)->send(new SendNewMailHost($newMessage));
 
 
-        return redirect()->route('guest.apartment.show',$newMessage->apartment->id)->with('send-mail','La mail è stata inviata con successo');
+        return redirect()->route('guest.apartment.show', $newMessage->apartment->id)->with('send-mail', 'La mail è stata inviata con successo');
     }
-    
 }
