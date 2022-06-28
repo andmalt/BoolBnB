@@ -29,6 +29,7 @@ class CreateApartmentsTable extends Migration
             $table->string('address');
             $table->decimal('lat',8,6)->nullable();
             $table->decimal('lon',9,6)->nullable();
+            $table->decimal('price',6,2);
             $table->timestamps();
 
             $table->foreign('user_id')

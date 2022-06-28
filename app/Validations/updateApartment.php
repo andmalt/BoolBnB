@@ -2,24 +2,18 @@
 
 $request->validate(
     [
-        'title' => 'required|string|unique:apartments|min:5|max:255',
         'city' => 'required|string|min:2|max:100',
         'region' => 'required|string|min:5|max:100',
         'address' => 'required|string|min:5|max:150',
-        'images' => "required",
-        'images.*' => 'mimes:jpg,png,jpeg,gif,svg',
         'rooms' => "required|integer|between:1,20",
         'bathrooms' => "required|integer|between:1,20",
         'beds' => "required|integer|between:1,40",
         'square' => "required|integer|between:15,500",
         'facilities' => 'nullable|exists:facilities,id',
-        'description' => 'required|string|min:10|max:1500'
+        'description' => 'required|string|min:10|max:1500',
+        'price' => 'required|numeric|min:1.00|max:9999.00',
     ],
     [
-        "title.required" => 'Non è possibile inserire un appartamento senza titolo',
-        "title.min" => 'Inserisci almeno 5 caratteri per la descrizione del titolo',
-        "title.max" => 'Puoi inserire massimo 255 caratteri per la descrizione del titolo',
-        "title.unique" => 'Questa descrizione già esiste',
         "city.required" => 'Inserisci la città',
         "city.min" => 'Inserisci almeno 2 caratteri per il campo città',
         "city.max" => 'Puoi inserire massimo 100 caratteri per il campo città',
@@ -29,8 +23,6 @@ $request->validate(
         "address.required" => 'Non è possibile inserire un appartamento senza indirizzo',
         "address.min" => 'Inserisci almeno 5 caratteri per l\'indirizzo',
         "address.max" => 'Puoi inserire massimo 150 caratteri per l\'indirizzo',
-        "images.required" => 'Non è possibile inserire un appartamento senza immagine',
-        "images.*.mimes" => 'Devi inserire un file immagine valido',
         "rooms.required" => 'Inserisci il numero di camere',
         "rooms.between" => 'Inserisci un numero di camere compreso tra 1 e 20',
         "rooms.integer" => 'Puoi inserire solo numeri nel campo camere',
@@ -46,6 +38,10 @@ $request->validate(
         "description.required" => 'inserisci una breve descrizione',
         "description.string" => 'la descrizione deve essere una stringa',
         "description.min" => 'la descrizione deve essere minimo di 10 caratteri',
-        "description.max" => 'la descrizione deve essere massimo di 1500 caratteri'
+        "description.max" => 'la descrizione deve essere massimo di 1500 caratteri',
+        "price.required" => 'devi inserire il prezzo per notte della casa',
+        "price.numeric" => 'il prezzo deve essere un numero',
+        "price.min" => 'il prezzo min è di un euro per notte',
+        "price.max" => 'il prezzo massimo è di 9999.00 euro per notte',
     ]
 );

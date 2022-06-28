@@ -21,7 +21,7 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $apartments = DB::table('apartments')->where('user_id', '=', Auth::user()->id)->get();
+        $apartments = DB::table('apartments')->where('user_id', '=', Auth::user()->id)->paginate(2);
 
         return view('admin.apartment.index', compact('apartments'));
     }
@@ -49,7 +49,7 @@ class ApartmentController extends Controller
     public function store(Request $request)
     {
         // validations
-        require __DIR__ . '../../../../Validations/apartmentValidations.php';
+        require __DIR__ . '../../../../Validations/createApartment.php';
 
 
         $data = $request->all();
@@ -75,7 +75,7 @@ class ApartmentController extends Controller
 
             foreach ($request->file('images') as $image) {
                 $photo = new Photo();
-                $name = time() . Str::random(35) . '.' . $image->getClientOriginalExtension();
+                $name = time() . Str::random(20) . '.' . $image->getClientOriginalExtension();
                 $image->move(storage_path('app/public/apartments/images/'), $name);
                 $photo->image_url = $name;
                 $photo->apartment_id = $apartment->id;
@@ -94,10 +94,12 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        $facilities = Facility::all();
 
-
-        return view('admin.apartment.show', compact('apartment'));
+        if (Auth::user()->id == $apartment->user_id) {
+            return view('admin.apartment.show', compact('apartment'));
+        } else {
+            return view('guest.welcome');
+        }
     }
 
     /**
@@ -110,7 +112,17 @@ class ApartmentController extends Controller
     {
         require __DIR__ . '../../../../Variables/apartmentVariables.php';
 
-        return view('admin.apartment.edit', compact('regions'));
+        $facilities = Facility::all();
+
+
+
+        $facilityIds = $apartment->facilities->pluck('id')->toArray();
+
+        if (Auth::user()->id == $apartment->user_id) {
+            return view('admin.apartment.edit', compact('regions', 'apartment', 'facilities', 'facilityIds'));
+        } else {
+            return view('guest.welcome');
+        }
     }
 
     /**
@@ -123,7 +135,21 @@ class ApartmentController extends Controller
     public function update(Request $request, Apartment $apartment)
     {
         // validations
-        require __DIR__ . '../../../../Validations/apartmentValidations.php';
+        require __DIR__ . '../../../../Validations/updateApartment.php';
+
+        $data = $request->all();
+
+        // call api to TomTom and response decoding
+        $address = str_replace(' ', '-', $data['address']);
+        $call = file_get_contents('https://api.tomtom.com/search/2/geocode/' . $data['region'] . '-' . $data['city'] . '-' . $address . '.JSON?key=CskONgb89uswo1PwlNDOtG4txMKrp1yQ');
+        $response = json_decode($call);
+        // inserted in data the results lat,lon in the response 
+        $data['lat'] = $response->results[0]->position->lat;
+        $data['lon'] = $response->results[0]->position->lon;
+
+        $apartment->update($data);
+
+        return redirect()->route('admin.apartment.show', $apartment->id);
     }
 
     /**
