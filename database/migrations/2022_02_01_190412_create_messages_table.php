@@ -16,13 +16,16 @@ class CreateMessagesTable extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('apartment_id');
-            $table->string('email',100);
+            $table->string('email', 100);
             $table->text('message_content');
             $table->string('name');
             $table->string('surname');
             $table->timestamps();
 
-            $table->foreign('apartment_id')->references('id')->on('apartments');
+            $table->foreign('apartment_id')
+                ->references('id')
+                ->on('apartments')
+                ->onDelete('cascade');
         });
     }
 
@@ -33,7 +36,7 @@ class CreateMessagesTable extends Migration
      */
     public function down()
     {
-        Schema::table('messages', function(Blueprint $table){
+        Schema::table('messages', function (Blueprint $table) {
             $table->dropForeign('messages_apartment_id_foreign');
         });
         Schema::dropIfExists('messages');

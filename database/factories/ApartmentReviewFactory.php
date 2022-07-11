@@ -6,7 +6,7 @@ use App\Models\Apartment;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Arr;
 
-class ApartmentReviewFactory extends Factory
+class ApartmentreviewFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,7 +19,7 @@ class ApartmentReviewFactory extends Factory
 
         return [
             'apartment_id' => Arr::random($apartment_ids),
-            'vote' => $this->faker->randomFloat(1,0,5),
+            'vote' => $this->faker->randomFloat(1, 0, 5),
             'name' => $this->faker->name(),
             'review' => $this->faker->paragraph(2),
         ];

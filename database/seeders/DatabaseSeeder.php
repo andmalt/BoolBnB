@@ -20,10 +20,10 @@ class DatabaseSeeder extends Seeder
         \App\Models\Photo::factory(100)->create();
         \App\Models\Message::factory(80)->create();
         \App\Models\Stat::factory(650)->create();
-        \App\Models\ApartmentReview::factory(150)->create();
-        \App\Models\UserReview::factory(70)->create();
-        
-                
+        \App\Models\Apartmentreview::factory(150)->create();
+        \App\Models\Userreview::factory(70)->create();
+
+
         $this->call([
             SponsorshipTableSeeder::class,
             ApartmentSponsorshipTableSeeder::class,

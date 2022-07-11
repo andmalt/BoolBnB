@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Arr;
 
-class UserReviewFactory extends Factory
+class UserreviewFactory extends Factory
 {
     /**
      * Define the model's default state.

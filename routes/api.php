@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Admin\ApartmentController;
 use App\Http\Controllers\Api\Auth\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -15,13 +16,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/**
+ * Authentication Routes
+ */
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::delete('/logout', [AuthController::class, 'logout']);
 });
 
-// Route::group(['middleware' => ['auth:sanctum']], function () {
-//     Route::post('/logout', [AuthController::class, 'logout']); test
-// });
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('my/apartments', [ApartmentController::class, 'index']);
+    Route::get('my/apartment/{id}', [ApartmentController::class, 'show']);
+});
