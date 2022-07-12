@@ -95,13 +95,24 @@ class ApartmentController extends Controller
     {
         $apartment = Apartment::find($id);
         $messages = $apartment->messages()->get();
+        $stats = $apartment->stats()->get();
+        $photos = $apartment->photos()->get();
+        $reviews = $apartment->reviews()->get();
+        $facilities = $apartment->facilities()->get();
+        $sponsorships = $apartment->sponsorships()->get();
 
         if ($request->user()->id == $apartment->user_id) {
             $response = [
                 'success' => true,
+                'data' =>
                 [
                     'apartment' => $apartment,
                     'messages' => $messages,
+                    'stats' => $stats,
+                    'photos' => $photos,
+                    'reviews' => $reviews,
+                    'facilities' => $facilities,
+                    'sponsorships' => $sponsorships,
                 ],
             ];
 
@@ -140,9 +151,23 @@ class ApartmentController extends Controller
 
         $apartment = Apartment::find($id);
 
-        $apartment->update($data);
+        if ($apartment) {
+            $apartment->update($data);
 
-        return redirect()->route('admin.apartment.show', $apartment->id);
+            $response = [
+                'success' => true,
+                'message' => "the apartment" . $apartment->id . "is updated",
+            ];
+
+            return response()->json($response);
+        } else {
+            $response = [
+                'success' => false,
+                'message' => "there isn't any apartment",
+            ];
+
+            return response()->json($response, 404);
+        }
     }
 
     /**
