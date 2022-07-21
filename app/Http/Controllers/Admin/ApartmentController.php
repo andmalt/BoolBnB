@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use App\Models\Facility;
 use App\Models\Photo;
+use App\Models\Stat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -57,7 +59,8 @@ class ApartmentController extends Controller
 
         // call api to TomTom and response decoding
         $address = str_replace(' ', '-', $data['address']);
-        $call = file_get_contents('https://api.tomtom.com/search/2/geocode/' . $data['region'] . '-' . $data['city'] . '-' . $address . '.JSON?key=CskONgb89uswo1PwlNDOtG4txMKrp1yQ');
+        $call = Http::get('https://api.tomtom.com/search/2/geocode/' . $data['region'] . '-' . $data['city'] . '-' . $address . '.JSON?key=CskONgb89uswo1PwlNDOtG4txMKrp1yQ');
+
         $response = json_decode($call);
         // inserted in data the results lat,lon in the response 
         $data['lat'] = $response->results[0]->position->lat;
@@ -75,9 +78,9 @@ class ApartmentController extends Controller
 
             foreach ($request->file('images') as $image) {
                 $photo = new Photo();
-                $name = time() . Str::random(20) . '.' . $image->getClientOriginalExtension();
-                $image->move(storage_path('app/public/apartments/images/'), $name);
-                $photo->image_url = $name;
+                $url = time() . Str::random(20) . $image->extension();
+                $image->move(storage_path('app/public/apartments/images/'), $url);
+                $photo->image_url = $url;
                 $photo->apartment_id = $apartment->id;
                 $photo->save();
             }
@@ -92,9 +95,8 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Apartment $apartment)
+    public function show(Apartment $apartment, Request $request)
     {
-
         if (Auth::user()->id == $apartment->user_id) {
             return view('admin.apartment.show', compact('apartment'));
         } else {
@@ -141,7 +143,7 @@ class ApartmentController extends Controller
 
         // call api to TomTom and response decoding
         $address = str_replace(' ', '-', $data['address']);
-        $call = file_get_contents('https://api.tomtom.com/search/2/geocode/' . $data['region'] . '-' . $data['city'] . '-' . $address . '.JSON?key=CskONgb89uswo1PwlNDOtG4txMKrp1yQ');
+        $call = Http::get('https://api.tomtom.com/search/2/geocode/' . $data['region'] . '-' . $data['city'] . '-' . $address . '.JSON?key=CskONgb89uswo1PwlNDOtG4txMKrp1yQ');
         $response = json_decode($call);
         // inserted in data the results lat,lon in the response 
         $data['lat'] = $response->results[0]->position->lat;

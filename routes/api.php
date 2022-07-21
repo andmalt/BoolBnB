@@ -17,17 +17,29 @@ use Illuminate\Support\Facades\Route;
 */
 
 /**
+ * Guest
+ */
+Route::middleware('guest')->group(function () {
+});
+
+/**
  * Authentication Routes
  */
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/register', [AuthController::class, 'register']);
-
+Route::middleware('guest')->group(function () {
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/register', [AuthController::class, 'register']);
+});
 Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/logout', [AuthController::class, 'logout']);
 });
 
-
-Route::middleware('auth:sanctum')->group(function () {
+/**
+ * Admin
+ */
+Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('my/apartments', [ApartmentController::class, 'index']);
     Route::get('my/apartment/{id}', [ApartmentController::class, 'show']);
+    Route::post('my/apartment/create', [ApartmentController::class, 'store']);
+    Route::post('my/apartment/{id}/update', [ApartmentController::class, 'update']);
+    Route::delete('my/apartment/{id}/delete', [ApartmentController::class, 'destroy']);
 });

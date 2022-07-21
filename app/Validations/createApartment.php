@@ -1,6 +1,6 @@
 <?php
 
-$request->validate(
+$validate = $request->validate(
     [
         'title' => 'required|string|unique:apartments|min:5|max:255',
         'city' => 'required|string|min:2|max:100',

@@ -7,20 +7,22 @@ use App\Models\Apartment;
 use App\Models\Facility;
 use App\Models\Photo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ApartmentController extends Controller
 {
+    /**
+     * Display all my apartments
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function index(Request $request)
     {
 
         $apartments = Apartment::where('user_id', '=', $request->user()->id)
-            ->with('facilities')
-            ->with('sponsorships')
-            ->with('stats')
-            ->with('messages')
-            // ->with('apartmentreviews')
             ->with('photos')
             ->paginate(5);
 
@@ -40,7 +42,7 @@ class ApartmentController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created apartment in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -48,7 +50,7 @@ class ApartmentController extends Controller
     public function store(Request $request)
     {
         // validations
-        require __DIR__ . '../../../../Validations/createApartment.php';
+
 
 
         $data = $request->all();
@@ -56,8 +58,11 @@ class ApartmentController extends Controller
 
         // call api to TomTom and response decoding
         $address = str_replace(' ', '-', $data['address']);
-        $call = file_get_contents('https://api.tomtom.com/search/2/geocode/' . $data['region'] . '-' . $data['city'] . '-' . $address . '.JSON?key=CskONgb89uswo1PwlNDOtG4txMKrp1yQ');
+
+        $call = Http::get('https://api.tomtom.com/search/2/geocode/' . $data['region'] . '-' . $data['city'] . '-' . $address . '.JSON?key=CskONgb89uswo1PwlNDOtG4txMKrp1yQ');
+
         $response = json_decode($call);
+
         // inserted in data the results lat,lon in the response 
         $data['lat'] = $response->results[0]->position->lat;
         $data['lon'] = $response->results[0]->position->lon;
@@ -74,25 +79,44 @@ class ApartmentController extends Controller
 
             foreach ($request->file('images') as $image) {
                 $photo = new Photo();
-                $name = time() . Str::random(20) . '.' . $image->getClientOriginalExtension();
-                $image->move(storage_path('app/public/apartments/images/'), $name);
-                $photo->image_url = $name;
+                $url = time() . Str::random(20) . '.' . $image->extension();
+                $image->move(storage_path('app/public/apartments/images/'), $url);
+                $photo->image_url = $url;
                 $photo->apartment_id = $apartment->id;
                 $photo->save();
             }
         }
 
-        return redirect()->route('admin.apartment.show', $apartment->id);
+        $response = [
+            'success' => true,
+            'message' => "the apartment has been created",
+            'data' => [
+                'apartment' => $apartment,
+                'facilities' => $apartment->facilities()->get(),
+                'photos' => $apartment->photos()->get(),
+            ],
+        ];
+
+        return response()->json($response, 201);
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified apartment.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id, Request $request)
     {
+        if (!Apartment::find($id)) {
+
+            $response = [
+                'success' => false,
+                'message' => "there isn't any apartment",
+            ];
+            return response()->json($response, 404);
+        }
+
         $apartment = Apartment::find($id);
         $messages = $apartment->messages()->get();
         $stats = $apartment->stats()->get();
@@ -101,7 +125,16 @@ class ApartmentController extends Controller
         $facilities = $apartment->facilities()->get();
         $sponsorships = $apartment->sponsorships()->get();
 
-        if ($request->user()->id == $apartment->user_id) {
+        if ($request->user()->id !== $apartment->user_id) {
+
+            $response = [
+                'success' => false,
+                'message' => "you aren't the user",
+            ];
+
+            return response()->json($response, 404);
+        } else {
+
             $response = [
                 'success' => true,
                 'data' =>
@@ -117,18 +150,11 @@ class ApartmentController extends Controller
             ];
 
             return response()->json($response);
-        } else {
-            $response = [
-                'success' => false,
-                'message' => "there isn't any apartment or maybe you aren't the user",
-            ];
-
-            return response()->json($response, 404);
         }
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the apartments in the storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -143,7 +169,8 @@ class ApartmentController extends Controller
 
         // call api to TomTom and response decoding
         $address = str_replace(' ', '-', $data['address']);
-        $call = file_get_contents('https://api.tomtom.com/search/2/geocode/' . $data['region'] . '-' . $data['city'] . '-' . $address . '.JSON?key=CskONgb89uswo1PwlNDOtG4txMKrp1yQ');
+        $call = Http::get('https://api.tomtom.com/search/2/geocode/' . $data['region'] . '-' . $data['city'] . '-' . $address . '.JSON?key=CskONgb89uswo1PwlNDOtG4txMKrp1yQ');
+
         $response = json_decode($call);
         // inserted in data the results lat,lon in the response 
         $data['lat'] = $response->results[0]->position->lat;
@@ -171,7 +198,7 @@ class ApartmentController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the apartments from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

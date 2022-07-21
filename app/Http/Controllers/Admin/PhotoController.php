@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
 
 class PhotoController extends Controller
 {
-    
+
     /**
      * get all images of an apartment
      *
@@ -31,7 +31,7 @@ class PhotoController extends Controller
      * @param  mixed $apartment
      * @return void
      */
-    public function uploadImage(Request $request,Apartment $apartment)
+    public function uploadImage(Request $request, Apartment $apartment)
     {
         $request->validate(
             [
@@ -44,19 +44,19 @@ class PhotoController extends Controller
             ]
         );
 
-        if($request->hasFile('images')){
-            foreach($request->file('images') as $image){
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
                 $photo = new Photo();
-                $name = time() . Str::random(20) . '.' . $image->getClientOriginalExtension();
-                $image->move(storage_path('app/public/apartments/images/'), $name);
+                $url = time() . Str::random(20) . '.' . $image->extension();
+                $image->move(storage_path('app/public/apartments/images/'), $url);
                 $photo->apartment_id = $apartment->id;
-                $photo->image_url = $name;
+                $photo->image_url = $url;
                 $photo->save();
             }
         }
-        return redirect()->route('admin.apartment.show',$apartment->id)->with('ok_message','L\'immagine è stata inserita con successo');
+        return redirect()->route('admin.apartment.show', $apartment->id)->with('ok_message', 'L\'immagine è stata inserita con successo');
     }
-    
+
     /**
      * delete a model photo
      *
@@ -67,9 +67,9 @@ class PhotoController extends Controller
     {
         // \dd($photo->apartment->id);
 
-        Storage::disk('public')->delete('apartments/images/'.$photo->image_url);
+        Storage::disk('public')->delete('apartments/images/' . $photo->image_url);
         $photo->delete();
 
-        return redirect()->route('admin.images.index',$photo->apartment->id)->with('delete-image',"La foto è stata eliminata con successo" );
+        return redirect()->route('admin.images.index', $photo->apartment->id)->with('delete-image', "La foto è stata eliminata con successo");
     }
 }
