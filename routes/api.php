@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\Admin\ApartmentController;
+use App\Http\Controllers\Api\Admin\PhotoController;
 use App\Http\Controllers\Api\Auth\AuthController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,4 +42,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('my/apartment/create', [ApartmentController::class, 'store']);
     Route::post('my/apartment/{id}/update', [ApartmentController::class, 'update']);
     Route::delete('my/apartment/{id}/delete', [ApartmentController::class, 'destroy']);
+    Route::post('my/apartment/{id}/img/upload', [PhotoController::class, 'uploadImage']);
 });

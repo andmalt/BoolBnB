@@ -9,6 +9,7 @@ use App\Models\Photo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class ApartmentController extends Controller
@@ -50,10 +51,36 @@ class ApartmentController extends Controller
     public function store(Request $request)
     {
         // validations
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|string|unique:apartments|min:5|max:255',
+            'city' => 'required|string|min:2|max:100',
+            'region' => 'required|string|min:5|max:100',
+            'address' => 'required|string|min:5|max:150',
+            'images' => "required",
+            'images.*' => 'mimes:jpg,png,jpeg,gif,svg',
+            'rooms' => "required|integer|between:1,20",
+            'bathrooms' => "required|integer|between:1,20",
+            'beds' => "required|integer|between:1,40",
+            'square' => "required|integer|between:15,500",
+            'facilities' => 'nullable|exists:facilities,id',
+            'description' => 'required|string|min:10|max:1500',
+            'price' => 'required|numeric|min:1.00|max:9999.00',
+        ]);
+
+        if ($validator->fails()) {
+
+            $response = [
+                'success' => false,
+                'error' => $validator->errors(),
+            ];
 
 
+            return response()->json($response, 400);
+        }
 
-        $data = $request->all();
+        $validated = $validator->validated();
+
+        $data = $validated;
         $data['user_id'] = $request->user()->id;
 
         // call api to TomTom and response decoding

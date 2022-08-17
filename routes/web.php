@@ -19,12 +19,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Home page
-Route::get('/', function () {
+/* Route::get('/', function () {
     return view('guest.welcome');
+}); */
+
+Route::get('/', function () {
+    return view('index');
 });
 
 
-Route::resource('/guest/apartment', ApartmentController::class)->names('guest.apartment')->only(['index', 'show']);
+/* Route::resource('/guest/apartment', ApartmentController::class)->names('guest.apartment')->only(['index', 'show']);
 Route::namespace('Guest')
     ->name('guest.')
     ->prefix('guest')
@@ -50,7 +54,7 @@ Route::middleware(['auth', 'verified'])
         Route::get('apartment/{apartment}/messages', [MessageController::class, 'getMessages'])->name('messages.index');
         Route::get('apartment/messages/{message}', [MessageController::class, 'viewMessage'])->name('message.show');
         Route::delete('apartment/message/{message}', [MessageController::class, 'deleteMessage'])->name('message.destroy');
-    });
+    }); */
 
 // Route::get("{any?}", function () {
 //     return view('guest.welcome');
