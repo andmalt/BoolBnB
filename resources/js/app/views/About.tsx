@@ -5,14 +5,14 @@ const About = () => {
 
 
 
-    
+
     useEffect(() => {
         // 
     }, []);
     return (
         <div>
             <h1 id='h1'>About</h1>
-            <Link to="/" id='link'>Home</Link>
+            <Link to="/" className='link'>Home</Link>
         </div>
     )
 }

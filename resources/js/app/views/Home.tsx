@@ -18,7 +18,7 @@ const Home = () => {
     return (
         <div>
             <h1 id='h1'>Home</h1>
-            <Link to="about" id='link'>About</Link>
+            <Link to="about" className='link'>About</Link>
         </div>
     )
 }
