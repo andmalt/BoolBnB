@@ -1,3 +1,14 @@
-module.exports= {
-  plugins: ["@babel/plugin-syntax-jsx"]
+module.exports = {
+  "presets": [
+    [
+      "@babel/preset-react",
+      {
+        "runtime": "automatic"
+      }
+    ],
+    "@babel/preset-env"
+  ],
+  "plugins": [
+    "@babel/plugin-proposal-class-properties"
+  ]
 }

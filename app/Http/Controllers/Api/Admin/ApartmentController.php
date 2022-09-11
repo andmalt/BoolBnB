@@ -164,7 +164,7 @@ class ApartmentController extends Controller
 
             $response = [
                 'success' => true,
-                'data' =>
+                'item' =>
                 [
                     'apartment' => $apartment,
                     'messages' => $messages,
@@ -234,7 +234,7 @@ class ApartmentController extends Controller
     {
         $apartment = Apartment::find($id);
 
-        if ($request->user()->id == $apartment->user_id) {
+        if ($request->user()->id === $apartment->user_id) {
             if ($apartment->facilities) $apartment->facilities()->detach();
 
             foreach ($apartment->photos as $photo) {

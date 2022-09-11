@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDom from 'react-dom'
 import App from './app/Index'
-import {BrowserRouter} from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 
 ReactDom.render(
     <React.StrictMode>
@@ -9,5 +9,5 @@ ReactDom.render(
             <App />
         </BrowserRouter>
     </React.StrictMode>,
-document.getElementById('root')
+    document.getElementById('root')
 )
