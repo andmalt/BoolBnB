@@ -26,25 +26,51 @@ __webpack_require__(/*! ../../css/index.css */ "./resources/css/index.css");
 
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
 
-var Home_1 = __importDefault(__webpack_require__(/*! ./views/Home */ "./resources/js/app/views/Home.tsx"));
+var views_1 = __webpack_require__(/*! ./views */ "./resources/js/app/views/index.ts");
 
-var About_1 = __importDefault(__webpack_require__(/*! ./views/About */ "./resources/js/app/views/About.tsx"));
-
-var Header_1 = __importDefault(__webpack_require__(/*! ./components/Header */ "./resources/js/app/components/Header.tsx"));
+var components_1 = __webpack_require__(/*! ./components */ "./resources/js/app/components/index.ts");
 
 var Index = function Index() {
-  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(Header_1["default"], null), react_1["default"].createElement("div", {
+  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(components_1.Header, null), react_1["default"].createElement("div", {
     id: 'container'
   }, react_1["default"].createElement(react_router_dom_1.Routes, null, react_1["default"].createElement(react_router_dom_1.Route, {
     path: '/',
-    element: react_1["default"].createElement(Home_1["default"], null)
+    element: react_1["default"].createElement(views_1.Home, null)
   }), react_1["default"].createElement(react_router_dom_1.Route, {
     path: 'about',
-    element: react_1["default"].createElement(About_1["default"], null)
-  }))));
+    element: react_1["default"].createElement(views_1.About, null)
+  }))), react_1["default"].createElement(components_1.Footer, null));
 };
 
 exports["default"] = Index;
+
+/***/ }),
+
+/***/ "./resources/js/app/components/Footer.tsx":
+/*!************************************************!*\
+  !*** ./resources/js/app/components/Footer.tsx ***!
+  \************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var Footer = function Footer() {
+  return react_1["default"].createElement("div", null, "Footer");
+};
+
+exports["default"] = Footer;
 
 /***/ }),
 
@@ -70,13 +96,80 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 
 __webpack_require__(/*! ../../../css/header.css */ "./resources/css/header.css");
 
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
+
 var Header = function Header() {
-  return react_1["default"].createElement("div", {
-    id: 'header'
-  }, "Header");
+  return react_1["default"].createElement("header", {
+    id: "header"
+  }, react_1["default"].createElement("nav", {
+    className: "p-6"
+  }, react_1["default"].createElement("div", {
+    className: "flex justify-between items-center"
+  }, react_1["default"].createElement(react_router_dom_1.Link, {
+    to: '/'
+  }, react_1["default"].createElement("h1", {
+    className: "pr-6 border-r-2 text-2xl font-bold text-gray-500"
+  }, "saunatime")), react_1["default"].createElement("div", {
+    className: "flex justify-between flex-grow"
+  }, react_1["default"].createElement("div", {
+    className: "flex ml-6 items-center"
+  }, react_1["default"].createElement("span", null, react_1["default"].createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    className: "h-5 w-5 mr-4 cursor-pointer text-gray-500",
+    fill: "none",
+    viewBox: "0 0 24 24",
+    stroke: "currentColor"
+  }, react_1["default"].createElement("path", {
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeWidth: "2",
+    d: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+  }))), react_1["default"].createElement("input", {
+    className: "outline-none text-sm flex-grow bg-gray-100",
+    type: "text",
+    placeholder: "Cerca\u2026"
+  })), react_1["default"].createElement("div", {
+    className: "md:flex space-x-6 hidden"
+  }, react_1["default"].createElement(react_router_dom_1.Link, {
+    to: "about",
+    className: 'text-gray-500 text-md'
+  }, "About"), react_1["default"].createElement("span", {
+    className: "text-gray-500 text-md"
+  }, "Sign up"), react_1["default"].createElement("span", {
+    className: "text-gray-500 text-md"
+  }, "Log in"))))));
 };
 
 exports["default"] = Header;
+
+/***/ }),
+
+/***/ "./resources/js/app/components/index.ts":
+/*!**********************************************!*\
+  !*** ./resources/js/app/components/index.ts ***!
+  \**********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.Header = exports.Footer = void 0;
+
+var Footer_1 = __importDefault(__webpack_require__(/*! ./Footer */ "./resources/js/app/components/Footer.tsx"));
+
+exports.Footer = Footer_1["default"];
+
+var Header_1 = __importDefault(__webpack_require__(/*! ./Header */ "./resources/js/app/components/Header.tsx"));
+
+exports.Header = Header_1["default"];
 
 /***/ }),
 
@@ -134,17 +227,12 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
-
 var About = function About() {
   (0, react_1.useEffect)(function () {// 
   }, []);
   return react_1["default"].createElement("div", null, react_1["default"].createElement("h1", {
     id: 'h1'
-  }, "About"), react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "/",
-    className: 'link'
-  }, "Home"));
+  }, "About"));
 };
 
 exports["default"] = About;
@@ -266,8 +354,6 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
-
 var Home = function Home() {
   var _ref = (0, react_1.useState)(false),
       _ref2 = _slicedToArray(_ref, 2),
@@ -283,15 +369,49 @@ var Home = function Home() {
       setIsMounted(false);
     };
   }, []);
-  return react_1["default"].createElement("div", null, react_1["default"].createElement("h1", {
-    id: 'h1'
-  }, "Home"), react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "about",
-    className: 'link'
-  }, "About"));
+  return react_1["default"].createElement("div", null, react_1["default"].createElement("div", {
+    className: "container mx-auto bg-gray-400 h-96 rounded-md flex items-center"
+  }, react_1["default"].createElement("div", {
+    className: "sm:ml-20 text-gray-50 text-center sm:text-left"
+  }, react_1["default"].createElement("h1", {
+    className: "text-5xl font-bold mb-4"
+  }, "Book saunas ", react_1["default"].createElement("br", null), "everywhere."), react_1["default"].createElement("p", {
+    className: "text-lg inline-block sm:block"
+  }, "The largest online community to rent saunas in Finland."), react_1["default"].createElement("button", {
+    className: "mt-8 px-4 py-2 bg-gray-600 rounded"
+  }, "Browse saunas"))));
 };
 
 exports["default"] = Home;
+
+/***/ }),
+
+/***/ "./resources/js/app/views/index.ts":
+/*!*****************************************!*\
+  !*** ./resources/js/app/views/index.ts ***!
+  \*****************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.About = exports.Home = void 0;
+
+var Home_1 = __importDefault(__webpack_require__(/*! ./Home */ "./resources/js/app/views/Home.tsx"));
+
+exports.Home = Home_1["default"];
+
+var About_1 = __importDefault(__webpack_require__(/*! ./About */ "./resources/js/app/views/About.tsx"));
+
+exports.About = About_1["default"];
 
 /***/ }),
 

@@ -12,7 +12,6 @@ const About = () => {
     return (
         <div>
             <h1 id='h1'>About</h1>
-            <Link to="/" className='link'>Home</Link>
         </div>
     )
 }

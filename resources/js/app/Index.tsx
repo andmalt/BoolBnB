@@ -1,9 +1,8 @@
 import React from 'react';
 import '../../css/index.css';
-import { Routes, Route, Link } from 'react-router-dom';
-import Home from './views/Home';
-import About from './views/About';
-import Header from './components/Header';
+import { Routes, Route } from 'react-router-dom';
+import { Home, About } from './views';
+import { Header, Footer } from './components';
 
 const Index = () => {
     return (
@@ -15,6 +14,7 @@ const Index = () => {
                     <Route path='about' element={<About />} />
                 </Routes>
             </div>
+            <Footer />
         </>
     )
 }

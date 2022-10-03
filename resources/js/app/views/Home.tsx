@@ -17,8 +17,16 @@ const Home = () => {
 
     return (
         <div>
-            <h1 id='h1'>Home</h1>
-            <Link to="about" className='link'>About</Link>
+            <div className="container mx-auto bg-gray-400 h-96 rounded-md flex items-center">
+                <div className="sm:ml-20 text-gray-50 text-center sm:text-left">
+                    <h1 className="text-5xl font-bold mb-4">
+                        Book saunas <br />
+                        everywhere.
+                    </h1>
+                    <p className="text-lg inline-block sm:block">The largest online community to rent saunas in Finland.</p>
+                    <button className="mt-8 px-4 py-2 bg-gray-600 rounded">Browse saunas</button>
+                </div>
+            </div>
         </div>
     )
 }
