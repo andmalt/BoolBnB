@@ -1,8 +1,8 @@
 import React from 'react';
-import '../../css/index.css';
+import '../../../css/index.css';
 import { Routes, Route } from 'react-router-dom';
-import { Home, About } from './views';
-import { Header, Footer } from './components';
+import { Home, About, Dashboard } from '../views';
+import { Header, Footer } from '../components';
 
 const Index = () => {
     return (
@@ -11,7 +11,8 @@ const Index = () => {
             <div id='container'>
                 <Routes>
                     <Route path='/' element={<Home />} />
-                    <Route path='about' element={<About />} />
+                    <Route path='/about' element={<About />} />
+                    <Route path='/dashboard' element={<Dashboard />} />
                 </Routes>
             </div>
             <Footer />

@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDom from 'react-dom'
-import App from './app/Index'
+import App from './app/routes/Index'
 import { BrowserRouter } from 'react-router-dom'
 
 ReactDom.render(

@@ -23,10 +23,9 @@ use Illuminate\Support\Facades\Route;
     return view('guest.welcome');
 }); */
 
-Route::get('/', function () {
+Route::get("{any?}", function () {
     return view('index');
-});
-
+})->where("any", ".*");
 
 /* Route::resource('/guest/apartment', ApartmentController::class)->names('guest.apartment')->only(['index', 'show']);
 Route::namespace('Guest')
@@ -57,7 +56,7 @@ Route::middleware(['auth', 'verified'])
     }); */
 
 // Route::get("{any?}", function () {
-//     return view('guest.welcome');
+//     return view('index');
 // })->where("any", ".*");
 
 require __DIR__ . '/auth.php';

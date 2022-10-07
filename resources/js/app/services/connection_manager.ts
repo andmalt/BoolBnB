@@ -3,6 +3,14 @@ import axios from "axios"
 const BASE_URL: string = `http://localhost:8000`;
 
 const api = {
+    csrfCookie: async function () {
+        try {
+            const response = await axios.get(`${BASE_URL}/sanctum/csrf-cookie`);
+            return response;
+        } catch (e) {
+            return { data: { success: false, error: { code: 500, message: e } } }
+        }
+    },
     login: async function (email: string, password: string) {
         try {
             const data = {
