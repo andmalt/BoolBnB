@@ -1,6 +1,7 @@
 import Home from "./Home";
 import About from "./About";
 import Dashboard from "./Dashboard";
+import Login from "./Login";
 
 /**
  * application views
@@ -8,5 +9,6 @@ import Dashboard from "./Dashboard";
 export {
     Home,
     About,
-    Dashboard
+    Dashboard,
+    Login
 }

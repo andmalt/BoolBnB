@@ -1,12 +1,18 @@
-import Footer from "./Footer"
-import Header from "./Header"
 import Statistics from "./Statistics"
+import Activities from "./Activities"
+import SocialTraffic from "./SocialTraffic"
+import Table from "./Table"
+import Form from "./Form"
+import Sidebar from "./Sidebar"
 
 /**
  * application component
  */
 export {
-    Footer,
-    Header,
-    Statistics
+    Statistics,
+    Activities,
+    SocialTraffic,
+    Table,
+    Form,
+    Sidebar
 }

@@ -13,9 +13,9 @@ const Header = () => {
           <div className="flex justify-end flex-grow">
             <div className="md:flex space-x-6 hidden">
               <Link to="/about" className='text-gray-500 text-md'>Chi siamo</Link>
-              <Link to="api/dashboard" className='text-gray-500 text-md'>Dashboard</Link>
+              <Link to="/dashboard" className='text-gray-500 text-md'>Dashboard</Link>
               <Link to="/" className="text-gray-500 text-md">Registrati</Link>
-              <Link to="/" className="text-gray-500 text-md">Accedi</Link>
+              <Link to="/login" className="text-gray-500 text-md">Accedi</Link>
             </div>
           </div>
         </div>

@@ -2,96 +2,9 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./resources/js/app/components/Footer.tsx":
-/*!************************************************!*\
-  !*** ./resources/js/app/components/Footer.tsx ***!
-  \************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var Footer = function Footer() {
-  return react_1["default"].createElement("div", null, "Footer");
-};
-
-exports["default"] = Footer;
-
-/***/ }),
-
-/***/ "./resources/js/app/components/Header.tsx":
-/*!************************************************!*\
-  !*** ./resources/js/app/components/Header.tsx ***!
-  \************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-__webpack_require__(/*! ../../../css/header.css */ "./resources/css/header.css");
-
-var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
-
-var Header = function Header() {
-  return react_1["default"].createElement("header", {
-    id: "header",
-    className: "shadow-md"
-  }, react_1["default"].createElement("nav", {
-    className: "p-6"
-  }, react_1["default"].createElement("div", {
-    className: "flex justify-between items-center"
-  }, react_1["default"].createElement(react_router_dom_1.Link, {
-    to: '/'
-  }, react_1["default"].createElement("h1", {
-    className: "pr-6 text-2xl font-bold text-gray-500"
-  }, "BoolBnB")), react_1["default"].createElement("div", {
-    className: "flex justify-end flex-grow"
-  }, react_1["default"].createElement("div", {
-    className: "md:flex space-x-6 hidden"
-  }, react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "/about",
-    className: 'text-gray-500 text-md'
-  }, "Chi siamo"), react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "api/dashboard",
-    className: 'text-gray-500 text-md'
-  }, "Dashboard"), react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "/",
-    className: "text-gray-500 text-md"
-  }, "Registrati"), react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "/",
-    className: "text-gray-500 text-md"
-  }, "Accedi"))))));
-};
-
-exports["default"] = Header;
-
-/***/ }),
-
-/***/ "./resources/js/app/components/Statistics.tsx":
+/***/ "./resources/js/app/components/Activities.tsx":
 /*!****************************************************!*\
-  !*** ./resources/js/app/components/Statistics.tsx ***!
+  !*** ./resources/js/app/components/Activities.tsx ***!
   \****************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
@@ -109,539 +22,13 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 /**
- * statistics card
+ *
+ *
  */
 
 
-var Statistics = function Statistics() {
+var Activities = function Activities() {
   return react_1["default"].createElement("div", {
-    className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-4 gap-4"
-  }, react_1["default"].createElement("div", {
-    className: "bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group"
-  }, react_1["default"].createElement("div", {
-    className: "flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12"
-  }, react_1["default"].createElement("svg", {
-    width: "30",
-    height: "30",
-    fill: "none",
-    viewBox: "0 0 24 24",
-    stroke: "currentColor",
-    className: "stroke-current text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out"
-  }, react_1["default"].createElement("path", {
-    strokeLinecap: "round",
-    strokeLinejoin: "round",
-    strokeWidth: "2",
-    d: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-  }))), react_1["default"].createElement("div", {
-    className: "text-right"
-  }, react_1["default"].createElement("p", {
-    className: "text-2xl"
-  }, "1,257"), react_1["default"].createElement("p", null, "Visitors"))), react_1["default"].createElement("div", {
-    className: "bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group"
-  }, react_1["default"].createElement("div", {
-    className: "flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12"
-  }, react_1["default"].createElement("svg", {
-    width: "30",
-    height: "30",
-    fill: "none",
-    viewBox: "0 0 24 24",
-    stroke: "currentColor",
-    className: "stroke-current text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out"
-  }, react_1["default"].createElement("path", {
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round",
-    "stroke-width": "2",
-    d: "M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-  }))), react_1["default"].createElement("div", {
-    className: "text-right"
-  }, react_1["default"].createElement("p", {
-    className: "text-2xl"
-  }, "557"), react_1["default"].createElement("p", null, "Orders"))), react_1["default"].createElement("div", {
-    className: "bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group"
-  }, react_1["default"].createElement("div", {
-    className: "flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12"
-  }, react_1["default"].createElement("svg", {
-    width: "30",
-    height: "30",
-    fill: "none",
-    viewBox: "0 0 24 24",
-    stroke: "currentColor",
-    className: "stroke-current text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out"
-  }, react_1["default"].createElement("path", {
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round",
-    "stroke-width": "2",
-    d: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
-  }))), react_1["default"].createElement("div", {
-    className: "text-right"
-  }, react_1["default"].createElement("p", {
-    className: "text-2xl"
-  }, "$11,257"), react_1["default"].createElement("p", null, "Sales"))), react_1["default"].createElement("div", {
-    className: "bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group"
-  }, react_1["default"].createElement("div", {
-    className: "flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12"
-  }, react_1["default"].createElement("svg", {
-    width: "30",
-    height: "30",
-    fill: "none",
-    viewBox: "0 0 24 24",
-    stroke: "currentColor",
-    className: "stroke-current text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out"
-  }, react_1["default"].createElement("path", {
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round",
-    "stroke-width": "2",
-    d: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-  }))), react_1["default"].createElement("div", {
-    className: "text-right"
-  }, react_1["default"].createElement("p", {
-    className: "text-2xl"
-  }, "$75,257"), react_1["default"].createElement("p", null, "Balances"))));
-};
-
-exports["default"] = Statistics;
-
-/***/ }),
-
-/***/ "./resources/js/app/components/index.ts":
-/*!**********************************************!*\
-  !*** ./resources/js/app/components/index.ts ***!
-  \**********************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-exports.Statistics = exports.Header = exports.Footer = void 0;
-
-var Footer_1 = __importDefault(__webpack_require__(/*! ./Footer */ "./resources/js/app/components/Footer.tsx"));
-
-exports.Footer = Footer_1["default"];
-
-var Header_1 = __importDefault(__webpack_require__(/*! ./Header */ "./resources/js/app/components/Header.tsx"));
-
-exports.Header = Header_1["default"];
-
-var Statistics_1 = __importDefault(__webpack_require__(/*! ./Statistics */ "./resources/js/app/components/Statistics.tsx"));
-
-exports.Statistics = Statistics_1["default"];
-
-/***/ }),
-
-/***/ "./resources/js/app/routes/Index.tsx":
-/*!*******************************************!*\
-  !*** ./resources/js/app/routes/Index.tsx ***!
-  \*******************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-__webpack_require__(/*! ../../../css/index.css */ "./resources/css/index.css");
-
-var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
-
-var views_1 = __webpack_require__(/*! ../views */ "./resources/js/app/views/index.ts");
-
-var components_1 = __webpack_require__(/*! ../components */ "./resources/js/app/components/index.ts");
-
-var Index = function Index() {
-  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(components_1.Header, null), react_1["default"].createElement("div", {
-    id: 'container'
-  }, react_1["default"].createElement(react_router_dom_1.Routes, null, react_1["default"].createElement(react_router_dom_1.Route, {
-    path: '/',
-    element: react_1["default"].createElement(views_1.Home, null)
-  }), react_1["default"].createElement(react_router_dom_1.Route, {
-    path: '/about',
-    element: react_1["default"].createElement(views_1.About, null)
-  }), react_1["default"].createElement(react_router_dom_1.Route, {
-    path: '/dashboard',
-    element: react_1["default"].createElement(views_1.Dashboard, null)
-  }))), react_1["default"].createElement(components_1.Footer, null));
-};
-
-exports["default"] = Index;
-
-/***/ }),
-
-/***/ "./resources/js/app/views/About.tsx":
-/*!******************************************!*\
-  !*** ./resources/js/app/views/About.tsx ***!
-  \******************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-
-
-var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  var desc = Object.getOwnPropertyDescriptor(m, k);
-
-  if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-    desc = {
-      enumerable: true,
-      get: function get() {
-        return m[k];
-      }
-    };
-  }
-
-  Object.defineProperty(o, k2, desc);
-} : function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  o[k2] = m[k];
-});
-
-var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
-  Object.defineProperty(o, "default", {
-    enumerable: true,
-    value: v
-  });
-} : function (o, v) {
-  o["default"] = v;
-});
-
-var __importStar = this && this.__importStar || function (mod) {
-  if (mod && mod.__esModule) return mod;
-  var result = {};
-  if (mod != null) for (var k in mod) {
-    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  }
-
-  __setModuleDefault(result, mod);
-
-  return result;
-};
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-
-var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var About = function About() {
-  (0, react_1.useEffect)(function () {// 
-  }, []);
-  return react_1["default"].createElement("div", null, react_1["default"].createElement("h1", {
-    id: 'h1'
-  }, "About"));
-};
-
-exports["default"] = About;
-
-/***/ }),
-
-/***/ "./resources/js/app/views/Dashboard.tsx":
-/*!**********************************************!*\
-  !*** ./resources/js/app/views/Dashboard.tsx ***!
-  \**********************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var Dashboard = function Dashboard() {
-  return react_1["default"].createElement("div", {
-    className: "top-margin-header"
-  }, react_1["default"].createElement("div", {
-    className: "min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white"
-  }, react_1["default"].createElement("div", {
-    className: "fixed flex flex-col top-28 left-0 w-14 hover:w-64 md:w-64 bg-gray-600 dark:bg-gray-900 h-full text-white transition-all duration-300 border-none z-10 sidebar rounded-r-sm"
-  }, react_1["default"].createElement("div", {
-    className: "overflow-y-auto overflow-x-hidden flex flex-col justify-between flex-grow"
-  }, react_1["default"].createElement("ul", {
-    className: "flex flex-col py-4 space-y-1"
-  }, react_1["default"].createElement("li", {
-    className: "px-5 hidden md:block"
-  }, react_1["default"].createElement("div", {
-    className: "flex flex-row items-center h-8"
-  }, react_1["default"].createElement("div", {
-    className: "text-sm font-light tracking-wide text-gray-400 uppercase"
-  }, "Principale"))), react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
-    href: "#",
-    className: "relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-500 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-300 dark:hover:border-gray-800 pr-6"
-  }, react_1["default"].createElement("span", {
-    className: "inline-flex justify-center items-center ml-4"
-  }, react_1["default"].createElement("svg", {
-    className: "w-5 h-5",
-    fill: "none",
-    stroke: "currentColor",
-    viewBox: "0 0 24 24",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, react_1["default"].createElement("path", {
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round",
-    "stroke-width": "2",
-    d: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-  }))), react_1["default"].createElement("span", {
-    className: "ml-2 text-sm tracking-wide truncate"
-  }, "Dashboard"))), react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
-    href: "#",
-    className: "relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-500 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-300 dark:hover:border-gray-800 pr-6"
-  }, react_1["default"].createElement("span", {
-    className: "inline-flex justify-center items-center ml-4"
-  }, react_1["default"].createElement("svg", {
-    className: "w-5 h-5",
-    fill: "none",
-    stroke: "currentColor",
-    viewBox: "0 0 24 24",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, react_1["default"].createElement("path", {
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round",
-    "stroke-width": "2",
-    d: "M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
-  }))), react_1["default"].createElement("span", {
-    className: "ml-2 text-sm tracking-wide truncate"
-  }, "Board"))), react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
-    href: "#",
-    className: "relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-500 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-300 dark:hover:border-gray-800 pr-6"
-  }, react_1["default"].createElement("span", {
-    className: "inline-flex justify-center items-center ml-4"
-  }, react_1["default"].createElement("svg", {
-    className: "w-5 h-5",
-    fill: "none",
-    stroke: "currentColor",
-    viewBox: "0 0 24 24",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, react_1["default"].createElement("path", {
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round",
-    "stroke-width": "2",
-    d: "M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
-  }))), react_1["default"].createElement("span", {
-    className: "ml-2 text-sm tracking-wide truncate"
-  }, "Messaggi"))), react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
-    href: "#",
-    className: "relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-500 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-300 dark:hover:border-gray-800 pr-6"
-  }, react_1["default"].createElement("span", {
-    className: "inline-flex justify-center items-center ml-4"
-  }, react_1["default"].createElement("svg", {
-    className: "w-5 h-5",
-    fill: "none",
-    stroke: "currentColor",
-    viewBox: "0 0 24 24",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, react_1["default"].createElement("path", {
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round",
-    "stroke-width": "2",
-    d: "M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-  }))), react_1["default"].createElement("span", {
-    className: "ml-2 text-sm tracking-wide truncate"
-  }, "Notifiche"))), react_1["default"].createElement("li", {
-    className: "px-5 hidden md:block"
-  }, react_1["default"].createElement("div", {
-    className: "flex flex-row items-center mt-5 h-8"
-  }, react_1["default"].createElement("div", {
-    className: "text-sm font-light tracking-wide text-gray-400 uppercase"
-  }, "Impostazioni"))), react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
-    href: "#",
-    className: "relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-500 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-300 dark:hover:border-gray-800 pr-6"
-  }, react_1["default"].createElement("span", {
-    className: "inline-flex justify-center items-center ml-4"
-  }, react_1["default"].createElement("svg", {
-    className: "w-5 h-5",
-    fill: "none",
-    stroke: "currentColor",
-    viewBox: "0 0 24 24",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, react_1["default"].createElement("path", {
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round",
-    "stroke-width": "2",
-    d: "M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-  }))), react_1["default"].createElement("span", {
-    className: "ml-2 text-sm tracking-wide truncate"
-  }, "Profilo"))), react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
-    href: "#",
-    className: "relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-500 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-300 dark:hover:border-gray-800 pr-6"
-  }, react_1["default"].createElement("span", {
-    className: "inline-flex justify-center items-center ml-4"
-  }, react_1["default"].createElement("svg", {
-    className: "w-5 h-5",
-    fill: "none",
-    stroke: "currentColor",
-    viewBox: "0 0 24 24",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, react_1["default"].createElement("path", {
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round",
-    "stroke-width": "2",
-    d: "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-  }), react_1["default"].createElement("path", {
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round",
-    "stroke-width": "2",
-    d: "M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-  }))), react_1["default"].createElement("span", {
-    className: "ml-2 text-sm tracking-wide truncate"
-  }, "Impostazioni")))), react_1["default"].createElement("p", {
-    className: "mb-14 px-5 py-3 hidden md:block text-center text-xs"
-  }, "Copyright @2021"))), react_1["default"].createElement("div", {
-    className: "h-full ml-14 mt-14 mb-10 md:ml-64"
-  }, react_1["default"].createElement("div", {
-    className: "grid grid-cols-1 lg:grid-cols-2 p-4 gap-4"
-  }, react_1["default"].createElement("div", {
-    className: "relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 dark:bg-gray-800 w-full shadow-lg rounded"
-  }, react_1["default"].createElement("div", {
-    className: "rounded-t mb-0 px-0 border-0"
-  }, react_1["default"].createElement("div", {
-    className: "flex flex-wrap items-center px-4 py-2"
-  }, react_1["default"].createElement("div", {
-    className: "relative w-full max-w-full flex-grow flex-1"
-  }, react_1["default"].createElement("h3", {
-    className: "font-semibold text-base text-gray-900 dark:text-gray-50"
-  }, "Social Traffic")), react_1["default"].createElement("div", {
-    className: "relative w-full max-w-full flex-grow flex-1 text-right"
-  }, react_1["default"].createElement("button", {
-    className: "bg-blue-500 dark:bg-gray-100 text-white active:bg-blue-600 dark:text-gray-800 dark:active:text-gray-700 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150",
-    type: "button"
-  }, "See all"))), react_1["default"].createElement("div", {
-    className: "block w-full overflow-x-auto"
-  }, react_1["default"].createElement("table", {
-    className: "items-center w-full bg-transparent border-collapse"
-  }, react_1["default"].createElement("thead", null, react_1["default"].createElement("tr", null, react_1["default"].createElement("th", {
-    className: "px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
-  }, "Referral"), react_1["default"].createElement("th", {
-    className: "px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
-  }, "Visitors"), react_1["default"].createElement("th", {
-    className: "px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left min-w-140-px"
-  }))), react_1["default"].createElement("tbody", null, react_1["default"].createElement("tr", {
-    className: "text-gray-700 dark:text-gray-100"
-  }, react_1["default"].createElement("th", {
-    className: "border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
-  }, "Facebook"), react_1["default"].createElement("td", {
-    className: "border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-  }, "5,480"), react_1["default"].createElement("td", {
-    className: "border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-  }, react_1["default"].createElement("div", {
-    className: "flex items-center"
-  }, react_1["default"].createElement("span", {
-    className: "mr-2"
-  }, "70%"), react_1["default"].createElement("div", {
-    className: "relative w-full"
-  }, react_1["default"].createElement("div", {
-    className: "overflow-hidden h-2 text-xs flex rounded bg-blue-200"
-  }, react_1["default"].createElement("div", {
-    style: {
-      width: "70%"
-    },
-    className: "shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-600"
-  })))))), react_1["default"].createElement("tr", {
-    className: "text-gray-700 dark:text-gray-100"
-  }, react_1["default"].createElement("th", {
-    className: "border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
-  }, "Twitter"), react_1["default"].createElement("td", {
-    className: "border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-  }, "3,380"), react_1["default"].createElement("td", {
-    className: "border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-  }, react_1["default"].createElement("div", {
-    className: "flex items-center"
-  }, react_1["default"].createElement("span", {
-    className: "mr-2"
-  }, "40%"), react_1["default"].createElement("div", {
-    className: "relative w-full"
-  }, react_1["default"].createElement("div", {
-    className: "overflow-hidden h-2 text-xs flex rounded bg-blue-200"
-  }, react_1["default"].createElement("div", {
-    style: {
-      width: "40%"
-    },
-    className: "shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500"
-  })))))), react_1["default"].createElement("tr", {
-    className: "text-gray-700 dark:text-gray-100"
-  }, react_1["default"].createElement("th", {
-    className: "border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
-  }, "Instagram"), react_1["default"].createElement("td", {
-    className: "border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-  }, "4,105"), react_1["default"].createElement("td", {
-    className: "border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-  }, react_1["default"].createElement("div", {
-    className: "flex items-center"
-  }, react_1["default"].createElement("span", {
-    className: "mr-2"
-  }, "45%"), react_1["default"].createElement("div", {
-    className: "relative w-full"
-  }, react_1["default"].createElement("div", {
-    className: "overflow-hidden h-2 text-xs flex rounded bg-pink-200"
-  }, react_1["default"].createElement("div", {
-    style: {
-      width: "45%"
-    },
-    className: "shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-pink-500"
-  })))))), react_1["default"].createElement("tr", {
-    className: "text-gray-700 dark:text-gray-100"
-  }, react_1["default"].createElement("th", {
-    className: "border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
-  }, "Google"), react_1["default"].createElement("td", {
-    className: "border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-  }, "4,985"), react_1["default"].createElement("td", {
-    className: "border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-  }, react_1["default"].createElement("div", {
-    className: "flex items-center"
-  }, react_1["default"].createElement("span", {
-    className: "mr-2"
-  }, "60%"), react_1["default"].createElement("div", {
-    className: "relative w-full"
-  }, react_1["default"].createElement("div", {
-    className: "overflow-hidden h-2 text-xs flex rounded bg-red-200"
-  }, react_1["default"].createElement("div", {
-    style: {
-      width: "60%"
-    },
-    className: "shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500"
-  })))))), react_1["default"].createElement("tr", {
-    className: "text-gray-700 dark:text-gray-100"
-  }, react_1["default"].createElement("th", {
-    className: "border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
-  }, "Linkedin"), react_1["default"].createElement("td", {
-    className: "border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-  }, "2,250"), react_1["default"].createElement("td", {
-    className: "border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-  }, react_1["default"].createElement("div", {
-    className: "flex items-center"
-  }, react_1["default"].createElement("span", {
-    className: "mr-2"
-  }, "30%"), react_1["default"].createElement("div", {
-    className: "relative w-full"
-  }, react_1["default"].createElement("div", {
-    className: "overflow-hidden h-2 text-xs flex rounded bg-blue-200"
-  }, react_1["default"].createElement("div", {
-    style: {
-      width: "30%"
-    },
-    className: "shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-700"
-  }))))))))))), react_1["default"].createElement("div", {
     className: "relative flex flex-col min-w-0 break-words bg-gray-50 dark:bg-gray-800 w-full shadow-lg rounded"
   }, react_1["default"].createElement("div", {
     className: "rounded-t mb-0 px-0 border-0"
@@ -801,146 +188,615 @@ var Dashboard = function Dashboard() {
     "fill-rule": "evenodd",
     d: "M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z",
     "clip-rule": "evenodd"
-  }))))))))))))), react_1["default"].createElement("div", {
-    className: "grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 p-4 gap-4 text-black dark:text-white"
+  }))))))))))));
+};
+
+exports["default"] = Activities;
+
+/***/ }),
+
+/***/ "./resources/js/app/components/Form.tsx":
+/*!**********************************************!*\
+  !*** ./resources/js/app/components/Form.tsx ***!
+  \**********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+/**
+ *
+ * Contact Form
+ */
+
+
+var Form = function Form() {
+  return react_1["default"].createElement("div", {
+    className: "mt-8 mx-4"
   }, react_1["default"].createElement("div", {
-    className: "md:col-span-2 xl:col-span-3"
+    className: "grid grid-cols-1 md:grid-cols-2"
+  }, react_1["default"].createElement("div", {
+    className: "p-6 mr-2 bg-gray-100 dark:bg-gray-800 sm:rounded-lg"
+  }, react_1["default"].createElement("h1", {
+    className: "text-4xl sm:text-5xl text-gray-800 dark:text-white font-extrabold tracking-tight"
+  }, "Get in touch"), react_1["default"].createElement("p", {
+    className: "text-normal text-lg sm:text-2xl font-medium text-gray-600 dark:text-gray-400 mt-2"
+  }, "Fill in the form to submit any query"), react_1["default"].createElement("div", {
+    className: "flex items-center mt-8 text-gray-600 dark:text-gray-400"
+  }, react_1["default"].createElement("svg", {
+    fill: "none",
+    stroke: "currentColor",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round",
+    "stroke-width": "1.5",
+    viewBox: "0 0 24 24",
+    className: "w-8 h-8 text-gray-500"
+  }, react_1["default"].createElement("path", {
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round",
+    "stroke-width": "1.5",
+    d: "M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+  }), react_1["default"].createElement("path", {
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round",
+    "stroke-width": "1.5",
+    d: "M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+  })), react_1["default"].createElement("div", {
+    className: "ml-4 text-md tracking-wide font-semibold w-40"
+  }, "Dhaka, Street, State, Postal Code")), react_1["default"].createElement("div", {
+    className: "flex items-center mt-4 text-gray-600 dark:text-gray-400"
+  }, react_1["default"].createElement("svg", {
+    fill: "none",
+    stroke: "currentColor",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round",
+    "stroke-width": "1.5",
+    viewBox: "0 0 24 24",
+    className: "w-8 h-8 text-gray-500"
+  }, react_1["default"].createElement("path", {
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round",
+    "stroke-width": "1.5",
+    d: "M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+  })), react_1["default"].createElement("div", {
+    className: "ml-4 text-md tracking-wide font-semibold w-40"
+  }, "+880 1234567890")), react_1["default"].createElement("div", {
+    className: "flex items-center mt-4 text-gray-600 dark:text-gray-400"
+  }, react_1["default"].createElement("svg", {
+    fill: "none",
+    stroke: "currentColor",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round",
+    "stroke-width": "1.5",
+    viewBox: "0 0 24 24",
+    className: "w-8 h-8 text-gray-500"
+  }, react_1["default"].createElement("path", {
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round",
+    "stroke-width": "1.5",
+    d: "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+  })), react_1["default"].createElement("div", {
+    className: "ml-4 text-md tracking-wide font-semibold w-40"
+  }, "info@demo.com"))), react_1["default"].createElement("form", {
+    className: "p-6 flex flex-col justify-center"
+  }, react_1["default"].createElement("div", {
+    className: "flex flex-col"
+  }, react_1["default"].createElement("label", {
+    htmlFor: 'name',
+    className: "hidden"
+  }, "Full Name"), react_1["default"].createElement("input", {
+    type: "name",
+    name: "name",
+    id: "name",
+    placeholder: "Full Name",
+    className: "w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 dark:text-gray-50 font-semibold focus:border-blue-500 focus:outline-none"
+  })), react_1["default"].createElement("div", {
+    className: "flex flex-col mt-2"
+  }, react_1["default"].createElement("label", {
+    htmlFor: "email",
+    className: "hidden"
+  }, "Email"), react_1["default"].createElement("input", {
+    type: "email",
+    name: "email",
+    id: "email",
+    placeholder: "Email",
+    className: "w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 dark:text-gray-50 font-semibold focus:border-blue-500 focus:outline-none"
+  })), react_1["default"].createElement("div", {
+    className: "flex flex-col mt-2"
+  }, react_1["default"].createElement("label", {
+    htmlFor: "tel",
+    className: "hidden"
+  }, "Number"), react_1["default"].createElement("input", {
+    type: "tel",
+    name: "tel",
+    id: "tel",
+    placeholder: "Telephone Number",
+    className: "w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 dark:text-gray-50 font-semibold focus:border-blue-500 focus:outline-none"
+  })), react_1["default"].createElement("button", {
+    type: "submit",
+    className: "md:w-32 bg-blue-600 dark:bg-gray-100 text-white dark:text-gray-800 font-bold py-3 px-6 rounded-lg mt-4 hover:bg-blue-500 dark:hover:bg-gray-200 transition ease-in-out duration-300"
+  }, "Submit"))));
+};
+
+exports["default"] = Form;
+
+/***/ }),
+
+/***/ "./resources/js/app/components/Sidebar.tsx":
+/*!*************************************************!*\
+  !*** ./resources/js/app/components/Sidebar.tsx ***!
+  \*************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+/**
+ *
+ *
+ */
+
+
+var Sidebar = function Sidebar() {
+  return react_1["default"].createElement("div", {
+    className: "fixed flex flex-col top-28 left-0 w-14 hover:w-64 md:w-64 bg-gray-600 dark:bg-gray-900 h-full text-white transition-all duration-300 border-none z-10 sidebar rounded-r-sm"
+  }, react_1["default"].createElement("div", {
+    className: "overflow-y-auto overflow-x-hidden flex flex-col justify-between flex-grow"
+  }, react_1["default"].createElement("ul", {
+    className: "flex flex-col py-4 space-y-1"
+  }, react_1["default"].createElement("li", {
+    className: "px-5 hidden md:block"
+  }, react_1["default"].createElement("div", {
+    className: "flex flex-row items-center h-8"
+  }, react_1["default"].createElement("div", {
+    className: "text-sm font-light tracking-wide text-gray-400 uppercase"
+  }, "Principale"))), react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
+    href: "#",
+    className: "relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-500 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-300 dark:hover:border-gray-800 pr-6"
+  }, react_1["default"].createElement("span", {
+    className: "inline-flex justify-center items-center ml-4"
+  }, react_1["default"].createElement("svg", {
+    className: "w-5 h-5",
+    fill: "none",
+    stroke: "currentColor",
+    viewBox: "0 0 24 24",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, react_1["default"].createElement("path", {
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round",
+    "stroke-width": "2",
+    d: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+  }))), react_1["default"].createElement("span", {
+    className: "ml-2 text-sm tracking-wide truncate"
+  }, "Dashboard"))), react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
+    href: "#",
+    className: "relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-500 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-300 dark:hover:border-gray-800 pr-6"
+  }, react_1["default"].createElement("span", {
+    className: "inline-flex justify-center items-center ml-4"
+  }, react_1["default"].createElement("svg", {
+    className: "w-5 h-5",
+    fill: "none",
+    stroke: "currentColor",
+    viewBox: "0 0 24 24",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, react_1["default"].createElement("path", {
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round",
+    "stroke-width": "2",
+    d: "M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
+  }))), react_1["default"].createElement("span", {
+    className: "ml-2 text-sm tracking-wide truncate"
+  }, "Board"))), react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
+    href: "#",
+    className: "relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-500 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-300 dark:hover:border-gray-800 pr-6"
+  }, react_1["default"].createElement("span", {
+    className: "inline-flex justify-center items-center ml-4"
+  }, react_1["default"].createElement("svg", {
+    className: "w-5 h-5",
+    fill: "none",
+    stroke: "currentColor",
+    viewBox: "0 0 24 24",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, react_1["default"].createElement("path", {
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round",
+    "stroke-width": "2",
+    d: "M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
+  }))), react_1["default"].createElement("span", {
+    className: "ml-2 text-sm tracking-wide truncate"
+  }, "Messaggi"))), react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
+    href: "#",
+    className: "relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-500 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-300 dark:hover:border-gray-800 pr-6"
+  }, react_1["default"].createElement("span", {
+    className: "inline-flex justify-center items-center ml-4"
+  }, react_1["default"].createElement("svg", {
+    className: "w-5 h-5",
+    fill: "none",
+    stroke: "currentColor",
+    viewBox: "0 0 24 24",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, react_1["default"].createElement("path", {
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round",
+    "stroke-width": "2",
+    d: "M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+  }))), react_1["default"].createElement("span", {
+    className: "ml-2 text-sm tracking-wide truncate"
+  }, "Notifiche"))), react_1["default"].createElement("li", {
+    className: "px-5 hidden md:block"
+  }, react_1["default"].createElement("div", {
+    className: "flex flex-row items-center mt-5 h-8"
+  }, react_1["default"].createElement("div", {
+    className: "text-sm font-light tracking-wide text-gray-400 uppercase"
+  }, "Impostazioni"))), react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
+    href: "#",
+    className: "relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-500 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-300 dark:hover:border-gray-800 pr-6"
+  }, react_1["default"].createElement("span", {
+    className: "inline-flex justify-center items-center ml-4"
+  }, react_1["default"].createElement("svg", {
+    className: "w-5 h-5",
+    fill: "none",
+    stroke: "currentColor",
+    viewBox: "0 0 24 24",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, react_1["default"].createElement("path", {
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round",
+    "stroke-width": "2",
+    d: "M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+  }))), react_1["default"].createElement("span", {
+    className: "ml-2 text-sm tracking-wide truncate"
+  }, "Profilo"))), react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
+    href: "#",
+    className: "relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-500 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-300 dark:hover:border-gray-800 pr-6"
+  }, react_1["default"].createElement("span", {
+    className: "inline-flex justify-center items-center ml-4"
+  }, react_1["default"].createElement("svg", {
+    className: "w-5 h-5",
+    fill: "none",
+    stroke: "currentColor",
+    viewBox: "0 0 24 24",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, react_1["default"].createElement("path", {
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round",
+    "stroke-width": "2",
+    d: "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+  }), react_1["default"].createElement("path", {
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round",
+    "stroke-width": "2",
+    d: "M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+  }))), react_1["default"].createElement("span", {
+    className: "ml-2 text-sm tracking-wide truncate"
+  }, "Impostazioni")))), react_1["default"].createElement("p", {
+    className: "mb-14 px-5 py-3 hidden md:block text-center text-xs"
+  }, "Copyright @2021")));
+};
+
+exports["default"] = Sidebar;
+
+/***/ }),
+
+/***/ "./resources/js/app/components/SocialTraffic.tsx":
+/*!*******************************************************!*\
+  !*** ./resources/js/app/components/SocialTraffic.tsx ***!
+  \*******************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+/**
+ *
+ *
+ */
+
+
+var SocialTraffic = function SocialTraffic() {
+  return react_1["default"].createElement("div", {
+    className: "relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 dark:bg-gray-800 w-full shadow-lg rounded"
+  }, react_1["default"].createElement("div", {
+    className: "rounded-t mb-0 px-0 border-0"
+  }, react_1["default"].createElement("div", {
+    className: "flex flex-wrap items-center px-4 py-2"
+  }, react_1["default"].createElement("div", {
+    className: "relative w-full max-w-full flex-grow flex-1"
   }, react_1["default"].createElement("h3", {
-    className: "text-lg font-semibold"
-  }, "Task summaries of recent sprints")), react_1["default"].createElement("div", {
-    className: "md:col-span-2 xl:col-span-1"
+    className: "font-semibold text-base text-gray-900 dark:text-gray-50"
+  }, "Social Traffic")), react_1["default"].createElement("div", {
+    className: "relative w-full max-w-full flex-grow flex-1 text-right"
+  }, react_1["default"].createElement("button", {
+    className: "bg-blue-500 dark:bg-gray-100 text-white active:bg-blue-600 dark:text-gray-800 dark:active:text-gray-700 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150",
+    type: "button"
+  }, "See all"))), react_1["default"].createElement("div", {
+    className: "block w-full overflow-x-auto"
+  }, react_1["default"].createElement("table", {
+    className: "items-center w-full bg-transparent border-collapse"
+  }, react_1["default"].createElement("thead", null, react_1["default"].createElement("tr", null, react_1["default"].createElement("th", {
+    className: "px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+  }, "Referral"), react_1["default"].createElement("th", {
+    className: "px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+  }, "Visitors"), react_1["default"].createElement("th", {
+    className: "px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left min-w-140-px"
+  }))), react_1["default"].createElement("tbody", null, react_1["default"].createElement("tr", {
+    className: "text-gray-700 dark:text-gray-100"
+  }, react_1["default"].createElement("th", {
+    className: "border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
+  }, "Facebook"), react_1["default"].createElement("td", {
+    className: "border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+  }, "5,480"), react_1["default"].createElement("td", {
+    className: "border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
   }, react_1["default"].createElement("div", {
-    className: "rounded bg-gray-200 dark:bg-gray-800 p-3"
+    className: "flex items-center"
+  }, react_1["default"].createElement("span", {
+    className: "mr-2"
+  }, "70%"), react_1["default"].createElement("div", {
+    className: "relative w-full"
   }, react_1["default"].createElement("div", {
-    className: "flex justify-between py-1 text-black dark:text-white"
-  }, react_1["default"].createElement("h3", {
-    className: "text-sm font-semibold"
-  }, "Tasks in TO DO"), react_1["default"].createElement("svg", {
-    className: "h-4 fill-current text-gray-600 dark:text-gray-500 cursor-pointer",
-    xmlns: "http://www.w3.org/2000/svg",
-    viewBox: "0 0 24 24"
+    className: "overflow-hidden h-2 text-xs flex rounded bg-blue-200"
+  }, react_1["default"].createElement("div", {
+    style: {
+      width: "70%"
+    },
+    className: "shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-600"
+  })))))), react_1["default"].createElement("tr", {
+    className: "text-gray-700 dark:text-gray-100"
+  }, react_1["default"].createElement("th", {
+    className: "border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
+  }, "Twitter"), react_1["default"].createElement("td", {
+    className: "border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+  }, "3,380"), react_1["default"].createElement("td", {
+    className: "border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+  }, react_1["default"].createElement("div", {
+    className: "flex items-center"
+  }, react_1["default"].createElement("span", {
+    className: "mr-2"
+  }, "40%"), react_1["default"].createElement("div", {
+    className: "relative w-full"
+  }, react_1["default"].createElement("div", {
+    className: "overflow-hidden h-2 text-xs flex rounded bg-blue-200"
+  }, react_1["default"].createElement("div", {
+    style: {
+      width: "40%"
+    },
+    className: "shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500"
+  })))))), react_1["default"].createElement("tr", {
+    className: "text-gray-700 dark:text-gray-100"
+  }, react_1["default"].createElement("th", {
+    className: "border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
+  }, "Instagram"), react_1["default"].createElement("td", {
+    className: "border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+  }, "4,105"), react_1["default"].createElement("td", {
+    className: "border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+  }, react_1["default"].createElement("div", {
+    className: "flex items-center"
+  }, react_1["default"].createElement("span", {
+    className: "mr-2"
+  }, "45%"), react_1["default"].createElement("div", {
+    className: "relative w-full"
+  }, react_1["default"].createElement("div", {
+    className: "overflow-hidden h-2 text-xs flex rounded bg-pink-200"
+  }, react_1["default"].createElement("div", {
+    style: {
+      width: "45%"
+    },
+    className: "shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-pink-500"
+  })))))), react_1["default"].createElement("tr", {
+    className: "text-gray-700 dark:text-gray-100"
+  }, react_1["default"].createElement("th", {
+    className: "border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
+  }, "Google"), react_1["default"].createElement("td", {
+    className: "border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+  }, "4,985"), react_1["default"].createElement("td", {
+    className: "border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+  }, react_1["default"].createElement("div", {
+    className: "flex items-center"
+  }, react_1["default"].createElement("span", {
+    className: "mr-2"
+  }, "60%"), react_1["default"].createElement("div", {
+    className: "relative w-full"
+  }, react_1["default"].createElement("div", {
+    className: "overflow-hidden h-2 text-xs flex rounded bg-red-200"
+  }, react_1["default"].createElement("div", {
+    style: {
+      width: "60%"
+    },
+    className: "shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500"
+  })))))), react_1["default"].createElement("tr", {
+    className: "text-gray-700 dark:text-gray-100"
+  }, react_1["default"].createElement("th", {
+    className: "border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
+  }, "Linkedin"), react_1["default"].createElement("td", {
+    className: "border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+  }, "2,250"), react_1["default"].createElement("td", {
+    className: "border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+  }, react_1["default"].createElement("div", {
+    className: "flex items-center"
+  }, react_1["default"].createElement("span", {
+    className: "mr-2"
+  }, "30%"), react_1["default"].createElement("div", {
+    className: "relative w-full"
+  }, react_1["default"].createElement("div", {
+    className: "overflow-hidden h-2 text-xs flex rounded bg-blue-200"
+  }, react_1["default"].createElement("div", {
+    style: {
+      width: "30%"
+    },
+    className: "shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-700"
+  })))))))))));
+};
+
+exports["default"] = SocialTraffic;
+
+/***/ }),
+
+/***/ "./resources/js/app/components/Statistics.tsx":
+/*!****************************************************!*\
+  !*** ./resources/js/app/components/Statistics.tsx ***!
+  \****************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+/**
+ * statistics card
+ */
+
+
+var Statistics = function Statistics() {
+  return react_1["default"].createElement("div", {
+    className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-4 gap-4"
+  }, react_1["default"].createElement("div", {
+    className: "bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group"
+  }, react_1["default"].createElement("div", {
+    className: "flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12"
+  }, react_1["default"].createElement("svg", {
+    width: "30",
+    height: "30",
+    fill: "none",
+    viewBox: "0 0 24 24",
+    stroke: "currentColor",
+    className: "stroke-current text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out"
   }, react_1["default"].createElement("path", {
-    d: "M5 10a1.999 1.999 0 1 0 0 4 1.999 1.999 0 1 0 0-4zm7 0a1.999 1.999 0 1 0 0 4 1.999 1.999 0 1 0 0-4zm7 0a1.999 1.999 0 1 0 0 4 1.999 1.999 0 1 0 0-4z"
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeWidth: "2",
+    d: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
   }))), react_1["default"].createElement("div", {
-    className: "text-sm text-black dark:text-gray-50 mt-2"
+    className: "text-right"
+  }, react_1["default"].createElement("p", {
+    className: "text-2xl"
+  }, "1,257"), react_1["default"].createElement("p", null, "Visitors"))), react_1["default"].createElement("div", {
+    className: "bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group"
   }, react_1["default"].createElement("div", {
-    className: "bg-white dark:bg-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded mt-1 border-b border-gray-100 dark:border-gray-900 cursor-pointer"
-  }, "Delete all references from the wiki"), react_1["default"].createElement("div", {
-    className: "bg-white dark:bg-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded mt-1 border-b border-gray-100 dark:border-gray-900 cursor-pointer"
-  }, "Remove analytics code"), react_1["default"].createElement("div", {
-    className: "bg-white dark:bg-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded mt-1 border-b border-gray-100 dark:border-gray-900 cursor-pointer"
-  }, "Do a mobile first layout", react_1["default"].createElement("div", {
-    className: "text-gray-500 dark:text-gray-200 mt-2 ml-2 flex justify-between items-start"
-  }, react_1["default"].createElement("span", {
-    className: "text-xs flex items-center"
+    className: "flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12"
   }, react_1["default"].createElement("svg", {
-    className: "h-4 fill-current mr-1",
-    xmlns: "http://www.w3.org/2000/svg",
-    viewBox: "0 0 50 50"
+    width: "30",
+    height: "30",
+    fill: "none",
+    viewBox: "0 0 24 24",
+    stroke: "currentColor",
+    className: "stroke-current text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out"
   }, react_1["default"].createElement("path", {
-    d: "M11 4c-3.855 0-7 3.145-7 7v28c0 3.855 3.145 7 7 7h28c3.855 0 7-3.145 7-7V11c0-3.855-3.145-7-7-7zm0 2h28c2.773 0 5 2.227 5 5v28c0 2.773-2.227 5-5 5H11c-2.773 0-5-2.227-5-5V11c0-2.773 2.227-5 5-5zm25.234 9.832l-13.32 15.723-8.133-7.586-1.363 1.465 9.664 9.015 14.684-17.324z"
-  })), "3/5"), react_1["default"].createElement("img", {
-    src: "https://i.imgur.com/OZaT7jl.png",
-    className: "rounded-full"
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round",
+    "stroke-width": "2",
+    d: "M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
   }))), react_1["default"].createElement("div", {
-    className: "bg-white dark:bg-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded mt-1 border-b border-gray-100 dark:border-gray-900 cursor-pointer"
-  }, "Check the meta tags"), react_1["default"].createElement("div", {
-    className: "bg-white dark:bg-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded mt-1 border-b border-gray-100 dark:border-gray-900 cursor-pointer"
-  }, "Think more tasks for this example", react_1["default"].createElement("div", {
-    className: "text-gray-500 dark:text-gray-200 mt-2 ml-2 flex justify-between items-start"
-  }, react_1["default"].createElement("span", {
-    className: "text-xs flex items-center"
-  }, react_1["default"].createElement("svg", {
-    className: "h-4 fill-current mr-1",
-    xmlns: "http://www.w3.org/2000/svg",
-    viewBox: "0 0 50 50"
-  }, react_1["default"].createElement("path", {
-    d: "M11 4c-3.855 0-7 3.145-7 7v28c0 3.855 3.145 7 7 7h28c3.855 0 7-3.145 7-7V11c0-3.855-3.145-7-7-7zm0 2h28c2.773 0 5 2.227 5 5v28c0 2.773-2.227 5-5 5H11c-2.773 0-5-2.227-5-5V11c0-2.773 2.227-5 5-5zm25.234 9.832l-13.32 15.723-8.133-7.586-1.363 1.465 9.664 9.015 14.684-17.324z"
-  })), "0/3"))), react_1["default"].createElement("p", {
-    className: "mt-3 text-gray-600 dark:text-gray-400"
-  }, "Add a card...")))), react_1["default"].createElement("div", null, react_1["default"].createElement("div", {
-    className: "rounded bg-gray-200 dark:bg-gray-800 p-3"
+    className: "text-right"
+  }, react_1["default"].createElement("p", {
+    className: "text-2xl"
+  }, "557"), react_1["default"].createElement("p", null, "Orders"))), react_1["default"].createElement("div", {
+    className: "bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group"
   }, react_1["default"].createElement("div", {
-    className: "flex justify-between py-1 text-black dark:text-white"
-  }, react_1["default"].createElement("h3", {
-    className: "text-sm font-semibold"
-  }, "Tasks in DEVELOPMENT"), react_1["default"].createElement("svg", {
-    className: "h-4 fill-current text-gray-600 dark:text-gray-500 cursor-pointer",
-    xmlns: "http://www.w3.org/2000/svg",
-    viewBox: "0 0 24 24"
+    className: "flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12"
+  }, react_1["default"].createElement("svg", {
+    width: "30",
+    height: "30",
+    fill: "none",
+    viewBox: "0 0 24 24",
+    stroke: "currentColor",
+    className: "stroke-current text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out"
   }, react_1["default"].createElement("path", {
-    d: "M5 10a1.999 1.999 0 1 0 0 4 1.999 1.999 0 1 0 0-4zm7 0a1.999 1.999 0 1 0 0 4 1.999 1.999 0 1 0 0-4zm7 0a1.999 1.999 0 1 0 0 4 1.999 1.999 0 1 0 0-4z"
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round",
+    "stroke-width": "2",
+    d: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
   }))), react_1["default"].createElement("div", {
-    className: "text-sm text-black dark:text-gray-50 mt-2"
+    className: "text-right"
+  }, react_1["default"].createElement("p", {
+    className: "text-2xl"
+  }, "$11,257"), react_1["default"].createElement("p", null, "Sales"))), react_1["default"].createElement("div", {
+    className: "bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group"
   }, react_1["default"].createElement("div", {
-    className: "bg-white dark:bg-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded mt-1 border-b border-gray-100 dark:border-gray-900 cursor-pointer"
-  }, "Delete all references from the wiki"), react_1["default"].createElement("div", {
-    className: "bg-white dark:bg-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded mt-1 border-b border-gray-100 dark:border-gray-900 cursor-pointer"
-  }, "Remove analytics code"), react_1["default"].createElement("div", {
-    className: "bg-white dark:bg-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded mt-1 border-b border-gray-100 dark:border-gray-900 cursor-pointer"
-  }, "Do a mobile first layout", react_1["default"].createElement("div", {
-    className: "flex justify-between items-start mt-2 ml-2 text-white text-xs"
-  }, react_1["default"].createElement("span", {
-    className: "bg-pink-600 rounded p-1 text-xs flex items-center"
+    className: "flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12"
   }, react_1["default"].createElement("svg", {
-    className: "h-4 fill-current",
-    xmlns: "http://www.w3.org/2000/svg",
-    viewBox: "0 0 24 24"
+    width: "30",
+    height: "30",
+    fill: "none",
+    viewBox: "0 0 24 24",
+    stroke: "currentColor",
+    className: "stroke-current text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out"
   }, react_1["default"].createElement("path", {
-    d: "M12 2c-.8 0-1.5.7-1.5 1.5v.688C7.344 4.87 5 7.62 5 11v4.5l-2 2.313V19h18v-1.188L19 15.5V11c0-3.379-2.344-6.129-5.5-6.813V3.5c0-.8-.7-1.5-1.5-1.5zm-2 18c0 1.102.898 2 2 2 1.102 0 2-.898 2-2z"
-  })), "2"))), react_1["default"].createElement("div", {
-    className: "bg-white dark:bg-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded mt-1 border-b border-gray-100 dark:border-gray-900 cursor-pointer"
-  }, "Check the meta tags"), react_1["default"].createElement("div", {
-    className: "bg-white dark:bg-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded mt-1 border-b border-gray-100 dark:border-gray-900 cursor-pointer"
-  }, "Think more tasks for this example", react_1["default"].createElement("div", {
-    className: "text-gray-500 mt-2 ml-2 flex justify-between items-start"
-  }, react_1["default"].createElement("span", {
-    className: "text-xs flex items-center"
-  }, react_1["default"].createElement("svg", {
-    className: "h-4 fill-current mr-1",
-    xmlns: "http://www.w3.org/2000/svg",
-    viewBox: "0 0 50 50"
-  }, react_1["default"].createElement("path", {
-    d: "M11 4c-3.855 0-7 3.145-7 7v28c0 3.855 3.145 7 7 7h28c3.855 0 7-3.145 7-7V11c0-3.855-3.145-7-7-7zm0 2h28c2.773 0 5 2.227 5 5v28c0 2.773-2.227 5-5 5H11c-2.773 0-5-2.227-5-5V11c0-2.773 2.227-5 5-5zm25.234 9.832l-13.32 15.723-8.133-7.586-1.363 1.465 9.664 9.015 14.684-17.324z"
-  })), "0/3"))), react_1["default"].createElement("p", {
-    className: "mt-3 text-gray-600 dark:text-gray-400"
-  }, "Add a card...")))), react_1["default"].createElement("div", null, react_1["default"].createElement("div", {
-    className: "rounded bg-gray-200 dark:bg-gray-800 p-3"
-  }, react_1["default"].createElement("div", {
-    className: "flex justify-between py-1 text-black dark:text-white"
-  }, react_1["default"].createElement("h3", {
-    className: "text-sm font-semibold"
-  }, "Tasks in QA"), react_1["default"].createElement("svg", {
-    className: "h-4 fill-current text-gray-600 dark:text-gray-500 cursor-pointer",
-    xmlns: "http://www.w3.org/2000/svg",
-    viewBox: "0 0 24 24"
-  }, react_1["default"].createElement("path", {
-    d: "M5 10a1.999 1.999 0 1 0 0 4 1.999 1.999 0 1 0 0-4zm7 0a1.999 1.999 0 1 0 0 4 1.999 1.999 0 1 0 0-4zm7 0a1.999 1.999 0 1 0 0 4 1.999 1.999 0 1 0 0-4z"
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round",
+    "stroke-width": "2",
+    d: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
   }))), react_1["default"].createElement("div", {
-    className: "text-sm text-black dark:text-gray-50 mt-2"
-  }, react_1["default"].createElement("div", {
-    className: "bg-white dark:bg-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded mt-1 border-b border-gray-100 dark:border-gray-900 cursor-pointer"
-  }, "Delete all references from the wiki"), react_1["default"].createElement("div", {
-    className: "bg-white dark:bg-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded mt-1 border-b border-gray-100 dark:border-gray-900 cursor-pointer"
-  }, "Remove analytics code"), react_1["default"].createElement("div", {
-    className: "bg-white dark:bg-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded mt-1 border-b border-gray-100 dark:border-gray-900 cursor-pointer"
-  }, "Do a mobile first layout"), react_1["default"].createElement("div", {
-    className: "bg-white dark:bg-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded mt-1 border-b border-gray-100 dark:border-gray-900 cursor-pointer"
-  }, "Check the meta tags"), react_1["default"].createElement("div", {
-    className: "bg-white dark:bg-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded mt-1 border-b border-gray-100 dark:border-gray-900 cursor-pointer"
-  }, "Think more tasks for this example", react_1["default"].createElement("div", {
-    className: "text-gray-500 dark:text-gray-200 mt-2 ml-2 flex justify-between items-start"
-  }, react_1["default"].createElement("span", {
-    className: "text-xs flex items-center"
-  }, react_1["default"].createElement("svg", {
-    className: "h-4 fill-current mr-1",
-    xmlns: "http://www.w3.org/2000/svg",
-    viewBox: "0 0 50 50"
-  }, react_1["default"].createElement("path", {
-    d: "M11 4c-3.855 0-7 3.145-7 7v28c0 3.855 3.145 7 7 7h28c3.855 0 7-3.145 7-7V11c0-3.855-3.145-7-7-7zm0 2h28c2.773 0 5 2.227 5 5v28c0 2.773-2.227 5-5 5H11c-2.773 0-5-2.227-5-5V11c0-2.773 2.227-5 5-5zm25.234 9.832l-13.32 15.723-8.133-7.586-1.363 1.465 9.664 9.015 14.684-17.324z"
-  })), "0/3"))), react_1["default"].createElement("p", {
-    className: "mt-3 text-gray-600 dark:text-gray-400"
-  }, "Add a card..."))))), react_1["default"].createElement("div", {
+    className: "text-right"
+  }, react_1["default"].createElement("p", {
+    className: "text-2xl"
+  }, "$75,257"), react_1["default"].createElement("p", null, "Balances"))));
+};
+
+exports["default"] = Statistics;
+
+/***/ }),
+
+/***/ "./resources/js/app/components/Table.tsx":
+/*!***********************************************!*\
+  !*** ./resources/js/app/components/Table.tsx ***!
+  \***********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var Table = function Table() {
+  return react_1["default"].createElement("div", {
     className: "mt-4 mx-4"
   }, react_1["default"].createElement("div", {
     className: "w-full overflow-hidden rounded-lg shadow-xs"
@@ -1148,237 +1004,322 @@ var Dashboard = function Dashboard() {
     d: "M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z",
     "clip-rule": "evenodd",
     "fill-rule": "evenodd"
-  })))))))))), react_1["default"].createElement("div", {
-    className: "mt-8 mx-4"
+  }))))))))));
+};
+
+exports["default"] = Table;
+
+/***/ }),
+
+/***/ "./resources/js/app/components/index.ts":
+/*!**********************************************!*\
+  !*** ./resources/js/app/components/index.ts ***!
+  \**********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.Sidebar = exports.Form = exports.Table = exports.SocialTraffic = exports.Activities = exports.Statistics = void 0;
+
+var Statistics_1 = __importDefault(__webpack_require__(/*! ./Statistics */ "./resources/js/app/components/Statistics.tsx"));
+
+exports.Statistics = Statistics_1["default"];
+
+var Activities_1 = __importDefault(__webpack_require__(/*! ./Activities */ "./resources/js/app/components/Activities.tsx"));
+
+exports.Activities = Activities_1["default"];
+
+var SocialTraffic_1 = __importDefault(__webpack_require__(/*! ./SocialTraffic */ "./resources/js/app/components/SocialTraffic.tsx"));
+
+exports.SocialTraffic = SocialTraffic_1["default"];
+
+var Table_1 = __importDefault(__webpack_require__(/*! ./Table */ "./resources/js/app/components/Table.tsx"));
+
+exports.Table = Table_1["default"];
+
+var Form_1 = __importDefault(__webpack_require__(/*! ./Form */ "./resources/js/app/components/Form.tsx"));
+
+exports.Form = Form_1["default"];
+
+var Sidebar_1 = __importDefault(__webpack_require__(/*! ./Sidebar */ "./resources/js/app/components/Sidebar.tsx"));
+
+exports.Sidebar = Sidebar_1["default"];
+
+/***/ }),
+
+/***/ "./resources/js/app/layout/Footer.tsx":
+/*!********************************************!*\
+  !*** ./resources/js/app/layout/Footer.tsx ***!
+  \********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var Footer = function Footer() {
+  return react_1["default"].createElement("div", null, "Footer");
+};
+
+exports["default"] = Footer;
+
+/***/ }),
+
+/***/ "./resources/js/app/layout/Header.tsx":
+/*!********************************************!*\
+  !*** ./resources/js/app/layout/Header.tsx ***!
+  \********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+__webpack_require__(/*! ../../../css/header.css */ "./resources/css/header.css");
+
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
+
+var Header = function Header() {
+  return react_1["default"].createElement("header", {
+    id: "header",
+    className: "shadow-md"
+  }, react_1["default"].createElement("nav", {
+    className: "p-6"
   }, react_1["default"].createElement("div", {
-    className: "grid grid-cols-1 md:grid-cols-2"
-  }, react_1["default"].createElement("div", {
-    className: "p-6 mr-2 bg-gray-100 dark:bg-gray-800 sm:rounded-lg"
+    className: "flex justify-between items-center"
+  }, react_1["default"].createElement(react_router_dom_1.Link, {
+    to: '/'
   }, react_1["default"].createElement("h1", {
-    className: "text-4xl sm:text-5xl text-gray-800 dark:text-white font-extrabold tracking-tight"
-  }, "Get in touch"), react_1["default"].createElement("p", {
-    className: "text-normal text-lg sm:text-2xl font-medium text-gray-600 dark:text-gray-400 mt-2"
-  }, "Fill in the form to submit any query"), react_1["default"].createElement("div", {
-    className: "flex items-center mt-8 text-gray-600 dark:text-gray-400"
-  }, react_1["default"].createElement("svg", {
-    fill: "none",
-    stroke: "currentColor",
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round",
-    "stroke-width": "1.5",
-    viewBox: "0 0 24 24",
-    className: "w-8 h-8 text-gray-500"
-  }, react_1["default"].createElement("path", {
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round",
-    "stroke-width": "1.5",
-    d: "M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-  }), react_1["default"].createElement("path", {
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round",
-    "stroke-width": "1.5",
-    d: "M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-  })), react_1["default"].createElement("div", {
-    className: "ml-4 text-md tracking-wide font-semibold w-40"
-  }, "Dhaka, Street, State, Postal Code")), react_1["default"].createElement("div", {
-    className: "flex items-center mt-4 text-gray-600 dark:text-gray-400"
-  }, react_1["default"].createElement("svg", {
-    fill: "none",
-    stroke: "currentColor",
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round",
-    "stroke-width": "1.5",
-    viewBox: "0 0 24 24",
-    className: "w-8 h-8 text-gray-500"
-  }, react_1["default"].createElement("path", {
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round",
-    "stroke-width": "1.5",
-    d: "M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-  })), react_1["default"].createElement("div", {
-    className: "ml-4 text-md tracking-wide font-semibold w-40"
-  }, "+880 1234567890")), react_1["default"].createElement("div", {
-    className: "flex items-center mt-4 text-gray-600 dark:text-gray-400"
-  }, react_1["default"].createElement("svg", {
-    fill: "none",
-    stroke: "currentColor",
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round",
-    "stroke-width": "1.5",
-    viewBox: "0 0 24 24",
-    className: "w-8 h-8 text-gray-500"
-  }, react_1["default"].createElement("path", {
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round",
-    "stroke-width": "1.5",
-    d: "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-  })), react_1["default"].createElement("div", {
-    className: "ml-4 text-md tracking-wide font-semibold w-40"
-  }, "info@demo.com"))), react_1["default"].createElement("form", {
-    className: "p-6 flex flex-col justify-center"
+    className: "pr-6 text-2xl font-bold text-gray-500"
+  }, "BoolBnB")), react_1["default"].createElement("div", {
+    className: "flex justify-end flex-grow"
   }, react_1["default"].createElement("div", {
-    className: "flex flex-col"
-  }, react_1["default"].createElement("label", {
-    htmlFor: 'name',
-    className: "hidden"
-  }, "Full Name"), react_1["default"].createElement("input", {
-    type: "name",
-    name: "name",
-    id: "name",
-    placeholder: "Full Name",
-    className: "w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 dark:text-gray-50 font-semibold focus:border-blue-500 focus:outline-none"
-  })), react_1["default"].createElement("div", {
-    className: "flex flex-col mt-2"
-  }, react_1["default"].createElement("label", {
-    htmlFor: "email",
-    className: "hidden"
-  }, "Email"), react_1["default"].createElement("input", {
-    type: "email",
-    name: "email",
-    id: "email",
-    placeholder: "Email",
-    className: "w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 dark:text-gray-50 font-semibold focus:border-blue-500 focus:outline-none"
-  })), react_1["default"].createElement("div", {
-    className: "flex flex-col mt-2"
-  }, react_1["default"].createElement("label", {
-    htmlFor: "tel",
-    className: "hidden"
-  }, "Number"), react_1["default"].createElement("input", {
-    type: "tel",
-    name: "tel",
-    id: "tel",
-    placeholder: "Telephone Number",
-    className: "w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 dark:text-gray-50 font-semibold focus:border-blue-500 focus:outline-none"
-  })), react_1["default"].createElement("button", {
-    type: "submit",
-    className: "md:w-32 bg-blue-600 dark:bg-gray-100 text-white dark:text-gray-800 font-bold py-3 px-6 rounded-lg mt-4 hover:bg-blue-500 dark:hover:bg-gray-200 transition ease-in-out duration-300"
-  }, "Submit")))), react_1["default"].createElement("div", {
-    className: "mt-8 mx-4"
+    className: "md:flex space-x-6 hidden"
+  }, react_1["default"].createElement(react_router_dom_1.Link, {
+    to: "/about",
+    className: 'text-gray-500 text-md'
+  }, "Chi siamo"), react_1["default"].createElement(react_router_dom_1.Link, {
+    to: "/dashboard",
+    className: 'text-gray-500 text-md'
+  }, "Dashboard"), react_1["default"].createElement(react_router_dom_1.Link, {
+    to: "/",
+    className: "text-gray-500 text-md"
+  }, "Registrati"), react_1["default"].createElement(react_router_dom_1.Link, {
+    to: "/login",
+    className: "text-gray-500 text-md"
+  }, "Accedi"))))));
+};
+
+exports["default"] = Header;
+
+/***/ }),
+
+/***/ "./resources/js/app/layout/index.ts":
+/*!******************************************!*\
+  !*** ./resources/js/app/layout/index.ts ***!
+  \******************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.Header = exports.Footer = void 0;
+
+var Footer_1 = __importDefault(__webpack_require__(/*! ../layout/Footer */ "./resources/js/app/layout/Footer.tsx"));
+
+exports.Footer = Footer_1["default"];
+
+var Header_1 = __importDefault(__webpack_require__(/*! ../layout/Header */ "./resources/js/app/layout/Header.tsx"));
+
+exports.Header = Header_1["default"];
+
+/***/ }),
+
+/***/ "./resources/js/app/routes/Index.tsx":
+/*!*******************************************!*\
+  !*** ./resources/js/app/routes/Index.tsx ***!
+  \*******************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+__webpack_require__(/*! ../../../css/index.css */ "./resources/css/index.css");
+
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
+
+var views_1 = __webpack_require__(/*! ../views */ "./resources/js/app/views/index.ts");
+
+var layout_1 = __webpack_require__(/*! ../layout */ "./resources/js/app/layout/index.ts");
+
+var Index = function Index() {
+  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(layout_1.Header, null), react_1["default"].createElement("div", {
+    id: 'container'
+  }, react_1["default"].createElement(react_router_dom_1.Routes, null, react_1["default"].createElement(react_router_dom_1.Route, {
+    path: '/',
+    element: react_1["default"].createElement(views_1.Home, null)
+  }), react_1["default"].createElement(react_router_dom_1.Route, {
+    path: '/about',
+    element: react_1["default"].createElement(views_1.About, null)
+  }), react_1["default"].createElement(react_router_dom_1.Route, {
+    path: '/dashboard',
+    element: react_1["default"].createElement(views_1.Dashboard, null)
+  }), react_1["default"].createElement(react_router_dom_1.Route, {
+    path: '/login',
+    element: react_1["default"].createElement(views_1.Login, null)
+  }))), react_1["default"].createElement(layout_1.Footer, null));
+};
+
+exports["default"] = Index;
+
+/***/ }),
+
+/***/ "./resources/js/app/views/About.tsx":
+/*!******************************************!*\
+  !*** ./resources/js/app/views/About.tsx ***!
+  \******************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  var desc = Object.getOwnPropertyDescriptor(m, k);
+
+  if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+    desc = {
+      enumerable: true,
+      get: function get() {
+        return m[k];
+      }
+    };
+  }
+
+  Object.defineProperty(o, k2, desc);
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var About = function About() {
+  (0, react_1.useEffect)(function () {// 
+  }, []);
+  return react_1["default"].createElement("div", null, react_1["default"].createElement("h1", {
+    id: 'h1'
+  }, "About"));
+};
+
+exports["default"] = About;
+
+/***/ }),
+
+/***/ "./resources/js/app/views/Dashboard.tsx":
+/*!**********************************************!*\
+  !*** ./resources/js/app/views/Dashboard.tsx ***!
+  \**********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var components_1 = __webpack_require__(/*! ../components */ "./resources/js/app/components/index.ts");
+
+var Dashboard = function Dashboard() {
+  return react_1["default"].createElement("div", {
+    className: "top-margin-header"
   }, react_1["default"].createElement("div", {
-    className: "p-4 bg-blue-50 dark:bg-gray-800 dark:text-gray-50 border border-blue-500 dark:border-gray-500 rounded-lg shadow-md"
-  }, react_1["default"].createElement("h4", {
-    className: "text-lg font-semibold"
-  }, "Have taken ideas & reused components from the following resources:"), react_1["default"].createElement("ul", null, react_1["default"].createElement("li", {
-    className: "mt-3"
-  }, react_1["default"].createElement("a", {
-    className: "flex items-center text-blue-700 dark:text-gray-100",
-    href: "https://tailwindcomponents.com/component/sidebar-navigation-1",
-    target: "_blank"
-  }, react_1["default"].createElement("svg", {
-    width: "20",
-    height: "20",
-    fill: "none",
-    viewBox: "0 0 24 24",
-    stroke: "currentColor",
-    className: "transform transition-transform duration-500 ease-in-out"
-  }, react_1["default"].createElement("path", {
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round",
-    "stroke-width": "2",
-    d: "M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
-  })), react_1["default"].createElement("span", {
-    className: "inline-flex pl-2"
-  }, "Sidebar Navigation"))), react_1["default"].createElement("li", {
-    className: "mt-2"
-  }, react_1["default"].createElement("a", {
-    className: "flex items-center text-blue-700 dark:text-gray-100",
-    href: "https://tailwindcomponents.com/component/contact-form-1",
-    target: "_blank"
-  }, react_1["default"].createElement("svg", {
-    width: "20",
-    height: "20",
-    fill: "none",
-    viewBox: "0 0 24 24",
-    stroke: "currentColor",
-    className: "transform transition-transform duration-500 ease-in-out"
-  }, react_1["default"].createElement("path", {
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round",
-    "stroke-width": "2",
-    d: "M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
-  })), react_1["default"].createElement("span", {
-    className: "inline-flex pl-2"
-  }, "Contact Form"))), react_1["default"].createElement("li", {
-    className: "mt-2"
-  }, react_1["default"].createElement("a", {
-    className: "flex items-center text-blue-700 dark:text-gray-100",
-    href: "https://tailwindcomponents.com/component/trello-panel-clone",
-    target: "_blank"
-  }, react_1["default"].createElement("svg", {
-    width: "20",
-    height: "20",
-    fill: "none",
-    viewBox: "0 0 24 24",
-    stroke: "currentColor",
-    className: "transform transition-transform duration-500 ease-in-out"
-  }, react_1["default"].createElement("path", {
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round",
-    "stroke-width": "2",
-    d: "M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
-  })), react_1["default"].createElement("span", {
-    className: "inline-flex pl-2"
-  }, "Section: Task Summaries"))), react_1["default"].createElement("li", {
-    className: "mt-2"
-  }, react_1["default"].createElement("a", {
-    className: "flex items-center text-blue-700 dark:text-gray-100",
-    href: "https://windmill-dashboard.vercel.app/",
-    target: "_blank"
-  }, react_1["default"].createElement("svg", {
-    width: "20",
-    height: "20",
-    fill: "none",
-    viewBox: "0 0 24 24",
-    stroke: "currentColor",
-    className: "transform transition-transform duration-500 ease-in-out"
-  }, react_1["default"].createElement("path", {
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round",
-    "stroke-width": "2",
-    d: "M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
-  })), react_1["default"].createElement("span", {
-    className: "inline-flex pl-2"
-  }, "Section: Client Table"))), react_1["default"].createElement("li", {
-    className: "mt-2"
-  }, react_1["default"].createElement("a", {
-    className: "flex items-center text-blue-700 dark:text-gray-100",
-    href: "https://demos.creative-tim.com/notus-js/pages/admin/dashboard.html",
-    target: "_blank"
-  }, react_1["default"].createElement("svg", {
-    width: "20",
-    height: "20",
-    fill: "none",
-    viewBox: "0 0 24 24",
-    stroke: "currentColor",
-    className: "transform transition-transform duration-500 ease-in-out"
-  }, react_1["default"].createElement("path", {
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round",
-    "stroke-width": "2",
-    d: "M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
-  })), react_1["default"].createElement("span", {
-    className: "inline-flex pl-2"
-  }, "Section: Social Traffic"))), react_1["default"].createElement("li", {
-    className: "mt-2"
-  }, react_1["default"].createElement("a", {
-    className: "flex items-center text-blue-700 dark:text-gray-100",
-    href: "https://mosaic.cruip.com",
-    target: "_blank"
-  }, react_1["default"].createElement("svg", {
-    width: "20",
-    height: "20",
-    fill: "none",
-    viewBox: "0 0 24 24",
-    stroke: "currentColor",
-    className: "transform transition-transform duration-500 ease-in-out"
-  }, react_1["default"].createElement("path", {
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round",
-    "stroke-width": "2",
-    d: "M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
-  })), react_1["default"].createElement("span", {
-    className: "inline-flex pl-2"
-  }, "Section: Recent Activities")))))))));
+    className: "min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white"
+  }, react_1["default"].createElement(components_1.Sidebar, null), react_1["default"].createElement("div", {
+    className: "h-full ml-14 mt-14 mb-10 md:ml-64"
+  }, react_1["default"].createElement("div", {
+    className: "grid grid-cols-1 lg:grid-cols-2 p-4 gap-4"
+  }))));
 };
 
 exports["default"] = Dashboard;
@@ -1532,6 +1473,226 @@ exports["default"] = Home;
 
 /***/ }),
 
+/***/ "./resources/js/app/views/Login.tsx":
+/*!******************************************!*\
+  !*** ./resources/js/app/views/Login.tsx ***!
+  \******************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+
+function _slicedToArray(arr, i) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+}
+
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+
+  return arr2;
+}
+
+function _iterableToArrayLimit(arr, i) {
+  var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
+
+  if (_i == null) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+
+  var _s, _e;
+
+  try {
+    for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  var desc = Object.getOwnPropertyDescriptor(m, k);
+
+  if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+    desc = {
+      enumerable: true,
+      get: function get() {
+        return m[k];
+      }
+    };
+  }
+
+  Object.defineProperty(o, k2, desc);
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var Login = function Login() {
+  var _ref = (0, react_1.useState)(true),
+      _ref2 = _slicedToArray(_ref, 2),
+      show = _ref2[0],
+      setShow = _ref2[1];
+
+  var _ref3 = (0, react_1.useState)(""),
+      _ref4 = _slicedToArray(_ref3, 2),
+      email = _ref4[0],
+      setEmail = _ref4[1];
+
+  var _ref5 = (0, react_1.useState)(""),
+      _ref6 = _slicedToArray(_ref5, 2),
+      password = _ref6[0],
+      setPassword = _ref6[1];
+
+  return react_1["default"].createElement("div", {
+    className: "container max-w-full mx-auto py-24 px-6"
+  }, react_1["default"].createElement("div", {
+    className: "font-sans"
+  }, react_1["default"].createElement("div", {
+    className: "max-w-sm mx-auto px-6"
+  }, react_1["default"].createElement("div", {
+    className: "relative flex flex-wrap"
+  }, react_1["default"].createElement("div", {
+    className: "w-full relative"
+  }, react_1["default"].createElement("div", {
+    className: "mt-6"
+  }, react_1["default"].createElement("div", {
+    className: "text-center font-semibold text-black"
+  }, "Accedi a BoolBnB"), react_1["default"].createElement("form", null, react_1["default"].createElement("div", {
+    className: 'mx-auto max-w-lg'
+  }, react_1["default"].createElement("div", {
+    className: "py-2"
+  }, react_1["default"].createElement("span", {
+    className: "px-1 text-sm text-gray-600"
+  }, "Email"), react_1["default"].createElement("input", {
+    value: email,
+    onChange: function onChange(e) {
+      return setEmail(e.target.value);
+    },
+    placeholder: "",
+    type: "text",
+    className: "text-md block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
+  })), react_1["default"].createElement("div", {
+    className: "py-2"
+  }, react_1["default"].createElement("span", {
+    className: "px-1 text-sm text-gray-600"
+  }, "Password"), react_1["default"].createElement("div", {
+    className: "relative"
+  }, react_1["default"].createElement("input", {
+    value: password,
+    onChange: function onChange(e) {
+      return setPassword(e.target.value);
+    },
+    placeholder: "",
+    type: show ? 'password' : 'text',
+    className: "text-md block px-3 py-2 rounded-lg w-full\r\n                                                bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md\r\n                                                focus:placeholder-gray-500\r\n                                                focus:bg-white\r\n                                                focus:border-gray-600 focus:outline-none"
+  }), react_1["default"].createElement("div", {
+    className: "absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+  }, !show ? react_1["default"].createElement("svg", {
+    onClick: function onClick() {
+      return setShow(true);
+    },
+    className: "h-6 text-gray-700",
+    fill: "none",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 576 512"
+  }, react_1["default"].createElement("path", {
+    fill: "currentColor",
+    d: "M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400a144 144 0 1 1 144-144 143.93 143.93 0 0 1-144 144zm0-240a95.31 95.31 0 0 0-25.31 3.79 47.85 47.85 0 0 1-66.9 66.9A95.78 95.78 0 1 0 288 160z"
+  })) : react_1["default"].createElement("svg", {
+    onClick: function onClick() {
+      return setShow(false);
+    },
+    className: "h-6 text-gray-700",
+    fill: "none",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 640 512"
+  }, react_1["default"].createElement("path", {
+    fill: "currentColor",
+    d: "M320 400c-75.85 0-137.25-58.71-142.9-133.11L72.2 185.82c-13.79 17.3-26.48 35.59-36.72 55.59a32.35 32.35 0 0 0 0 29.19C89.71 376.41 197.07 448 320 448c26.91 0 52.87-4 77.89-10.46L346 397.39a144.13 144.13 0 0 1-26 2.61zm313.82 58.1l-110.55-85.44a331.25 331.25 0 0 0 81.25-102.07 32.35 32.35 0 0 0 0-29.19C550.29 135.59 442.93 64 320 64a308.15 308.15 0 0 0-147.32 37.7L45.46 3.37A16 16 0 0 0 23 6.18L3.37 31.45A16 16 0 0 0 6.18 53.9l588.36 454.73a16 16 0 0 0 22.46-2.81l19.64-25.27a16 16 0 0 0-2.82-22.45zm-183.72-142l-39.3-30.38A94.75 94.75 0 0 0 416 256a94.76 94.76 0 0 0-121.31-92.21A47.65 47.65 0 0 1 304 192a46.64 46.64 0 0 1-1.54 10l-73.61-56.89A142.31 142.31 0 0 1 320 112a143.92 143.92 0 0 1 144 144c0 21.63-5.29 41.79-13.9 60.11z"
+  }))))), react_1["default"].createElement("div", {
+    className: "flex justify-between"
+  }, react_1["default"].createElement("label", {
+    className: "block text-gray-500 font-bold my-4"
+  }, react_1["default"].createElement("input", {
+    type: "checkbox",
+    className: "leading-loose text-pink-600"
+  }), react_1["default"].createElement("span", {
+    className: "py-2 text-sm text-gray-600 leading-snug ml-3"
+  }, "Ricordati")), react_1["default"].createElement("label", {
+    className: "block text-gray-500 font-bold my-4"
+  }, react_1["default"].createElement("a", {
+    href: "#",
+    className: "cursor-pointer tracking-tighter text-black border-b-2 border-gray-200 hover:border-gray-400"
+  }, react_1["default"].createElement("span", null, "Password dimenticata?")))), react_1["default"].createElement("button", {
+    className: "mt-3 text-lg font-semibold bg-gray-800 w-full text-white rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-black"
+  }, "Login")))))))));
+};
+
+exports["default"] = Login;
+
+/***/ }),
+
 /***/ "./resources/js/app/views/index.ts":
 /*!*****************************************!*\
   !*** ./resources/js/app/views/index.ts ***!
@@ -1549,7 +1710,7 @@ var __importDefault = this && this.__importDefault || function (mod) {
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.Dashboard = exports.About = exports.Home = void 0;
+exports.Login = exports.Dashboard = exports.About = exports.Home = void 0;
 
 var Home_1 = __importDefault(__webpack_require__(/*! ./Home */ "./resources/js/app/views/Home.tsx"));
 
@@ -1562,6 +1723,10 @@ exports.About = About_1["default"];
 var Dashboard_1 = __importDefault(__webpack_require__(/*! ./Dashboard */ "./resources/js/app/views/Dashboard.tsx"));
 
 exports.Dashboard = Dashboard_1["default"];
+
+var Login_1 = __importDefault(__webpack_require__(/*! ./Login */ "./resources/js/app/views/Login.tsx"));
+
+exports.Login = Login_1["default"];
 
 /***/ }),
 
