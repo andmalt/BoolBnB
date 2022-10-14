@@ -74,7 +74,6 @@ class ApartmentController extends Controller
                 'error' => $validator->errors(),
             ];
 
-
             return response()->json($response, 400);
         }
 
@@ -190,9 +189,32 @@ class ApartmentController extends Controller
     public function update($id, Request $request)
     {
         // validations
-        require __DIR__ . '../../../../Validations/updateApartment.php';
+        $validator = Validator::make($request->all(), [
+            'city' => 'required|string|min:2|max:100',
+            'region' => 'required|string|min:5|max:100',
+            'address' => 'required|string|min:5|max:150',
+            'rooms' => "required|integer|between:1,20",
+            'bathrooms' => "required|integer|between:1,20",
+            'beds' => "required|integer|between:1,40",
+            'square' => "required|integer|between:15,500",
+            'facilities' => 'nullable|exists:facilities,id',
+            'description' => 'required|string|min:10|max:1500',
+            'price' => 'required|numeric|min:1.00|max:9999.00',
+        ]);
 
-        $data = $request->all();
+        if ($validator->fails()) {
+
+            $response = [
+                'success' => false,
+                'error' => $validator->errors(),
+            ];
+
+            return response()->json($response, 400);
+        }
+
+        $validated = $validator->validated();
+
+        $data = $validated;
 
         // call api to TomTom and response decoding
         $address = str_replace(' ', '-', $data['address']);
@@ -210,7 +232,7 @@ class ApartmentController extends Controller
 
             $response = [
                 'success' => true,
-                'message' => "the apartment" . $apartment->id . "is updated",
+                'message' => "the apartment " . $apartment->title . " is updated",
             ];
 
             return response()->json($response);

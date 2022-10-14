@@ -1,10 +1,32 @@
 import React, { useState } from 'react'
+import { Navigate, useNavigate } from 'react-router-dom';
+import api from '../services/connection_manager';
 
 const Login = () => {
 
     const [show, setShow] = useState<boolean>(true);
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const navigate = useNavigate();
+
+    const login = async (e: any) => {
+        e.preventDefault()
+        try {
+            const response = await api.login(email, password);
+            try {
+                if (response.data.success) {
+                    localStorage.setItem("token", response.data.token)
+                    setEmail("")
+                    setPassword("")
+                    return navigate("/dashboard");
+                }
+            } catch (error) {
+                return { data: { success: false, error: error, message: "Le credenziali sono errate" } }
+            }
+        } catch (error) {
+            return { data: { success: false, error: error } }
+        }
+    }
 
     return (
         <div className="container max-w-full mx-auto py-24 px-6">
@@ -17,7 +39,7 @@ const Login = () => {
                                     Accedi a BoolBnB
                                 </div>
 
-                                <form>
+                                <form >
                                     <div className='mx-auto max-w-lg'>
                                         <div className="py-2">
                                             <span className="px-1 text-sm text-gray-600">Email</span>
@@ -68,7 +90,7 @@ const Login = () => {
                                                 </a>
                                             </label>
                                         </div>
-                                        <button className="mt-3 text-lg font-semibold bg-gray-800 w-full text-white rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-black">
+                                        <button type='button' onClick={(e) => login(e)} className="mt-3 text-lg font-semibold bg-gray-800 w-full text-white rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-black">
                                             Login
                                         </button>
                                     </div>
