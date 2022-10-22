@@ -116,7 +116,7 @@ class ApartmentController extends Controller
         $response = [
             'success' => true,
             'message' => "the apartment has been created",
-            'data' => [
+            'item' => [
                 'apartment' => $apartment,
                 'facilities' => $apartment->facilities()->get(),
                 'photos' => $apartment->photos()->get(),

@@ -2,22 +2,20 @@ import axios from "axios"
 
 const BASE_URL: string = `http://localhost:8000`;
 
+const csrf = document.head.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+
 const api = {
-    csrfCookie: async function () {
-        try {
-            const response = await axios.get(`${BASE_URL}/sanctum/csrf-cookie`);
-            return response;
-        } catch (e) {
-            return { data: { success: false, error: { code: 500, message: e } } }
-        }
-    },
     login: async function (email: string, password: string) {
         try {
             const data = {
                 email,
                 password
             }
-            const response = await axios.post(`${BASE_URL}/api/login`, data);
+            const response = await axios.post(`${BASE_URL}/api/login`, data, {
+                headers: {
+                    'X-CSRF-TOKEN': `${csrf}`,
+                }
+            });
             return response;
         } catch (e) {
             return { data: { success: false, error: { code: 500, message: e } } }
@@ -33,16 +31,17 @@ const api = {
             password_confirmation
         }
         try {
-            const response = await axios.post(`${BASE_URL}/api/register`, data);
+            const response = await axios.post(`${BASE_URL}/api/register`, data, { headers: { 'X-CSRF-TOKEN': `${csrf}` } });
             return response;
         } catch (e) {
             return { data: { success: false, error: { code: 500, message: e } } }
         }
     },
-    logout: async function (token: string) {
+    logout: async function (token: string | null) {
         const headers = {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            'X-CSRF-TOKEN': `${csrf}`
         }
         try {
             const response = await axios.delete(`${BASE_URL}/api/logout`, { headers });

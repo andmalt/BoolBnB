@@ -1,30 +1,39 @@
 import React, { useState } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import api from '../services/connection_manager';
+import { useAppDispatch } from '../util/hooks';
+import { clear, authenticated, loading, error } from '../util/authSlice';
 
-const Login = () => {
+export interface LoginProps {
+}
+
+const Login = (props: LoginProps) => {
 
     const [show, setShow] = useState<boolean>(true);
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
 
-    const login = async (e: any) => {
+    const setLogin = async (e: any) => {
         e.preventDefault()
+        dispatch(loading());
+        const response = await api.login(email, password);
+        console.log("login: " + response.data);
         try {
-            const response = await api.login(email, password);
-            try {
-                if (response.data.success) {
-                    localStorage.setItem("token", response.data.token)
-                    setEmail("")
-                    setPassword("")
-                    return navigate("/dashboard");
-                }
-            } catch (error) {
-                return { data: { success: false, error: error, message: "Le credenziali sono errate" } }
+            if (response.data.success) {
+                localStorage.setItem("token", response.data.token)
+                dispatch(authenticated(response.data.token))
+                setEmail("")
+                setPassword("")
+                dispatch(clear())
+                console.log("store token: ");
+
+                return navigate("/dashboard");
             }
-        } catch (error) {
-            return { data: { success: false, error: error } }
+        } catch (e) {
+            dispatch(error())
+            return { data: { success: false, error: e, message: "Le credenziali sono errate" } }
         }
     }
 
@@ -90,7 +99,7 @@ const Login = () => {
                                                 </a>
                                             </label>
                                         </div>
-                                        <button type='button' onClick={(e) => login(e)} className="mt-3 text-lg font-semibold bg-gray-800 w-full text-white rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-black">
+                                        <button type='button' onClick={(e) => setLogin(e)} className="mt-3 text-lg font-semibold bg-gray-800 w-full text-white rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-black">
                                             Login
                                         </button>
                                     </div>
