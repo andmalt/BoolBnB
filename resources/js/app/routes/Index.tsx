@@ -10,8 +10,6 @@ export interface IndexProps {
 const Index = (props: IndexProps) => {
     // const [token, setToken] = useState<string | null>(null);
 
-
-
     useEffect(() => {
     }, []);
 

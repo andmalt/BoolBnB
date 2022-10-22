@@ -2,48 +2,42 @@ import React, { useEffect, useState } from 'react';
 import '../../../css/header.css';
 import { Link, useNavigate } from 'react-router-dom';
 import api from '../services/connection_manager';
-import { useAppDispatch } from '../util/hooks';
+import { useAppDispatch, useAppSelector } from '../util/hooks';
 import { clear, logout, loading, error } from '../util/authSlice';
 
 export interface HeaderProps {
 }
 
 const Header = (props: HeaderProps) => {
-
-  const [token, setToken] = useState<string | null>(localStorage.getItem("token"));
-  const [isAuth, setIsAuth] = useState<boolean>(false);
   const [isMount, setIsMount] = useState<boolean>(true);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const authSelector = useAppSelector(state => state.auth);
 
   const setLogout = async (e: any) => {
     e.preventDefault()
+    console.log("t1: " + authSelector.token);
     dispatch(loading())
-    await api.logout(token)
     try {
-      localStorage.removeItem("token")
-      setToken(null)
+      await api.logout(authSelector.token)
       dispatch(logout())
       dispatch(clear())
-      setIsAuth(false)
+      console.log("t2: " + authSelector.token);
       return navigate("/");
     } catch (err) {
+      dispatch(logout())
       dispatch(error())
-      return { err, message: "Error logout" }
+      setTimeout(() => {
+        dispatch(clear())
+        return navigate("/");
+      }, 2000)
     }
   }
 
   useEffect(() => {
-    setIsMount(true)
     if (isMount) {
-      if (token !== null) {
-        setIsAuth(true)
-      }
+      // 
     }
-    console.log("token: " + token);
-    console.log("store token: ");
-    console.log("store email: ");
-
     return () => setIsMount(false)
   }, [])
 
@@ -57,7 +51,7 @@ const Header = (props: HeaderProps) => {
           <div className="flex justify-end flex-grow">
             <div className="md:flex space-x-6 hidden">
               {
-                token !== null ?
+                authSelector.token != null ?
                   <>
                     <Link to="/dashboard" className='text-gray-500 text-md'>Dashboard</Link>
                     <button onClick={(e) => setLogout(e)}>Esci</button>

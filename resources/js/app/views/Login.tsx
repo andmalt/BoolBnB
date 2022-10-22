@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import api from '../services/connection_manager';
-import { useAppDispatch } from '../util/hooks';
+import { useAppDispatch, useAppSelector } from '../util/hooks';
 import { clear, authenticated, loading, error } from '../util/authSlice';
 
 export interface LoginProps {
@@ -14,6 +14,7 @@ const Login = (props: LoginProps) => {
     const [password, setPassword] = useState<string>("");
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+    const authSelector = useAppSelector(state => state.auth);
 
     const setLogin = async (e: any) => {
         e.preventDefault()
@@ -22,13 +23,11 @@ const Login = (props: LoginProps) => {
         console.log("login: " + response.data);
         try {
             if (response.data.success) {
-                localStorage.setItem("token", response.data.token)
                 dispatch(authenticated(response.data.token))
                 setEmail("")
                 setPassword("")
                 dispatch(clear())
-                console.log("store token: ");
-
+                console.log("store token: " + authSelector.token);
                 return navigate("/dashboard");
             }
         } catch (e) {

@@ -1,4 +1,5 @@
 import axios from "axios"
+import { deleteLocalStorage, setLocalStorage } from "./functions";
 
 const BASE_URL: string = `http://localhost:8000`;
 
@@ -16,12 +17,20 @@ const api = {
                     'X-CSRF-TOKEN': `${csrf}`,
                 }
             });
+            if (response.data.success) {
+                setLocalStorage(response)
+            }
             return response;
         } catch (e) {
             return { data: { success: false, error: { code: 500, message: e } } }
         }
     },
-    register: async function (name: string, surname: string, email: string, password: string, password_confirmation: string) {
+    register: async function (
+        name: string,
+        surname: string,
+        email: string,
+        password: string,
+        password_confirmation: string) {
 
         const data = {
             name,
@@ -31,7 +40,14 @@ const api = {
             password_confirmation
         }
         try {
-            const response = await axios.post(`${BASE_URL}/api/register`, data, { headers: { 'X-CSRF-TOKEN': `${csrf}` } });
+            const response = await axios.post(`${BASE_URL}/api/register`, data, {
+                headers: {
+                    'X-CSRF-TOKEN': `${csrf}`
+                }
+            });
+            if (response.data.success) {
+                setLocalStorage(response)
+            }
             return response;
         } catch (e) {
             return { data: { success: false, error: { code: 500, message: e } } }
@@ -44,9 +60,10 @@ const api = {
             'X-CSRF-TOKEN': `${csrf}`
         }
         try {
-            const response = await axios.delete(`${BASE_URL}/api/logout`, { headers });
-            return response;
+            await axios.delete(`${BASE_URL}/api/logout`, { headers });
+            return deleteLocalStorage();
         } catch (e) {
+            deleteLocalStorage()
             return { data: { success: false, error: { code: 500, message: e } } }
         }
     }

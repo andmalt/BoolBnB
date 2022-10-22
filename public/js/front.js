@@ -8597,20 +8597,15 @@ var connection_manager_1 = __importDefault(__webpack_require__(/*! ../services/c
 var hooks_1 = __webpack_require__(/*! ../util/hooks */ "./resources/js/app/util/hooks.ts");
 var authSlice_1 = __webpack_require__(/*! ../util/authSlice */ "./resources/js/app/util/authSlice.ts");
 var Header = function Header(props) {
-  var _ref = (0, react_1.useState)(localStorage.getItem("token")),
+  var _ref = (0, react_1.useState)(true),
     _ref2 = _slicedToArray(_ref, 2),
-    token = _ref2[0],
-    setToken = _ref2[1];
-  var _ref3 = (0, react_1.useState)(false),
-    _ref4 = _slicedToArray(_ref3, 2),
-    isAuth = _ref4[0],
-    setIsAuth = _ref4[1];
-  var _ref5 = (0, react_1.useState)(true),
-    _ref6 = _slicedToArray(_ref5, 2),
-    isMount = _ref6[0],
-    setIsMount = _ref6[1];
+    isMount = _ref2[0],
+    setIsMount = _ref2[1];
   var navigate = (0, react_router_dom_1.useNavigate)();
   var dispatch = (0, hooks_1.useAppDispatch)();
+  var authSelector = (0, hooks_1.useAppSelector)(function (state) {
+    return state.auth;
+  });
   var setLogout = function setLogout(e) {
     return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -8618,43 +8613,37 @@ var Header = function Header(props) {
           switch (_context.prev = _context.next) {
             case 0:
               e.preventDefault();
+              console.log("t1: " + authSelector.token);
               dispatch((0, authSlice_1.loading)());
-              _context.next = 4;
-              return connection_manager_1["default"].logout(token);
-            case 4:
-              _context.prev = 4;
-              localStorage.removeItem("token");
-              setToken(null);
+              _context.prev = 3;
+              _context.next = 6;
+              return connection_manager_1["default"].logout(authSelector.token);
+            case 6:
               dispatch((0, authSlice_1.logout)());
               dispatch((0, authSlice_1.clear)());
-              setIsAuth(false);
+              console.log("t2: " + authSelector.token);
               return _context.abrupt("return", navigate("/"));
-            case 13:
-              _context.prev = 13;
-              _context.t0 = _context["catch"](4);
+            case 12:
+              _context.prev = 12;
+              _context.t0 = _context["catch"](3);
+              dispatch((0, authSlice_1.logout)());
               dispatch((0, authSlice_1.error)());
-              return _context.abrupt("return", {
-                err: _context.t0,
-                message: "Error logout"
-              });
+              setTimeout(function () {
+                dispatch((0, authSlice_1.clear)());
+                return navigate("/");
+              }, 2000);
             case 17:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[4, 13]]);
+      }, _callee, null, [[3, 12]]);
     }));
   };
   (0, react_1.useEffect)(function () {
-    setIsMount(true);
     if (isMount) {
-      if (token !== null) {
-        setIsAuth(true);
-      }
+      // 
     }
-    console.log("token: " + token);
-    console.log("store token: ");
-    console.log("store email: ");
     return function () {
       return setIsMount(false);
     };
@@ -8674,7 +8663,7 @@ var Header = function Header(props) {
     className: "flex justify-end flex-grow"
   }, react_1["default"].createElement("div", {
     className: "md:flex space-x-6 hidden"
-  }, token !== null ? react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(react_router_dom_1.Link, {
+  }, authSelector.token != null ? react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/dashboard",
     className: 'text-gray-500 text-md'
   }, "Dashboard"), react_1["default"].createElement("button", {
@@ -9143,6 +9132,7 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
+var functions_1 = __webpack_require__(/*! ./functions */ "./resources/js/app/services/functions.ts");
 var BASE_URL = "http://localhost:8000";
 var csrf = (_a = document.head.querySelector('meta[name="csrf-token"]')) === null || _a === void 0 ? void 0 : _a.getAttribute('content');
 var api = {
@@ -9166,9 +9156,12 @@ var api = {
               });
             case 4:
               response = _context.sent;
+              if (response.data.success) {
+                (0, functions_1.setLocalStorage)(response);
+              }
               return _context.abrupt("return", response);
-            case 8:
-              _context.prev = 8;
+            case 9:
+              _context.prev = 9;
               _context.t0 = _context["catch"](0);
               return _context.abrupt("return", {
                 data: {
@@ -9179,12 +9172,12 @@ var api = {
                   }
                 }
               });
-            case 11:
+            case 12:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 8]]);
+      }, _callee, null, [[0, 9]]);
     }));
   },
   register: function register(name, surname, email, password, password_confirmation) {
@@ -9210,9 +9203,12 @@ var api = {
               });
             case 4:
               response = _context2.sent;
+              if (response.data.success) {
+                (0, functions_1.setLocalStorage)(response);
+              }
               return _context2.abrupt("return", response);
-            case 8:
-              _context2.prev = 8;
+            case 9:
+              _context2.prev = 9;
               _context2.t0 = _context2["catch"](1);
               return _context2.abrupt("return", {
                 data: {
@@ -9223,17 +9219,17 @@ var api = {
                   }
                 }
               });
-            case 11:
+            case 12:
             case "end":
               return _context2.stop();
           }
         }
-      }, _callee2, null, [[1, 8]]);
+      }, _callee2, null, [[1, 9]]);
     }));
   },
   logout: function logout(token) {
     return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
-      var headers, response;
+      var headers;
       return _regeneratorRuntime().wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
@@ -9249,11 +9245,11 @@ var api = {
                 headers: headers
               });
             case 4:
-              response = _context3.sent;
-              return _context3.abrupt("return", response);
-            case 8:
-              _context3.prev = 8;
+              return _context3.abrupt("return", (0, functions_1.deleteLocalStorage)());
+            case 7:
+              _context3.prev = 7;
               _context3.t0 = _context3["catch"](1);
+              (0, functions_1.deleteLocalStorage)();
               return _context3.abrupt("return", {
                 data: {
                   success: false,
@@ -9268,11 +9264,50 @@ var api = {
               return _context3.stop();
           }
         }
-      }, _callee3, null, [[1, 8]]);
+      }, _callee3, null, [[1, 7]]);
     }));
   }
 };
 exports["default"] = api;
+
+/***/ }),
+
+/***/ "./resources/js/app/services/functions.ts":
+/*!************************************************!*\
+  !*** ./resources/js/app/services/functions.ts ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.deleteLocalStorage = exports.getLocalStorage = exports.setLocalStorage = void 0;
+var setLocalStorage = function setLocalStorage(response) {
+  localStorage.setItem("token", response.data.token);
+  localStorage.setItem("name", "".concat(response.data.user.name, " ").concat(response.data.user.surname));
+  localStorage.setItem("email", response.data.user.email);
+};
+exports.setLocalStorage = setLocalStorage;
+var getLocalStorage = function getLocalStorage() {
+  var token = localStorage.getItem("token");
+  var name = localStorage.getItem("name");
+  var email = localStorage.getItem("email");
+  return {
+    token: token,
+    name: name,
+    email: email
+  };
+};
+exports.getLocalStorage = getLocalStorage;
+var deleteLocalStorage = function deleteLocalStorage() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("name");
+  localStorage.removeItem("email");
+};
+exports.deleteLocalStorage = deleteLocalStorage;
 
 /***/ }),
 
@@ -9291,10 +9326,15 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.selectToken = exports.logout = exports.authenticated = exports.clear = exports.error = exports.loading = exports.authSlice = void 0;
 var toolkit_1 = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
+var functions_1 = __webpack_require__(/*! ../services/functions */ "./resources/js/app/services/functions.ts");
+var data = (0, functions_1.getLocalStorage)();
+var token = data.token;
+var name = data.name;
+var email = data.email;
 var initialState = {
-  name: null,
-  email: null,
-  token: null,
+  name: name,
+  email: email,
+  token: token,
   isLoading: false,
   isError: false,
   isSuccess: false
@@ -9324,11 +9364,19 @@ exports.authSlice = (0, toolkit_1.createSlice)({
       state.isSuccess = true;
       state.token = token.payload;
     },
+    setName: function setName(state, name) {
+      state.name = name.payload;
+    },
+    setEmail: function setEmail(state, email) {
+      state.email = email.payload;
+    },
     logout: function logout(state) {
       state.isLoading = false;
       state.isError = false;
       state.isSuccess = true;
       state.token = null;
+      state.name = null;
+      state.email = null;
     }
   }
 });
@@ -10453,6 +10501,9 @@ var Login = function Login(props) {
     setPassword = _ref6[1];
   var navigate = (0, react_router_dom_1.useNavigate)();
   var dispatch = (0, hooks_1.useAppDispatch)();
+  var authSelector = (0, hooks_1.useAppSelector)(function (state) {
+    return state.auth;
+  });
   var setLogin = function setLogin(e) {
     return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var response;
@@ -10469,21 +10520,20 @@ var Login = function Login(props) {
               console.log("login: " + response.data);
               _context.prev = 6;
               if (!response.data.success) {
-                _context.next = 15;
+                _context.next = 14;
                 break;
               }
-              localStorage.setItem("token", response.data.token);
               dispatch((0, authSlice_1.authenticated)(response.data.token));
               setEmail("");
               setPassword("");
               dispatch((0, authSlice_1.clear)());
-              console.log("store token: ");
+              console.log("store token: " + authSelector.token);
               return _context.abrupt("return", navigate("/dashboard"));
-            case 15:
-              _context.next = 21;
+            case 14:
+              _context.next = 20;
               break;
-            case 17:
-              _context.prev = 17;
+            case 16:
+              _context.prev = 16;
               _context.t0 = _context["catch"](6);
               dispatch((0, authSlice_1.error)());
               return _context.abrupt("return", {
@@ -10493,12 +10543,12 @@ var Login = function Login(props) {
                   message: "Le credenziali sono errate"
                 }
               });
-            case 21:
+            case 20:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[6, 17]]);
+      }, _callee, null, [[6, 16]]);
     }));
   };
   return react_1["default"].createElement("div", {
