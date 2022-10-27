@@ -20,7 +20,6 @@ const Login = (props: LoginProps) => {
         e.preventDefault()
         dispatch(loading());
         const response = await api.login(email, password);
-        console.log("login: " + response.data);
         try {
             if (response.data.success) {
                 dispatch(authenticated(response.data.token))

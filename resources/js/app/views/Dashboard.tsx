@@ -20,13 +20,12 @@ const Dashboard = (props: DashboardProps) => {
     }
 
     const checkAuth = () => {
-        if (token == null) {
+        if (authSelector.token == null) {
             navigate("/")
         }
     }
 
     useEffect(() => {
-        setIsMount(true)
         if (isMount) {
             controlAuth().finally(() => {
                 checkAuth()
