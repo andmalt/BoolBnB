@@ -3,7 +3,7 @@ import { deleteLocalStorage, setLocalStorage } from "./functions";
 
 const BASE_URL: string = `http://localhost:8000`;
 
-const csrf = document.head.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+const csrf = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
 
 const api = {
     login: async function (email: string, password: string) {

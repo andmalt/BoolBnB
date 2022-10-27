@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import api from '../services/connection_manager';
 import { useAppDispatch, useAppSelector } from '../util/hooks';
-import { clear, authenticated, loading, error } from '../util/authSlice';
+import { clear, authenticated, loading, error, sEmail, sName } from '../util/authSlice';
 
 export interface LoginProps {
 }
@@ -24,6 +24,8 @@ const Login = (props: LoginProps) => {
         try {
             if (response.data.success) {
                 dispatch(authenticated(response.data.token))
+                dispatch(sEmail(response.data.user.email))
+                dispatch(sName(`${response.data.user.name} ${response.data.user.surname}`))
                 setEmail("")
                 setPassword("")
                 dispatch(clear())

@@ -50,10 +50,10 @@ export const authSlice = createSlice({
             state.isSuccess = true;
             state.token = token.payload;
         },
-        setName: (state, name: PayloadAction<string>) => {
+        sName: (state, name: PayloadAction<string>) => {
             state.name = name.payload;
         },
-        setEmail: (state, email: PayloadAction<string>) => {
+        sEmail: (state, email: PayloadAction<string>) => {
             state.email = email.payload;
         },
         logout: state => {
@@ -64,12 +64,10 @@ export const authSlice = createSlice({
             state.name = null;
             state.email = null;
         }
-
-
     }
 })
 
-export const { loading, error, clear, authenticated, logout } = authSlice.actions
+export const { loading, error, clear, authenticated, logout, sEmail, sName } = authSlice.actions
 
 export const selectToken = (state: RootState) => state.auth.token
 

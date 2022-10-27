@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Sidebar } from '../components';
+import { useAppSelector } from '../util/hooks';
 export interface DashboardProps {
 }
 
 const Dashboard = (props: DashboardProps) => {
-
-    const [token, setToken] = useState<string | null>(localStorage.getItem("token"));
+    const [email, setEmail] = useState<string | null>();
+    const [name, setName] = useState<string | null>();
+    const [token, setToken] = useState<string | null>();
     const [isMount, setIsMount] = useState<boolean>(true);
     const navigate = useNavigate();
+    const authSelector = useAppSelector(state => state.auth);
 
     const controlAuth = async () => {
-        setToken(localStorage.getItem("token"))
+        setToken(authSelector.token)
+        setName(authSelector.name)
+        setEmail(authSelector.email)
     }
 
     const checkAuth = () => {

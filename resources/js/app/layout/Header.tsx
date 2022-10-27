@@ -16,15 +16,15 @@ const Header = (props: HeaderProps) => {
 
   const setLogout = async (e: any) => {
     e.preventDefault()
-    console.log("t1: " + authSelector.token);
     dispatch(loading())
     try {
       await api.logout(authSelector.token)
       dispatch(logout())
       dispatch(clear())
-      console.log("t2: " + authSelector.token);
       return navigate("/");
     } catch (err) {
+
+      // need fixed the catch
       dispatch(logout())
       dispatch(error())
       setTimeout(() => {
