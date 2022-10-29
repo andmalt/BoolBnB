@@ -4,7 +4,7 @@ import api from '../services/connection_manager';
 import { useAppDispatch, useAppSelector } from '../util/hooks';
 import { clear, authenticated, loading, error, sEmail, sName } from '../util/authSlice';
 
-export interface LoginProps {
+interface LoginProps {
 }
 
 const Login = (props: LoginProps) => {
@@ -14,21 +14,20 @@ const Login = (props: LoginProps) => {
     const [password, setPassword] = useState<string>("");
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const authSelector = useAppSelector(state => state.auth);
 
     const setLogin = async (e: any) => {
         e.preventDefault()
         dispatch(loading());
-        const response = await api.login(email, password);
         try {
+            const response = await api.login(email, password);
             if (response.data.success) {
-                dispatch(authenticated(response.data.token))
                 dispatch(sEmail(response.data.user.email))
                 dispatch(sName(`${response.data.user.name} ${response.data.user.surname}`))
+                dispatch(authenticated(response.data.token))
                 setEmail("")
                 setPassword("")
                 dispatch(clear())
-                console.log("store token: " + authSelector.token);
+                // console.log("store token: " + authSelector.token);
                 return navigate("/dashboard");
             }
         } catch (e) {

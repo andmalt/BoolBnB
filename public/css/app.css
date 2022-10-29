@@ -664,6 +664,17 @@ select {
     max-width: 1536px;
   }
 }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
 .fixed {
   position: fixed;
 }
@@ -925,6 +936,9 @@ select {
 .h-96 {
   height: 24rem;
 }
+.h-12 {
+  height: 3rem;
+}
 .min-h-screen {
   min-height: 100vh;
 }
@@ -975,6 +989,15 @@ select {
 }
 .w-14 {
   width: 3.5rem;
+}
+.w-10 {
+  width: 2.5rem;
+}
+.w-12 {
+  width: 3rem;
+}
+.w-16 {
+  width: 4rem;
 }
 .min-w-0 {
   min-width: 0px;
@@ -1039,6 +1062,15 @@ select {
 }
 .transform {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+@keyframes spin {
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+.animate-spin {
+  animation: spin 1s linear infinite;
 }
 .cursor-default {
   cursor: default;
@@ -1180,6 +1212,9 @@ select {
 .border-2 {
   border-width: 2px;
 }
+.border-\[3px\] {
+  border-width: 3px;
+}
 .border-t {
   border-top-width: 1px;
 }
@@ -1255,6 +1290,12 @@ select {
 .border-blue-600 {
   --tw-border-opacity: 1;
   border-color: rgb(37 99 235 / var(--tw-border-opacity));
+}
+.border-current {
+  border-color: currentColor;
+}
+.border-t-transparent {
+  border-top-color: transparent;
 }
 .bg-white {
   --tw-bg-opacity: 1;
@@ -2527,4 +2568,3 @@ select {
     padding-right: 3rem;
   }
 }
-

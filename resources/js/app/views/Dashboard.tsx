@@ -2,19 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Sidebar } from '../components';
 import { useAppSelector } from '../util/hooks';
-export interface DashboardProps {
+interface DashboardProps {
 }
 
 const Dashboard = (props: DashboardProps) => {
     const [email, setEmail] = useState<string | null>();
     const [name, setName] = useState<string | null>();
-    const [token, setToken] = useState<string | null>();
-    const [isMount, setIsMount] = useState<boolean>(true);
+    const [isMount, setIsMount] = useState<boolean>(false);
     const navigate = useNavigate();
     const authSelector = useAppSelector(state => state.auth);
 
-    const controlAuth = async () => {
-        setToken(authSelector.token)
+    const controlAuth = () => {
         setName(authSelector.name)
         setEmail(authSelector.email)
     }
@@ -26,11 +24,10 @@ const Dashboard = (props: DashboardProps) => {
     }
 
     useEffect(() => {
+        setIsMount(true)
         if (isMount) {
-            controlAuth().finally(() => {
-                checkAuth()
-                console.log("token2: " + token);
-            })
+            controlAuth()
+            checkAuth()
         }
         return () => setIsMount(false)
     }, []);

@@ -10,9 +10,7 @@ const Home = () => {
         if (isMounted) {
 
         }
-        return () => {
-            setIsMounted(false)
-        }
+        return () => setIsMounted(false)
     }, []);
 
     return (

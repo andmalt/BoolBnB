@@ -3,15 +3,22 @@ import '../../../css/index.css';
 import { Routes, Route } from 'react-router-dom';
 import { Home, Dashboard, Login } from '../views';
 import { Header, Footer } from '../layout';
+import { useAppSelector } from '../util/hooks';
+import Loading from '../components/Loading';
 
-export interface IndexProps {
+interface IndexProps {
 }
 
 const Index = (props: IndexProps) => {
-    // const [token, setToken] = useState<string | null>(null);
+
+    const authSelector = useAppSelector(state => state.auth);
 
     useEffect(() => {
     }, []);
+
+    if (authSelector.isLoading) {
+        return <Loading />
+    }
 
     return (
         <>
