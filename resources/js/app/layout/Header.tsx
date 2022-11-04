@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react';
 import '../../../css/header.css';
 import { Link, useNavigate } from 'react-router-dom';
 import api from '../services/connection_manager';
-import { useAppDispatch, useAppSelector } from '../util/hooks';
-import { clear, logout, loading, error } from '../util/authSlice';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { clear, logout, loading, error } from '../store/authSlice';
 
-export interface HeaderProps {
+interface HeaderProps {
 }
 
 const Header = (props: HeaderProps) => {
-  const [isMount, setIsMount] = useState<boolean>(true);
+  const { } = props;
+  const [isMount, setIsMount] = useState<boolean>(false);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const authSelector = useAppSelector(state => state.auth);
@@ -35,6 +36,7 @@ const Header = (props: HeaderProps) => {
   }
 
   useEffect(() => {
+    setIsMount(true)
     if (isMount) {
       // 
     }
@@ -53,13 +55,13 @@ const Header = (props: HeaderProps) => {
               {
                 authSelector.token != null ?
                   <>
-                    <Link to="/dashboard" className='text-gray-500 text-md'>Dashboard</Link>
+                    <Link to="/dashboard" className='text-gray-500'>Dashboard</Link>
                     <button onClick={(e) => setLogout(e)}>Esci</button>
                   </>
                   :
                   <>
-                    <Link to="/" className="text-gray-500 text-md">Registrati</Link>
-                    <Link to="/login" className="text-gray-500 text-md">Accedi</Link>
+                    <Link to="/register" className="text-gray-500">Registrati</Link>
+                    <Link to="/login" className="text-gray-500">Accedi</Link>
                   </>
               }
             </div>

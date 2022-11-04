@@ -9080,6 +9080,9 @@ function _iterableToArrayLimit(arr, i) {
 function _arrayWithHoles(arr) {
   if (Array.isArray(arr)) return arr;
 }
+function _objectDestructuringEmpty(obj) {
+  if (obj == null) throw new TypeError("Cannot destructure " + obj);
+}
 var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
   if (k2 === undefined) k2 = k;
   var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -9152,10 +9155,11 @@ var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/reac
 __webpack_require__(/*! ../../../css/header.css */ "./resources/css/header.css");
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 var connection_manager_1 = __importDefault(__webpack_require__(/*! ../services/connection_manager */ "./resources/js/app/services/connection_manager.ts"));
-var hooks_1 = __webpack_require__(/*! ../util/hooks */ "./resources/js/app/util/hooks.ts");
-var authSlice_1 = __webpack_require__(/*! ../util/authSlice */ "./resources/js/app/util/authSlice.ts");
+var hooks_1 = __webpack_require__(/*! ../store/hooks */ "./resources/js/app/store/hooks.ts");
+var authSlice_1 = __webpack_require__(/*! ../store/authSlice */ "./resources/js/app/store/authSlice.ts");
 var Header = function Header(props) {
-  var _ref = (0, react_1.useState)(true),
+  _objectDestructuringEmpty(props);
+  var _ref = (0, react_1.useState)(false),
     _ref2 = _slicedToArray(_ref, 2),
     isMount = _ref2[0],
     setIsMount = _ref2[1];
@@ -9198,6 +9202,7 @@ var Header = function Header(props) {
     }));
   };
   (0, react_1.useEffect)(function () {
+    setIsMount(true);
     if (isMount) {
       // 
     }
@@ -9222,17 +9227,17 @@ var Header = function Header(props) {
     className: "md:flex space-x-6 hidden"
   }, authSelector.token != null ? react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/dashboard",
-    className: 'text-gray-500 text-md'
+    className: 'text-gray-500'
   }, "Dashboard"), react_1["default"].createElement("button", {
     onClick: function onClick(e) {
       return setLogout(e);
     }
   }, "Esci")) : react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "/",
-    className: "text-gray-500 text-md"
+    to: "/register",
+    className: "text-gray-500"
   }, "Registrati"), react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/login",
-    className: "text-gray-500 text-md"
+    className: "text-gray-500"
   }, "Accedi")))))));
 };
 exports["default"] = Header;
@@ -9319,7 +9324,7 @@ __webpack_require__(/*! ../../../css/index.css */ "./resources/css/index.css");
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 var views_1 = __webpack_require__(/*! ../views */ "./resources/js/app/views/index.ts");
 var layout_1 = __webpack_require__(/*! ../layout */ "./resources/js/app/layout/index.ts");
-var hooks_1 = __webpack_require__(/*! ../util/hooks */ "./resources/js/app/util/hooks.ts");
+var hooks_1 = __webpack_require__(/*! ../store/hooks */ "./resources/js/app/store/hooks.ts");
 var Loading_1 = __importDefault(__webpack_require__(/*! ../components/Loading */ "./resources/js/app/components/Loading.tsx"));
 var Index = function Index(props) {
   var authSelector = (0, hooks_1.useAppSelector)(function (state) {
@@ -9330,13 +9335,16 @@ var Index = function Index(props) {
     return react_1["default"].createElement(Loading_1["default"], null);
   }
   return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(layout_1.Header, null), react_1["default"].createElement("div", {
-    id: 'container'
+    id: 'containe'
   }, react_1["default"].createElement(react_router_dom_1.Routes, null, react_1["default"].createElement(react_router_dom_1.Route, {
     path: '/',
     element: react_1["default"].createElement(views_1.Home, null)
   }), react_1["default"].createElement(react_router_dom_1.Route, {
     path: '/login',
     element: react_1["default"].createElement(views_1.Login, null)
+  }), react_1["default"].createElement(react_router_dom_1.Route, {
+    path: '/register',
+    element: react_1["default"].createElement(views_1.Register, null)
   }), react_1["default"].createElement(react_router_dom_1.Route, {
     path: '/dashboard',
     element: react_1["default"].createElement(views_1.Dashboard, null)
@@ -9764,7 +9772,7 @@ var api = {
       }, _callee, null, [[0, 9]]);
     }));
   },
-  register: function register(name, surname, email, password, password_confirmation) {
+  register: function register(name, surname, email, password, passwordConfirmation) {
     return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
       var data, response;
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
@@ -9776,7 +9784,7 @@ var api = {
                 surname: surname,
                 email: email,
                 password: password,
-                password_confirmation: password_confirmation
+                password_confirmation: passwordConfirmation
               };
               _context2.prev = 1;
               _context2.next = 4;
@@ -9895,10 +9903,10 @@ exports.deleteLocalStorage = deleteLocalStorage;
 
 /***/ }),
 
-/***/ "./resources/js/app/util/authSlice.ts":
-/*!********************************************!*\
-  !*** ./resources/js/app/util/authSlice.ts ***!
-  \********************************************/
+/***/ "./resources/js/app/store/authSlice.ts":
+/*!*********************************************!*\
+  !*** ./resources/js/app/store/authSlice.ts ***!
+  \*********************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -9908,9 +9916,10 @@ var _a;
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.selectToken = exports.sName = exports.sEmail = exports.logout = exports.authenticated = exports.clear = exports.error = exports.loading = exports.authSlice = void 0;
+exports.sName = exports.sEmail = exports.logout = exports.authenticated = exports.clear = exports.error = exports.loading = exports.authSlice = void 0;
 var toolkit_1 = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
 var functions_1 = __webpack_require__(/*! ../services/functions */ "./resources/js/app/services/functions.ts");
+// import type { RootState } from './store'
 var data = (0, functions_1.getLocalStorage)();
 var token = data.token;
 var name = data.name;
@@ -9965,18 +9974,15 @@ exports.authSlice = (0, toolkit_1.createSlice)({
   }
 });
 _a = exports.authSlice.actions, exports.loading = _a.loading, exports.error = _a.error, exports.clear = _a.clear, exports.authenticated = _a.authenticated, exports.logout = _a.logout, exports.sEmail = _a.sEmail, exports.sName = _a.sName;
-var selectToken = function selectToken(state) {
-  return state.auth.token;
-};
-exports.selectToken = selectToken;
+// export const selectToken = (state: RootState) => state.auth.token
 exports["default"] = exports.authSlice.reducer;
 
 /***/ }),
 
-/***/ "./resources/js/app/util/hooks.ts":
-/*!****************************************!*\
-  !*** ./resources/js/app/util/hooks.ts ***!
-  \****************************************/
+/***/ "./resources/js/app/store/hooks.ts":
+/*!*****************************************!*\
+  !*** ./resources/js/app/store/hooks.ts ***!
+  \*****************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -9993,10 +9999,10 @@ exports.useAppSelector = react_redux_1.useSelector;
 
 /***/ }),
 
-/***/ "./resources/js/app/util/store.ts":
-/*!****************************************!*\
-  !*** ./resources/js/app/util/store.ts ***!
-  \****************************************/
+/***/ "./resources/js/app/store/store.ts":
+/*!*****************************************!*\
+  !*** ./resources/js/app/store/store.ts ***!
+  \*****************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -10011,7 +10017,7 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 var toolkit_1 = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
-var authSlice_1 = __importDefault(__webpack_require__(/*! ./authSlice */ "./resources/js/app/util/authSlice.ts"));
+var authSlice_1 = __importDefault(__webpack_require__(/*! ./authSlice */ "./resources/js/app/store/authSlice.ts"));
 var store = (0, toolkit_1.configureStore)({
   reducer: {
     auth: authSlice_1["default"]
@@ -10117,7 +10123,7 @@ Object.defineProperty(exports, "__esModule", ({
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 var components_1 = __webpack_require__(/*! ../components */ "./resources/js/app/components/index.ts");
-var hooks_1 = __webpack_require__(/*! ../util/hooks */ "./resources/js/app/util/hooks.ts");
+var hooks_1 = __webpack_require__(/*! ../store/hooks */ "./resources/js/app/store/hooks.ts");
 var Dashboard = function Dashboard(props) {
   var _ref = (0, react_1.useState)(),
     _ref2 = _slicedToArray(_ref, 2),
@@ -10155,14 +10161,12 @@ var Dashboard = function Dashboard(props) {
     };
   }, []);
   return react_1["default"].createElement("div", {
-    className: "top-margin-header"
-  }, react_1["default"].createElement("div", {
-    className: "min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white"
+    className: "flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white"
   }, react_1["default"].createElement(components_1.Sidebar, null), react_1["default"].createElement("div", {
     className: "h-full ml-14 mt-14 mb-10 md:ml-64"
   }, react_1["default"].createElement("div", {
     className: "grid grid-cols-1 lg:grid-cols-2 p-4 gap-4"
-  }))));
+  })));
 };
 exports["default"] = Dashboard;
 
@@ -10671,6 +10675,9 @@ function _iterableToArrayLimit(arr, i) {
 function _arrayWithHoles(arr) {
   if (Array.isArray(arr)) return arr;
 }
+function _objectDestructuringEmpty(obj) {
+  if (obj == null) throw new TypeError("Cannot destructure " + obj);
+}
 var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
   if (k2 === undefined) k2 = k;
   var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -10742,9 +10749,10 @@ Object.defineProperty(exports, "__esModule", ({
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 var connection_manager_1 = __importDefault(__webpack_require__(/*! ../services/connection_manager */ "./resources/js/app/services/connection_manager.ts"));
-var hooks_1 = __webpack_require__(/*! ../util/hooks */ "./resources/js/app/util/hooks.ts");
-var authSlice_1 = __webpack_require__(/*! ../util/authSlice */ "./resources/js/app/util/authSlice.ts");
+var hooks_1 = __webpack_require__(/*! ../store/hooks */ "./resources/js/app/store/hooks.ts");
+var authSlice_1 = __webpack_require__(/*! ../store/authSlice */ "./resources/js/app/store/authSlice.ts");
 var Login = function Login(props) {
+  _objectDestructuringEmpty(props);
   var _ref = (0, react_1.useState)(true),
     _ref2 = _slicedToArray(_ref, 2),
     show = _ref2[0],
@@ -10786,10 +10794,15 @@ var Login = function Login(props) {
               // console.log("store token: " + authSelector.token);
               return _context.abrupt("return", navigate("/dashboard"));
             case 14:
-              _context.next = 20;
+              console.log("login function not succeded");
+              //
+              // insert here login popup not succeded
+              // 
+              dispatch((0, authSlice_1.clear)());
+              _context.next = 22;
               break;
-            case 16:
-              _context.prev = 16;
+            case 18:
+              _context.prev = 18;
               _context.t0 = _context["catch"](2);
               dispatch((0, authSlice_1.error)());
               return _context.abrupt("return", {
@@ -10799,12 +10812,12 @@ var Login = function Login(props) {
                   message: "Le credenziali sono errate"
                 }
               });
-            case 20:
+            case 22:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[2, 16]]);
+      }, _callee, null, [[2, 18]]);
     }));
   };
   return react_1["default"].createElement("div", {
@@ -10899,6 +10912,710 @@ exports["default"] = Login;
 
 /***/ }),
 
+/***/ "./resources/js/app/views/Register.tsx":
+/*!*********************************************!*\
+  !*** ./resources/js/app/views/Register.tsx ***!
+  \*********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+  }, _typeof(obj);
+}
+function _regeneratorRuntime() {
+  "use strict";
+
+  /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */
+  _regeneratorRuntime = function _regeneratorRuntime() {
+    return exports;
+  };
+  var exports = {},
+    Op = Object.prototype,
+    hasOwn = Op.hasOwnProperty,
+    defineProperty = Object.defineProperty || function (obj, key, desc) {
+      obj[key] = desc.value;
+    },
+    $Symbol = "function" == typeof Symbol ? Symbol : {},
+    iteratorSymbol = $Symbol.iterator || "@@iterator",
+    asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator",
+    toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
+  function define(obj, key, value) {
+    return Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: !0,
+      configurable: !0,
+      writable: !0
+    }), obj[key];
+  }
+  try {
+    define({}, "");
+  } catch (err) {
+    define = function define(obj, key, value) {
+      return obj[key] = value;
+    };
+  }
+  function wrap(innerFn, outerFn, self, tryLocsList) {
+    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator,
+      generator = Object.create(protoGenerator.prototype),
+      context = new Context(tryLocsList || []);
+    return defineProperty(generator, "_invoke", {
+      value: makeInvokeMethod(innerFn, self, context)
+    }), generator;
+  }
+  function tryCatch(fn, obj, arg) {
+    try {
+      return {
+        type: "normal",
+        arg: fn.call(obj, arg)
+      };
+    } catch (err) {
+      return {
+        type: "throw",
+        arg: err
+      };
+    }
+  }
+  exports.wrap = wrap;
+  var ContinueSentinel = {};
+  function Generator() {}
+  function GeneratorFunction() {}
+  function GeneratorFunctionPrototype() {}
+  var IteratorPrototype = {};
+  define(IteratorPrototype, iteratorSymbol, function () {
+    return this;
+  });
+  var getProto = Object.getPrototypeOf,
+    NativeIteratorPrototype = getProto && getProto(getProto(values([])));
+  NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype);
+  var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype);
+  function defineIteratorMethods(prototype) {
+    ["next", "throw", "return"].forEach(function (method) {
+      define(prototype, method, function (arg) {
+        return this._invoke(method, arg);
+      });
+    });
+  }
+  function AsyncIterator(generator, PromiseImpl) {
+    function invoke(method, arg, resolve, reject) {
+      var record = tryCatch(generator[method], generator, arg);
+      if ("throw" !== record.type) {
+        var result = record.arg,
+          value = result.value;
+        return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) {
+          invoke("next", value, resolve, reject);
+        }, function (err) {
+          invoke("throw", err, resolve, reject);
+        }) : PromiseImpl.resolve(value).then(function (unwrapped) {
+          result.value = unwrapped, resolve(result);
+        }, function (error) {
+          return invoke("throw", error, resolve, reject);
+        });
+      }
+      reject(record.arg);
+    }
+    var previousPromise;
+    defineProperty(this, "_invoke", {
+      value: function value(method, arg) {
+        function callInvokeWithMethodAndArg() {
+          return new PromiseImpl(function (resolve, reject) {
+            invoke(method, arg, resolve, reject);
+          });
+        }
+        return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg();
+      }
+    });
+  }
+  function makeInvokeMethod(innerFn, self, context) {
+    var state = "suspendedStart";
+    return function (method, arg) {
+      if ("executing" === state) throw new Error("Generator is already running");
+      if ("completed" === state) {
+        if ("throw" === method) throw arg;
+        return doneResult();
+      }
+      for (context.method = method, context.arg = arg;;) {
+        var delegate = context.delegate;
+        if (delegate) {
+          var delegateResult = maybeInvokeDelegate(delegate, context);
+          if (delegateResult) {
+            if (delegateResult === ContinueSentinel) continue;
+            return delegateResult;
+          }
+        }
+        if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) {
+          if ("suspendedStart" === state) throw state = "completed", context.arg;
+          context.dispatchException(context.arg);
+        } else "return" === context.method && context.abrupt("return", context.arg);
+        state = "executing";
+        var record = tryCatch(innerFn, self, context);
+        if ("normal" === record.type) {
+          if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue;
+          return {
+            value: record.arg,
+            done: context.done
+          };
+        }
+        "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg);
+      }
+    };
+  }
+  function maybeInvokeDelegate(delegate, context) {
+    var method = delegate.iterator[context.method];
+    if (undefined === method) {
+      if (context.delegate = null, "throw" === context.method) {
+        if (delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method)) return ContinueSentinel;
+        context.method = "throw", context.arg = new TypeError("The iterator does not provide a 'throw' method");
+      }
+      return ContinueSentinel;
+    }
+    var record = tryCatch(method, delegate.iterator, context.arg);
+    if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel;
+    var info = record.arg;
+    return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel);
+  }
+  function pushTryEntry(locs) {
+    var entry = {
+      tryLoc: locs[0]
+    };
+    1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry);
+  }
+  function resetTryEntry(entry) {
+    var record = entry.completion || {};
+    record.type = "normal", delete record.arg, entry.completion = record;
+  }
+  function Context(tryLocsList) {
+    this.tryEntries = [{
+      tryLoc: "root"
+    }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0);
+  }
+  function values(iterable) {
+    if (iterable) {
+      var iteratorMethod = iterable[iteratorSymbol];
+      if (iteratorMethod) return iteratorMethod.call(iterable);
+      if ("function" == typeof iterable.next) return iterable;
+      if (!isNaN(iterable.length)) {
+        var i = -1,
+          next = function next() {
+            for (; ++i < iterable.length;) {
+              if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next;
+            }
+            return next.value = undefined, next.done = !0, next;
+          };
+        return next.next = next;
+      }
+    }
+    return {
+      next: doneResult
+    };
+  }
+  function doneResult() {
+    return {
+      value: undefined,
+      done: !0
+    };
+  }
+  return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", {
+    value: GeneratorFunctionPrototype,
+    configurable: !0
+  }), defineProperty(GeneratorFunctionPrototype, "constructor", {
+    value: GeneratorFunction,
+    configurable: !0
+  }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) {
+    var ctor = "function" == typeof genFun && genFun.constructor;
+    return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name));
+  }, exports.mark = function (genFun) {
+    return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun;
+  }, exports.awrap = function (arg) {
+    return {
+      __await: arg
+    };
+  }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () {
+    return this;
+  }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) {
+    void 0 === PromiseImpl && (PromiseImpl = Promise);
+    var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl);
+    return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) {
+      return result.done ? result.value : iter.next();
+    });
+  }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () {
+    return this;
+  }), define(Gp, "toString", function () {
+    return "[object Generator]";
+  }), exports.keys = function (val) {
+    var object = Object(val),
+      keys = [];
+    for (var key in object) {
+      keys.push(key);
+    }
+    return keys.reverse(), function next() {
+      for (; keys.length;) {
+        var key = keys.pop();
+        if (key in object) return next.value = key, next.done = !1, next;
+      }
+      return next.done = !0, next;
+    };
+  }, exports.values = values, Context.prototype = {
+    constructor: Context,
+    reset: function reset(skipTempReset) {
+      if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) {
+        "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined);
+      }
+    },
+    stop: function stop() {
+      this.done = !0;
+      var rootRecord = this.tryEntries[0].completion;
+      if ("throw" === rootRecord.type) throw rootRecord.arg;
+      return this.rval;
+    },
+    dispatchException: function dispatchException(exception) {
+      if (this.done) throw exception;
+      var context = this;
+      function handle(loc, caught) {
+        return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught;
+      }
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i],
+          record = entry.completion;
+        if ("root" === entry.tryLoc) return handle("end");
+        if (entry.tryLoc <= this.prev) {
+          var hasCatch = hasOwn.call(entry, "catchLoc"),
+            hasFinally = hasOwn.call(entry, "finallyLoc");
+          if (hasCatch && hasFinally) {
+            if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0);
+            if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc);
+          } else if (hasCatch) {
+            if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0);
+          } else {
+            if (!hasFinally) throw new Error("try statement without catch or finally");
+            if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc);
+          }
+        }
+      }
+    },
+    abrupt: function abrupt(type, arg) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) {
+          var finallyEntry = entry;
+          break;
+        }
+      }
+      finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null);
+      var record = finallyEntry ? finallyEntry.completion : {};
+      return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record);
+    },
+    complete: function complete(record, afterLoc) {
+      if ("throw" === record.type) throw record.arg;
+      return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel;
+    },
+    finish: function finish(finallyLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel;
+      }
+    },
+    "catch": function _catch(tryLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc === tryLoc) {
+          var record = entry.completion;
+          if ("throw" === record.type) {
+            var thrown = record.arg;
+            resetTryEntry(entry);
+          }
+          return thrown;
+        }
+      }
+      throw new Error("illegal catch attempt");
+    },
+    delegateYield: function delegateYield(iterable, resultName, nextLoc) {
+      return this.delegate = {
+        iterator: values(iterable),
+        resultName: resultName,
+        nextLoc: nextLoc
+      }, "next" === this.method && (this.arg = undefined), ContinueSentinel;
+    }
+  }, exports;
+}
+function _slicedToArray(arr, i) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+}
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+  return arr2;
+}
+function _iterableToArrayLimit(arr, i) {
+  var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
+  if (_i == null) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+  var _s, _e;
+  try {
+    for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+  return _arr;
+}
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+function _objectDestructuringEmpty(obj) {
+  if (obj == null) throw new TypeError("Cannot destructure " + obj);
+}
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  var desc = Object.getOwnPropertyDescriptor(m, k);
+  if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+    desc = {
+      enumerable: true,
+      get: function get() {
+        return m[k];
+      }
+    };
+  }
+  Object.defineProperty(o, k2, desc);
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+  __setModuleDefault(result, mod);
+  return result;
+};
+var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function (resolve) {
+      resolve(value);
+    });
+  }
+  return new (P || (P = Promise))(function (resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+    function step(result) {
+      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+    }
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+var connection_manager_1 = __importDefault(__webpack_require__(/*! ../services/connection_manager */ "./resources/js/app/services/connection_manager.ts"));
+var authSlice_1 = __webpack_require__(/*! ../store/authSlice */ "./resources/js/app/store/authSlice.ts");
+var hooks_1 = __webpack_require__(/*! ../store/hooks */ "./resources/js/app/store/hooks.ts");
+var Register = function Register(props) {
+  _objectDestructuringEmpty(props);
+  var _ref = (0, react_1.useState)(""),
+    _ref2 = _slicedToArray(_ref, 2),
+    name = _ref2[0],
+    setName = _ref2[1];
+  var _ref3 = (0, react_1.useState)(""),
+    _ref4 = _slicedToArray(_ref3, 2),
+    surname = _ref4[0],
+    setSurname = _ref4[1];
+  var _ref5 = (0, react_1.useState)(""),
+    _ref6 = _slicedToArray(_ref5, 2),
+    email = _ref6[0],
+    setEmail = _ref6[1];
+  var _ref7 = (0, react_1.useState)(""),
+    _ref8 = _slicedToArray(_ref7, 2),
+    password = _ref8[0],
+    setPassword = _ref8[1];
+  var _ref9 = (0, react_1.useState)(""),
+    _ref10 = _slicedToArray(_ref9, 2),
+    password2 = _ref10[0],
+    setPassword2 = _ref10[1];
+  var _ref11 = (0, react_1.useState)(true),
+    _ref12 = _slicedToArray(_ref11, 2),
+    show = _ref12[0],
+    setShow = _ref12[1];
+  var _ref13 = (0, react_1.useState)(true),
+    _ref14 = _slicedToArray(_ref13, 2),
+    show2 = _ref14[0],
+    setShow2 = _ref14[1];
+  var navigate = (0, react_router_dom_1.useNavigate)();
+  var dispatch = (0, hooks_1.useAppDispatch)();
+  var setRegister = function setRegister(e) {
+    return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      var response;
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              e.preventDefault();
+              dispatch((0, authSlice_1.loading)());
+              if (!(password !== password2)) {
+                _context.next = 5;
+                break;
+              }
+              dispatch((0, authSlice_1.clear)());
+              return _context.abrupt("return", console.log("password errata"));
+            case 5:
+              _context.prev = 5;
+              _context.next = 8;
+              return connection_manager_1["default"].register(name, surname, email, password, password2);
+            case 8:
+              response = _context.sent;
+              if (!response.data.success) {
+                _context.next = 20;
+                break;
+              }
+              dispatch((0, authSlice_1.sEmail)(response.data.user.email));
+              dispatch((0, authSlice_1.sName)("".concat(response.data.user.name, " ").concat(response.data.user.surname)));
+              dispatch((0, authSlice_1.authenticated)(response.data.token));
+              setName("");
+              setSurname("");
+              setEmail("");
+              setPassword("");
+              setPassword2("");
+              dispatch((0, authSlice_1.clear)());
+              // console.log("store token: " + authSelector.token);
+              return _context.abrupt("return", navigate("/dashboard"));
+            case 20:
+              console.log("register failed");
+              dispatch((0, authSlice_1.clear)());
+              //
+              // insert here modal of register not succeed
+              //     
+              _context.next = 28;
+              break;
+            case 24:
+              _context.prev = 24;
+              _context.t0 = _context["catch"](5);
+              dispatch((0, authSlice_1.error)());
+              return _context.abrupt("return", {
+                data: {
+                  success: false,
+                  error: _context.t0,
+                  message: "Le credenziali sono errate"
+                }
+              });
+            case 28:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[5, 24]]);
+    }));
+  };
+  return react_1["default"].createElement("div", {
+    className: "container max-w-full mx-auto py-24 px-6"
+  }, react_1["default"].createElement("div", {
+    className: "font-sans"
+  }, react_1["default"].createElement("div", {
+    className: "max-w-sm mx-auto px-6"
+  }, react_1["default"].createElement("div", {
+    className: "relative flex flex-wrap"
+  }, react_1["default"].createElement("div", {
+    className: "w-full relative"
+  }, react_1["default"].createElement("div", null, react_1["default"].createElement("div", {
+    className: "text-center font-semibold text-black"
+  }, "Accedi a BoolBnB"), react_1["default"].createElement("form", null, react_1["default"].createElement("div", {
+    className: 'mx-auto max-w-lg'
+  }, react_1["default"].createElement("div", {
+    className: "py-2"
+  }, react_1["default"].createElement("span", {
+    className: "px-1 text-sm text-gray-600"
+  }, "Nome"), react_1["default"].createElement("input", {
+    value: name,
+    onChange: function onChange(e) {
+      return setName(e.target.value);
+    },
+    placeholder: "",
+    type: "text",
+    className: "text-md block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
+  })), react_1["default"].createElement("div", {
+    className: "py-2"
+  }, react_1["default"].createElement("span", {
+    className: "px-1 text-sm text-gray-600"
+  }, "Cognome"), react_1["default"].createElement("input", {
+    value: surname,
+    onChange: function onChange(e) {
+      return setSurname(e.target.value);
+    },
+    placeholder: "",
+    type: "text",
+    className: "text-md block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
+  })), react_1["default"].createElement("div", {
+    className: "py-2"
+  }, react_1["default"].createElement("span", {
+    className: "px-1 text-sm text-gray-600"
+  }, "Email"), react_1["default"].createElement("input", {
+    value: email,
+    onChange: function onChange(e) {
+      return setEmail(e.target.value);
+    },
+    placeholder: "",
+    type: "email",
+    className: "text-md block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
+  })), react_1["default"].createElement("div", {
+    className: "py-2"
+  }, react_1["default"].createElement("span", {
+    className: "px-1 text-sm text-gray-600"
+  }, "Password"), react_1["default"].createElement("div", {
+    className: "relative"
+  }, react_1["default"].createElement("input", {
+    value: password,
+    onChange: function onChange(e) {
+      return setPassword(e.target.value);
+    },
+    placeholder: "",
+    type: show ? 'password' : 'text',
+    className: "text-md block px-3 py-2 rounded-lg w-full\r\n                                                bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md\r\n                                                focus:placeholder-gray-500\r\n                                                focus:bg-white\r\n                                                focus:border-gray-600 focus:outline-none"
+  }), react_1["default"].createElement("div", {
+    className: "absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+  }, !show ? react_1["default"].createElement("svg", {
+    onClick: function onClick() {
+      return setShow(true);
+    },
+    className: "h-6 text-gray-700",
+    fill: "none",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 576 512"
+  }, react_1["default"].createElement("path", {
+    fill: "currentColor",
+    d: "M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400a144 144 0 1 1 144-144 143.93 143.93 0 0 1-144 144zm0-240a95.31 95.31 0 0 0-25.31 3.79 47.85 47.85 0 0 1-66.9 66.9A95.78 95.78 0 1 0 288 160z"
+  })) : react_1["default"].createElement("svg", {
+    onClick: function onClick() {
+      return setShow(false);
+    },
+    className: "h-6 text-gray-700",
+    fill: "none",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 640 512"
+  }, react_1["default"].createElement("path", {
+    fill: "currentColor",
+    d: "M320 400c-75.85 0-137.25-58.71-142.9-133.11L72.2 185.82c-13.79 17.3-26.48 35.59-36.72 55.59a32.35 32.35 0 0 0 0 29.19C89.71 376.41 197.07 448 320 448c26.91 0 52.87-4 77.89-10.46L346 397.39a144.13 144.13 0 0 1-26 2.61zm313.82 58.1l-110.55-85.44a331.25 331.25 0 0 0 81.25-102.07 32.35 32.35 0 0 0 0-29.19C550.29 135.59 442.93 64 320 64a308.15 308.15 0 0 0-147.32 37.7L45.46 3.37A16 16 0 0 0 23 6.18L3.37 31.45A16 16 0 0 0 6.18 53.9l588.36 454.73a16 16 0 0 0 22.46-2.81l19.64-25.27a16 16 0 0 0-2.82-22.45zm-183.72-142l-39.3-30.38A94.75 94.75 0 0 0 416 256a94.76 94.76 0 0 0-121.31-92.21A47.65 47.65 0 0 1 304 192a46.64 46.64 0 0 1-1.54 10l-73.61-56.89A142.31 142.31 0 0 1 320 112a143.92 143.92 0 0 1 144 144c0 21.63-5.29 41.79-13.9 60.11z"
+  }))))), react_1["default"].createElement("div", {
+    className: "py-2"
+  }, react_1["default"].createElement("span", {
+    className: "px-1 text-sm text-gray-600"
+  }, "Password di conferma"), react_1["default"].createElement("div", {
+    className: "relative"
+  }, react_1["default"].createElement("input", {
+    value: password2,
+    onChange: function onChange(e) {
+      return setPassword2(e.target.value);
+    },
+    placeholder: "",
+    type: show2 ? 'password' : 'text',
+    className: "text-md block px-3 py-2 rounded-lg w-full\r\n                                                bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md\r\n                                                focus:placeholder-gray-500\r\n                                                focus:bg-white\r\n                                                focus:border-gray-600 focus:outline-none"
+  }), react_1["default"].createElement("div", {
+    className: "absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+  }, !show2 ? react_1["default"].createElement("svg", {
+    onClick: function onClick() {
+      return setShow2(true);
+    },
+    className: "h-6 text-gray-700",
+    fill: "none",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 576 512"
+  }, react_1["default"].createElement("path", {
+    fill: "currentColor",
+    d: "M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400a144 144 0 1 1 144-144 143.93 143.93 0 0 1-144 144zm0-240a95.31 95.31 0 0 0-25.31 3.79 47.85 47.85 0 0 1-66.9 66.9A95.78 95.78 0 1 0 288 160z"
+  })) : react_1["default"].createElement("svg", {
+    onClick: function onClick() {
+      return setShow2(false);
+    },
+    className: "h-6 text-gray-700",
+    fill: "none",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 640 512"
+  }, react_1["default"].createElement("path", {
+    fill: "currentColor",
+    d: "M320 400c-75.85 0-137.25-58.71-142.9-133.11L72.2 185.82c-13.79 17.3-26.48 35.59-36.72 55.59a32.35 32.35 0 0 0 0 29.19C89.71 376.41 197.07 448 320 448c26.91 0 52.87-4 77.89-10.46L346 397.39a144.13 144.13 0 0 1-26 2.61zm313.82 58.1l-110.55-85.44a331.25 331.25 0 0 0 81.25-102.07 32.35 32.35 0 0 0 0-29.19C550.29 135.59 442.93 64 320 64a308.15 308.15 0 0 0-147.32 37.7L45.46 3.37A16 16 0 0 0 23 6.18L3.37 31.45A16 16 0 0 0 6.18 53.9l588.36 454.73a16 16 0 0 0 22.46-2.81l19.64-25.27a16 16 0 0 0-2.82-22.45zm-183.72-142l-39.3-30.38A94.75 94.75 0 0 0 416 256a94.76 94.76 0 0 0-121.31-92.21A47.65 47.65 0 0 1 304 192a46.64 46.64 0 0 1-1.54 10l-73.61-56.89A142.31 142.31 0 0 1 320 112a143.92 143.92 0 0 1 144 144c0 21.63-5.29 41.79-13.9 60.11z"
+  }))))), react_1["default"].createElement("div", {
+    className: "flex justify-between"
+  }, react_1["default"].createElement("label", {
+    className: "block text-gray-500 font-bold my-4"
+  }, react_1["default"].createElement("input", {
+    type: "checkbox",
+    className: "leading-loose text-pink-600"
+  }), react_1["default"].createElement("span", {
+    className: "py-2 text-sm text-gray-600 leading-snug ml-3"
+  }, "Ricordati")), react_1["default"].createElement("label", {
+    className: "block text-gray-500 font-bold my-4"
+  }, react_1["default"].createElement("a", {
+    href: "#",
+    className: "cursor-pointer tracking-tighter text-black border-b-2 border-gray-200 hover:border-gray-400"
+  }, react_1["default"].createElement("span", null, "Password dimenticata?")))), react_1["default"].createElement("button", {
+    type: 'button',
+    onClick: function onClick(e) {
+      return setRegister(e);
+    },
+    className: "mt-3 text-lg font-semibold bg-gray-800 w-full text-white rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-black"
+  }, "Login")))))))));
+};
+exports["default"] = Register;
+
+/***/ }),
+
 /***/ "./resources/js/app/views/index.ts":
 /*!*****************************************!*\
   !*** ./resources/js/app/views/index.ts ***!
@@ -10916,13 +11633,15 @@ var __importDefault = this && this.__importDefault || function (mod) {
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.Login = exports.Dashboard = exports.Home = void 0;
+exports.Register = exports.Login = exports.Dashboard = exports.Home = void 0;
 var Home_1 = __importDefault(__webpack_require__(/*! ./Home */ "./resources/js/app/views/Home.tsx"));
 exports.Home = Home_1["default"];
 var Dashboard_1 = __importDefault(__webpack_require__(/*! ./Dashboard */ "./resources/js/app/views/Dashboard.tsx"));
 exports.Dashboard = Dashboard_1["default"];
 var Login_1 = __importDefault(__webpack_require__(/*! ./Login */ "./resources/js/app/views/Login.tsx"));
 exports.Login = Login_1["default"];
+var Register_1 = __importDefault(__webpack_require__(/*! ./Register */ "./resources/js/app/views/Register.tsx"));
+exports.Register = Register_1["default"];
 
 /***/ }),
 
@@ -10947,7 +11666,7 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 var react_dom_1 = __importDefault(__webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js"));
 var Index_1 = __importDefault(__webpack_require__(/*! ./app/routes/Index */ "./resources/js/app/routes/Index.tsx"));
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
-var store_1 = __importDefault(__webpack_require__(/*! ./app/util/store */ "./resources/js/app/util/store.ts"));
+var store_1 = __importDefault(__webpack_require__(/*! ./app/store/store */ "./resources/js/app/store/store.ts"));
 var react_redux_1 = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 react_dom_1["default"].render(react_1["default"].createElement(react_1["default"].StrictMode, null, react_1["default"].createElement(react_router_dom_1.BrowserRouter, null, react_1["default"].createElement(react_redux_1.Provider, {
   store: store_1["default"]
@@ -12957,7 +13676,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#container {\r\n    padding: 35px 25px;\r\n}\r\n\r\n#h1 {\r\n    font-size: 50px;\r\n    text-align: center;\r\n    margin-bottom: 80px;\r\n}\r\n\r\n.link {\r\n    font-size: 30px;\r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "#containe {\r\n    box-sizing: border-box;\r\n    padding: 35px 25px;\r\n}\r\n\r\n#h1 {\r\n    font-size: 50px;\r\n    text-align: center;\r\n    margin-bottom: 80px;\r\n}\r\n\r\n.link {\r\n    font-size: 30px;\r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

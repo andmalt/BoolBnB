@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import '../../../css/index.css';
 import { Routes, Route } from 'react-router-dom';
-import { Home, Dashboard, Login } from '../views';
+import { Home, Dashboard, Login, Register } from '../views';
 import { Header, Footer } from '../layout';
-import { useAppSelector } from '../util/hooks';
+import { useAppSelector } from '../store/hooks';
 import Loading from '../components/Loading';
 
 interface IndexProps {
@@ -23,10 +23,11 @@ const Index = (props: IndexProps) => {
     return (
         <>
             <Header />
-            <div id='container'>
+            <div id='containe'>
                 <Routes>
                     <Route path='/' element={<Home />} />
                     <Route path='/login' element={<Login />} />
+                    <Route path='/register' element={<Register />} />
                     <Route path='/dashboard' element={<Dashboard />} />
                 </Routes>
             </div>

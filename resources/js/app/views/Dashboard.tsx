@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Sidebar } from '../components';
-import { useAppSelector } from '../util/hooks';
+import { useAppSelector } from '../store/hooks';
 interface DashboardProps {
 }
 
@@ -32,22 +32,20 @@ const Dashboard = (props: DashboardProps) => {
         return () => setIsMount(false)
     }, []);
     return (
-        <div className="top-margin-header">
-            <div className="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white">
+        <div className="flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white">
 
-                {/* <!-- Sidebar --> */}
-                <Sidebar />
+            {/* <!-- Sidebar --> */}
+            <Sidebar />
 
-                <div className="h-full ml-14 mt-14 mb-10 md:ml-64">
+            <div className="h-full ml-14 mt-14 mb-10 md:ml-64">
 
-                    {/* <!-- Statistics Cards --> */}
+                {/* <!-- Statistics Cards --> */}
 
-                    <div className="grid grid-cols-1 lg:grid-cols-2 p-4 gap-4">
+                <div className="grid grid-cols-1 lg:grid-cols-2 p-4 gap-4">
 
-                    </div>
                 </div>
             </div>
-        </div >
+        </div>
     )
 }
 

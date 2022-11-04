@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { getLocalStorage } from '../services/functions'
-import type { RootState } from './store'
+// import type { RootState } from './store'
 
 const data = getLocalStorage();
 
@@ -69,6 +69,6 @@ export const authSlice = createSlice({
 
 export const { loading, error, clear, authenticated, logout, sEmail, sName } = authSlice.actions
 
-export const selectToken = (state: RootState) => state.auth.token
+// export const selectToken = (state: RootState) => state.auth.token
 
 export default authSlice.reducer

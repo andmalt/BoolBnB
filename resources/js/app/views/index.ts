@@ -1,6 +1,7 @@
 import Home from "./Home";
 import Dashboard from "./Dashboard";
 import Login from "./Login";
+import Register from "./Register";
 
 /**
  * application views
@@ -8,5 +9,6 @@ import Login from "./Login";
 export {
     Home,
     Dashboard,
-    Login
+    Login,
+    Register
 }
