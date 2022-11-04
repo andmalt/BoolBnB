@@ -4,6 +4,13 @@ import api from '../services/connection_manager';
 import { authenticated, clear, error, loading, sEmail, sName } from '../store/authSlice';
 import { useAppDispatch } from '../store/hooks';
 
+type Form = {
+    name: string,
+    surname: string,
+    email: string,
+    password: string,
+    password2: string
+}
 interface RegisterProps {
 
 }
@@ -17,6 +24,7 @@ const Register = (props: RegisterProps) => {
     const [password2, setPassword2] = useState<string>("");
     const [show, setShow] = useState<boolean>(true);
     const [show2, setShow2] = useState<boolean>(true);
+    const [errors, setErrors] = useState<Form>();
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
@@ -42,6 +50,7 @@ const Register = (props: RegisterProps) => {
                 // console.log("store token: " + authSelector.token);
                 return navigate("/dashboard");
             }
+            setErrors(response.data.errors)
             console.log("register failed");
             dispatch(clear())
             //
@@ -80,6 +89,13 @@ const Register = (props: RegisterProps) => {
                                             <span className="px-1 text-sm text-gray-600">Email</span>
                                             <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="" type="email"
                                                 className="text-md block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none" />
+                                            {
+                                                errors !== undefined ?
+                                                    <span className="text-danger">{errors.email}</span>
+                                                    :
+                                                    null
+                                            }
+
                                         </div>
                                         <div className="py-2">
                                             <span className="px-1 text-sm text-gray-600">Password</span>

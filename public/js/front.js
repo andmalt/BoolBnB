@@ -11396,6 +11396,10 @@ var Register = function Register(props) {
     _ref14 = _slicedToArray(_ref13, 2),
     show2 = _ref14[0],
     setShow2 = _ref14[1];
+  var _ref15 = (0, react_1.useState)(),
+    _ref16 = _slicedToArray(_ref15, 2),
+    errors = _ref16[0],
+    setErrors = _ref16[1];
   var navigate = (0, react_router_dom_1.useNavigate)();
   var dispatch = (0, hooks_1.useAppDispatch)();
   var setRegister = function setRegister(e) {
@@ -11435,15 +11439,16 @@ var Register = function Register(props) {
               // console.log("store token: " + authSelector.token);
               return _context.abrupt("return", navigate("/dashboard"));
             case 20:
+              setErrors(response.data.errors);
               console.log("register failed");
               dispatch((0, authSlice_1.clear)());
               //
               // insert here modal of register not succeed
               //     
-              _context.next = 28;
+              _context.next = 29;
               break;
-            case 24:
-              _context.prev = 24;
+            case 25:
+              _context.prev = 25;
               _context.t0 = _context["catch"](5);
               dispatch((0, authSlice_1.error)());
               return _context.abrupt("return", {
@@ -11453,12 +11458,12 @@ var Register = function Register(props) {
                   message: "Le credenziali sono errate"
                 }
               });
-            case 28:
+            case 29:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[5, 24]]);
+      }, _callee, null, [[5, 25]]);
     }));
   };
   return react_1["default"].createElement("div", {
@@ -11511,7 +11516,9 @@ var Register = function Register(props) {
     placeholder: "",
     type: "email",
     className: "text-md block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
-  })), react_1["default"].createElement("div", {
+  }), errors !== undefined ? react_1["default"].createElement("span", {
+    className: "text-danger"
+  }, errors.email) : null), react_1["default"].createElement("div", {
     className: "py-2"
   }, react_1["default"].createElement("span", {
     className: "px-1 text-sm text-gray-600"

@@ -37,7 +37,7 @@ const api = {
             surname,
             email,
             password,
-            password_confirmation: passwordConfirmation,
+            password_confirmation: passwordConfirmation
         }
         try {
             const response = await axios.post(`${BASE_URL}/api/register`, data, {
