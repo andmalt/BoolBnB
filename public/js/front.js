@@ -9159,7 +9159,7 @@ var hooks_1 = __webpack_require__(/*! ../store/hooks */ "./resources/js/app/stor
 var authSlice_1 = __webpack_require__(/*! ../store/authSlice */ "./resources/js/app/store/authSlice.ts");
 var Header = function Header(props) {
   _objectDestructuringEmpty(props);
-  var _ref = (0, react_1.useState)(false),
+  var _ref = (0, react_1.useState)(true),
     _ref2 = _slicedToArray(_ref, 2),
     isMount = _ref2[0],
     setIsMount = _ref2[1];
@@ -9202,7 +9202,6 @@ var Header = function Header(props) {
     }));
   };
   (0, react_1.useEffect)(function () {
-    setIsMount(true);
     if (isMount) {
       // 
     }
@@ -10133,7 +10132,7 @@ var Dashboard = function Dashboard(props) {
     _ref4 = _slicedToArray(_ref3, 2),
     name = _ref4[0],
     setName = _ref4[1];
-  var _ref5 = (0, react_1.useState)(false),
+  var _ref5 = (0, react_1.useState)(true),
     _ref6 = _slicedToArray(_ref5, 2),
     isMount = _ref6[0],
     setIsMount = _ref6[1];
@@ -10151,10 +10150,9 @@ var Dashboard = function Dashboard(props) {
     }
   };
   (0, react_1.useEffect)(function () {
-    setIsMount(true);
     if (isMount) {
-      controlAuth();
       checkAuth();
+      controlAuth();
     }
     return function () {
       return setIsMount(false);
@@ -10267,12 +10265,11 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 var Home = function Home() {
-  var _ref = (0, react_1.useState)(false),
+  var _ref = (0, react_1.useState)(true),
     _ref2 = _slicedToArray(_ref, 2),
     isMounted = _ref2[0],
     setIsMounted = _ref2[1];
   (0, react_1.useEffect)(function () {
-    setIsMounted(true);
     if (isMounted) {}
     return function () {
       return setIsMounted(false);
@@ -10794,9 +10791,9 @@ var Login = function Login(props) {
               // console.log("store token: " + authSelector.token);
               return _context.abrupt("return", navigate("/dashboard"));
             case 14:
-              console.log("login function not succeded");
+              console.log("login failed");
               //
-              // insert here login popup not succeded
+              // insert here modal of login not succeded
               // 
               dispatch((0, authSlice_1.clear)());
               _context.next = 22;
@@ -10846,8 +10843,8 @@ var Login = function Login(props) {
       return setEmail(e.target.value);
     },
     placeholder: "",
-    type: "text",
-    className: "text-md block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
+    type: "email",
+    className: "block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
   })), react_1["default"].createElement("div", {
     className: "py-2"
   }, react_1["default"].createElement("span", {
@@ -10861,7 +10858,7 @@ var Login = function Login(props) {
     },
     placeholder: "",
     type: show ? 'password' : 'text',
-    className: "text-md block px-3 py-2 rounded-lg w-full\r\n                                                bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md\r\n                                                focus:placeholder-gray-500\r\n                                                focus:bg-white\r\n                                                focus:border-gray-600 focus:outline-none"
+    className: "block px-3 py-2 rounded-lg w-full\r\n                                                bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md\r\n                                                focus:placeholder-gray-500\r\n                                                focus:bg-white\r\n                                                focus:border-gray-600 focus:outline-none"
   }), react_1["default"].createElement("div", {
     className: "absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
   }, !show ? react_1["default"].createElement("svg", {
@@ -10906,7 +10903,7 @@ var Login = function Login(props) {
       return setLogin(e);
     },
     className: "mt-3 text-lg font-semibold bg-gray-800 w-full text-white rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-black"
-  }, "Login")))))))));
+  }, "Accedi")))))))));
 };
 exports["default"] = Login;
 
@@ -11476,7 +11473,7 @@ var Register = function Register(props) {
     className: "w-full relative"
   }, react_1["default"].createElement("div", null, react_1["default"].createElement("div", {
     className: "text-center font-semibold text-black"
-  }, "Accedi a BoolBnB"), react_1["default"].createElement("form", null, react_1["default"].createElement("div", {
+  }, "Registrati su BoolBnB"), react_1["default"].createElement("form", null, react_1["default"].createElement("div", {
     className: 'mx-auto max-w-lg'
   }, react_1["default"].createElement("div", {
     className: "py-2"
@@ -11610,7 +11607,7 @@ var Register = function Register(props) {
       return setRegister(e);
     },
     className: "mt-3 text-lg font-semibold bg-gray-800 w-full text-white rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-black"
-  }, "Login")))))))));
+  }, "Registrati")))))))));
 };
 exports["default"] = Register;
 

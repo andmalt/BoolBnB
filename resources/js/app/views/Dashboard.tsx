@@ -8,7 +8,7 @@ interface DashboardProps {
 const Dashboard = (props: DashboardProps) => {
     const [email, setEmail] = useState<string | null>();
     const [name, setName] = useState<string | null>();
-    const [isMount, setIsMount] = useState<boolean>(false);
+    const [isMount, setIsMount] = useState<boolean>(true);
     const navigate = useNavigate();
     const authSelector = useAppSelector(state => state.auth);
 
@@ -24,10 +24,9 @@ const Dashboard = (props: DashboardProps) => {
     }
 
     useEffect(() => {
-        setIsMount(true)
         if (isMount) {
-            controlAuth()
             checkAuth()
+            controlAuth()
         }
         return () => setIsMount(false)
     }, []);

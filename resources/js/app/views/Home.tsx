@@ -3,10 +3,9 @@ import { Link } from 'react-router-dom';
 
 const Home = () => {
 
-    const [isMounted, setIsMounted] = useState<boolean>(false);
+    const [isMounted, setIsMounted] = useState<boolean>(true);
 
     useEffect(() => {
-        setIsMounted(true)
         if (isMounted) {
 
         }

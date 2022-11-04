@@ -10,7 +10,7 @@ interface HeaderProps {
 
 const Header = (props: HeaderProps) => {
   const { } = props;
-  const [isMount, setIsMount] = useState<boolean>(false);
+  const [isMount, setIsMount] = useState<boolean>(true);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const authSelector = useAppSelector(state => state.auth);
@@ -36,7 +36,6 @@ const Header = (props: HeaderProps) => {
   }
 
   useEffect(() => {
-    setIsMount(true)
     if (isMount) {
       // 
     }

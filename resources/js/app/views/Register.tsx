@@ -61,7 +61,7 @@ const Register = (props: RegisterProps) => {
                         <div className="w-full relative">
                             <div>
                                 <div className="text-center font-semibold text-black">
-                                    Accedi a BoolBnB
+                                    Registrati su BoolBnB
                                 </div>
 
                                 <form >
@@ -155,7 +155,7 @@ const Register = (props: RegisterProps) => {
                                             </label>
                                         </div>
                                         <button type='button' onClick={(e) => setRegister(e)} className="mt-3 text-lg font-semibold bg-gray-800 w-full text-white rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-black">
-                                            Login
+                                            Registrati
                                         </button>
                                     </div>
                                 </form>
