@@ -1,5 +1,5 @@
 import axios from "axios"
-import { deleteLocalStorage, setLocalStorage } from "./functions";
+import { convertInputForm, deleteLocalStorage, setLocalStorage } from "./functions";
 
 const BASE_URL: string = `http://localhost:8000`;
 
@@ -33,8 +33,8 @@ const api = {
         passwordConfirmation: string) {
 
         const data = {
-            name,
-            surname,
+            name: convertInputForm(name),
+            surname: convertInputForm(surname),
             email,
             password,
             password_confirmation: passwordConfirmation

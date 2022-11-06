@@ -20,3 +20,10 @@ export const deleteLocalStorage = () => {
     localStorage.removeItem("name")
     localStorage.removeItem("email")
 }
+
+export const convertInputForm = (e: string) => {
+    let ordered = e.trim();
+    let lowerCase = ordered.toLowerCase();
+    const response = lowerCase.charAt(0).toUpperCase() + lowerCase.slice(1);
+    return response;
+}
