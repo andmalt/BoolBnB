@@ -9773,14 +9773,14 @@ var api = {
   },
   register: function register(name, surname, email, password, passwordConfirmation) {
     return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-      var data, response;
+      var data, response, errors;
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
               data = {
-                name: name,
-                surname: surname,
+                name: (0, functions_1.convertInputForm)(name),
+                surname: (0, functions_1.convertInputForm)(surname),
                 email: email,
                 password: password,
                 password_confirmation: passwordConfirmation
@@ -9801,16 +9801,15 @@ var api = {
             case 9:
               _context2.prev = 9;
               _context2.t0 = _context2["catch"](1);
+              // { data: { success: false, error: e } }
+              errors = _context2.t0;
               return _context2.abrupt("return", {
                 data: {
                   success: false,
-                  error: {
-                    code: 500,
-                    message: _context2.t0
-                  }
+                  errors: errors
                 }
               });
-            case 12:
+            case 13:
             case "end":
               return _context2.stop();
           }
@@ -9875,7 +9874,7 @@ exports["default"] = api;
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.deleteLocalStorage = exports.getLocalStorage = exports.setLocalStorage = void 0;
+exports.convertInputForm = exports.deleteLocalStorage = exports.getLocalStorage = exports.setLocalStorage = void 0;
 var setLocalStorage = function setLocalStorage(response) {
   localStorage.setItem("token", response.data.token);
   localStorage.setItem("name", "".concat(response.data.user.name, " ").concat(response.data.user.surname));
@@ -9899,6 +9898,13 @@ var deleteLocalStorage = function deleteLocalStorage() {
   localStorage.removeItem("email");
 };
 exports.deleteLocalStorage = deleteLocalStorage;
+var convertInputForm = function convertInputForm(e) {
+  var ordered = e.trim();
+  var lowerCase = ordered.toLowerCase();
+  var response = lowerCase.charAt(0).toUpperCase() + lowerCase.slice(1);
+  return response;
+};
+exports.convertInputForm = convertInputForm;
 
 /***/ }),
 
@@ -10752,16 +10758,20 @@ var Login = function Login(props) {
   _objectDestructuringEmpty(props);
   var _ref = (0, react_1.useState)(true),
     _ref2 = _slicedToArray(_ref, 2),
-    show = _ref2[0],
-    setShow = _ref2[1];
-  var _ref3 = (0, react_1.useState)(""),
+    isMounted = _ref2[0],
+    setIsMounted = _ref2[1];
+  var _ref3 = (0, react_1.useState)(true),
     _ref4 = _slicedToArray(_ref3, 2),
-    email = _ref4[0],
-    setEmail = _ref4[1];
+    show = _ref4[0],
+    setShow = _ref4[1];
   var _ref5 = (0, react_1.useState)(""),
     _ref6 = _slicedToArray(_ref5, 2),
-    password = _ref6[0],
-    setPassword = _ref6[1];
+    email = _ref6[0],
+    setEmail = _ref6[1];
+  var _ref7 = (0, react_1.useState)(""),
+    _ref8 = _slicedToArray(_ref7, 2),
+    password = _ref8[0],
+    setPassword = _ref8[1];
   var navigate = (0, react_router_dom_1.useNavigate)();
   var dispatch = (0, hooks_1.useAppDispatch)();
   var setLogin = function setLogin(e) {
@@ -10817,6 +10827,14 @@ var Login = function Login(props) {
       }, _callee, null, [[2, 18]]);
     }));
   };
+  (0, react_1.useEffect)(function () {
+    if (isMounted) {
+      // 
+    }
+    return function () {
+      return setIsMounted(false);
+    };
+  }, []);
   return react_1["default"].createElement("div", {
     className: "container max-w-full mx-auto py-24 px-6"
   }, react_1["default"].createElement("div", {
@@ -11400,31 +11418,42 @@ var Register = function Register(props) {
     _ref16 = _slicedToArray(_ref15, 2),
     errors = _ref16[0],
     setErrors = _ref16[1];
+  var _ref17 = (0, react_1.useState)(null),
+    _ref18 = _slicedToArray(_ref17, 2),
+    isError = _ref18[0],
+    setIsError = _ref18[1];
+  var _ref19 = (0, react_1.useState)(false),
+    _ref20 = _slicedToArray(_ref19, 2),
+    noRegister = _ref20[0],
+    setNoRegister = _ref20[1];
   var navigate = (0, react_router_dom_1.useNavigate)();
   var dispatch = (0, hooks_1.useAppDispatch)();
   var setRegister = function setRegister(e) {
     return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-      var response;
+      var response, test;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               e.preventDefault();
               dispatch((0, authSlice_1.loading)());
-              if (!(password !== password2)) {
-                _context.next = 5;
+              if (!(password !== password2 || password === "" && password2 === "")) {
+                _context.next = 6;
                 break;
               }
+              // creare modale di password non corrette
+              setNoRegister(true);
               dispatch((0, authSlice_1.clear)());
               return _context.abrupt("return", console.log("password errata"));
-            case 5:
-              _context.prev = 5;
-              _context.next = 8;
+            case 6:
+              setNoRegister(false);
+              _context.prev = 7;
+              _context.next = 10;
               return connection_manager_1["default"].register(name, surname, email, password, password2);
-            case 8:
+            case 10:
               response = _context.sent;
               if (!response.data.success) {
-                _context.next = 20;
+                _context.next = 22;
                 break;
               }
               dispatch((0, authSlice_1.sEmail)(response.data.user.email));
@@ -11438,32 +11467,32 @@ var Register = function Register(props) {
               dispatch((0, authSlice_1.clear)());
               // console.log("store token: " + authSelector.token);
               return _context.abrupt("return", navigate("/dashboard"));
-            case 20:
-              setErrors(response.data.errors);
+            case 22:
+              test = response.data.errors.response.data.errors;
+              setErrors(test);
               console.log("register failed");
               dispatch((0, authSlice_1.clear)());
+              console.log(errors);
+              console.log(test);
+              setIsError(true);
+              console.log(isError);
               //
               // insert here modal of register not succeed
               //     
-              _context.next = 29;
+              _context.next = 37;
               break;
-            case 25:
-              _context.prev = 25;
-              _context.t0 = _context["catch"](5);
+            case 32:
+              _context.prev = 32;
+              _context.t0 = _context["catch"](7);
               dispatch((0, authSlice_1.error)());
-              return _context.abrupt("return", {
-                data: {
-                  success: false,
-                  error: _context.t0,
-                  message: "Le credenziali sono errate"
-                }
-              });
-            case 29:
+              console.log("register error: ", _context.t0);
+              return _context.abrupt("return", null);
+            case 37:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[5, 25]]);
+      }, _callee, null, [[7, 32]]);
     }));
   };
   return react_1["default"].createElement("div", {
@@ -11492,7 +11521,9 @@ var Register = function Register(props) {
     placeholder: "",
     type: "text",
     className: "text-md block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
-  })), react_1["default"].createElement("div", {
+  }), isError == true ? react_1["default"].createElement("span", {
+    className: "text-danger"
+  }, errors !== undefined ? errors.name : null) : null), react_1["default"].createElement("div", {
     className: "py-2"
   }, react_1["default"].createElement("span", {
     className: "px-1 text-sm text-gray-600"
@@ -11504,7 +11535,9 @@ var Register = function Register(props) {
     placeholder: "",
     type: "text",
     className: "text-md block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
-  })), react_1["default"].createElement("div", {
+  }), isError == true ? react_1["default"].createElement("span", {
+    className: "text-danger"
+  }, errors !== undefined ? errors.surname : null) : null), react_1["default"].createElement("div", {
     className: "py-2"
   }, react_1["default"].createElement("span", {
     className: "px-1 text-sm text-gray-600"
@@ -11516,9 +11549,9 @@ var Register = function Register(props) {
     placeholder: "",
     type: "email",
     className: "text-md block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
-  }), errors !== undefined ? react_1["default"].createElement("span", {
+  }), isError == true ? react_1["default"].createElement("span", {
     className: "text-danger"
-  }, errors.email) : null), react_1["default"].createElement("div", {
+  }, errors !== undefined ? errors.email : null) : null), react_1["default"].createElement("div", {
     className: "py-2"
   }, react_1["default"].createElement("span", {
     className: "px-1 text-sm text-gray-600"
@@ -11531,7 +11564,7 @@ var Register = function Register(props) {
     },
     placeholder: "",
     type: show ? 'password' : 'text',
-    className: "text-md block px-3 py-2 rounded-lg w-full\r\n                                                bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md\r\n                                                focus:placeholder-gray-500\r\n                                                focus:bg-white\r\n                                                focus:border-gray-600 focus:outline-none"
+    className: "".concat(noRegister ? "border-red-600 " : "border-gray-300 ") + "text-md block px-3 py-2 rounded-lg w-full bg-white border-2 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
   }), react_1["default"].createElement("div", {
     className: "absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
   }, !show ? react_1["default"].createElement("svg", {
@@ -11569,7 +11602,7 @@ var Register = function Register(props) {
     },
     placeholder: "",
     type: show2 ? 'password' : 'text',
-    className: "text-md block px-3 py-2 rounded-lg w-full\r\n                                                bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md\r\n                                                focus:placeholder-gray-500\r\n                                                focus:bg-white\r\n                                                focus:border-gray-600 focus:outline-none"
+    className: "".concat(noRegister ? "border-red-600 " : "border-gray-300 ") + "text-md block px-3 py-2 rounded-lg w-full bg-white border-2 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
   }), react_1["default"].createElement("div", {
     className: "absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
   }, !show2 ? react_1["default"].createElement("svg", {

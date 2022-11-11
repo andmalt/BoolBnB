@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import api from '../services/connection_manager';
 import { useAppDispatch } from '../store/hooks';
@@ -16,6 +16,7 @@ interface LoginProps {
 
 const Login = (props: LoginProps) => {
     const { } = props;
+    const [isMounted, setIsMounted] = useState<boolean>(true);
     const [show, setShow] = useState<boolean>(true);
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
@@ -47,6 +48,13 @@ const Login = (props: LoginProps) => {
             return { data: { success: false, error: e, message: "Le credenziali sono errate" } }
         }
     }
+
+    useEffect(() => {
+        if (isMounted) {
+            // 
+        }
+        return () => setIsMounted(false);
+    }, []);
 
     return (
         <div className="container max-w-full mx-auto py-24 px-6">

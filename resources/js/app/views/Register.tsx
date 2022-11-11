@@ -5,11 +5,11 @@ import { authenticated, clear, error, loading, sEmail, sName } from '../store/au
 import { useAppDispatch } from '../store/hooks';
 
 type Form = {
-    name: string,
-    surname: string,
-    email: string,
-    password: string,
-    password2: string
+    name: string[],
+    surname: string[],
+    email: string[],
+    password: string[],
+    password2: string[]
 }
 interface RegisterProps {
 
@@ -25,16 +25,21 @@ const Register = (props: RegisterProps) => {
     const [show, setShow] = useState<boolean>(true);
     const [show2, setShow2] = useState<boolean>(true);
     const [errors, setErrors] = useState<Form>();
+    const [isError, setIsError] = useState<boolean | null>(null);
+    const [noRegister, setNoRegister] = useState<boolean>(false);
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
     const setRegister = async (e: any) => {
         e.preventDefault()
         dispatch(loading());
-        if (password !== password2) {
+        if (password !== password2 || (password === "" && password2 === "")) {
+            // creare modale di password non corrette
+            setNoRegister(true)
             dispatch(clear())
             return console.log("password errata");
         }
+        setNoRegister(false)
         try {
             const response = await api.register(name, surname, email, password, password2);
             if (response.data.success) {
@@ -50,15 +55,22 @@ const Register = (props: RegisterProps) => {
                 // console.log("store token: " + authSelector.token);
                 return navigate("/dashboard");
             }
-            setErrors(response.data.errors)
+            const test = response.data.errors.response.data.errors
+            setErrors(test)
             console.log("register failed");
             dispatch(clear())
+            console.log(errors);
+            console.log(test);
+
+            setIsError(true)
+            console.log(isError);
             //
             // insert here modal of register not succeed
             //     
         } catch (e) {
             dispatch(error())
-            return { data: { success: false, error: e, message: "Le credenziali sono errate" } }
+            console.log("register error: ", e);
+            return null
         }
     }
 
@@ -79,19 +91,31 @@ const Register = (props: RegisterProps) => {
                                             <span className="px-1 text-sm text-gray-600">Nome</span>
                                             <input value={name} onChange={(e) => setName(e.target.value)} placeholder="" type="text"
                                                 className="text-md block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none" />
+                                            {
+                                                isError == true ?
+                                                    <span className="text-danger">{errors !== undefined ? errors.name : null}</span>
+                                                    :
+                                                    null
+                                            }
                                         </div>
                                         <div className="py-2">
                                             <span className="px-1 text-sm text-gray-600">Cognome</span>
                                             <input value={surname} onChange={(e) => setSurname(e.target.value)} placeholder="" type="text"
                                                 className="text-md block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none" />
+                                            {
+                                                isError == true ?
+                                                    <span className="text-danger">{errors !== undefined ? errors.surname : null}</span>
+                                                    :
+                                                    null
+                                            }
                                         </div>
                                         <div className="py-2">
                                             <span className="px-1 text-sm text-gray-600">Email</span>
                                             <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="" type="email"
-                                                className="text-md block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none" />
+                                                className={"text-md block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"} />
                                             {
-                                                errors !== undefined ?
-                                                    <span className="text-danger">{errors.email}</span>
+                                                isError == true ?
+                                                    <span className="text-danger">{errors !== undefined ? errors.email : null}</span>
                                                     :
                                                     null
                                             }
@@ -100,11 +124,8 @@ const Register = (props: RegisterProps) => {
                                         <div className="py-2">
                                             <span className="px-1 text-sm text-gray-600">Password</span>
                                             <div className="relative">
-                                                <input value={password} onChange={(e) => setPassword(e.target.value)} placeholder="" type={show ? 'password' : 'text'} className="text-md block px-3 py-2 rounded-lg w-full
-                                                bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md
-                                                focus:placeholder-gray-500
-                                                focus:bg-white
-                                                focus:border-gray-600 focus:outline-none" />
+                                                <input value={password} onChange={(e) => setPassword(e.target.value)} placeholder="" type={show ? 'password' : 'text'}
+                                                    className={`${noRegister ? "border-red-600 " : "border-gray-300 "}` + "text-md block px-3 py-2 rounded-lg w-full bg-white border-2 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"} />
                                                 <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
                                                     {
                                                         !show ?
@@ -129,11 +150,8 @@ const Register = (props: RegisterProps) => {
                                         <div className="py-2">
                                             <span className="px-1 text-sm text-gray-600">Password di conferma</span>
                                             <div className="relative">
-                                                <input value={password2} onChange={(e) => setPassword2(e.target.value)} placeholder="" type={show2 ? 'password' : 'text'} className="text-md block px-3 py-2 rounded-lg w-full
-                                                bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md
-                                                focus:placeholder-gray-500
-                                                focus:bg-white
-                                                focus:border-gray-600 focus:outline-none" />
+                                                <input value={password2} onChange={(e) => setPassword2(e.target.value)} placeholder="" type={show2 ? 'password' : 'text'}
+                                                    className={`${noRegister ? "border-red-600 " : "border-gray-300 "}` + "text-md block px-3 py-2 rounded-lg w-full bg-white border-2 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"} />
                                                 <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
                                                     {
                                                         !show2 ?

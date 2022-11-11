@@ -50,7 +50,9 @@ const api = {
             }
             return response;
         } catch (e) {
-            return { data: { success: false, error: { code: 500, message: e } } }
+            // { data: { success: false, error: e } }
+            const errors = e;
+            return { data: { success: false, errors } }
         }
     },
     logout: async function (token: string | null) {
