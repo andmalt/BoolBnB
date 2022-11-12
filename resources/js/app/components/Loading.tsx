@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { CSSTransition } from 'react-transition-group';
+// import { CSSTransition } from 'react-transition-group';
 import '../../../css/loading.css'
 
 interface LoadingProp {

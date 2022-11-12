@@ -14,7 +14,7 @@ interface AuthState {
     token: string | null,
     isLoading: boolean,
     isError: boolean,
-    isSuccess: boolean
+    isSuccess: boolean,
 }
 const initialState: AuthState = {
     name: name,
@@ -34,7 +34,7 @@ export const authSlice = createSlice({
             state.isError = false;
             state.isSuccess = false;
         },
-        error: state => {
+        error: (state) => {
             state.isLoading = false;
             state.isError = true;
             state.isSuccess = false;
@@ -63,7 +63,7 @@ export const authSlice = createSlice({
             state.token = null;
             state.name = null;
             state.email = null;
-        }
+        },
     }
 })
 

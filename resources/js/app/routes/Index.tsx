@@ -16,12 +16,14 @@ const Index = (props: IndexProps) => {
     useEffect(() => {
     }, []);
 
-    if (authSelector.isLoading) {
-        return <Loading />
-    }
-
     return (
         <>
+            {
+                authSelector.isLoading ?
+                    <Loading />
+                    :
+                    null
+            }
             <Header />
             <div id='containe'>
                 <Routes>

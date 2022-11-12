@@ -25,7 +25,7 @@ const Register = (props: RegisterProps) => {
     const [show, setShow] = useState<boolean>(true);
     const [show2, setShow2] = useState<boolean>(true);
     const [errors, setErrors] = useState<Form>();
-    const [isError, setIsError] = useState<boolean | null>(null);
+    const [isError, setIsError] = useState<boolean>();
     const [noRegister, setNoRegister] = useState<boolean>(false);
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
@@ -54,16 +54,13 @@ const Register = (props: RegisterProps) => {
                 dispatch(clear())
                 // console.log("store token: " + authSelector.token);
                 return navigate("/dashboard");
+            } else {
+                setIsError(true)
+                console.log(isError);
+                setErrors(response.data.errors.response.data.errors)
+                console.log("register failed");
+                dispatch(clear())
             }
-            const test = response.data.errors.response.data.errors
-            setErrors(test)
-            console.log("register failed");
-            dispatch(clear())
-            console.log(errors);
-            console.log(test);
-
-            setIsError(true)
-            console.log(isError);
             //
             // insert here modal of register not succeed
             //     
@@ -90,10 +87,12 @@ const Register = (props: RegisterProps) => {
                                         <div className="py-2">
                                             <span className="px-1 text-sm text-gray-600">Nome</span>
                                             <input value={name} onChange={(e) => setName(e.target.value)} placeholder="" type="text"
-                                                className="text-md block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none" />
+                                                className="text-md block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none mb-2" />
                                             {
                                                 isError == true ?
-                                                    <span className="text-danger">{errors !== undefined ? errors.name : null}</span>
+                                                    errors?.name.map((error, i) => {
+                                                        return <span key={i} className="text-red-600 px-1">{errors !== undefined ? error : null}</span>
+                                                    })
                                                     :
                                                     null
                                             }
@@ -101,10 +100,12 @@ const Register = (props: RegisterProps) => {
                                         <div className="py-2">
                                             <span className="px-1 text-sm text-gray-600">Cognome</span>
                                             <input value={surname} onChange={(e) => setSurname(e.target.value)} placeholder="" type="text"
-                                                className="text-md block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none" />
+                                                className="text-md block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none mb-2" />
                                             {
                                                 isError == true ?
-                                                    <span className="text-danger">{errors !== undefined ? errors.surname : null}</span>
+                                                    errors?.surname.map((error, i) => {
+                                                        return <span key={i} className="text-red-600 px-1">{errors !== undefined ? error : null}</span>
+                                                    })
                                                     :
                                                     null
                                             }
@@ -112,10 +113,12 @@ const Register = (props: RegisterProps) => {
                                         <div className="py-2">
                                             <span className="px-1 text-sm text-gray-600">Email</span>
                                             <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="" type="email"
-                                                className={"text-md block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"} />
+                                                className={"text-md block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none mb-2"} />
                                             {
                                                 isError == true ?
-                                                    <span className="text-danger">{errors !== undefined ? errors.email : null}</span>
+                                                    errors?.email.map((error, i) => {
+                                                        return <span key={i} className="text-red-600 px-1">{errors !== undefined ? error : null}</span>
+                                                    })
                                                     :
                                                     null
                                             }

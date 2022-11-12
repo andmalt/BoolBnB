@@ -7941,6 +7941,7 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+// import { CSSTransition } from 'react-transition-group';
 __webpack_require__(/*! ../../../css/loading.css */ "./resources/css/loading.css");
 var Loading = function Loading(props) {
   _objectDestructuringEmpty(props);
@@ -9330,10 +9331,7 @@ var Index = function Index(props) {
     return state.auth;
   });
   (0, react_1.useEffect)(function () {}, []);
-  if (authSelector.isLoading) {
-    return react_1["default"].createElement(Loading_1["default"], null);
-  }
-  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(layout_1.Header, null), react_1["default"].createElement("div", {
+  return react_1["default"].createElement(react_1["default"].Fragment, null, authSelector.isLoading ? react_1["default"].createElement(Loading_1["default"], null) : null, react_1["default"].createElement(layout_1.Header, null), react_1["default"].createElement("div", {
     id: 'containe'
   }, react_1["default"].createElement(react_router_dom_1.Routes, null, react_1["default"].createElement(react_router_dom_1.Route, {
     path: '/',
@@ -9773,7 +9771,7 @@ var api = {
   },
   register: function register(name, surname, email, password, passwordConfirmation) {
     return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-      var data, response, errors;
+      var data, response;
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
@@ -9801,15 +9799,13 @@ var api = {
             case 9:
               _context2.prev = 9;
               _context2.t0 = _context2["catch"](1);
-              // { data: { success: false, error: e } }
-              errors = _context2.t0;
               return _context2.abrupt("return", {
                 data: {
                   success: false,
-                  errors: errors
+                  errors: _context2.t0
                 }
               });
-            case 13:
+            case 12:
             case "end":
               return _context2.stop();
           }
@@ -11418,7 +11414,7 @@ var Register = function Register(props) {
     _ref16 = _slicedToArray(_ref15, 2),
     errors = _ref16[0],
     setErrors = _ref16[1];
-  var _ref17 = (0, react_1.useState)(null),
+  var _ref17 = (0, react_1.useState)(),
     _ref18 = _slicedToArray(_ref17, 2),
     isError = _ref18[0],
     setIsError = _ref18[1];
@@ -11430,7 +11426,7 @@ var Register = function Register(props) {
   var dispatch = (0, hooks_1.useAppDispatch)();
   var setRegister = function setRegister(e) {
     return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-      var response, test;
+      var response;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -11453,7 +11449,7 @@ var Register = function Register(props) {
             case 10:
               response = _context.sent;
               if (!response.data.success) {
-                _context.next = 22;
+                _context.next = 24;
                 break;
               }
               dispatch((0, authSlice_1.sEmail)(response.data.user.email));
@@ -11467,32 +11463,27 @@ var Register = function Register(props) {
               dispatch((0, authSlice_1.clear)());
               // console.log("store token: " + authSelector.token);
               return _context.abrupt("return", navigate("/dashboard"));
-            case 22:
-              test = response.data.errors.response.data.errors;
-              setErrors(test);
-              console.log("register failed");
-              dispatch((0, authSlice_1.clear)());
-              console.log(errors);
-              console.log(test);
+            case 24:
               setIsError(true);
               console.log(isError);
-              //
-              // insert here modal of register not succeed
-              //     
-              _context.next = 37;
+              setErrors(response.data.errors.response.data.errors);
+              console.log("register failed");
+              dispatch((0, authSlice_1.clear)());
+            case 29:
+              _context.next = 36;
               break;
-            case 32:
-              _context.prev = 32;
+            case 31:
+              _context.prev = 31;
               _context.t0 = _context["catch"](7);
               dispatch((0, authSlice_1.error)());
               console.log("register error: ", _context.t0);
               return _context.abrupt("return", null);
-            case 37:
+            case 36:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[7, 32]]);
+      }, _callee, null, [[7, 31]]);
     }));
   };
   return react_1["default"].createElement("div", {
@@ -11520,10 +11511,13 @@ var Register = function Register(props) {
     },
     placeholder: "",
     type: "text",
-    className: "text-md block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
-  }), isError == true ? react_1["default"].createElement("span", {
-    className: "text-danger"
-  }, errors !== undefined ? errors.name : null) : null), react_1["default"].createElement("div", {
+    className: "text-md block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none mb-2"
+  }), isError == true ? errors === null || errors === void 0 ? void 0 : errors.name.map(function (error, i) {
+    return react_1["default"].createElement("span", {
+      key: i,
+      className: "text-red-600 px-1"
+    }, errors !== undefined ? error : null);
+  }) : null), react_1["default"].createElement("div", {
     className: "py-2"
   }, react_1["default"].createElement("span", {
     className: "px-1 text-sm text-gray-600"
@@ -11534,10 +11528,13 @@ var Register = function Register(props) {
     },
     placeholder: "",
     type: "text",
-    className: "text-md block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
-  }), isError == true ? react_1["default"].createElement("span", {
-    className: "text-danger"
-  }, errors !== undefined ? errors.surname : null) : null), react_1["default"].createElement("div", {
+    className: "text-md block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none mb-2"
+  }), isError == true ? errors === null || errors === void 0 ? void 0 : errors.surname.map(function (error, i) {
+    return react_1["default"].createElement("span", {
+      key: i,
+      className: "text-red-600 px-1"
+    }, errors !== undefined ? error : null);
+  }) : null), react_1["default"].createElement("div", {
     className: "py-2"
   }, react_1["default"].createElement("span", {
     className: "px-1 text-sm text-gray-600"
@@ -11548,10 +11545,13 @@ var Register = function Register(props) {
     },
     placeholder: "",
     type: "email",
-    className: "text-md block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
-  }), isError == true ? react_1["default"].createElement("span", {
-    className: "text-danger"
-  }, errors !== undefined ? errors.email : null) : null), react_1["default"].createElement("div", {
+    className: "text-md block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none mb-2"
+  }), isError == true ? errors === null || errors === void 0 ? void 0 : errors.email.map(function (error, i) {
+    return react_1["default"].createElement("span", {
+      key: i,
+      className: "text-red-600 px-1"
+    }, errors !== undefined ? error : null);
+  }) : null), react_1["default"].createElement("div", {
     className: "py-2"
   }, react_1["default"].createElement("span", {
     className: "px-1 text-sm text-gray-600"
@@ -13737,7 +13737,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#container {\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\r\n    height: 100vh;\r\n}\r\n\r\n#text {\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\r\n    margin-bottom: 45px;\r\n}\r\n\r\n#paragraph {\r\n    font-size: 25px;\r\n    font-weight: 600;\r\n}\r\n\r\n#spinner {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n}\r\n\r\n/* .loading-enter {\r\n    width: 0%;\r\n    height: 100%;\r\n}\r\n\r\n.loading-enter-active {\r\n    width: 50%;\r\n    height: 100%;\r\n    transition: width 600ms;\r\n}\r\n\r\n.loading-exit {\r\n    height: 100%;\r\n    width: 50%;\r\n}\r\n\r\n.loading-exit-active {\r\n    width: 100%;\r\n    height: 100%;\r\n    transition: width 600ms;\r\n} */", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "#container {\r\n    position: absolute;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\r\n    height: 100vh;\r\n    width: 100vw;\r\n    z-index: 11;\r\n    background-color: white;\r\n}\r\n\r\n#text {\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\r\n    margin-bottom: 45px;\r\n}\r\n\r\n#paragraph {\r\n    font-size: 25px;\r\n    font-weight: 600;\r\n}\r\n\r\n#spinner {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n}\r\n\r\n/* .loading-enter {\r\n    width: 0%;\r\n    height: 100%;\r\n}\r\n\r\n.loading-enter-active {\r\n    width: 50%;\r\n    height: 100%;\r\n    transition: width 600ms;\r\n}\r\n\r\n.loading-exit {\r\n    height: 100%;\r\n    width: 50%;\r\n}\r\n\r\n.loading-exit-active {\r\n    width: 100%;\r\n    height: 100%;\r\n    transition: width 600ms;\r\n} */", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
