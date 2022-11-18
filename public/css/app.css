@@ -924,6 +924,9 @@ select {
 .h-9 {
   height: 2.25rem;
 }
+.h-screen {
+  height: 100vh;
+}
 .h-11 {
   height: 2.75rem;
 }
@@ -935,9 +938,6 @@ select {
 }
 .h-96 {
   height: 24rem;
-}
-.h-screen {
-  height: 100vh;
 }
 .min-h-screen {
   min-height: 100vh;
@@ -1395,6 +1395,14 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(99 102 241 / var(--tw-bg-opacity));
 }
+.bg-\[\#1A2238\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(26 34 56 / var(--tw-bg-opacity));
+}
+.bg-\[\#FF6A3D\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 106 61 / var(--tw-bg-opacity));
+}
 .bg-blue-600 {
   --tw-bg-opacity: 1;
   background-color: rgb(37 99 235 / var(--tw-bg-opacity));
@@ -1437,14 +1445,6 @@ select {
 .bg-gray-400 {
   --tw-bg-opacity: 1;
   background-color: rgb(156 163 175 / var(--tw-bg-opacity));
-}
-.bg-\[\#1A2238\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(26 34 56 / var(--tw-bg-opacity));
-}
-.bg-\[\#FF6A3D\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 106 61 / var(--tw-bg-opacity));
 }
 .fill-current {
   fill: currentColor;
@@ -1630,16 +1630,16 @@ select {
   font-size: 1.5rem;
   line-height: 2rem;
 }
+.text-9xl {
+  font-size: 8rem;
+  line-height: 1;
+}
 .text-4xl {
   font-size: 2.25rem;
   line-height: 2.5rem;
 }
 .text-5xl {
   font-size: 3rem;
-  line-height: 1;
-}
-.text-9xl {
-  font-size: 8rem;
   line-height: 1;
 }
 .font-medium {
@@ -1790,6 +1790,10 @@ select {
   --tw-text-opacity: 1;
   color: rgb(254 242 242 / var(--tw-text-opacity));
 }
+.text-\[\#FF6A3D\] {
+  --tw-text-opacity: 1;
+  color: rgb(255 106 61 / var(--tw-text-opacity));
+}
 .text-blue-800 {
   --tw-text-opacity: 1;
   color: rgb(30 64 175 / var(--tw-text-opacity));
@@ -1809,10 +1813,6 @@ select {
 .text-pink-600 {
   --tw-text-opacity: 1;
   color: rgb(219 39 119 / var(--tw-text-opacity));
-}
-.text-\[\#FF6A3D\] {
-  --tw-text-opacity: 1;
-  color: rgb(255 106 61 / var(--tw-text-opacity));
 }
 .underline {
   text-decoration-line: underline;

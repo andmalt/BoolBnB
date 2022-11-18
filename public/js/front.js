@@ -9231,17 +9231,17 @@ var Header = function Header(props) {
             case 0:
               e.preventDefault();
               dispatch((0, authSlice_1.loading)());
-              dispatch((0, authSlice_1.error)());
-              _context.prev = 3;
-              _context.next = 6;
+              _context.prev = 2;
+              _context.next = 5;
               return connection_manager_1["default"].logout(authSelector.token);
-            case 6:
+            case 5:
               dispatch((0, authSlice_1.logout)());
               dispatch((0, authSlice_1.clear)());
               return _context.abrupt("return", navigate("/"));
-            case 11:
-              _context.prev = 11;
-              _context.t0 = _context["catch"](3);
+            case 10:
+              _context.prev = 10;
+              _context.t0 = _context["catch"](2);
+              console.log("header error:", _context.t0);
               // need fixed the catch
               dispatch((0, authSlice_1.logout)());
               dispatch((0, authSlice_1.error)());
@@ -9250,7 +9250,7 @@ var Header = function Header(props) {
               return _context.stop();
           }
         }
-      }, _callee, null, [[3, 11]]);
+      }, _callee, null, [[2, 10]]);
     }));
   };
   (0, react_1.useEffect)(function () {
