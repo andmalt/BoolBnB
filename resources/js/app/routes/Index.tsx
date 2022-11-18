@@ -5,6 +5,7 @@ import { Home, Dashboard, Login, Register } from '../views';
 import { Header, Footer } from '../layout';
 import { useAppSelector } from '../store/hooks';
 import Loading from '../components/Loading';
+import Error from '../components/Error';
 
 interface IndexProps {
 }
@@ -14,10 +15,17 @@ const Index = (props: IndexProps) => {
     const authSelector = useAppSelector(state => state.auth);
 
     useEffect(() => {
+        //  
     }, []);
 
     return (
         <>
+            {
+                authSelector.isError ?
+                    <Error />
+                    :
+                    null
+            }
             {
                 authSelector.isLoading ?
                     <Loading />

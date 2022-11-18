@@ -7711,6 +7711,60 @@ exports["default"] = Activities;
 
 /***/ }),
 
+/***/ "./resources/js/app/components/Error.tsx":
+/*!***********************************************!*\
+  !*** ./resources/js/app/components/Error.tsx ***!
+  \***********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+__webpack_require__(/*! ../../../css/error.css */ "./resources/css/error.css");
+var authSlice_1 = __webpack_require__(/*! ../store/authSlice */ "./resources/js/app/store/authSlice.ts");
+var hooks_1 = __webpack_require__(/*! ../store/hooks */ "./resources/js/app/store/hooks.ts");
+var Error = function Error() {
+  var dispatch = (0, hooks_1.useAppDispatch)();
+  var navigate = (0, react_router_dom_1.useNavigate)();
+  var closeError = function closeError() {
+    dispatch((0, authSlice_1.clear)());
+    return navigate("/");
+  };
+  return react_1["default"].createElement("main", {
+    id: "error",
+    className: "h-screen w-full flex flex-col justify-center items-center bg-[#1A2238]"
+  }, react_1["default"].createElement("h1", {
+    className: "text-9xl font-extrabold text-white tracking-widest"
+  }, "404"), react_1["default"].createElement("div", {
+    className: "bg-[#FF6A3D] px-2 text-sm rounded rotate-12 absolute"
+  }, "Page Not Found"), react_1["default"].createElement("button", {
+    className: "mt-5"
+  }, react_1["default"].createElement("a", {
+    className: "relative inline-block text-sm font-medium text-[#FF6A3D] group active:text-orange-500 focus:outline-none focus:ring"
+  }, react_1["default"].createElement("span", {
+    className: "absolute inset-0 transition-transform translate-x-0.5 translate-y-0.5 bg-[#FF6A3D] group-hover:translate-y-0 group-hover:translate-x-0"
+  }), react_1["default"].createElement("span", {
+    className: "relative block px-8 py-3 bg-[#1A2238] border border-current"
+  }, react_1["default"].createElement("button", {
+    onClick: function onClick() {
+      return closeError();
+    }
+  }, "Vai alla pagina iniziale")))));
+};
+exports["default"] = Error;
+
+/***/ }),
+
 /***/ "./resources/js/app/components/Form.tsx":
 /*!**********************************************!*\
   !*** ./resources/js/app/components/Form.tsx ***!
@@ -9177,29 +9231,26 @@ var Header = function Header(props) {
             case 0:
               e.preventDefault();
               dispatch((0, authSlice_1.loading)());
-              _context.prev = 2;
-              _context.next = 5;
+              dispatch((0, authSlice_1.error)());
+              _context.prev = 3;
+              _context.next = 6;
               return connection_manager_1["default"].logout(authSelector.token);
-            case 5:
+            case 6:
               dispatch((0, authSlice_1.logout)());
               dispatch((0, authSlice_1.clear)());
               return _context.abrupt("return", navigate("/"));
-            case 10:
-              _context.prev = 10;
-              _context.t0 = _context["catch"](2);
+            case 11:
+              _context.prev = 11;
+              _context.t0 = _context["catch"](3);
               // need fixed the catch
               dispatch((0, authSlice_1.logout)());
               dispatch((0, authSlice_1.error)());
-              setTimeout(function () {
-                dispatch((0, authSlice_1.clear)());
-                return navigate("/");
-              }, 2000);
             case 15:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[2, 10]]);
+      }, _callee, null, [[3, 11]]);
     }));
   };
   (0, react_1.useEffect)(function () {
@@ -9326,12 +9377,15 @@ var views_1 = __webpack_require__(/*! ../views */ "./resources/js/app/views/inde
 var layout_1 = __webpack_require__(/*! ../layout */ "./resources/js/app/layout/index.ts");
 var hooks_1 = __webpack_require__(/*! ../store/hooks */ "./resources/js/app/store/hooks.ts");
 var Loading_1 = __importDefault(__webpack_require__(/*! ../components/Loading */ "./resources/js/app/components/Loading.tsx"));
+var Error_1 = __importDefault(__webpack_require__(/*! ../components/Error */ "./resources/js/app/components/Error.tsx"));
 var Index = function Index(props) {
   var authSelector = (0, hooks_1.useAppSelector)(function (state) {
     return state.auth;
   });
-  (0, react_1.useEffect)(function () {}, []);
-  return react_1["default"].createElement(react_1["default"].Fragment, null, authSelector.isLoading ? react_1["default"].createElement(Loading_1["default"], null) : null, react_1["default"].createElement(layout_1.Header, null), react_1["default"].createElement("div", {
+  (0, react_1.useEffect)(function () {
+    //  
+  }, []);
+  return react_1["default"].createElement(react_1["default"].Fragment, null, authSelector.isError ? react_1["default"].createElement(Error_1["default"], null) : null, authSelector.isLoading ? react_1["default"].createElement(Loading_1["default"], null) : null, react_1["default"].createElement(layout_1.Header, null), react_1["default"].createElement("div", {
     id: 'containe'
   }, react_1["default"].createElement(react_router_dom_1.Routes, null, react_1["default"].createElement(react_router_dom_1.Route, {
     path: '/',
@@ -13668,6 +13722,30 @@ function blitBuffer (src, dst, offset, length) {
 function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[2]!./resources/css/error.css":
+/*!*******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[2]!./resources/css/error.css ***!
+  \*******************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "#error{\r\n    position: absolute;\r\n    z-index: 11;\r\n}", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
 
 /***/ }),
@@ -49627,6 +49705,36 @@ if (false) {} else {
   module.exports = __webpack_require__(/*! ./cjs/scheduler-tracing.development.js */ "./node_modules/scheduler/cjs/scheduler-tracing.development.js");
 }
 
+
+/***/ }),
+
+/***/ "./resources/css/error.css":
+/*!*********************************!*\
+  !*** ./resources/css/error.css ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_8_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_8_oneOf_1_use_2_error_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[1]!../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[2]!./error.css */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[2]!./resources/css/error.css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_8_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_8_oneOf_1_use_2_error_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_8_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_8_oneOf_1_use_2_error_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
