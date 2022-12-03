@@ -51,15 +51,31 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $fields = $request->validate([
-            'email' => 'required|string',
-            'password' => 'required|string',
+        // validation
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|string|email|max:255',
+            'password' => 'required|string'
         ]);
+
+        // if validation not good
+        if ($validator->fails()) {
+
+            $response = [
+                'success' => false,
+                'errors' => $validator->errors(),
+            ];
+
+            return response()->json($response, 401);
+        }
+
+        $fields = $validator;
 
         $user = User::where('email', $fields['email'])->first();
 
+        // If validation is good check the email and password exist
         if (!$user || !Hash::check($fields['password'], $user->password)) {
 
+            // if not exist
             $response = [
                 'success' => false,
                 'message' => 'the credentials are not good',
@@ -68,6 +84,7 @@ class AuthController extends Controller
             return response()->json($response, 401);
         }
 
+        // if exist create token
         $token = $user->createToken('BoolBnB')->plainTextToken;
 
         $response = [
@@ -81,6 +98,7 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
+        // all user tokens will be deleted
         $request->user()->tokens()->delete();
 
         $response = [

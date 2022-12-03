@@ -9948,6 +9948,12 @@ var deleteLocalStorage = function deleteLocalStorage() {
   localStorage.removeItem("email");
 };
 exports.deleteLocalStorage = deleteLocalStorage;
+/**
+ * a string will be made lowercase except the first letter
+ *
+ * @param e string
+ * @returns string
+ */
 var convertInputForm = function convertInputForm(e) {
   var ordered = e.trim();
   var lowerCase = ordered.toLowerCase();
@@ -10822,6 +10828,14 @@ var Login = function Login(props) {
     _ref8 = _slicedToArray(_ref7, 2),
     password = _ref8[0],
     setPassword = _ref8[1];
+  var _ref9 = (0, react_1.useState)(),
+    _ref10 = _slicedToArray(_ref9, 2),
+    isError = _ref10[0],
+    setIsError = _ref10[1];
+  var _ref11 = (0, react_1.useState)(),
+    _ref12 = _slicedToArray(_ref11, 2),
+    errors = _ref12[0],
+    setErrors = _ref12[1];
   var navigate = (0, react_router_dom_1.useNavigate)();
   var dispatch = (0, hooks_1.useAppDispatch)();
   var setLogin = function setLogin(e) {
@@ -10851,17 +10865,21 @@ var Login = function Login(props) {
               // console.log("store token: " + authSelector.token);
               return _context.abrupt("return", navigate("/dashboard"));
             case 14:
+              // setIsError(true)
+              // console.log(isError);
+              // setErrors(response.data.errors.response.data.errors)
               console.log("login failed");
               //
               // insert here modal of login not succeded
               // 
               dispatch((0, authSlice_1.clear)());
-              _context.next = 22;
+              _context.next = 23;
               break;
             case 18:
               _context.prev = 18;
               _context.t0 = _context["catch"](2);
               dispatch((0, authSlice_1.error)());
+              console.log("error login");
               return _context.abrupt("return", {
                 data: {
                   success: false,
@@ -10869,7 +10887,7 @@ var Login = function Login(props) {
                   message: "Le credenziali sono errate"
                 }
               });
-            case 22:
+            case 23:
             case "end":
               return _context.stop();
           }
@@ -11478,7 +11496,7 @@ var Register = function Register(props) {
     setNoRegister = _ref20[1];
   var navigate = (0, react_router_dom_1.useNavigate)();
   var dispatch = (0, hooks_1.useAppDispatch)();
-  var setRegister = function setRegister(e) {
+  var register = function register(e) {
     return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var response;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -11503,7 +11521,7 @@ var Register = function Register(props) {
             case 10:
               response = _context.sent;
               if (!response.data.success) {
-                _context.next = 24;
+                _context.next = 22;
                 break;
               }
               dispatch((0, authSlice_1.sEmail)(response.data.user.email));
@@ -11517,27 +11535,29 @@ var Register = function Register(props) {
               dispatch((0, authSlice_1.clear)());
               // console.log("store token: " + authSelector.token);
               return _context.abrupt("return", navigate("/dashboard"));
-            case 24:
-              setIsError(true);
-              console.log(isError);
-              setErrors(response.data.errors.response.data.errors);
+            case 22:
+              // setIsError(true)
+              // console.log(isError);
+              // setErrors(response.data.errors.response.data.errors)
               console.log("register failed");
               dispatch((0, authSlice_1.clear)());
-            case 29:
-              _context.next = 36;
+              //
+              // insert here modal of register not succeed
+              //     
+              _context.next = 30;
               break;
-            case 31:
-              _context.prev = 31;
+            case 26:
+              _context.prev = 26;
               _context.t0 = _context["catch"](7);
-              dispatch((0, authSlice_1.error)());
+              /* dispatch(error()) */
               console.log("register error: ", _context.t0);
               return _context.abrupt("return", null);
-            case 36:
+            case 30:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[7, 31]]);
+      }, _callee, null, [[7, 26]]);
     }));
   };
   return react_1["default"].createElement("div", {
@@ -11566,12 +11586,7 @@ var Register = function Register(props) {
     placeholder: "",
     type: "text",
     className: "text-md block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none mb-2"
-  }), isError == true ? errors === null || errors === void 0 ? void 0 : errors.name.map(function (error, i) {
-    return react_1["default"].createElement("span", {
-      key: i,
-      className: "text-red-600 px-1"
-    }, errors !== undefined ? error : null);
-  }) : null), react_1["default"].createElement("div", {
+  })), react_1["default"].createElement("div", {
     className: "py-2"
   }, react_1["default"].createElement("span", {
     className: "px-1 text-sm text-gray-600"
@@ -11583,12 +11598,7 @@ var Register = function Register(props) {
     placeholder: "",
     type: "text",
     className: "text-md block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none mb-2"
-  }), isError == true ? errors === null || errors === void 0 ? void 0 : errors.surname.map(function (error, i) {
-    return react_1["default"].createElement("span", {
-      key: i,
-      className: "text-red-600 px-1"
-    }, errors !== undefined ? error : null);
-  }) : null), react_1["default"].createElement("div", {
+  })), react_1["default"].createElement("div", {
     className: "py-2"
   }, react_1["default"].createElement("span", {
     className: "px-1 text-sm text-gray-600"
@@ -11600,12 +11610,7 @@ var Register = function Register(props) {
     placeholder: "",
     type: "email",
     className: "text-md block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none mb-2"
-  }), isError == true ? errors === null || errors === void 0 ? void 0 : errors.email.map(function (error, i) {
-    return react_1["default"].createElement("span", {
-      key: i,
-      className: "text-red-600 px-1"
-    }, errors !== undefined ? error : null);
-  }) : null), react_1["default"].createElement("div", {
+  })), react_1["default"].createElement("div", {
     className: "py-2"
   }, react_1["default"].createElement("span", {
     className: "px-1 text-sm text-gray-600"
@@ -11690,15 +11695,10 @@ var Register = function Register(props) {
     className: "leading-loose text-pink-600"
   }), react_1["default"].createElement("span", {
     className: "py-2 text-sm text-gray-600 leading-snug ml-3"
-  }, "Ricordati")), react_1["default"].createElement("label", {
-    className: "block text-gray-500 font-bold my-4"
-  }, react_1["default"].createElement("a", {
-    href: "#",
-    className: "cursor-pointer tracking-tighter text-black border-b-2 border-gray-200 hover:border-gray-400"
-  }, react_1["default"].createElement("span", null, "Password dimenticata?")))), react_1["default"].createElement("button", {
+  }, "Ricordati"))), react_1["default"].createElement("button", {
     type: 'button',
     onClick: function onClick(e) {
-      return setRegister(e);
+      return register(e);
     },
     className: "mt-3 text-lg font-semibold bg-gray-800 w-full text-white rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-black"
   }, "Registrati")))))))));

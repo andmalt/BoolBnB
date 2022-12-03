@@ -30,7 +30,7 @@ const Register = (props: RegisterProps) => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
-    const setRegister = async (e: any) => {
+    const register = async (e: any) => {
         e.preventDefault()
         dispatch(loading());
         if (password !== password2 || (password === "" && password2 === "")) {
@@ -54,18 +54,17 @@ const Register = (props: RegisterProps) => {
                 dispatch(clear())
                 // console.log("store token: " + authSelector.token);
                 return navigate("/dashboard");
-            } else {
-                setIsError(true)
-                console.log(isError);
-                setErrors(response.data.errors.response.data.errors)
-                console.log("register failed");
-                dispatch(clear())
             }
+            // setIsError(true)
+            // console.log(isError);
+            // setErrors(response.data.errors.response.data.errors)
+            console.log("register failed");
+            dispatch(clear())
             //
             // insert here modal of register not succeed
             //     
         } catch (e) {
-            dispatch(error())
+            /* dispatch(error()) */
             console.log("register error: ", e);
             return null
         }
@@ -88,41 +87,16 @@ const Register = (props: RegisterProps) => {
                                             <span className="px-1 text-sm text-gray-600">Nome</span>
                                             <input value={name} onChange={(e) => setName(e.target.value)} placeholder="" type="text"
                                                 className="text-md block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none mb-2" />
-                                            {
-                                                isError == true ?
-                                                    errors?.name.map((error, i) => {
-                                                        return <span key={i} className="text-red-600 px-1">{errors !== undefined ? error : null}</span>
-                                                    })
-                                                    :
-                                                    null
-                                            }
                                         </div>
                                         <div className="py-2">
                                             <span className="px-1 text-sm text-gray-600">Cognome</span>
                                             <input value={surname} onChange={(e) => setSurname(e.target.value)} placeholder="" type="text"
                                                 className="text-md block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none mb-2" />
-                                            {
-                                                isError == true ?
-                                                    errors?.surname.map((error, i) => {
-                                                        return <span key={i} className="text-red-600 px-1">{errors !== undefined ? error : null}</span>
-                                                    })
-                                                    :
-                                                    null
-                                            }
                                         </div>
                                         <div className="py-2">
                                             <span className="px-1 text-sm text-gray-600">Email</span>
                                             <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="" type="email"
                                                 className={"text-md block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none mb-2"} />
-                                            {
-                                                isError == true ?
-                                                    errors?.email.map((error, i) => {
-                                                        return <span key={i} className="text-red-600 px-1">{errors !== undefined ? error : null}</span>
-                                                    })
-                                                    :
-                                                    null
-                                            }
-
                                         </div>
                                         <div className="py-2">
                                             <span className="px-1 text-sm text-gray-600">Password</span>
@@ -183,15 +157,8 @@ const Register = (props: RegisterProps) => {
                                                     Ricordati
                                                 </span>
                                             </label>
-                                            <label className="block text-gray-500 font-bold my-4">
-                                                <a href="#" className="cursor-pointer tracking-tighter text-black border-b-2 border-gray-200 hover:border-gray-400">
-                                                    <span>
-                                                        Password dimenticata?
-                                                    </span>
-                                                </a>
-                                            </label>
                                         </div>
-                                        <button type='button' onClick={(e) => setRegister(e)} className="mt-3 text-lg font-semibold bg-gray-800 w-full text-white rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-black">
+                                        <button type='button' onClick={(e) => register(e)} className="mt-3 text-lg font-semibold bg-gray-800 w-full text-white rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-black">
                                             Registrati
                                         </button>
                                     </div>

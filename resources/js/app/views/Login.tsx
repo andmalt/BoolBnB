@@ -14,12 +14,19 @@ import {
 interface LoginProps {
 }
 
+type Form = {
+    email: string[],
+    password: string[],
+}
+
 const Login = (props: LoginProps) => {
     const { } = props;
     const [isMounted, setIsMounted] = useState<boolean>(true);
     const [show, setShow] = useState<boolean>(true);
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const [isError, setIsError] = useState<boolean>();
+    const [errors, setErrors] = useState<Form>();
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
@@ -38,6 +45,9 @@ const Login = (props: LoginProps) => {
                 // console.log("store token: " + authSelector.token);
                 return navigate("/dashboard");
             }
+            // setIsError(true)
+            // console.log(isError);
+            // setErrors(response.data.errors.response.data.errors)
             console.log("login failed");
             //
             // insert here modal of login not succeded
@@ -45,6 +55,7 @@ const Login = (props: LoginProps) => {
             dispatch(clear())
         } catch (e) {
             dispatch(error())
+            console.log("error login");
             return { data: { success: false, error: e, message: "Le credenziali sono errate" } }
         }
     }

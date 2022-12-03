@@ -21,6 +21,12 @@ export const deleteLocalStorage = () => {
     localStorage.removeItem("email")
 }
 
+/**
+ * a string will be made lowercase except the first letter
+ * 
+ * @param e string 
+ * @returns string
+ */
 export const convertInputForm = (e: string) => {
     let ordered = e.trim();
     let lowerCase = ordered.toLowerCase();
