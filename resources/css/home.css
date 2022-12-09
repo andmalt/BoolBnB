@@ -1,0 +1,25 @@
+#house-container{
+    background-image: url("../images/main-background/mirror-house.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    padding: 70px 0;
+}
+
+#small-container{
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 13px;
+}
+
+#black-space{
+    height: 80px;
+    background-color: black;
+}
+
+@media (max-width: 640px) {
+    #small-container {
+        background-color: rgba(0, 0, 0, 0.5);
+        /* border-color: rgb(30, 64, 175); */
+        box-shadow: 0px;
+    }
+}

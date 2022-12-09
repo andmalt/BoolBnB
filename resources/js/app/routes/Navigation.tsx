@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import '../../../css/index.css';
 import { Routes, Route } from 'react-router-dom';
 import { Home, Dashboard, Login, Register } from '../views';
@@ -7,11 +7,11 @@ import { useAppSelector } from '../store/hooks';
 import Loading from '../components/Loading';
 import Error from '../components/Error';
 
-interface IndexProps {
+interface NavigationProps {
 }
 
-const Index = (props: IndexProps) => {
-
+const Navigation = (props: NavigationProps) => {
+    const { } = props;
     const authSelector = useAppSelector(state => state.auth);
 
     useEffect(() => {
@@ -33,7 +33,7 @@ const Index = (props: IndexProps) => {
                     null
             }
             <Header />
-            <div id='containe'>
+            <div id='main-container'>
                 <Routes>
                     <Route path='/' element={<Home />} />
                     <Route path='/login' element={<Login />} />
@@ -46,4 +46,4 @@ const Index = (props: IndexProps) => {
     )
 }
 
-export default Index;
+export default Navigation;

@@ -43,20 +43,20 @@ const Header = (props: HeaderProps) => {
       <nav className="p-6">
         <div className="flex justify-between items-center">
           <Link to={'/'}>
-            <h1 className="pr-6 text-2xl font-bold text-gray-500">BoolBnB</h1>
+            <h1 className="pr-6 text-2xl font-bold text-blue-800">BoolBnB</h1>
           </Link>
           <div className="flex justify-end flex-grow">
             <div className="md:flex space-x-6 hidden">
               {
                 authSelector.token != null ?
                   <>
-                    <Link to="/dashboard" className='text-gray-500'>Dashboard</Link>
+                    <Link to="/dashboard" className='text-blue-800 hover:text-blue-600'>Dashboard</Link>
                     <button onClick={(e) => setLogout(e)}>Esci</button>
                   </>
                   :
                   <>
-                    <Link to="/register" className="text-gray-500">Registrati</Link>
-                    <Link to="/login" className="text-gray-500">Accedi</Link>
+                    <Link to="/register" className="text-blue-800 hover:text-blue-600">Registrati</Link>
+                    <Link to="/login" className="text-blue-800 hover:text-blue-600">Accedi</Link>
                   </>
               }
             </div>
