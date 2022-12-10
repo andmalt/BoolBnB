@@ -21,10 +21,10 @@ const Loading = (props: LoadingProp) => {
     return (
         <div id='container'>
             <div id="text">
-                <p id='paragraph'>caricamento.....</p>
+                <p id='paragraph' className='text-blue-800'>caricamento.....</p>
             </div>
             <div id="spinner">
-                <div className="animate-spin inline-block w-16 h-16 border-[3px] border-current border-t-transparent text-gray-400 rounded-full" role="status" aria-label="loading">
+                <div className="animate-spin inline-block w-16 h-16 border-[3px] border-current border-t-transparent text-blue-800 rounded-full" role="status" aria-label="loading">
                     <span className="sr-only">Loading...</span>
                 </div>
             </div>

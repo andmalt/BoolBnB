@@ -28,8 +28,8 @@ class AuthController extends Controller
 
             return response()->json($response, 400);
         }
-        $fields = $validator;
 
+        $fields = $validator;
 
         $user = User::create([
             'name' => $fields['name'],

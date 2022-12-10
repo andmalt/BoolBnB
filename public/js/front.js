@@ -8017,11 +8017,12 @@ var Loading = function Loading(props) {
   }, react_1["default"].createElement("div", {
     id: "text"
   }, react_1["default"].createElement("p", {
-    id: 'paragraph'
+    id: 'paragraph',
+    className: 'text-blue-800'
   }, "caricamento.....")), react_1["default"].createElement("div", {
     id: "spinner"
   }, react_1["default"].createElement("div", {
-    className: "animate-spin inline-block w-16 h-16 border-[3px] border-current border-t-transparent text-gray-400 rounded-full",
+    className: "animate-spin inline-block w-16 h-16 border-[3px] border-current border-t-transparent text-blue-800 rounded-full",
     role: "status",
     "aria-label": "loading"
   }, react_1["default"].createElement("span", {
@@ -9328,17 +9329,18 @@ var Header = function Header(props) {
     className: "md:flex space-x-6 hidden"
   }, authSelector.token != null ? react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/dashboard",
-    className: 'text-blue-800 hover:text-blue-600'
+    className: 'text-blue-800 hover:text-blue-600 \r\n                      transition ease-in-out delay-150 hover:-translate-y-1'
   }, "Dashboard"), react_1["default"].createElement("button", {
+    className: 'text-blue-800 hover:text-blue-600 \r\n                      transition ease-in-out delay-150 hover:-translate-y-1',
     onClick: function onClick(e) {
       return setLogout(e);
     }
   }, "Esci")) : react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/register",
-    className: "text-blue-800 hover:text-blue-600"
+    className: "text-blue-800 hover:text-blue-600 \r\n                      transition ease-in-out delay-150 hover:-translate-y-1"
   }, "Registrati"), react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/login",
-    className: "text-blue-800 hover:text-blue-600"
+    className: "text-blue-800 hover:text-blue-600 \r\n                      transition ease-in-out delay-150 hover:-translate-y-1"
   }, "Accedi")))))));
 };
 exports["default"] = Header;
@@ -9370,9 +9372,9 @@ exports.Header = Header_1["default"];
 
 /***/ }),
 
-/***/ "./resources/js/app/routes/navigation.tsx":
+/***/ "./resources/js/app/routes/Navigation.tsx":
 /*!************************************************!*\
-  !*** ./resources/js/app/routes/navigation.tsx ***!
+  !*** ./resources/js/app/routes/Navigation.tsx ***!
   \************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
@@ -9440,7 +9442,7 @@ var Navigation = function Navigation(props) {
     //  
   }, []);
   return react_1["default"].createElement(react_1["default"].Fragment, null, authSelector.isError ? react_1["default"].createElement(Error_1["default"], null) : null, authSelector.isLoading ? react_1["default"].createElement(Loading_1["default"], null) : null, react_1["default"].createElement(layout_1.Header, null), react_1["default"].createElement("div", {
-    id: 'containe'
+    id: 'main-container'
   }, react_1["default"].createElement(react_router_dom_1.Routes, null, react_1["default"].createElement(react_router_dom_1.Route, {
     path: '/',
     element: react_1["default"].createElement(views_1.Home, null)
@@ -10393,18 +10395,19 @@ var Home = function Home() {
     };
   }, []);
   return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement("div", {
-    id: 'house-container'
+    id: 'house-container',
+    className: 'xl:py-28 py-16'
   }, react_1["default"].createElement("div", {
     id: 'small-container',
     className: "container lg:max-w-4xl xl:max-w-5xl 2xl:max-w-6xl mx-auto h-96 rounded-md flex items-center"
   }, react_1["default"].createElement("div", {
-    className: "sm:ml-20 text-center sm:text-left text-blue-800"
+    className: "sm:ml-20 text-center sm:text-left text-blue-800 font-sans"
   }, react_1["default"].createElement("h1", {
     className: "text-5xl font-bold mb-4"
   }, "Cerca le tua casa ", react_1["default"].createElement("br", null), "ovunque."), react_1["default"].createElement("p", {
     className: "text-lg inline-block sm:block"
   }, "Cerca casa selezionando la citt\xE0 o la regione in cui vorresti la nuova abitazione."), react_1["default"].createElement("button", {
-    className: "mt-8 px-4 py-2 bg-black hover:bg-blue-800 hover:text-black border-blue-800 rounded border-2"
+    className: "transition ease-in-out delay-300 hover:-translate-y-2 mt-8 px-4 py-2 bg-black hover:bg-blue-800 hover:text-black border-blue-800 rounded border-2"
   }, "Cerca case")))), react_1["default"].createElement("div", {
     id: 'black-space'
   }));
@@ -10976,13 +10979,13 @@ var Login = function Login(props) {
   }, react_1["default"].createElement("div", {
     className: "mt-6"
   }, react_1["default"].createElement("div", {
-    className: "text-center font-semibold text-black"
+    className: "text-center font-bold text-blue-800 text-[25px]"
   }, "Accedi a BoolBnB"), react_1["default"].createElement("form", null, react_1["default"].createElement("div", {
     className: 'mx-auto max-w-lg'
   }, react_1["default"].createElement("div", {
     className: "py-2"
   }, react_1["default"].createElement("span", {
-    className: "px-1 text-sm text-gray-600"
+    className: "px-1 text-sm text-blue-800 font-bold"
   }, "Email"), react_1["default"].createElement("input", {
     value: email,
     onChange: function onChange(e) {
@@ -10990,11 +10993,11 @@ var Login = function Login(props) {
     },
     placeholder: "",
     type: "email",
-    className: "block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
+    className: "block px-3 py-2 mt-2 rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
   })), react_1["default"].createElement("div", {
     className: "py-2"
   }, react_1["default"].createElement("span", {
-    className: "px-1 text-sm text-gray-600"
+    className: "px-1 text-sm text-blue-800 font-bold"
   }, "Password"), react_1["default"].createElement("div", {
     className: "relative"
   }, react_1["default"].createElement("input", {
@@ -11004,14 +11007,14 @@ var Login = function Login(props) {
     },
     placeholder: "",
     type: show ? 'password' : 'text',
-    className: "block px-3 py-2 rounded-lg w-full\r\n                                                bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md\r\n                                                focus:placeholder-gray-500\r\n                                                focus:bg-white\r\n                                                focus:border-gray-600 focus:outline-none"
+    className: "block px-3 py-2 mt-2 rounded-lg w-full\r\n                                                bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md\r\n                                                focus:placeholder-gray-500\r\n                                                focus:bg-white\r\n                                                focus:border-gray-600 focus:outline-none"
   }), react_1["default"].createElement("div", {
     className: "absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
   }, !show ? react_1["default"].createElement("svg", {
     onClick: function onClick() {
       return setShow(true);
     },
-    className: "h-6 text-gray-700",
+    className: "h-6 text-blue-800",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
     viewBox: "0 0 576 512"
@@ -11022,7 +11025,7 @@ var Login = function Login(props) {
     onClick: function onClick() {
       return setShow(false);
     },
-    className: "h-6 text-gray-700",
+    className: "h-6 text-blue-800",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
     viewBox: "0 0 640 512"
@@ -11035,20 +11038,20 @@ var Login = function Login(props) {
     className: "block text-gray-500 font-bold my-4"
   }, react_1["default"].createElement("input", {
     type: "checkbox",
-    className: "leading-loose text-pink-600"
+    className: "leading-loose text-blue-800"
   }), react_1["default"].createElement("span", {
-    className: "py-2 text-sm text-gray-600 leading-snug ml-3"
+    className: "py-2 text-sm text-blue-800 leading-snug ml-3"
   }, "Ricordati")), react_1["default"].createElement("label", {
     className: "block text-gray-500 font-bold my-4"
   }, react_1["default"].createElement("a", {
     href: "#",
-    className: "cursor-pointer tracking-tighter text-black border-b-2 border-gray-200 hover:border-gray-400"
+    className: "cursor-pointer tracking-tighter text-blue-800 hover:text-blue-700"
   }, react_1["default"].createElement("span", null, "Password dimenticata?")))), react_1["default"].createElement("button", {
     type: 'button',
     onClick: function onClick(e) {
       return setLogin(e);
     },
-    className: "mt-3 text-lg font-semibold bg-gray-800 w-full text-white rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-black"
+    className: "mt-3 text-lg font-semibold hover:bg-blue-700 w-full rounded-lg px-6 py-3 block shadow-xl text-white bg-blue-800 transition ease-in-out delay-150 hover:-translate-y-1"
   }, "Accedi")))))))));
 };
 exports["default"] = Login;
@@ -11621,7 +11624,7 @@ var Register = function Register(props) {
     }));
   };
   return react_1["default"].createElement("div", {
-    className: "container max-w-full mx-auto py-24 px-6"
+    className: "container max-w-full mx-auto pb-24 pt-12 px-6"
   }, react_1["default"].createElement("div", {
     className: "font-sans"
   }, react_1["default"].createElement("div", {
@@ -11631,13 +11634,13 @@ var Register = function Register(props) {
   }, react_1["default"].createElement("div", {
     className: "w-full relative"
   }, react_1["default"].createElement("div", null, react_1["default"].createElement("div", {
-    className: "text-center font-semibold text-black"
+    className: "text-center font-bold text-blue-800 text-[25px]"
   }, "Registrati su BoolBnB"), react_1["default"].createElement("form", null, react_1["default"].createElement("div", {
     className: 'mx-auto max-w-lg'
   }, react_1["default"].createElement("div", {
     className: "py-2"
   }, react_1["default"].createElement("span", {
-    className: "px-1 text-sm text-gray-600"
+    className: "px-1 text-sm text-blue-800 font-bold"
   }, "Nome"), react_1["default"].createElement("input", {
     value: name,
     onChange: function onChange(e) {
@@ -11645,11 +11648,11 @@ var Register = function Register(props) {
     },
     placeholder: "",
     type: "text",
-    className: "text-md block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none mb-2"
+    className: "text-md block px-3 py-2 mt-2 rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none mb-2"
   })), react_1["default"].createElement("div", {
     className: "py-2"
   }, react_1["default"].createElement("span", {
-    className: "px-1 text-sm text-gray-600"
+    className: "px-1 text-sm text-blue-800 font-bold"
   }, "Cognome"), react_1["default"].createElement("input", {
     value: surname,
     onChange: function onChange(e) {
@@ -11657,11 +11660,11 @@ var Register = function Register(props) {
     },
     placeholder: "",
     type: "text",
-    className: "text-md block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none mb-2"
+    className: "text-md block px-3 py-2 mt-2 rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none mb-2"
   })), react_1["default"].createElement("div", {
     className: "py-2"
   }, react_1["default"].createElement("span", {
-    className: "px-1 text-sm text-gray-600"
+    className: "px-1 text-sm text-blue-800 font-bold"
   }, "Email"), react_1["default"].createElement("input", {
     value: email,
     onChange: function onChange(e) {
@@ -11669,11 +11672,11 @@ var Register = function Register(props) {
     },
     placeholder: "",
     type: "email",
-    className: "text-md block px-3 py-2  rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none mb-2"
+    className: "text-md block px-3 py-2 mt-2 rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none mb-2"
   })), react_1["default"].createElement("div", {
     className: "py-2"
   }, react_1["default"].createElement("span", {
-    className: "px-1 text-sm text-gray-600"
+    className: "px-1 text-sm text-blue-800 font-bold"
   }, "Password"), react_1["default"].createElement("div", {
     className: "relative"
   }, react_1["default"].createElement("input", {
@@ -11683,14 +11686,14 @@ var Register = function Register(props) {
     },
     placeholder: "",
     type: show ? 'password' : 'text',
-    className: "".concat(noRegister ? "border-red-600 " : "border-gray-300 ") + "text-md block px-3 py-2 rounded-lg w-full bg-white border-2 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
+    className: "".concat(noRegister ? "border-red-600 " : "border-gray-300 ") + "text-md block px-3 mt-2 py-2 rounded-lg w-full bg-white border-2 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
   }), react_1["default"].createElement("div", {
     className: "absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
   }, !show ? react_1["default"].createElement("svg", {
     onClick: function onClick() {
       return setShow(true);
     },
-    className: "h-6 text-gray-700",
+    className: "h-6 text-blue-800",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
     viewBox: "0 0 576 512"
@@ -11701,7 +11704,7 @@ var Register = function Register(props) {
     onClick: function onClick() {
       return setShow(false);
     },
-    className: "h-6 text-gray-700",
+    className: "h-6 text-blue-800",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
     viewBox: "0 0 640 512"
@@ -11711,7 +11714,7 @@ var Register = function Register(props) {
   }))))), react_1["default"].createElement("div", {
     className: "py-2"
   }, react_1["default"].createElement("span", {
-    className: "px-1 text-sm text-gray-600"
+    className: "px-1 text-sm text-blue-800 font-bold"
   }, "Password di conferma"), react_1["default"].createElement("div", {
     className: "relative"
   }, react_1["default"].createElement("input", {
@@ -11721,14 +11724,14 @@ var Register = function Register(props) {
     },
     placeholder: "",
     type: show2 ? 'password' : 'text',
-    className: "".concat(noRegister ? "border-red-600 " : "border-gray-300 ") + "text-md block px-3 py-2 rounded-lg w-full bg-white border-2 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
+    className: "".concat(noRegister ? "border-red-600 " : "border-gray-300 ") + "text-md block px-3 py-2 mt-2 rounded-lg w-full bg-white border-2 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
   }), react_1["default"].createElement("div", {
     className: "absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
   }, !show2 ? react_1["default"].createElement("svg", {
     onClick: function onClick() {
       return setShow2(true);
     },
-    className: "h-6 text-gray-700",
+    className: "h-6 text-blue-800",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
     viewBox: "0 0 576 512"
@@ -11739,7 +11742,7 @@ var Register = function Register(props) {
     onClick: function onClick() {
       return setShow2(false);
     },
-    className: "h-6 text-gray-700",
+    className: "h-6 text-blue-800",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
     viewBox: "0 0 640 512"
@@ -11752,15 +11755,15 @@ var Register = function Register(props) {
     className: "block text-gray-500 font-bold my-4"
   }, react_1["default"].createElement("input", {
     type: "checkbox",
-    className: "leading-loose text-pink-600"
+    className: "leading-loose text-blue-800"
   }), react_1["default"].createElement("span", {
-    className: "py-2 text-sm text-gray-600 leading-snug ml-3"
+    className: "py-2 text-sm text-blue-800 leading-snug ml-3"
   }, "Ricordati"))), react_1["default"].createElement("button", {
     type: 'button',
     onClick: function onClick(e) {
       return register(e);
     },
-    className: "mt-3 text-lg font-semibold bg-gray-800 w-full text-white rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-black"
+    className: "mt-3 text-lg font-semibold hover:bg-blue-700 w-full rounded-lg px-6 py-3 block shadow-xl text-white bg-blue-800 transition ease-in-out delay-150 hover:-translate-y-1"
   }, "Registrati")))))))));
 };
 exports["default"] = Register;
@@ -11815,13 +11818,13 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 var react_dom_1 = __importDefault(__webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js"));
-var navigation_1 = __importDefault(__webpack_require__(/*! ./app/routes/navigation */ "./resources/js/app/routes/navigation.tsx"));
+var Navigation_1 = __importDefault(__webpack_require__(/*! ./app/routes/Navigation */ "./resources/js/app/routes/Navigation.tsx"));
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 var store_1 = __importDefault(__webpack_require__(/*! ./app/store/store */ "./resources/js/app/store/store.ts"));
 var react_redux_1 = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 react_dom_1["default"].render(react_1["default"].createElement(react_1["default"].StrictMode, null, react_1["default"].createElement(react_router_dom_1.BrowserRouter, null, react_1["default"].createElement(react_redux_1.Provider, {
   store: store_1["default"]
-}, react_1["default"].createElement(navigation_1["default"], null)))), document.getElementById('root'));
+}, react_1["default"].createElement(Navigation_1["default"], null)))), document.getElementById('root'));
 
 /***/ }),
 
@@ -13881,7 +13884,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_main_background_mirror_house_jpg__WEBPACK_IMPORTED_MODULE_2__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#house-container{\r\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\r\n    background-repeat: no-repeat;\r\n    background-position: center;\r\n    background-size: cover;\r\n    padding: 70px 0;\r\n}\r\n\r\n#small-container{\r\n    background-color: rgba(0, 0, 0, 0.5);\r\n    box-shadow: 13px;\r\n}\r\n\r\n#black-space{\r\n    height: 80px;\r\n    background-color: black;\r\n}\r\n\r\n@media (max-width: 640px) {\r\n    #small-container {\r\n        background-color: rgba(0, 0, 0, 0.5);\r\n        /* border-color: rgb(30, 64, 175); */\r\n        box-shadow: 0px;\r\n    }\r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "#house-container{\r\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\r\n    background-repeat: no-repeat;\r\n    background-position: center;\r\n    background-size: cover;\r\n}\r\n\r\n#small-container{\r\n    background-color: rgba(0, 0, 0, 0.5);\r\n    box-shadow: 3px 9px 17px 3px #000000;\r\n}\r\n\r\n#black-space{\r\n    height: 80px;\r\n    background-color: black;\r\n}\r\n\r\n@media (max-width: 640px) {\r\n    #small-container {\r\n        background-color: rgba(0, 0, 0, 0.5);\r\n        /* border-color: rgb(30, 64, 175); */\r\n        box-shadow: 0px;\r\n    }\r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -13929,7 +13932,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#container {\r\n    position: absolute;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\r\n    height: 100vh;\r\n    width: 100vw;\r\n    z-index: 11;\r\n    background-color: white;\r\n}\r\n\r\n#text {\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\r\n    margin-bottom: 45px;\r\n}\r\n\r\n#paragraph {\r\n    font-size: 25px;\r\n    font-weight: 600;\r\n}\r\n\r\n#spinner {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n}\r\n\r\n/* .loading-enter {\r\n    width: 0%;\r\n    height: 100%;\r\n}\r\n\r\n.loading-enter-active {\r\n    width: 50%;\r\n    height: 100%;\r\n    transition: width 600ms;\r\n}\r\n\r\n.loading-exit {\r\n    height: 100%;\r\n    width: 50%;\r\n}\r\n\r\n.loading-exit-active {\r\n    width: 100%;\r\n    height: 100%;\r\n    transition: width 600ms;\r\n} */", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "#container {\r\n    position: absolute;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\r\n    height: 100vh;\r\n    width: 100vw;\r\n    z-index: 11;\r\n    background-color: black;\r\n}\r\n\r\n#text {\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\r\n    margin-bottom: 45px;\r\n}\r\n\r\n#paragraph {\r\n    font-size: 25px;\r\n    font-weight: 600;\r\n}\r\n\r\n#spinner {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n}\r\n\r\n/* .loading-enter {\r\n    width: 0%;\r\n    height: 100%;\r\n}\r\n\r\n.loading-enter-active {\r\n    width: 50%;\r\n    height: 100%;\r\n    transition: width 600ms;\r\n}\r\n\r\n.loading-exit {\r\n    height: 100%;\r\n    width: 50%;\r\n}\r\n\r\n.loading-exit-active {\r\n    width: 100%;\r\n    height: 100%;\r\n    transition: width 600ms;\r\n} */", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

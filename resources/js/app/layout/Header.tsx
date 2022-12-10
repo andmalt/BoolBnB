@@ -50,13 +50,27 @@ const Header = (props: HeaderProps) => {
               {
                 authSelector.token != null ?
                   <>
-                    <Link to="/dashboard" className='text-blue-800 hover:text-blue-600'>Dashboard</Link>
-                    <button onClick={(e) => setLogout(e)}>Esci</button>
+                    <Link to="/dashboard" className='text-blue-800 hover:text-blue-600 
+                      transition ease-in-out delay-150 hover:-translate-y-1'>
+                      Dashboard
+                    </Link>
+                    <button
+                      className='text-blue-800 hover:text-blue-600 
+                      transition ease-in-out delay-150 hover:-translate-y-1'
+                      onClick={(e) => setLogout(e)}>
+                      Esci
+                    </button>
                   </>
                   :
                   <>
-                    <Link to="/register" className="text-blue-800 hover:text-blue-600">Registrati</Link>
-                    <Link to="/login" className="text-blue-800 hover:text-blue-600">Accedi</Link>
+                    <Link to="/register" className="text-blue-800 hover:text-blue-600 
+                      transition ease-in-out delay-150 hover:-translate-y-1">
+                      Registrati
+                    </Link>
+                    <Link to="/login" className="text-blue-800 hover:text-blue-600 
+                      transition ease-in-out delay-150 hover:-translate-y-1">
+                      Accedi
+                    </Link>
                   </>
               }
             </div>
