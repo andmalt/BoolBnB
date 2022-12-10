@@ -1,4 +1,6 @@
 #header{
     padding: 10px;
     background-color: black;
+    box-shadow: 0px 15px 15px -10px rgb(30 ,64 ,175);
+    margin-bottom: 30px;
 }

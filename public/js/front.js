@@ -8057,7 +8057,7 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
  */
 var Sidebar = function Sidebar() {
   return react_1["default"].createElement("div", {
-    className: "fixed flex flex-col top-28 left-0 w-14 hover:w-64 md:w-64 bg-gray-600 dark:bg-gray-900 h-full text-white transition-all duration-300 border-none z-10 sidebar rounded-r-sm"
+    className: "flex flex-col top-28 left-0 w-14 hover:w-60 md:w-48 bg-black border-blue-800 shadow-[25px_16px_15px_-19px_rgb(30,64,175)] h-full text-white transition-all duration-300 rounded-r-md"
   }, react_1["default"].createElement("div", {
     className: "overflow-y-auto overflow-x-hidden flex flex-col justify-between flex-grow"
   }, react_1["default"].createElement("ul", {
@@ -8067,10 +8067,10 @@ var Sidebar = function Sidebar() {
   }, react_1["default"].createElement("div", {
     className: "flex flex-row items-center h-8"
   }, react_1["default"].createElement("div", {
-    className: "text-sm font-light tracking-wide text-gray-400 uppercase"
+    className: "text-sm tracking-wide text-blue-800 font-bold uppercase"
   }, "Principale"))), react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
     href: "#",
-    className: "relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-500 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-300 dark:hover:border-gray-800 pr-6"
+    className: "relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-600 dark:hover:border-gray-800 pr-6"
   }, react_1["default"].createElement("span", {
     className: "inline-flex justify-center items-center ml-4"
   }, react_1["default"].createElement("svg", {
@@ -8088,7 +8088,7 @@ var Sidebar = function Sidebar() {
     className: "ml-2 text-sm tracking-wide truncate"
   }, "Dashboard"))), react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
     href: "#",
-    className: "relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-500 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-300 dark:hover:border-gray-800 pr-6"
+    className: "relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-600 dark:hover:border-gray-800 pr-6"
   }, react_1["default"].createElement("span", {
     className: "inline-flex justify-center items-center ml-4"
   }, react_1["default"].createElement("svg", {
@@ -8104,9 +8104,9 @@ var Sidebar = function Sidebar() {
     d: "M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
   }))), react_1["default"].createElement("span", {
     className: "ml-2 text-sm tracking-wide truncate"
-  }, "Board"))), react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
+  }, "Statistiche"))), react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
     href: "#",
-    className: "relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-500 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-300 dark:hover:border-gray-800 pr-6"
+    className: "relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-600 dark:hover:border-gray-800 pr-6"
   }, react_1["default"].createElement("span", {
     className: "inline-flex justify-center items-center ml-4"
   }, react_1["default"].createElement("svg", {
@@ -8124,7 +8124,7 @@ var Sidebar = function Sidebar() {
     className: "ml-2 text-sm tracking-wide truncate"
   }, "Messaggi"))), react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
     href: "#",
-    className: "relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-500 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-300 dark:hover:border-gray-800 pr-6"
+    className: "relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-600 dark:hover:border-gray-800 pr-6"
   }, react_1["default"].createElement("span", {
     className: "inline-flex justify-center items-center ml-4"
   }, react_1["default"].createElement("svg", {
@@ -8145,10 +8145,10 @@ var Sidebar = function Sidebar() {
   }, react_1["default"].createElement("div", {
     className: "flex flex-row items-center mt-5 h-8"
   }, react_1["default"].createElement("div", {
-    className: "text-sm font-light tracking-wide text-gray-400 uppercase"
+    className: "text-sm tracking-wide text-blue-800 font-bold uppercase"
   }, "Impostazioni"))), react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
     href: "#",
-    className: "relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-500 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-300 dark:hover:border-gray-800 pr-6"
+    className: "relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-600 dark:hover:border-gray-800 pr-6"
   }, react_1["default"].createElement("span", {
     className: "inline-flex justify-center items-center ml-4"
   }, react_1["default"].createElement("svg", {
@@ -8166,7 +8166,7 @@ var Sidebar = function Sidebar() {
     className: "ml-2 text-sm tracking-wide truncate"
   }, "Profilo"))), react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
     href: "#",
-    className: "relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-500 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-300 dark:hover:border-gray-800 pr-6"
+    className: "relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-600 dark:hover:border-gray-800 pr-6"
   }, react_1["default"].createElement("span", {
     className: "inline-flex justify-center items-center ml-4"
   }, react_1["default"].createElement("svg", {
@@ -8187,9 +8187,7 @@ var Sidebar = function Sidebar() {
     d: "M15 12a3 3 0 11-6 0 3 3 0 016 0z"
   }))), react_1["default"].createElement("span", {
     className: "ml-2 text-sm tracking-wide truncate"
-  }, "Impostazioni")))), react_1["default"].createElement("p", {
-    className: "mb-14 px-5 py-3 hidden md:block text-center text-xs"
-  }, "Copyright @2021")));
+  }, "Impostazioni"))))));
 };
 exports["default"] = Sidebar;
 
@@ -9312,9 +9310,8 @@ var Header = function Header(props) {
       return setIsMount(false);
     };
   }, []);
-  return react_1["default"].createElement("header", {
-    id: "header",
-    className: "shadow-md"
+  return react_1["default"].createElement("div", {
+    id: "header"
   }, react_1["default"].createElement("nav", {
     className: "p-6"
   }, react_1["default"].createElement("div", {
@@ -9326,7 +9323,7 @@ var Header = function Header(props) {
   }, "BoolBnB")), react_1["default"].createElement("div", {
     className: "flex justify-end flex-grow"
   }, react_1["default"].createElement("div", {
-    className: "md:flex space-x-6 hidden"
+    className: "flex space-x-6"
   }, authSelector.token != null ? react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/dashboard",
     className: 'text-blue-800 hover:text-blue-600 \r\n                      transition ease-in-out delay-150 hover:-translate-y-1 font-bold'
@@ -9441,7 +9438,9 @@ var Navigation = function Navigation(props) {
   (0, react_1.useEffect)(function () {
     //  
   }, []);
-  return react_1["default"].createElement(react_1["default"].Fragment, null, authSelector.isError ? react_1["default"].createElement(Error_1["default"], null) : null, authSelector.isLoading ? react_1["default"].createElement(Loading_1["default"], null) : null, react_1["default"].createElement(layout_1.Header, null), react_1["default"].createElement("div", {
+  return react_1["default"].createElement("div", {
+    className: 'bg-black'
+  }, authSelector.isError ? react_1["default"].createElement(Error_1["default"], null) : null, authSelector.isLoading ? react_1["default"].createElement(Loading_1["default"], null) : null, react_1["default"].createElement(layout_1.Header, null), react_1["default"].createElement("div", {
     id: 'main-container'
   }, react_1["default"].createElement(react_router_dom_1.Routes, null, react_1["default"].createElement(react_router_dom_1.Route, {
     path: '/',
@@ -10241,6 +10240,7 @@ var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/reac
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 var components_1 = __webpack_require__(/*! ../components */ "./resources/js/app/components/index.ts");
 var hooks_1 = __webpack_require__(/*! ../store/hooks */ "./resources/js/app/store/hooks.ts");
+__webpack_require__(/*! ../../../css/dashboard.css */ "./resources/css/dashboard.css");
 var Dashboard = function Dashboard(props) {
   var _ref = (0, react_1.useState)(),
     _ref2 = _slicedToArray(_ref, 2),
@@ -10277,6 +10277,7 @@ var Dashboard = function Dashboard(props) {
     };
   }, []);
   return react_1["default"].createElement("div", {
+    id: 'dashboard',
     className: "flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white"
   }, react_1["default"].createElement(components_1.Sidebar, null), react_1["default"].createElement("div", {
     className: "h-full ml-14 mt-14 mb-10 md:ml-64"
@@ -10401,13 +10402,13 @@ var Home = function Home() {
     id: 'small-container',
     className: "container lg:max-w-4xl xl:max-w-5xl 2xl:max-w-6xl mx-auto h-96 rounded-md flex items-center"
   }, react_1["default"].createElement("div", {
-    className: "sm:ml-20 text-center sm:text-left text-blue-800 font-sans"
+    className: "sm:ml-20 text-center sm:text-left  font-sans"
   }, react_1["default"].createElement("h1", {
-    className: "text-5xl font-bold mb-4"
-  }, "Cerca le tua casa ", react_1["default"].createElement("br", null), "ovunque."), react_1["default"].createElement("p", {
-    className: "text-lg inline-block sm:block"
+    className: "text-5xl font-bold mb-4 text-blue-800"
+  }, "Cerca la tua casa ", react_1["default"].createElement("br", null), "ovunque."), react_1["default"].createElement("p", {
+    className: "text-lg inline-block sm:block text-white"
   }, "Cerca casa selezionando la citt\xE0 o la regione in cui vorresti la nuova abitazione."), react_1["default"].createElement("button", {
-    className: "transition ease-in-out delay-300 hover:-translate-y-2 mt-8 px-4 py-2 bg-black hover:bg-blue-800 hover:text-black border-blue-800 active:bg-blue-900 rounded border-2"
+    className: "transition ease-out delay-150 hover:-translate-y-2 mt-8 px-4 py-2 bg-black hover:bg-blue-800 hover:text-black border-blue-800 active:bg-blue-900 rounded border-2 text-blue-800"
   }, "Cerca case")))), react_1["default"].createElement("div", {
     id: 'black-space'
   }));
@@ -13789,6 +13790,30 @@ function isnan (val) {
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[2]!./resources/css/dashboard.css":
+/*!***********************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[2]!./resources/css/dashboard.css ***!
+  \***********************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "#dashboard{\r\n    min-height: calc(100vh - 130px);\r\n    background-color: black;\r\n}", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[2]!./resources/css/error.css":
 /*!*******************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[2]!./resources/css/error.css ***!
@@ -13830,7 +13855,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#footer-container{\r\n    background-color: black;\r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "#footer-container{\r\n    background-color: black;\r\n    box-shadow: 0px -15px 15px -10px rgb(30, 64, 175);\r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -13854,7 +13879,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#header{\r\n    padding: 10px;\r\n    background-color: black;\r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "#header{\r\n    padding: 10px;\r\n    background-color: black;\r\n    box-shadow: 0px 15px 15px -10px rgb(30 ,64 ,175);\r\n    margin-bottom: 30px;\r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -13884,7 +13909,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_main_background_mirror_house_jpg__WEBPACK_IMPORTED_MODULE_2__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#house-container{\r\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\r\n    background-repeat: no-repeat;\r\n    background-position: center;\r\n    background-size: cover;\r\n}\r\n\r\n#small-container{\r\n    background-color: rgba(0, 0, 0, 0.5);\r\n    box-shadow: 3px 9px 17px 3px #000000;\r\n}\r\n\r\n#black-space{\r\n    height: 80px;\r\n    background-color: black;\r\n}\r\n\r\n@media (max-width: 640px) {\r\n    #small-container {\r\n        background-color: rgba(0, 0, 0, 0.5);\r\n        /* border-color: rgb(30, 64, 175); */\r\n        box-shadow: 0px;\r\n    }\r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "#house-container{\r\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\r\n    background-repeat: no-repeat;\r\n    background-position: center;\r\n    background-size: cover;\r\n    background-color: #000000;\r\n}\r\n\r\n#small-container{\r\n    background-color: rgba(0, 0, 0, 0.5);\r\n    box-shadow: 3px 9px 17px 3px #000000;\r\n}\r\n\r\n#black-space{\r\n    height: 80px;\r\n    background-color: black;\r\n}\r\n\r\n@media (max-width: 640px) {\r\n    #small-container {\r\n        background-color: rgba(0, 0, 0, 0.5);\r\n        /* border-color: rgb(30, 64, 175); */\r\n        box-shadow: 0px;\r\n    }\r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -49881,6 +49906,36 @@ if (false) {} else {
   module.exports = __webpack_require__(/*! ./cjs/scheduler-tracing.development.js */ "./node_modules/scheduler/cjs/scheduler-tracing.development.js");
 }
 
+
+/***/ }),
+
+/***/ "./resources/css/dashboard.css":
+/*!*************************************!*\
+  !*** ./resources/css/dashboard.css ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_8_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_8_oneOf_1_use_2_dashboard_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[1]!../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[2]!./dashboard.css */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[2]!./resources/css/dashboard.css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_8_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_8_oneOf_1_use_2_dashboard_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_8_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_8_oneOf_1_use_2_dashboard_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 

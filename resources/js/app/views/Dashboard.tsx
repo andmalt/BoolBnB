@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Sidebar } from '../components';
 import { useAppSelector } from '../store/hooks';
+import "../../../css/dashboard.css"
 interface DashboardProps {
 }
 
@@ -31,7 +32,7 @@ const Dashboard = (props: DashboardProps) => {
         return () => setIsMount(false)
     }, []);
     return (
-        <div className="flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white">
+        <div id='dashboard' className="flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white">
 
             {/* <!-- Sidebar --> */}
             <Sidebar />

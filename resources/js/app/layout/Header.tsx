@@ -39,14 +39,14 @@ const Header = (props: HeaderProps) => {
   }, [])
 
   return (
-    <header id="header" className="shadow-md">
+    <div id="header">
       <nav className="p-6">
         <div className="flex justify-between items-center">
           <Link to={'/'}>
             <h1 className="pr-6 text-2xl font-bold text-blue-800">BoolBnB</h1>
           </Link>
           <div className="flex justify-end flex-grow">
-            <div className="md:flex space-x-6 hidden">
+            <div className="flex space-x-6">
               {
                 authSelector.token != null ?
                   <>
@@ -77,7 +77,7 @@ const Header = (props: HeaderProps) => {
           </div>
         </div>
       </nav>
-    </header>
+    </div>
   )
 }
 

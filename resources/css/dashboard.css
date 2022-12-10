@@ -1,0 +1,4 @@
+#dashboard{
+    min-height: calc(100vh - 130px);
+    background-color: black;
+}

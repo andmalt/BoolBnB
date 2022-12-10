@@ -19,7 +19,7 @@ const Navigation = (props: NavigationProps) => {
     }, []);
 
     return (
-        <>
+        <div className='bg-black'>
             {
                 authSelector.isError ?
                     <Error />
@@ -42,7 +42,7 @@ const Navigation = (props: NavigationProps) => {
                 </Routes>
             </div>
             <Footer />
-        </>
+        </div>
     )
 }
 
