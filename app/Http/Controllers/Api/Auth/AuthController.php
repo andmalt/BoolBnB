@@ -51,24 +51,10 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        // validation
-        $validator = Validator::make($request->all(), [
+        $fields = $request->validate([
             'email' => 'required|string|email|max:255',
             'password' => 'required|string'
         ]);
-
-        // if validation not good
-        if ($validator->fails()) {
-
-            $response = [
-                'success' => false,
-                'errors' => $validator->errors(),
-            ];
-
-            return response()->json($response, 401);
-        }
-
-        $fields = $validator;
 
         $user = User::where('email', $fields['email'])->first();
 

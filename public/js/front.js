@@ -9329,18 +9329,18 @@ var Header = function Header(props) {
     className: "md:flex space-x-6 hidden"
   }, authSelector.token != null ? react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/dashboard",
-    className: 'text-blue-800 hover:text-blue-600 \r\n                      transition ease-in-out delay-150 hover:-translate-y-1'
+    className: 'text-blue-800 hover:text-blue-600 \r\n                      transition ease-in-out delay-150 hover:-translate-y-1 font-bold'
   }, "Dashboard"), react_1["default"].createElement("button", {
-    className: 'text-blue-800 hover:text-blue-600 \r\n                      transition ease-in-out delay-150 hover:-translate-y-1',
+    className: 'text-blue-800 hover:text-blue-600 \r\n                      transition ease-in-out delay-150 hover:-translate-y-1 font-bold',
     onClick: function onClick(e) {
       return setLogout(e);
     }
   }, "Esci")) : react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/register",
-    className: "text-blue-800 hover:text-blue-600 \r\n                      transition ease-in-out delay-150 hover:-translate-y-1"
+    className: "text-blue-800 hover:text-blue-600 \r\n                      transition ease-in-out delay-150 hover:-translate-y-1 font-bold"
   }, "Registrati"), react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/login",
-    className: "text-blue-800 hover:text-blue-600 \r\n                      transition ease-in-out delay-150 hover:-translate-y-1"
+    className: "text-blue-800 hover:text-blue-600 \r\n                      transition ease-in-out delay-150 hover:-translate-y-1 font-bold"
   }, "Accedi")))))));
 };
 exports["default"] = Header;
@@ -10407,7 +10407,7 @@ var Home = function Home() {
   }, "Cerca le tua casa ", react_1["default"].createElement("br", null), "ovunque."), react_1["default"].createElement("p", {
     className: "text-lg inline-block sm:block"
   }, "Cerca casa selezionando la citt\xE0 o la regione in cui vorresti la nuova abitazione."), react_1["default"].createElement("button", {
-    className: "transition ease-in-out delay-300 hover:-translate-y-2 mt-8 px-4 py-2 bg-black hover:bg-blue-800 hover:text-black border-blue-800 rounded border-2"
+    className: "transition ease-in-out delay-300 hover:-translate-y-2 mt-8 px-4 py-2 bg-black hover:bg-blue-800 hover:text-black border-blue-800 active:bg-blue-900 rounded border-2"
   }, "Cerca case")))), react_1["default"].createElement("div", {
     id: 'black-space'
   }));

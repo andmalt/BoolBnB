@@ -51,12 +51,12 @@ const Header = (props: HeaderProps) => {
                 authSelector.token != null ?
                   <>
                     <Link to="/dashboard" className='text-blue-800 hover:text-blue-600 
-                      transition ease-in-out delay-150 hover:-translate-y-1'>
+                      transition ease-in-out delay-150 hover:-translate-y-1 font-bold'>
                       Dashboard
                     </Link>
                     <button
                       className='text-blue-800 hover:text-blue-600 
-                      transition ease-in-out delay-150 hover:-translate-y-1'
+                      transition ease-in-out delay-150 hover:-translate-y-1 font-bold'
                       onClick={(e) => setLogout(e)}>
                       Esci
                     </button>
@@ -64,11 +64,11 @@ const Header = (props: HeaderProps) => {
                   :
                   <>
                     <Link to="/register" className="text-blue-800 hover:text-blue-600 
-                      transition ease-in-out delay-150 hover:-translate-y-1">
+                      transition ease-in-out delay-150 hover:-translate-y-1 font-bold">
                       Registrati
                     </Link>
                     <Link to="/login" className="text-blue-800 hover:text-blue-600 
-                      transition ease-in-out delay-150 hover:-translate-y-1">
+                      transition ease-in-out delay-150 hover:-translate-y-1 font-bold">
                       Accedi
                     </Link>
                   </>

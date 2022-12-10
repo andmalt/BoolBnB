@@ -23,7 +23,7 @@ const Home = () => {
                             ovunque.
                         </h1>
                         <p className="text-lg inline-block sm:block">Cerca casa selezionando la città o la regione in cui vorresti la nuova abitazione.</p>
-                        <button className="transition ease-in-out delay-300 hover:-translate-y-2 mt-8 px-4 py-2 bg-black hover:bg-blue-800 hover:text-black border-blue-800 rounded border-2">Cerca case</button>
+                        <button className="transition ease-in-out delay-300 hover:-translate-y-2 mt-8 px-4 py-2 bg-black hover:bg-blue-800 hover:text-black border-blue-800 active:bg-blue-900 rounded border-2">Cerca case</button>
                     </div>
                 </div>
             </div>
