@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import '../../../css/index.css';
 import { Routes, Route } from 'react-router-dom';
-import { Home, Dashboard, Login, Register } from '../views';
+import { Homes, Dashboard, Login, Register, Main } from '../views';
 import { Header, Footer } from '../layout';
 import { useAppSelector } from '../store/hooks';
 import Loading from '../components/Loading';
@@ -35,10 +35,11 @@ const Navigation = (props: NavigationProps) => {
             <Header />
             <div id='main-container'>
                 <Routes>
-                    <Route path='/' element={<Home />} />
+                    <Route path='/' element={<Main />} />
                     <Route path='/login' element={<Login />} />
                     <Route path='/register' element={<Register />} />
                     <Route path='/dashboard' element={<Dashboard />} />
+                    <Route path='/homes' element={<Homes />} />
                 </Routes>
             </div>
             <Footer />

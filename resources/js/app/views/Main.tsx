@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import "../../../css/home.css"
 
-const Home = () => {
+const Main = () => {
 
     const [isMounted, setIsMounted] = useState<boolean>(true);
+    const navigate = useNavigate();
+
+    const goToHomes = () => {
+        navigate("/homes")
+    }
 
     useEffect(() => {
         if (isMounted) {
-
+            // 
         }
         return () => setIsMounted(false)
     }, []);
@@ -23,7 +28,7 @@ const Home = () => {
                             ovunque.
                         </h1>
                         <p className="text-lg inline-block sm:block text-white">Cerca casa selezionando la città o la regione in cui vorresti la nuova abitazione.</p>
-                        <button className="transition ease-out delay-150 hover:-translate-y-2 mt-8 px-4 py-2 bg-black hover:bg-blue-800 hover:text-black border-blue-800 active:bg-blue-900 rounded border-2 text-blue-800">Cerca case</button>
+                        <button onClick={() => goToHomes()} className="transition ease-out delay-150 hover:-translate-y-2 mt-8 px-4 py-2 bg-black hover:bg-blue-800 hover:text-black border-blue-800 active:bg-blue-900 rounded border-2 text-blue-800">Cerca casa</button>
                     </div>
                 </div>
             </div>
@@ -32,4 +37,4 @@ const Home = () => {
     )
 }
 
-export default Home;
+export default Main;

@@ -66,6 +66,17 @@ const api = {
             deleteLocalStorage()
             return { data: { success: false, error: { code: 500, message: e } } }
         }
+    },
+    getAllHouses: async function () {
+        const headers = {
+            "Content-Type": "application/json",
+        }
+        try {
+            const response = await axios.get(`${BASE_URL}/api/homes`, { headers })
+            return response;
+        } catch (e) {
+            return { data: { success: false, error: { code: 500, message: e }}}
+        }
     }
 }
 

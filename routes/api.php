@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Admin\ApartmentController;
 use App\Http\Controllers\Api\Admin\PhotoController;
 use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\Guest\ApartmentController as GuestApartmentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +21,7 @@ use Illuminate\Support\Facades\Route;
  * Guest
  */
 Route::middleware('guest')->group(function () {
+    Route::get('homes', [GuestApartmentController::class, 'index']);
 });
 
 /**

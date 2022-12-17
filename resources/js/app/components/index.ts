@@ -4,6 +4,7 @@ import SocialTraffic from "./SocialTraffic"
 import Table from "./Table"
 import Form from "./Form"
 import Sidebar from "./Sidebar"
+import HouseSmallCard from "./HouseSmallCard"
 
 /**
  * application component
@@ -14,5 +15,6 @@ export {
     SocialTraffic,
     Table,
     Form,
-    Sidebar
+    Sidebar,
+    HouseSmallCard
 }
