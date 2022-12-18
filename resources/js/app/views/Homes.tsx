@@ -29,8 +29,8 @@ export interface Photos {
 }
 
 const Homes = () => {
-    const [houses, setHouses] = useState<House[]>();
-    const [photos, setPhotos] = useState<Photos[]>();
+    const [houses, setHouses] = useState<House[]>([]);
+    const [photos, setPhotos] = useState<Photos[]>([]);
     const dispatch = useAppDispatch();
 
     const allHouses = async () => {
@@ -73,14 +73,14 @@ const Homes = () => {
 
                     <div className="grid gap-12 grid-cols-1">
                         {
-                            houses?.map((house, i) => {
-                                const p = photos?.filter(photo => {
+                            houses.map(house => {
+                                const p = photos.filter(photo => {
                                     return photo.apartment_id == house.id
                                 });
 
                                 return <HouseSmallCard
                                     key={house.id}
-                                    photo={p}
+                                    photos={p}
                                     title={house.title}
                                     description={house.description} />
                             })

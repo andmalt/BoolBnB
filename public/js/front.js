@@ -7907,6 +7907,54 @@ exports["default"] = Form;
 "use strict";
 
 
+function _slicedToArray(arr, i) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+}
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+  return arr2;
+}
+function _iterableToArrayLimit(arr, i) {
+  var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
+  if (_i == null) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+  var _s, _e;
+  try {
+    for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+  return _arr;
+}
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
 var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
   if (k2 === undefined) k2 = k;
   var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -7945,12 +7993,43 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 var HouseSmallCard = function HouseSmallCard(props) {
-  var photo = props.photo,
+  var photos = props.photos,
     title = props.title,
     description = props.description;
+  var _ref = (0, react_1.useState)(0),
+    _ref2 = _slicedToArray(_ref, 2),
+    count = _ref2[0],
+    setCount = _ref2[1];
+  var _ref3 = (0, react_1.useState)(photos[count]),
+    _ref4 = _slicedToArray(_ref3, 2),
+    photo = _ref4[0],
+    setPhoto = _ref4[1];
+  var nextImage = function nextImage() {
+    if (count == photos.length - 1) {
+      setCount(0);
+    } else {
+      setCount(count + 1);
+    }
+  };
+  var previousImage = function previousImage() {
+    if (count == 0) {
+      setCount(photos.length - 1);
+    } else {
+      setCount(count - 1);
+    }
+  };
+  var getPhoto = function getPhoto(index) {
+    var photo = photos[count];
+    photos.forEach(function (element, i) {
+      if (i == index) {
+        photo = element;
+      }
+    });
+    setPhoto(photo);
+  };
   (0, react_1.useEffect)(function () {
-    console.log(photo);
-  }, []);
+    getPhoto(count);
+  }, [count]);
   return react_1["default"].createElement("div", {
     className: "p-1 sm:flex space-x-6 bg-black bg-opacity-50 shadow-xl rounded-2xl"
   }, react_1["default"].createElement("div", {
@@ -7959,23 +8038,23 @@ var HouseSmallCard = function HouseSmallCard(props) {
     id: "default-carousel",
     className: "relative"
   }, react_1["default"].createElement("div", {
-    className: "overflow-hidden relative h-56 w-96 rounded-lg sm:h-64 xl:h-80 2xl:h-96"
-  }, photo != undefined ? photo === null || photo === void 0 ? void 0 : photo.map(function (el) {
-    return react_1["default"].createElement("div", {
-      key: el.id,
-      className: "duration-700 ease-in-out"
-    }, react_1["default"].createElement("img", {
-      src: el.image_url,
-      className: "block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2",
-      alt: "photo ".concat(el.id)
-    }));
-  }) : react_1["default"].createElement("div", {
+    className: "overflow-hidden relative h-64 w-96 rounded-lg xl:h-80 2xl:h-96"
+  }, photos.length != 0 ? react_1["default"].createElement("div", {
+    className: "duration-700 ease-in-out"
+  }, react_1["default"].createElement("img", {
+    src: photo.image_url,
+    className: "block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2",
+    alt: "image ".concat(photo.id)
+  })) : react_1["default"].createElement("div", {
     className: "duration-700 ease-in-out"
   }, react_1["default"].createElement("img", {
     src: "https://tailus.io/sources/blocks/twocards/preview/images/woman.jpg",
     className: "block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2",
     alt: "..."
   }))), react_1["default"].createElement("button", {
+    onClick: function onClick() {
+      return previousImage();
+    },
     type: "button",
     className: "flex absolute top-0 left-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none"
   }, react_1["default"].createElement("span", {
@@ -7994,6 +8073,9 @@ var HouseSmallCard = function HouseSmallCard(props) {
   })), react_1["default"].createElement("span", {
     className: "hidden"
   }, "Previous"))), react_1["default"].createElement("button", {
+    onClick: function onClick() {
+      return nextImage();
+    },
     type: "button",
     className: "flex absolute top-0 right-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none"
   }, react_1["default"].createElement("span", {
@@ -8016,7 +8098,7 @@ var HouseSmallCard = function HouseSmallCard(props) {
   }, react_1["default"].createElement("div", {
     className: "space-y-2"
   }, react_1["default"].createElement("div", {
-    className: "space-y-4"
+    className: "space-y-4 overflow-y-auto"
   }, react_1["default"].createElement("h4", {
     className: "text-2xl font-semibold text-cyan-900"
   }, title), react_1["default"].createElement("p", {
@@ -10916,11 +10998,11 @@ var connection_manager_1 = __importDefault(__webpack_require__(/*! ../services/c
 var authSlice_1 = __webpack_require__(/*! ../store/authSlice */ "./resources/js/app/store/authSlice.ts");
 var hooks_1 = __webpack_require__(/*! ../store/hooks */ "./resources/js/app/store/hooks.ts");
 var Homes = function Homes() {
-  var _ref = (0, react_1.useState)(),
+  var _ref = (0, react_1.useState)([]),
     _ref2 = _slicedToArray(_ref, 2),
     houses = _ref2[0],
     setHouses = _ref2[1];
-  var _ref3 = (0, react_1.useState)(),
+  var _ref3 = (0, react_1.useState)([]),
     _ref4 = _slicedToArray(_ref3, 2),
     photos = _ref4[0],
     setPhotos = _ref4[1];
@@ -10985,13 +11067,13 @@ var Homes = function Homes() {
     className: "lg:w-6/12 lg:mx-auto"
   }, "Quam hic dolore cumque voluptate rerum beatae et quae, tempore sunt, debitis dolorum officia aliquid explicabo? Excepturi, voluptate?")), react_1["default"].createElement("div", {
     className: "grid gap-12 grid-cols-1"
-  }, houses === null || houses === void 0 ? void 0 : houses.map(function (house, i) {
-    var p = photos === null || photos === void 0 ? void 0 : photos.filter(function (photo) {
+  }, houses.map(function (house) {
+    var p = photos.filter(function (photo) {
       return photo.apartment_id == house.id;
     });
     return react_1["default"].createElement(components_1.HouseSmallCard, {
       key: house.id,
-      photo: p,
+      photos: p,
       title: house.title,
       description: house.description
     });
