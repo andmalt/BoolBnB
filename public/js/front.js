@@ -11007,6 +11007,9 @@ var Homes = function Homes() {
     photos = _ref4[0],
     setPhotos = _ref4[1];
   var dispatch = (0, hooks_1.useAppDispatch)();
+  var authSelector = (0, hooks_1.useAppSelector)(function (state) {
+    return state.auth;
+  });
   var allHouses = function allHouses() {
     return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var response;
@@ -11023,7 +11026,7 @@ var Homes = function Homes() {
               if (response.data.success) {
                 console.log(response);
                 setPhotos(response.data.photos);
-                setHouses(response.data.apartments.data);
+                setHouses(response.data.apartments);
                 dispatch((0, authSlice_1.clear)());
               } else {
                 console.log("error response houses");
@@ -11067,7 +11070,7 @@ var Homes = function Homes() {
     className: "lg:w-6/12 lg:mx-auto"
   }, "Quam hic dolore cumque voluptate rerum beatae et quae, tempore sunt, debitis dolorum officia aliquid explicabo? Excepturi, voluptate?")), react_1["default"].createElement("div", {
     className: "grid gap-12 grid-cols-1"
-  }, houses.map(function (house) {
+  }, !authSelector.isLoading ? houses.map(function (house) {
     var p = photos.filter(function (photo) {
       return photo.apartment_id == house.id;
     });
@@ -11077,7 +11080,7 @@ var Homes = function Homes() {
       title: house.title,
       description: house.description
     });
-  })))));
+  }) : null))));
 };
 exports["default"] = Homes;
 

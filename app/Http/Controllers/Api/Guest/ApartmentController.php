@@ -16,7 +16,7 @@ class ApartmentController extends Controller
         //     ->orderByDesc('visible')->paginate(10);
 
         $apartments = DB::table('apartments')
-            ->orderByDesc('visible')->paginate(10);
+            ->orderByDesc('visible')->get();
         $photos = DB::table('photos')->get();
 
         $response = [

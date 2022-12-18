@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { HouseSmallCard } from '../components';
 import api from '../services/connection_manager';
 import { clear, error, loading } from '../store/authSlice';
-import { useAppDispatch } from '../store/hooks';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 
 interface House {
     id: number,
@@ -32,6 +32,7 @@ const Homes = () => {
     const [houses, setHouses] = useState<House[]>([]);
     const [photos, setPhotos] = useState<Photos[]>([]);
     const dispatch = useAppDispatch();
+    const authSelector = useAppSelector(state => state.auth);
 
     const allHouses = async () => {
         dispatch(loading())
@@ -40,7 +41,7 @@ const Homes = () => {
             if (response.data.success) {
                 console.log(response);
                 setPhotos(response.data.photos);
-                setHouses(response.data.apartments.data);
+                setHouses(response.data.apartments);
                 dispatch(clear())
             } else {
                 console.log("error response houses");
@@ -73,17 +74,20 @@ const Homes = () => {
 
                     <div className="grid gap-12 grid-cols-1">
                         {
-                            houses.map(house => {
-                                const p = photos.filter(photo => {
-                                    return photo.apartment_id == house.id
-                                });
+                            !authSelector.isLoading ?
+                                houses.map(house => {
+                                    const p = photos.filter(photo => {
+                                        return photo.apartment_id == house.id
+                                    });
 
-                                return <HouseSmallCard
-                                    key={house.id}
-                                    photos={p}
-                                    title={house.title}
-                                    description={house.description} />
-                            })
+                                    return <HouseSmallCard
+                                        key={house.id}
+                                        photos={p}
+                                        title={house.title}
+                                        description={house.description} />
+                                })
+                                :
+                                null
                         }
                     </div>
                 </div>
