@@ -44,7 +44,6 @@ const HouseSmallCard = (props: HouseCard) => {
 
     return (
         <div className="p-1 sm:flex space-x-6 bg-black bg-opacity-50 shadow-xl rounded-2xl">
-            {/* <img src="https://tailus.io/sources/blocks/twocards/preview/images/woman.jpg" alt="art cover" loading="lazy" width="1000" height="667" className="h-56 sm:h-full w-full sm:w-5/12 object-cover object-top rounded-lg transition duration-500 group-hover:rounded-xl" /> */}
             <div className="max-w-2xl mx-auto">
                 <div id="default-carousel" className="relative">
                     { /* Carousel wrapper  */}
