@@ -1,10 +1,10 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import "../../../css/error.css"
-import { clear } from '../store/authSlice'
-import { useAppDispatch } from '../store/hooks'
+import { useNavigate } from 'react-router-dom';
+import { clear } from '../store/authSlice';
+import { useAppDispatch } from '../store/hooks';
 
-const Error = () => {
+const NoMatch = () => {
+
     const dispatch = useAppDispatch();
     const navigate = useNavigate()
 
@@ -15,9 +15,9 @@ const Error = () => {
 
     return (
         <main id="error" className="h-screen w-full flex flex-col justify-center items-center bg-[#1A2238]">
-            <h1 className="text-9xl font-extrabold text-white tracking-widest">500</h1>
+            <h1 className="text-9xl font-extrabold text-white tracking-widest">404</h1>
             <div className="bg-[#FF6A3D] px-2 text-sm rounded rotate-12 absolute">
-                Internal Server Error
+                Page Not Found
             </div>
             <button className="mt-5">
                 <a
@@ -33,7 +33,7 @@ const Error = () => {
                 </a>
             </button>
         </main>
-    )
+  )
 }
 
-export default Error
+export default NoMatch;

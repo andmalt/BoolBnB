@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { Photos } from '../views/Homes';
 
 interface HouseCard {
     photos: Photos[]
     title: string,
     description: string
+    id: number
 }
 
 const HouseSmallCard = (props: HouseCard) => {
-    const { photos, title, description } = props;
+    const { photos, title, description , id } = props;
     const [count, setCount] = useState<number>(0);
     const [photo, setPhoto] = useState<Photos>(photos[count]);
+    const navigate = useNavigate();
+
+    const getHome = (id:number) =>{
+        navigate(`/house/${id}`)
+    }
 
     const nextImage = () => {
         if (count == photos.length - 1) {
@@ -107,7 +114,9 @@ const HouseSmallCard = (props: HouseCard) => {
             <div className="sm:w-7/12 pl-0 p-5">
                 <div className="space-y-2">
                     <div className="space-y-4 overflow-y-auto">
-                        <h4 className="text-2xl font-semibold text-cyan-900">{title}</h4>
+                        <button onClick={()=> getHome(id)}>
+                            <h4 className="text-2xl font-semibold text-cyan-900">{title}</h4>
+                        </button>
                         <p className="text-gray-600">{description}</p>
                     </div>
                 </div>

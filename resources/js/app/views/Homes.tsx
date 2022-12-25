@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 import { HouseSmallCard } from '../components';
 import api from '../services/connection_manager';
 import { clear, error, loading } from '../store/authSlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 
-interface House {
+export interface House {
     id: number,
     user_id: number,
     title: string,
@@ -80,11 +81,14 @@ const Homes = () => {
                                         return photo.apartment_id == house.id
                                     });
 
-                                    return <HouseSmallCard
+                                    return(
+                                        <HouseSmallCard
+                                        id={house.id}
                                         key={house.id}
                                         photos={p}
                                         title={house.title}
-                                        description={house.description} />
+                                        description={house.description} />   
+                                    )                                    
                                 })
                                 :
                                 null

@@ -1,7 +1,15 @@
 import React, { useEffect } from 'react';
 import '../../../css/index.css';
 import { Routes, Route } from 'react-router-dom';
-import { Homes, Dashboard, Login, Register, Main } from '../views';
+import { 
+    Homes,
+    Dashboard,
+    Login,
+    Register,
+    Main,
+    House,
+    NoMatch
+} from '../views';
 import { Header, Footer } from '../layout';
 import { useAppSelector } from '../store/hooks';
 import Loading from '../components/Loading';
@@ -40,6 +48,8 @@ const Navigation = (props: NavigationProps) => {
                     <Route path='/register' element={<Register />} />
                     <Route path='/dashboard' element={<Dashboard />} />
                     <Route path='/homes' element={<Homes />} />
+                    <Route path='/house/:houseId' element={<House />} />
+                    <Route path='*' element={<NoMatch />} />
                 </Routes>
             </div>
             <Footer />

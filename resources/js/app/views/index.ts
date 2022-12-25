@@ -3,6 +3,8 @@ import Dashboard from "./Dashboard";
 import Login from "./Login";
 import Register from "./Register";
 import Homes from "./Homes";
+import House from "./House";
+import NoMatch from "./NoMatch";
 
 /**
  * application views
@@ -12,5 +14,7 @@ export {
     Dashboard,
     Login,
     Register,
-    Main
+    Main,
+    House,
+    NoMatch
 }

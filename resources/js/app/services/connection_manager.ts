@@ -77,6 +77,17 @@ const api = {
         } catch (e) {
             return { data: { success: false, error: { code: 500, message: e }}}
         }
+    },
+    getHome: async function(id:string|undefined){
+        const headers = {
+            "Content-Type": "application/json",
+        }
+        try {
+            const response = await axios.get(`${BASE_URL}/api/house/${id}`, { headers })
+            return response;
+        } catch (e) {
+            return { data: { success: false, error: { code: 500, message: e }}}
+        }
     }
 }
 
