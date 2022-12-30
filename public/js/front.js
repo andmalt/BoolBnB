@@ -11801,12 +11801,7 @@ var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_mod
 var connection_manager_1 = __importDefault(__webpack_require__(/*! ../services/connection_manager */ "./resources/js/app/services/connection_manager.ts"));
 var authSlice_1 = __webpack_require__(/*! ../store/authSlice */ "./resources/js/app/store/authSlice.ts");
 var hooks_1 = __webpack_require__(/*! ../store/hooks */ "./resources/js/app/store/hooks.ts");
-var defaultPhoto = {
-  id: 0,
-  apartment_id: 0,
-  image_url: 'https://tailus.io/sources/blocks/twocards/preview/images/woman.jpg'
-};
-var House = function House(props) {
+var HouseView = function HouseView(props) {
   _objectDestructuringEmpty(props);
   var params = (0, react_router_dom_1.useParams)();
   var houseId = params.houseId;
@@ -11871,6 +11866,7 @@ var House = function House(props) {
   var nextImage = function nextImage() {
     if (count == lengthPhotos - 1) {
       setCount(0);
+      setNumberPhoto(1);
     } else {
       setCount(count + 1);
       setNumberPhoto(numberPhoto + 1);
@@ -11879,6 +11875,7 @@ var House = function House(props) {
   var previousImage = function previousImage() {
     if (count == 0) {
       setCount(lengthPhotos - 1);
+      setNumberPhoto(lengthPhotos);
     } else {
       setCount(count - 1);
       setNumberPhoto(numberPhoto - 1);
@@ -11906,10 +11903,33 @@ var House = function House(props) {
     };
   }, []);
   return react_1["default"].createElement("div", {
-    className: 'text-white'
-  }, react_1["default"].createElement("h1", null, "House ", home === null || home === void 0 ? void 0 : home.id, " ", home === null || home === void 0 ? void 0 : home.title), react_1["default"].createElement("div", {
-    className: "overflow-hidden relative rounded-lg h-60 md:h-64 xl:h-72 w-72 md:w-72 xl:w-80"
-  }, (photos === null || photos === void 0 ? void 0 : photos.length) != 0 ? react_1["default"].createElement("div", {
+    className: 'h-full w-full flex flex-col flex-wrap items-center sm:px-10 py-10'
+  }, react_1["default"].createElement("div", {
+    className: 'w-full py-3'
+  }, react_1["default"].createElement(react_router_dom_1.Link, {
+    to: "/homes"
+  }, react_1["default"].createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    fill: "none",
+    viewBox: "0 0 24 24",
+    strokeWidth: 1.5,
+    stroke: "currentColor",
+    className: "w-8 h-8 text-blue-800 font-bold"
+  }, react_1["default"].createElement("path", {
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    d: "M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+  })))), react_1["default"].createElement("div", {
+    className: 'bg-gradient-to-br from-blue-800 to-[rgb(20,20,20)] rounded-lg p-3 mb-20'
+  }, react_1["default"].createElement("h1", {
+    className: "text-white font-bold text-lg md:text-4xl"
+  }, home === null || home === void 0 ? void 0 : home.title)), react_1["default"].createElement("div", {
+    className: 'flex flex-row flex-wrap justify-center items-start mb-10'
+  }, react_1["default"].createElement("div", {
+    className: "h-[250px] w-[350px] md:h-[400px] md:w-[500px] p-5 bg-gradient-to-br from-blue-800 to-[rgb(20,20,20)] rounded-lg mb-5 lg:mb-0"
+  }, react_1["default"].createElement("div", {
+    className: "overflow-hidden relative h-full"
+  }, (photos === null || photos === void 0 ? void 0 : photos.length) != 0 && photos != undefined ? react_1["default"].createElement("div", {
     className: "duration-700 ease-in-out"
   }, react_1["default"].createElement("img", {
     src: photo === null || photo === void 0 ? void 0 : photo.image_url,
@@ -11963,9 +11983,35 @@ var House = function House(props) {
     d: "M9 5l7 7-7 7"
   })), react_1["default"].createElement("span", {
     className: "hidden"
-  }, "Next")))));
+  }, "Next"))), react_1["default"].createElement("div", {
+    className: "absolute right-0 bottom-0 md:bottom-2 w-14 h-7 bg-slate-600 flex justify-center items-center"
+  }, react_1["default"].createElement("p", {
+    className: "text-white"
+  }, numberPhoto, "/", lengthPhotos)))), react_1["default"].createElement("div", {
+    className: 'flex flex-col'
+  }, react_1["default"].createElement("div", {
+    className: 'bg-gradient-to-br from-blue-800 to-[rgb(20,20,20)] rounded-lg p-3 sm:ml-5 text-white ml-0 mb-5'
+  }, react_1["default"].createElement("h5", {
+    className: 'font-bold mb-3 uppercase'
+  }, "Caratteristiche Immobile"), react_1["default"].createElement("ul", null, react_1["default"].createElement("li", null, "Metri quadri: ", home === null || home === void 0 ? void 0 : home.square), react_1["default"].createElement("li", null, "Bagno/i: ", home === null || home === void 0 ? void 0 : home.bathrooms), react_1["default"].createElement("li", null, "Camera/e: ", home === null || home === void 0 ? void 0 : home.rooms), react_1["default"].createElement("li", null, "Letto/i: ", home === null || home === void 0 ? void 0 : home.beds))), react_1["default"].createElement("div", {
+    className: 'bg-gradient-to-br from-blue-800 to-[rgb(20,20,20)] rounded-lg p-3 sm:ml-5 text-white ml-0 flex flex-row justify-start items-center'
+  }, react_1["default"].createElement("h4", {
+    className: 'font-bold uppercase align-middle'
+  }, "Prezzo \u20AC", home === null || home === void 0 ? void 0 : home.price, " ", react_1["default"].createElement("span", {
+    className: 'normal-case italic'
+  }, "per notte"))))), react_1["default"].createElement("div", {
+    className: 'flex flex-col flex-wrap w-full items-center'
+  }, react_1["default"].createElement("div", {
+    className: 'bg-gradient-to-br from-blue-800 to-[rgb(20,20,20)] rounded-lg p-3 w-[80%] text-white mb-4'
+  }, react_1["default"].createElement("h3", {
+    className: 'mb-3 font-bold uppercase'
+  }, home === null || home === void 0 ? void 0 : home.city), react_1["default"].createElement("h4", {
+    className: 'italic'
+  }, home === null || home === void 0 ? void 0 : home.address)), react_1["default"].createElement("div", {
+    className: 'bg-gradient-to-br from-blue-800 to-[rgb(20,20,20)] rounded-lg p-3 w-[80%] text-white'
+  }, react_1["default"].createElement("p", null, home === null || home === void 0 ? void 0 : home.description))));
 };
-exports["default"] = House;
+exports["default"] = HouseView;
 
 /***/ }),
 
