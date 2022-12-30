@@ -1,10 +1,12 @@
-import Statistics from "./Statistics"
-import Activities from "./Activities"
-import SocialTraffic from "./SocialTraffic"
-import Table from "./Table"
-import Form from "./Form"
-import Sidebar from "./Sidebar"
+import Statistics from "./dashboard/Statistics"
+import Activities from "./dashboard/Activities"
+import SocialTraffic from "./dashboard/SocialTraffic"
+import Table from "./dashboard/Table"
+import Form from "./dashboard/Form"
+import Sidebar from "./dashboard/Sidebar"
 import HouseSmallCard from "./HouseSmallCard"
+import Error from "./Error"
+import Loading from "./Loading"
 
 /**
  * application component
@@ -16,5 +18,7 @@ export {
     Table,
     Form,
     Sidebar,
-    HouseSmallCard
+    HouseSmallCard,
+    Error,
+    Loading
 }

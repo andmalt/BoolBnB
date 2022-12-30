@@ -20,7 +20,9 @@ export interface House {
     city: string,
     address: string,
     lat: string,
-    lon: string
+    lon: string,
+    price: number,
+    photos?:Photos,
 }
 
 export interface Photos {
@@ -86,8 +88,7 @@ const Homes = () => {
                                         id={house.id}
                                         key={house.id}
                                         photos={p}
-                                        title={house.title}
-                                        description={house.description} />   
+                                        house={house} />   
                                     )                                    
                                 })
                                 :

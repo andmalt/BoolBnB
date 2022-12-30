@@ -7716,10 +7716,446 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./resources/js/app/components/Activities.tsx":
-/*!****************************************************!*\
-  !*** ./resources/js/app/components/Activities.tsx ***!
-  \****************************************************/
+/***/ "./resources/js/app/components/Error.tsx":
+/*!***********************************************!*\
+  !*** ./resources/js/app/components/Error.tsx ***!
+  \***********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+__webpack_require__(/*! ../../../css/error.css */ "./resources/css/error.css");
+var authSlice_1 = __webpack_require__(/*! ../store/authSlice */ "./resources/js/app/store/authSlice.ts");
+var hooks_1 = __webpack_require__(/*! ../store/hooks */ "./resources/js/app/store/hooks.ts");
+var Error = function Error() {
+  var dispatch = (0, hooks_1.useAppDispatch)();
+  var navigate = (0, react_router_dom_1.useNavigate)();
+  var closeError = function closeError() {
+    dispatch((0, authSlice_1.clear)());
+    return navigate("/");
+  };
+  return react_1["default"].createElement("main", {
+    id: "error",
+    className: "h-screen w-full flex flex-col justify-center items-center bg-[#1A2238]"
+  }, react_1["default"].createElement("h1", {
+    className: "text-9xl font-extrabold text-white tracking-widest"
+  }, "500"), react_1["default"].createElement("div", {
+    className: "bg-[#FF6A3D] px-2 text-sm rounded rotate-12 absolute"
+  }, "Internal Server Error"), react_1["default"].createElement("button", {
+    className: "mt-5"
+  }, react_1["default"].createElement("a", {
+    className: "relative inline-block text-sm font-medium text-[#FF6A3D] group active:text-orange-500 focus:outline-none focus:ring"
+  }, react_1["default"].createElement("span", {
+    className: "absolute inset-0 transition-transform translate-x-0.5 translate-y-0.5 bg-[#FF6A3D] group-hover:translate-y-0 group-hover:translate-x-0"
+  }), react_1["default"].createElement("span", {
+    className: "relative block px-8 py-3 bg-[#1A2238] border border-current"
+  }, react_1["default"].createElement("button", {
+    onClick: function onClick() {
+      return closeError();
+    }
+  }, "Vai alla pagina iniziale")))));
+};
+exports["default"] = Error;
+
+/***/ }),
+
+/***/ "./resources/js/app/components/HouseSmallCard.tsx":
+/*!********************************************************!*\
+  !*** ./resources/js/app/components/HouseSmallCard.tsx ***!
+  \********************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function _slicedToArray(arr, i) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+}
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+  return arr2;
+}
+function _iterableToArrayLimit(arr, i) {
+  var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"];
+  if (null != _i) {
+    var _s,
+      _e,
+      _x,
+      _r,
+      _arr = [],
+      _n = !0,
+      _d = !1;
+    try {
+      if (_x = (_i = _i.call(arr)).next, 0 === i) {
+        if (Object(_i) !== _i) return;
+        _n = !1;
+      } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0);
+    } catch (err) {
+      _d = !0, _e = err;
+    } finally {
+      try {
+        if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return;
+      } finally {
+        if (_d) throw _e;
+      }
+    }
+    return _arr;
+  }
+}
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  var desc = Object.getOwnPropertyDescriptor(m, k);
+  if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+    desc = {
+      enumerable: true,
+      get: function get() {
+        return m[k];
+      }
+    };
+  }
+  Object.defineProperty(o, k2, desc);
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  __setModuleDefault(result, mod);
+  return result;
+};
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+var HouseSmallCard = function HouseSmallCard(props) {
+  var photos = props.photos,
+    house = props.house,
+    id = props.id;
+  var title = house.title,
+    description = house.description,
+    rooms = house.rooms,
+    beds = house.beds,
+    bathrooms = house.bathrooms,
+    price = house.price,
+    square = house.square,
+    city = house.city,
+    address = house.address,
+    region = house.region;
+  var _ref = (0, react_1.useState)(0),
+    _ref2 = _slicedToArray(_ref, 2),
+    count = _ref2[0],
+    setCount = _ref2[1];
+  var _ref3 = (0, react_1.useState)(photos[count]),
+    _ref4 = _slicedToArray(_ref3, 2),
+    photo = _ref4[0],
+    setPhoto = _ref4[1];
+  var navigate = (0, react_router_dom_1.useNavigate)();
+  var getHome = function getHome(id) {
+    navigate("/house/".concat(id));
+  };
+  var nextImage = function nextImage() {
+    if (count == photos.length - 1) {
+      setCount(0);
+    } else {
+      setCount(count + 1);
+    }
+  };
+  var previousImage = function previousImage() {
+    if (count == 0) {
+      setCount(photos.length - 1);
+    } else {
+      setCount(count - 1);
+    }
+  };
+  var getPhoto = function getPhoto(index) {
+    var photo = photos[count];
+    photos.forEach(function (element, i) {
+      if (i == index) {
+        photo = element;
+      }
+    });
+    setPhoto(photo);
+  };
+  (0, react_1.useEffect)(function () {
+    getPhoto(count);
+  }, [count]);
+  return react_1["default"].createElement("div", {
+    className: "flex flex-row flex-wrap space-x-6 bg-black bg-opacity-50 shadow-xl rounded-2xl"
+  }, react_1["default"].createElement("div", {
+    className: "max-w-2xl mx-auto"
+  }, react_1["default"].createElement("div", {
+    id: "default-carousel",
+    className: "relative"
+  }, react_1["default"].createElement("div", {
+    className: "overflow-hidden relative rounded-lg h-60 md:h-64 xl:h-72 w-72 md:w-72 xl:w-80"
+  }, photos.length != 0 ? react_1["default"].createElement("div", {
+    className: "duration-700 ease-in-out"
+  }, react_1["default"].createElement("img", {
+    src: photo.image_url,
+    className: "block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2",
+    alt: "image ".concat(photo.id)
+  })) : react_1["default"].createElement("div", {
+    className: "duration-700 ease-in-out"
+  }, react_1["default"].createElement("img", {
+    src: "https://tailus.io/sources/blocks/twocards/preview/images/woman.jpg",
+    className: "block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2",
+    alt: "..."
+  })), react_1["default"].createElement("button", {
+    onClick: function onClick() {
+      return previousImage();
+    },
+    type: "button",
+    className: "flex absolute top-0 left-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none"
+  }, react_1["default"].createElement("span", {
+    className: "inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-black/30  hover:bg-black/50 focus:ring-4 focus:ring-white focus:outline-none"
+  }, react_1["default"].createElement("svg", {
+    className: "w-5 h-5 text-white sm:w-6 sm:h-6",
+    fill: "none",
+    stroke: "currentColor",
+    viewBox: "0 0 24 24",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, react_1["default"].createElement("path", {
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeWidth: "2",
+    d: "M15 19l-7-7 7-7"
+  })), react_1["default"].createElement("span", {
+    className: "hidden"
+  }, "Previous"))), react_1["default"].createElement("button", {
+    onClick: function onClick() {
+      return nextImage();
+    },
+    type: "button",
+    className: "flex absolute top-0 right-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none"
+  }, react_1["default"].createElement("span", {
+    className: "inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-black/30 hover:bg-black/50 focus:ring-4 focus:ring-white focus:outline-none"
+  }, react_1["default"].createElement("svg", {
+    className: "w-5 h-5 text-white sm:w-6 sm:h-6",
+    fill: "none",
+    stroke: "currentColor",
+    viewBox: "0 0 24 24",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, react_1["default"].createElement("path", {
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeWidth: "2",
+    d: "M9 5l7 7-7 7"
+  })), react_1["default"].createElement("span", {
+    className: "hidden"
+  }, "Next")))))), react_1["default"].createElement("div", {
+    onClick: function onClick() {
+      return getHome(id);
+    },
+    className: "sm:w-7/12 pl-0 p-5 overflow-y-scroll cursor-pointer"
+  }, react_1["default"].createElement("div", {
+    className: "space-y-2"
+  }, react_1["default"].createElement("div", {
+    className: "space-y-4"
+  }, react_1["default"].createElement("h4", {
+    className: "text-2xl font-semibold text-cyan-900 text-left"
+  }, title), react_1["default"].createElement("p", {
+    className: "text-left font-bold"
+  }, city), react_1["default"].createElement("p", {
+    className: "text-left font-semibold"
+  }, address), react_1["default"].createElement("div", {
+    className: 'flex flex-row flex-wrap'
+  }, react_1["default"].createElement("p", {
+    className: 'font-bold mx-2'
+  }, square, " ", react_1["default"].createElement("span", {
+    className: 'font-semibold'
+  }, "mq")), react_1["default"].createElement("p", {
+    className: 'font-bold mx-2'
+  }, beds, " ", react_1["default"].createElement("span", {
+    className: 'font-semibold'
+  }, "camere"), " "), react_1["default"].createElement("p", {
+    className: 'font-bold mx-2'
+  }, bathrooms, " ", react_1["default"].createElement("span", {
+    className: 'font-semibold'
+  }, "bagni")), react_1["default"].createElement("p", {
+    className: 'font-bold mx-2'
+  }, "\u20AC", price, " per notte")), react_1["default"].createElement("p", {
+    className: "text-gray-600 hidden lg:block"
+  }, description)))));
+};
+exports["default"] = HouseSmallCard;
+
+/***/ }),
+
+/***/ "./resources/js/app/components/Loading.tsx":
+/*!*************************************************!*\
+  !*** ./resources/js/app/components/Loading.tsx ***!
+  \*************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function _slicedToArray(arr, i) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+}
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+  return arr2;
+}
+function _iterableToArrayLimit(arr, i) {
+  var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"];
+  if (null != _i) {
+    var _s,
+      _e,
+      _x,
+      _r,
+      _arr = [],
+      _n = !0,
+      _d = !1;
+    try {
+      if (_x = (_i = _i.call(arr)).next, 0 === i) {
+        if (Object(_i) !== _i) return;
+        _n = !1;
+      } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0);
+    } catch (err) {
+      _d = !0, _e = err;
+    } finally {
+      try {
+        if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return;
+      } finally {
+        if (_d) throw _e;
+      }
+    }
+    return _arr;
+  }
+}
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+function _objectDestructuringEmpty(obj) {
+  if (obj == null) throw new TypeError("Cannot destructure " + obj);
+}
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  var desc = Object.getOwnPropertyDescriptor(m, k);
+  if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+    desc = {
+      enumerable: true,
+      get: function get() {
+        return m[k];
+      }
+    };
+  }
+  Object.defineProperty(o, k2, desc);
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  __setModuleDefault(result, mod);
+  return result;
+};
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+// import { CSSTransition } from 'react-transition-group';
+__webpack_require__(/*! ../../../css/loading.css */ "./resources/css/loading.css");
+var Loading = function Loading(props) {
+  _objectDestructuringEmpty(props);
+  var _ref = (0, react_1.useState)(false),
+    _ref2 = _slicedToArray(_ref, 2),
+    isMount = _ref2[0],
+    setIsMount = _ref2[1];
+  (0, react_1.useEffect)(function () {
+    setIsMount(true);
+    if (isMount) {
+      //
+    }
+    return function () {
+      return setIsMount(false);
+    };
+  }, []);
+  return react_1["default"].createElement("div", {
+    id: 'container'
+  }, react_1["default"].createElement("div", {
+    id: "text"
+  }, react_1["default"].createElement("p", {
+    id: 'paragraph',
+    className: 'text-blue-800'
+  }, "caricamento.....")), react_1["default"].createElement("div", {
+    id: "spinner"
+  }, react_1["default"].createElement("div", {
+    className: "animate-spin inline-block w-16 h-16 border-[3px] border-current border-t-transparent text-blue-800 rounded-full",
+    role: "status",
+    "aria-label": "loading"
+  }, react_1["default"].createElement("span", {
+    className: "sr-only"
+  }, "Loading..."))));
+};
+exports["default"] = Loading;
+
+/***/ }),
+
+/***/ "./resources/js/app/components/dashboard/Activities.tsx":
+/*!**************************************************************!*\
+  !*** ./resources/js/app/components/dashboard/Activities.tsx ***!
+  \**************************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -7905,64 +8341,10 @@ exports["default"] = Activities;
 
 /***/ }),
 
-/***/ "./resources/js/app/components/Error.tsx":
-/*!***********************************************!*\
-  !*** ./resources/js/app/components/Error.tsx ***!
-  \***********************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
-__webpack_require__(/*! ../../../css/error.css */ "./resources/css/error.css");
-var authSlice_1 = __webpack_require__(/*! ../store/authSlice */ "./resources/js/app/store/authSlice.ts");
-var hooks_1 = __webpack_require__(/*! ../store/hooks */ "./resources/js/app/store/hooks.ts");
-var Error = function Error() {
-  var dispatch = (0, hooks_1.useAppDispatch)();
-  var navigate = (0, react_router_dom_1.useNavigate)();
-  var closeError = function closeError() {
-    dispatch((0, authSlice_1.clear)());
-    return navigate("/");
-  };
-  return react_1["default"].createElement("main", {
-    id: "error",
-    className: "h-screen w-full flex flex-col justify-center items-center bg-[#1A2238]"
-  }, react_1["default"].createElement("h1", {
-    className: "text-9xl font-extrabold text-white tracking-widest"
-  }, "500"), react_1["default"].createElement("div", {
-    className: "bg-[#FF6A3D] px-2 text-sm rounded rotate-12 absolute"
-  }, "Internal Server Error"), react_1["default"].createElement("button", {
-    className: "mt-5"
-  }, react_1["default"].createElement("a", {
-    className: "relative inline-block text-sm font-medium text-[#FF6A3D] group active:text-orange-500 focus:outline-none focus:ring"
-  }, react_1["default"].createElement("span", {
-    className: "absolute inset-0 transition-transform translate-x-0.5 translate-y-0.5 bg-[#FF6A3D] group-hover:translate-y-0 group-hover:translate-x-0"
-  }), react_1["default"].createElement("span", {
-    className: "relative block px-8 py-3 bg-[#1A2238] border border-current"
-  }, react_1["default"].createElement("button", {
-    onClick: function onClick() {
-      return closeError();
-    }
-  }, "Vai alla pagina iniziale")))));
-};
-exports["default"] = Error;
-
-/***/ }),
-
-/***/ "./resources/js/app/components/Form.tsx":
-/*!**********************************************!*\
-  !*** ./resources/js/app/components/Form.tsx ***!
-  \**********************************************/
+/***/ "./resources/js/app/components/dashboard/Form.tsx":
+/*!********************************************************!*\
+  !*** ./resources/js/app/components/dashboard/Form.tsx ***!
+  \********************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -8092,364 +8474,10 @@ exports["default"] = Form;
 
 /***/ }),
 
-/***/ "./resources/js/app/components/HouseSmallCard.tsx":
-/*!********************************************************!*\
-  !*** ./resources/js/app/components/HouseSmallCard.tsx ***!
-  \********************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-function _slicedToArray(arr, i) {
-  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
-}
-function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-function _unsupportedIterableToArray(o, minLen) {
-  if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
-}
-function _arrayLikeToArray(arr, len) {
-  if (len == null || len > arr.length) len = arr.length;
-  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-  return arr2;
-}
-function _iterableToArrayLimit(arr, i) {
-  var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"];
-  if (null != _i) {
-    var _s,
-      _e,
-      _x,
-      _r,
-      _arr = [],
-      _n = !0,
-      _d = !1;
-    try {
-      if (_x = (_i = _i.call(arr)).next, 0 === i) {
-        if (Object(_i) !== _i) return;
-        _n = !1;
-      } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0);
-    } catch (err) {
-      _d = !0, _e = err;
-    } finally {
-      try {
-        if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return;
-      } finally {
-        if (_d) throw _e;
-      }
-    }
-    return _arr;
-  }
-}
-function _arrayWithHoles(arr) {
-  if (Array.isArray(arr)) return arr;
-}
-var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  var desc = Object.getOwnPropertyDescriptor(m, k);
-  if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-    desc = {
-      enumerable: true,
-      get: function get() {
-        return m[k];
-      }
-    };
-  }
-  Object.defineProperty(o, k2, desc);
-} : function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  o[k2] = m[k];
-});
-var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
-  Object.defineProperty(o, "default", {
-    enumerable: true,
-    value: v
-  });
-} : function (o, v) {
-  o["default"] = v;
-});
-var __importStar = this && this.__importStar || function (mod) {
-  if (mod && mod.__esModule) return mod;
-  var result = {};
-  if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  __setModuleDefault(result, mod);
-  return result;
-};
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
-var HouseSmallCard = function HouseSmallCard(props) {
-  var photos = props.photos,
-    title = props.title,
-    description = props.description,
-    id = props.id;
-  var _ref = (0, react_1.useState)(0),
-    _ref2 = _slicedToArray(_ref, 2),
-    count = _ref2[0],
-    setCount = _ref2[1];
-  var _ref3 = (0, react_1.useState)(photos[count]),
-    _ref4 = _slicedToArray(_ref3, 2),
-    photo = _ref4[0],
-    setPhoto = _ref4[1];
-  var navigate = (0, react_router_dom_1.useNavigate)();
-  var getHome = function getHome(id) {
-    navigate("/house/".concat(id));
-  };
-  var nextImage = function nextImage() {
-    if (count == photos.length - 1) {
-      setCount(0);
-    } else {
-      setCount(count + 1);
-    }
-  };
-  var previousImage = function previousImage() {
-    if (count == 0) {
-      setCount(photos.length - 1);
-    } else {
-      setCount(count - 1);
-    }
-  };
-  var getPhoto = function getPhoto(index) {
-    var photo = photos[count];
-    photos.forEach(function (element, i) {
-      if (i == index) {
-        photo = element;
-      }
-    });
-    setPhoto(photo);
-  };
-  (0, react_1.useEffect)(function () {
-    getPhoto(count);
-  }, [count]);
-  return react_1["default"].createElement("div", {
-    className: "p-1 sm:flex space-x-6 bg-black bg-opacity-50 shadow-xl rounded-2xl"
-  }, react_1["default"].createElement("div", {
-    className: "max-w-2xl mx-auto"
-  }, react_1["default"].createElement("div", {
-    id: "default-carousel",
-    className: "relative"
-  }, react_1["default"].createElement("div", {
-    className: "overflow-hidden relative h-64 w-96 rounded-lg xl:h-80 2xl:h-96"
-  }, photos.length != 0 ? react_1["default"].createElement("div", {
-    className: "duration-700 ease-in-out"
-  }, react_1["default"].createElement("img", {
-    src: photo.image_url,
-    className: "block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2",
-    alt: "image ".concat(photo.id)
-  })) : react_1["default"].createElement("div", {
-    className: "duration-700 ease-in-out"
-  }, react_1["default"].createElement("img", {
-    src: "https://tailus.io/sources/blocks/twocards/preview/images/woman.jpg",
-    className: "block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2",
-    alt: "..."
-  }))), react_1["default"].createElement("button", {
-    onClick: function onClick() {
-      return previousImage();
-    },
-    type: "button",
-    className: "flex absolute top-0 left-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none"
-  }, react_1["default"].createElement("span", {
-    className: "inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-black/30  hover:bg-black/50 focus:ring-4 focus:ring-white focus:outline-none"
-  }, react_1["default"].createElement("svg", {
-    className: "w-5 h-5 text-white sm:w-6 sm:h-6",
-    fill: "none",
-    stroke: "currentColor",
-    viewBox: "0 0 24 24",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, react_1["default"].createElement("path", {
-    strokeLinecap: "round",
-    strokeLinejoin: "round",
-    strokeWidth: "2",
-    d: "M15 19l-7-7 7-7"
-  })), react_1["default"].createElement("span", {
-    className: "hidden"
-  }, "Previous"))), react_1["default"].createElement("button", {
-    onClick: function onClick() {
-      return nextImage();
-    },
-    type: "button",
-    className: "flex absolute top-0 right-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none"
-  }, react_1["default"].createElement("span", {
-    className: "inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-black/30 hover:bg-black/50 focus:ring-4 focus:ring-white focus:outline-none"
-  }, react_1["default"].createElement("svg", {
-    className: "w-5 h-5 text-white sm:w-6 sm:h-6",
-    fill: "none",
-    stroke: "currentColor",
-    viewBox: "0 0 24 24",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, react_1["default"].createElement("path", {
-    strokeLinecap: "round",
-    strokeLinejoin: "round",
-    strokeWidth: "2",
-    d: "M9 5l7 7-7 7"
-  })), react_1["default"].createElement("span", {
-    className: "hidden"
-  }, "Next"))))), react_1["default"].createElement("div", {
-    className: "sm:w-7/12 pl-0 p-5"
-  }, react_1["default"].createElement("div", {
-    className: "space-y-2"
-  }, react_1["default"].createElement("div", {
-    className: "space-y-4 overflow-y-auto"
-  }, react_1["default"].createElement("button", {
-    onClick: function onClick() {
-      return getHome(id);
-    }
-  }, react_1["default"].createElement("h4", {
-    className: "text-2xl font-semibold text-cyan-900"
-  }, title)), react_1["default"].createElement("p", {
-    className: "text-gray-600"
-  }, description)))));
-};
-exports["default"] = HouseSmallCard;
-
-/***/ }),
-
-/***/ "./resources/js/app/components/Loading.tsx":
-/*!*************************************************!*\
-  !*** ./resources/js/app/components/Loading.tsx ***!
-  \*************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-function _slicedToArray(arr, i) {
-  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
-}
-function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-function _unsupportedIterableToArray(o, minLen) {
-  if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
-}
-function _arrayLikeToArray(arr, len) {
-  if (len == null || len > arr.length) len = arr.length;
-  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-  return arr2;
-}
-function _iterableToArrayLimit(arr, i) {
-  var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"];
-  if (null != _i) {
-    var _s,
-      _e,
-      _x,
-      _r,
-      _arr = [],
-      _n = !0,
-      _d = !1;
-    try {
-      if (_x = (_i = _i.call(arr)).next, 0 === i) {
-        if (Object(_i) !== _i) return;
-        _n = !1;
-      } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0);
-    } catch (err) {
-      _d = !0, _e = err;
-    } finally {
-      try {
-        if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return;
-      } finally {
-        if (_d) throw _e;
-      }
-    }
-    return _arr;
-  }
-}
-function _arrayWithHoles(arr) {
-  if (Array.isArray(arr)) return arr;
-}
-function _objectDestructuringEmpty(obj) {
-  if (obj == null) throw new TypeError("Cannot destructure " + obj);
-}
-var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  var desc = Object.getOwnPropertyDescriptor(m, k);
-  if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-    desc = {
-      enumerable: true,
-      get: function get() {
-        return m[k];
-      }
-    };
-  }
-  Object.defineProperty(o, k2, desc);
-} : function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  o[k2] = m[k];
-});
-var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
-  Object.defineProperty(o, "default", {
-    enumerable: true,
-    value: v
-  });
-} : function (o, v) {
-  o["default"] = v;
-});
-var __importStar = this && this.__importStar || function (mod) {
-  if (mod && mod.__esModule) return mod;
-  var result = {};
-  if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  __setModuleDefault(result, mod);
-  return result;
-};
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-// import { CSSTransition } from 'react-transition-group';
-__webpack_require__(/*! ../../../css/loading.css */ "./resources/css/loading.css");
-var Loading = function Loading(props) {
-  _objectDestructuringEmpty(props);
-  var _ref = (0, react_1.useState)(false),
-    _ref2 = _slicedToArray(_ref, 2),
-    isMount = _ref2[0],
-    setIsMount = _ref2[1];
-  (0, react_1.useEffect)(function () {
-    setIsMount(true);
-    if (isMount) {
-      //
-    }
-    return function () {
-      return setIsMount(false);
-    };
-  }, []);
-  return react_1["default"].createElement("div", {
-    id: 'container'
-  }, react_1["default"].createElement("div", {
-    id: "text"
-  }, react_1["default"].createElement("p", {
-    id: 'paragraph',
-    className: 'text-blue-800'
-  }, "caricamento.....")), react_1["default"].createElement("div", {
-    id: "spinner"
-  }, react_1["default"].createElement("div", {
-    className: "animate-spin inline-block w-16 h-16 border-[3px] border-current border-t-transparent text-blue-800 rounded-full",
-    role: "status",
-    "aria-label": "loading"
-  }, react_1["default"].createElement("span", {
-    className: "sr-only"
-  }, "Loading..."))));
-};
-exports["default"] = Loading;
-
-/***/ }),
-
-/***/ "./resources/js/app/components/Sidebar.tsx":
-/*!*************************************************!*\
-  !*** ./resources/js/app/components/Sidebar.tsx ***!
-  \*************************************************/
+/***/ "./resources/js/app/components/dashboard/Sidebar.tsx":
+/*!***********************************************************!*\
+  !*** ./resources/js/app/components/dashboard/Sidebar.tsx ***!
+  \***********************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -8606,10 +8634,10 @@ exports["default"] = Sidebar;
 
 /***/ }),
 
-/***/ "./resources/js/app/components/SocialTraffic.tsx":
-/*!*******************************************************!*\
-  !*** ./resources/js/app/components/SocialTraffic.tsx ***!
-  \*******************************************************/
+/***/ "./resources/js/app/components/dashboard/SocialTraffic.tsx":
+/*!*****************************************************************!*\
+  !*** ./resources/js/app/components/dashboard/SocialTraffic.tsx ***!
+  \*****************************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -8765,10 +8793,10 @@ exports["default"] = SocialTraffic;
 
 /***/ }),
 
-/***/ "./resources/js/app/components/Statistics.tsx":
-/*!****************************************************!*\
-  !*** ./resources/js/app/components/Statistics.tsx ***!
-  \****************************************************/
+/***/ "./resources/js/app/components/dashboard/Statistics.tsx":
+/*!**************************************************************!*\
+  !*** ./resources/js/app/components/dashboard/Statistics.tsx ***!
+  \**************************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -8875,10 +8903,10 @@ exports["default"] = Statistics;
 
 /***/ }),
 
-/***/ "./resources/js/app/components/Table.tsx":
-/*!***********************************************!*\
-  !*** ./resources/js/app/components/Table.tsx ***!
-  \***********************************************/
+/***/ "./resources/js/app/components/dashboard/Table.tsx":
+/*!*********************************************************!*\
+  !*** ./resources/js/app/components/dashboard/Table.tsx ***!
+  \*********************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -9125,21 +9153,25 @@ var __importDefault = this && this.__importDefault || function (mod) {
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.HouseSmallCard = exports.Sidebar = exports.Form = exports.Table = exports.SocialTraffic = exports.Activities = exports.Statistics = void 0;
-var Statistics_1 = __importDefault(__webpack_require__(/*! ./Statistics */ "./resources/js/app/components/Statistics.tsx"));
+exports.Loading = exports.Error = exports.HouseSmallCard = exports.Sidebar = exports.Form = exports.Table = exports.SocialTraffic = exports.Activities = exports.Statistics = void 0;
+var Statistics_1 = __importDefault(__webpack_require__(/*! ./dashboard/Statistics */ "./resources/js/app/components/dashboard/Statistics.tsx"));
 exports.Statistics = Statistics_1["default"];
-var Activities_1 = __importDefault(__webpack_require__(/*! ./Activities */ "./resources/js/app/components/Activities.tsx"));
+var Activities_1 = __importDefault(__webpack_require__(/*! ./dashboard/Activities */ "./resources/js/app/components/dashboard/Activities.tsx"));
 exports.Activities = Activities_1["default"];
-var SocialTraffic_1 = __importDefault(__webpack_require__(/*! ./SocialTraffic */ "./resources/js/app/components/SocialTraffic.tsx"));
+var SocialTraffic_1 = __importDefault(__webpack_require__(/*! ./dashboard/SocialTraffic */ "./resources/js/app/components/dashboard/SocialTraffic.tsx"));
 exports.SocialTraffic = SocialTraffic_1["default"];
-var Table_1 = __importDefault(__webpack_require__(/*! ./Table */ "./resources/js/app/components/Table.tsx"));
+var Table_1 = __importDefault(__webpack_require__(/*! ./dashboard/Table */ "./resources/js/app/components/dashboard/Table.tsx"));
 exports.Table = Table_1["default"];
-var Form_1 = __importDefault(__webpack_require__(/*! ./Form */ "./resources/js/app/components/Form.tsx"));
+var Form_1 = __importDefault(__webpack_require__(/*! ./dashboard/Form */ "./resources/js/app/components/dashboard/Form.tsx"));
 exports.Form = Form_1["default"];
-var Sidebar_1 = __importDefault(__webpack_require__(/*! ./Sidebar */ "./resources/js/app/components/Sidebar.tsx"));
+var Sidebar_1 = __importDefault(__webpack_require__(/*! ./dashboard/Sidebar */ "./resources/js/app/components/dashboard/Sidebar.tsx"));
 exports.Sidebar = Sidebar_1["default"];
 var HouseSmallCard_1 = __importDefault(__webpack_require__(/*! ./HouseSmallCard */ "./resources/js/app/components/HouseSmallCard.tsx"));
 exports.HouseSmallCard = HouseSmallCard_1["default"];
+var Error_1 = __importDefault(__webpack_require__(/*! ./Error */ "./resources/js/app/components/Error.tsx"));
+exports.Error = Error_1["default"];
+var Loading_1 = __importDefault(__webpack_require__(/*! ./Loading */ "./resources/js/app/components/Loading.tsx"));
+exports.Loading = Loading_1["default"];
 
 /***/ }),
 
@@ -11316,8 +11348,7 @@ var Homes = function Homes() {
       id: house.id,
       key: house.id,
       photos: p,
-      title: house.title,
-      description: house.description
+      house: house
     });
   }) : null))));
 };
@@ -11770,6 +11801,11 @@ var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_mod
 var connection_manager_1 = __importDefault(__webpack_require__(/*! ../services/connection_manager */ "./resources/js/app/services/connection_manager.ts"));
 var authSlice_1 = __webpack_require__(/*! ../store/authSlice */ "./resources/js/app/store/authSlice.ts");
 var hooks_1 = __webpack_require__(/*! ../store/hooks */ "./resources/js/app/store/hooks.ts");
+var defaultPhoto = {
+  id: 0,
+  apartment_id: 0,
+  image_url: 'https://tailus.io/sources/blocks/twocards/preview/images/woman.jpg'
+};
 var House = function House(props) {
   _objectDestructuringEmpty(props);
   var params = (0, react_router_dom_1.useParams)();
@@ -11778,6 +11814,26 @@ var House = function House(props) {
     _ref2 = _slicedToArray(_ref, 2),
     home = _ref2[0],
     setHome = _ref2[1];
+  var _ref3 = (0, react_1.useState)(0),
+    _ref4 = _slicedToArray(_ref3, 2),
+    lengthPhotos = _ref4[0],
+    setLengthPhotos = _ref4[1];
+  var _ref5 = (0, react_1.useState)(1),
+    _ref6 = _slicedToArray(_ref5, 2),
+    numberPhoto = _ref6[0],
+    setNumberPhoto = _ref6[1];
+  var _ref7 = (0, react_1.useState)(0),
+    _ref8 = _slicedToArray(_ref7, 2),
+    count = _ref8[0],
+    setCount = _ref8[1];
+  var _ref9 = (0, react_1.useState)(),
+    _ref10 = _slicedToArray(_ref9, 2),
+    photos = _ref10[0],
+    setPhotos = _ref10[1];
+  var _ref11 = (0, react_1.useState)(null),
+    _ref12 = _slicedToArray(_ref11, 2),
+    photo = _ref12[0],
+    setPhoto = _ref12[1];
   var dispatch = (0, hooks_1.useAppDispatch)();
   var getHome = function getHome() {
     return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -11793,6 +11849,9 @@ var House = function House(props) {
             response = _context.sent;
             if (response.data.success) {
               setHome(response.data.apartment[0]);
+              setPhoto(response.data.apartment[0].photos[0]);
+              setPhotos(response.data.apartment[0].photos);
+              setLengthPhotos(response.data.apartment[0].photos.length);
               dispatch((0, authSlice_1.clear)());
             }
             _context.next = 12;
@@ -11809,6 +11868,34 @@ var House = function House(props) {
       }, _callee, null, [[1, 8]]);
     }));
   };
+  var nextImage = function nextImage() {
+    if (count == lengthPhotos - 1) {
+      setCount(0);
+    } else {
+      setCount(count + 1);
+      setNumberPhoto(numberPhoto + 1);
+    }
+  };
+  var previousImage = function previousImage() {
+    if (count == 0) {
+      setCount(lengthPhotos - 1);
+    } else {
+      setCount(count - 1);
+      setNumberPhoto(numberPhoto - 1);
+    }
+  };
+  var getPhoto = function getPhoto(index) {
+    if (photos) {
+      photos.forEach(function (element, i) {
+        if (i == index) {
+          setPhoto(element);
+        }
+      });
+    }
+  };
+  (0, react_1.useEffect)(function () {
+    getPhoto(count);
+  }, [count]);
   (0, react_1.useEffect)(function () {
     var isMount = true;
     if (isMount) {
@@ -11820,7 +11907,63 @@ var House = function House(props) {
   }, []);
   return react_1["default"].createElement("div", {
     className: 'text-white'
-  }, "House ", home === null || home === void 0 ? void 0 : home.id, " ", home === null || home === void 0 ? void 0 : home.title);
+  }, react_1["default"].createElement("h1", null, "House ", home === null || home === void 0 ? void 0 : home.id, " ", home === null || home === void 0 ? void 0 : home.title), react_1["default"].createElement("div", {
+    className: "overflow-hidden relative rounded-lg h-60 md:h-64 xl:h-72 w-72 md:w-72 xl:w-80"
+  }, (photos === null || photos === void 0 ? void 0 : photos.length) != 0 ? react_1["default"].createElement("div", {
+    className: "duration-700 ease-in-out"
+  }, react_1["default"].createElement("img", {
+    src: photo === null || photo === void 0 ? void 0 : photo.image_url,
+    className: "block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2",
+    alt: "image ".concat(photo === null || photo === void 0 ? void 0 : photo.id)
+  })) : react_1["default"].createElement("div", {
+    className: "duration-700 ease-in-out"
+  }, react_1["default"].createElement("img", {
+    src: "https://tailus.io/sources/blocks/twocards/preview/images/woman.jpg",
+    className: "block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2",
+    alt: "..."
+  })), react_1["default"].createElement("button", {
+    onClick: function onClick() {
+      return previousImage();
+    },
+    type: "button",
+    className: "flex absolute top-0 left-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none"
+  }, react_1["default"].createElement("span", {
+    className: "inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-black/30  hover:bg-black/50 focus:ring-4 focus:ring-white focus:outline-none"
+  }, react_1["default"].createElement("svg", {
+    className: "w-5 h-5 text-white sm:w-6 sm:h-6",
+    fill: "none",
+    stroke: "currentColor",
+    viewBox: "0 0 24 24",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, react_1["default"].createElement("path", {
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeWidth: "2",
+    d: "M15 19l-7-7 7-7"
+  })), react_1["default"].createElement("span", {
+    className: "hidden"
+  }, "Previous"))), react_1["default"].createElement("button", {
+    onClick: function onClick() {
+      return nextImage();
+    },
+    type: "button",
+    className: "flex absolute top-0 right-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none"
+  }, react_1["default"].createElement("span", {
+    className: "inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-black/30 hover:bg-black/50 focus:ring-4 focus:ring-white focus:outline-none"
+  }, react_1["default"].createElement("svg", {
+    className: "w-5 h-5 text-white sm:w-6 sm:h-6",
+    fill: "none",
+    stroke: "currentColor",
+    viewBox: "0 0 24 24",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, react_1["default"].createElement("path", {
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeWidth: "2",
+    d: "M9 5l7 7-7 7"
+  })), react_1["default"].createElement("span", {
+    className: "hidden"
+  }, "Next")))));
 };
 exports["default"] = House;
 
