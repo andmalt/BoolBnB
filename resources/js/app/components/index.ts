@@ -7,6 +7,7 @@ import Sidebar from "./dashboard/Sidebar"
 import HouseSmallCard from "./HouseSmallCard"
 import Error from "./Error"
 import Loading from "./Loading"
+import DialogModal from "./DialogModal"
 
 /**
  * application component
@@ -20,5 +21,6 @@ export {
     Sidebar,
     HouseSmallCard,
     Error,
-    Loading
+    Loading,
+    DialogModal,
 }

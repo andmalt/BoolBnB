@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
+import { Form } from '../components';
 import api from '../services/connection_manager';
 import { clear, error, loading } from '../store/authSlice';
 import { useAppDispatch } from '../store/hooks';
@@ -66,7 +67,6 @@ const HouseView = (props: HouseProps) => {
                 }
             });
         }
-
     }
 
     useEffect(() => {
@@ -149,6 +149,12 @@ const HouseView = (props: HouseProps) => {
                 <div className='bg-gradient-to-br from-blue-800 to-[rgb(20,20,20)] rounded-lg p-3 w-[80%] text-white'>
                     <p>{home?.description}</p>
                 </div>
+            </div>
+            {/* write here map component */}
+
+            {/* email message component */}
+            <div className=''>
+                <Form houseId={home?.id} />
             </div>
         </div>
     )

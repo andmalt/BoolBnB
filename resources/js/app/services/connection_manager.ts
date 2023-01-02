@@ -88,6 +88,31 @@ const api = {
         } catch (e) {
             return { data: { success: false, error: { code: 500, message: e }}}
         }
+    },
+    guestSendEmail: async function (
+        name: string,
+        surname: string,
+        email: string,
+        message: string,
+        houseId: number|undefined
+    ) {
+        const headers = {
+            "Content-Type": "application/json",
+            'X-CSRF-TOKEN': `${csrf}`
+        }
+        const data = {
+            name: convertInputForm(name),
+            surname: convertInputForm(surname),
+            email,
+            message_content:message,
+            houseId
+        }
+        try {
+            const response = await axios.post(`${BASE_URL}/api/message/send`,data, { headers })
+            return response; 
+        } catch (e) {
+            return { data: { success: false, error: { code: 500, message: e }}}
+        }
     }
 }
 

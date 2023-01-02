@@ -4,7 +4,7 @@ import "../../../css/footer.css"
 const Footer = () => {
     return (
         <div id='footer-container'>
-            <div className=" bg-black">
+            <div className=" bg-black pt-3">
                 <div className="max-w-2xl mx-auto text-blue-800 py-4">
                     <div className="text-center">
                         <h3 className="text-3xl mb-4"> Scarica la nostra app</h3>

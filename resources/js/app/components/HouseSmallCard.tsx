@@ -111,12 +111,12 @@ const HouseSmallCard = (props: HouseCard) => {
                     </div> */}
                 </div>
             </div>
-            <div onClick={() => getHome(id)} className="sm:w-7/12 pl-0 p-5 overflow-y-scroll cursor-pointer">
+            <div onClick={() => getHome(id)} className="sm:w-7/12 pl-0 p-5 overflow-auto cursor-pointer">
                 <div className="space-y-2">
                     <div className="space-y-4">
                         <h4 className="text-2xl font-semibold text-cyan-900 text-left">{title}</h4>
-                        
-                        
+
+
                         <p className="text-left font-bold">{city}</p>
                         <p className="text-left font-semibold">{address}</p>
                         <div className='flex flex-row flex-wrap'>

@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\Admin\ApartmentController;
 use App\Http\Controllers\Api\Admin\PhotoController;
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Guest\ApartmentController as GuestApartmentController;
+use App\Http\Controllers\Api\Guest\MessageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,18 +23,19 @@ use Illuminate\Support\Facades\Route;
  */
 Route::middleware('guest')->group(function () {
     Route::get('homes', [GuestApartmentController::class, 'index']);
-    Route::get('house/{id}',[GuestApartmentController::class, 'show']);
+    Route::get('house/{id}', [GuestApartmentController::class, 'show']);
+    Route::post('message/send', [MessageController::class, 'sendEmail']);
 });
 
 /**
  * Authentication Routes
  */
 Route::middleware('guest')->group(function () {
-    Route::post('/login', [AuthController::class, 'login']);
-    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('login', [AuthController::class, 'login']);
+    Route::post('register', [AuthController::class, 'register']);
 });
 Route::middleware('auth:sanctum')->group(function () {
-    Route::delete('/logout', [AuthController::class, 'logout']);
+    Route::delete('logout', [AuthController::class, 'logout']);
 });
 
 /**
