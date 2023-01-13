@@ -7740,7 +7740,7 @@ var DialogModal = function DialogModal(props) {
   var errors = props.errors,
     setOpenModal = props.setOpenModal,
     openModal = props.openModal,
-    isContact = props.isContact;
+    type = props.type;
   return react_1["default"].createElement(react_3.Transition, {
     appear: true,
     show: openModal,
@@ -7748,9 +7748,7 @@ var DialogModal = function DialogModal(props) {
   }, react_1["default"].createElement(react_3.Dialog, {
     as: "div",
     className: "relative z-10",
-    onClose: function onClose() {
-      return setOpenModal;
-    }
+    onClose: setOpenModal
   }, react_1["default"].createElement(react_3.Transition.Child, {
     as: react_2.Fragment,
     enter: "ease-out duration-300",
@@ -7778,7 +7776,7 @@ var DialogModal = function DialogModal(props) {
   }, react_1["default"].createElement(react_3.Dialog.Title, {
     as: "h3",
     className: "text-lg font-medium leading-6 text-gray-900"
-  }, isContact ? "Errore Inserimento dati" : "Errori"), react_1["default"].createElement("div", {
+  }, type === "guest" ? "Errore Inserimento dati" : "Errori"), react_1["default"].createElement("div", {
     className: "mt-2"
   }, errors === null || errors === void 0 ? void 0 : errors.map(function (error, i) {
     return react_1["default"].createElement("p", {
@@ -7788,7 +7786,6 @@ var DialogModal = function DialogModal(props) {
   })), react_1["default"].createElement("div", {
     className: "mt-4 flex flex-row justify-center"
   }, react_1["default"].createElement("button", {
-    type: "button",
     className: "inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2",
     onClick: setOpenModal
   }, "Va bene!"))))))));
@@ -8894,10 +8891,10 @@ var Form = function Form(props) {
     _ref12 = _slicedToArray(_ref11, 2),
     isOpenModal = _ref12[0],
     setIsOpenModal = _ref12[1];
-  var _ref13 = (0, react_1.useState)(true),
+  var _ref13 = (0, react_1.useState)("guest"),
     _ref14 = _slicedToArray(_ref13, 2),
-    isContact = _ref14[0],
-    setIsContact = _ref14[1];
+    type = _ref14[0],
+    setType = _ref14[1];
   var dispatch = (0, hooks_1.useAppDispatch)();
   var sendMessage = function sendMessage(e) {
     return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -8922,13 +8919,18 @@ var Form = function Form(props) {
             response = _context.sent;
             if (response.data.success) {
               console.log("message send");
+              setName("");
+              setSurname("");
+              setEmail("");
+              setMessage("");
               dispatch((0, authSlice_1.clear)());
             } else {
               setErrors(response.data.error.message.response.data.errors.message_content);
               setIsOpenModal(true);
               console.log("message not send", response);
+              dispatch((0, authSlice_1.clear)());
             }
-            _context.next = 15;
+            _context.next = 16;
             break;
           case 11:
             _context.prev = 11;
@@ -8936,13 +8938,8 @@ var Form = function Form(props) {
             console.log("error email send:", _context.t0);
             // dispatch(error())
             setIsOpenModal(true);
-          case 15:
-            // remeber to added here popup for send message
-            setName("");
-            setSurname("");
-            setEmail("");
-            setMessage("");
-          case 19:
+            dispatch((0, authSlice_1.clear)());
+          case 16:
           case "end":
             return _context.stop();
         }
@@ -8959,14 +8956,14 @@ var Form = function Form(props) {
       return setIsOpenModal(false);
     },
     openModal: isOpenModal,
-    isContact: isContact
+    type: type
   }), react_1["default"].createElement("div", {
     className: "p-6 mr-2 bg-gradient-to-br from-blue-800 to-[rgb(20,20,20)] sm:rounded-lg"
   }, react_1["default"].createElement("h1", {
     className: "text-4xl sm:text-5xl text-white font-extrabold tracking-tight"
   }, "Contattaci"), react_1["default"].createElement("p", {
     className: "text-normal text-lg sm:text-2xl font-medium text-white mt-2"
-  }, "Compila il form per sottoporre qualsiasi richiesta"), react_1["default"].createElement("div", {
+  }, "Compila il form per sottoporre qualsiasi richiesta ", houseId ? "al proprietario della casa." : null), houseId !== undefined ? null : react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement("div", {
     className: "flex items-center mt-8 text-white "
   }, react_1["default"].createElement("svg", {
     fill: "none",
@@ -8987,7 +8984,7 @@ var Form = function Form(props) {
     strokeWidth: "1.5",
     d: "M15 11a3 3 0 11-6 0 3 3 0 016 0z"
   })), react_1["default"].createElement("div", {
-    className: "ml-4 text-md tracking-wide font-semibold w-40"
+    className: "ml-4 tracking-wide font-semibold w-40"
   }, "Rome, Italy")), react_1["default"].createElement("div", {
     className: "flex items-center mt-4 text-white "
   }, react_1["default"].createElement("svg", {
@@ -9004,7 +9001,7 @@ var Form = function Form(props) {
     strokeWidth: "1.5",
     d: "M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
   })), react_1["default"].createElement("div", {
-    className: "ml-4 text-md tracking-wide font-semibold w-40"
+    className: "ml-4 tracking-wide font-semibold w-40"
   }, "+39 1234567890")), react_1["default"].createElement("div", {
     className: "flex items-center mt-4 text-white "
   }, react_1["default"].createElement("svg", {
@@ -9021,8 +9018,8 @@ var Form = function Form(props) {
     strokeWidth: "1.5",
     d: "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
   })), react_1["default"].createElement("div", {
-    className: "ml-4 text-md tracking-wide font-semibold w-40"
-  }, "info@demo.com"))), react_1["default"].createElement("form", {
+    className: "ml-4 tracking-wide font-semibold w-40"
+  }, "info@demo.com")))), react_1["default"].createElement("form", {
     className: "p-6 flex flex-col justify-center",
     onSubmit: sendMessage
   }, react_1["default"].createElement("div", {

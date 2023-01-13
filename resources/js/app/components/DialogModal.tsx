@@ -3,17 +3,29 @@ import { useState, Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 
 interface ModalProps {
+    /**
+     * 
+     */
     errors?: []
+    /**
+     * 
+     */
     openModal: boolean
+    /**
+     * function for closing the modal
+     */
     setOpenModal(): void
-    isContact: boolean
+    /**
+     * form type ["guest","admin"]
+     */
+    type: string
 }
 
 const DialogModal = (props: ModalProps) => {
-    const { errors, setOpenModal, openModal, isContact } = props;
+    const { errors, setOpenModal, openModal, type } = props;
     return (
         <Transition appear show={openModal} as={Fragment}>
-            <Dialog as="div" className="relative z-10" onClose={() => setOpenModal}>
+            <Dialog as="div" className="relative z-10" onClose={setOpenModal}>
                 <Transition.Child
                     as={Fragment}
                     enter="ease-out duration-300"
@@ -42,7 +54,7 @@ const DialogModal = (props: ModalProps) => {
                                     as="h3"
                                     className="text-lg font-medium leading-6 text-gray-900"
                                 >
-                                    {isContact ? "Errore Inserimento dati" : "Errori"}
+                                    {type === "guest" ? "Errore Inserimento dati" : "Errori"}
                                 </Dialog.Title>
                                 <div className="mt-2">
                                     {
@@ -58,7 +70,6 @@ const DialogModal = (props: ModalProps) => {
 
                                 <div className="mt-4 flex flex-row justify-center">
                                     <button
-                                        type="button"
                                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                                         onClick={setOpenModal}
                                     >
