@@ -1,0 +1,15 @@
+.mapDiv{
+    height: 300px;
+    width: 450px;
+    margin: 25px 0;
+    border-radius: 8px;
+}
+
+@media (max-width:640px) {
+    .mapDiv {
+            height: 250px;
+            width: 350px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+}

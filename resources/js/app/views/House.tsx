@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import { Form } from '../components';
 import api from '../services/connection_manager';
 import { clear, error, loading } from '../store/authSlice';
 import { useAppDispatch } from '../store/hooks';
 import { House, Photos } from './Homes';
+import '@tomtom-international/web-sdk-maps/dist/maps.css'
+import "../../../css/houseMap.css"
+import tt from '@tomtom-international/web-sdk-maps';
 
 interface HouseProps {
 
@@ -20,6 +23,11 @@ const HouseView = (props: HouseProps) => {
     const [count, setCount] = useState<number>(0);
     const [photos, setPhotos] = useState<Photos[]>();
     const [photo, setPhoto] = useState<Photos | null>(null);
+    const [mapLongitude, setMapLongitude] = useState<number>(0);
+    const [mapLatitude, setMapLatitude] = useState<number>(0);
+    const [mapZoom, setMapZoom] = useState<number>(5);
+    const [map, setMap] = useState<tt.Map>();
+    const mapElement = React.useRef() as React.MutableRefObject<HTMLInputElement>;
     const dispatch = useAppDispatch();
 
     const getHome = async () => {
@@ -27,10 +35,15 @@ const HouseView = (props: HouseProps) => {
         try {
             const response = await api.getHome(houseId)
             if (response.data.success) {
+                console.log(response);
+                setMapLongitude(response.data.apartment[0].lon)
+                setMapLatitude(response.data.apartment[0].lat)
                 setHome(response.data.apartment[0])
                 setPhoto(response.data.apartment[0].photos[0])
                 setPhotos(response.data.apartment[0].photos)
                 setLengthPhotos(response.data.apartment[0].photos.length)
+                setMapLongitude(response.data.apartment[0].lon)
+                setMapLatitude(response.data.apartment[0].lat)
                 dispatch(clear())
             }
         } catch (e) {
@@ -74,11 +87,29 @@ const HouseView = (props: HouseProps) => {
     }, [count])
 
     useEffect(() => {
+        let map = tt.map({
+            key: "CskONgb89uswo1PwlNDOtG4txMKrp1yQ",
+            container: mapElement.current,
+            center: [mapLongitude, mapLatitude],
+            zoom: mapZoom
+        });
+        let marker = new tt.Marker().setLngLat([mapLongitude, mapLatitude]).addTo(map);
+
+        setMap(map);
+        // console.log("lat", mapLatitude);
+        // console.log("lon", mapLongitude);
+        return () => map.remove();
+
+    }, [mapLatitude || mapLongitude]);
+
+    useEffect(() => {
         let isMount = true
         if (isMount) {
             getHome();
         }
-        return () => { isMount = false };
+        return () => {
+            isMount = false
+        };
     }, []);
 
     return (
@@ -151,7 +182,7 @@ const HouseView = (props: HouseProps) => {
                 </div>
             </div>
             {/* write here map component */}
-
+            <div ref={mapElement} className="mapDiv"></div>
             {/* email message component */}
             <div className=''>
                 <Form houseId={home?.id} />
