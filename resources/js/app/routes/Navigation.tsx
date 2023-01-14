@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import '../../../css/index.css';
 import { Routes, Route } from 'react-router-dom';
-import { 
+import {
     Homes,
     Dashboard,
     Login,

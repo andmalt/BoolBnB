@@ -4,10 +4,10 @@ import { Form } from '../components';
 import api from '../services/connection_manager';
 import { clear, error, loading } from '../store/authSlice';
 import { useAppDispatch } from '../store/hooks';
-import { House, Photos } from './Homes';
 import '@tomtom-international/web-sdk-maps/dist/maps.css'
 import "../../../css/houseMap.css"
 import tt from '@tomtom-international/web-sdk-maps';
+import { House, Photos } from '../services/interfaces';
 
 interface HouseProps {
 
@@ -93,11 +93,10 @@ const HouseView = (props: HouseProps) => {
             center: [mapLongitude, mapLatitude],
             zoom: mapZoom
         });
-        let marker = new tt.Marker().setLngLat([mapLongitude, mapLatitude]).addTo(map);
+        new tt.Marker().setLngLat([mapLongitude, mapLatitude]).addTo(map);
 
         setMap(map);
-        // console.log("lat", mapLatitude);
-        // console.log("lon", mapLongitude);
+
         return () => map.remove();
 
     }, [mapLatitude || mapLongitude]);
@@ -181,7 +180,7 @@ const HouseView = (props: HouseProps) => {
                     <p>{home?.description}</p>
                 </div>
             </div>
-            {/* write here map component */}
+            {/* map component */}
             <div ref={mapElement} className="mapDiv"></div>
             {/* email message component */}
             <div className=''>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { House, Photos } from '../views/Homes';
+import { House, Photos } from '../services/interfaces';
 
 interface HouseCard {
     photos: Photos[]

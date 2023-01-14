@@ -11933,11 +11933,14 @@ var __importDefault = this && this.__importDefault || function (mod) {
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
+var web_sdk_maps_1 = __importDefault(__webpack_require__(/*! @tomtom-international/web-sdk-maps */ "./node_modules/@tomtom-international/web-sdk-maps/dist/maps.min.js"));
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 var components_1 = __webpack_require__(/*! ../components */ "./resources/js/app/components/index.ts");
 var connection_manager_1 = __importDefault(__webpack_require__(/*! ../services/connection_manager */ "./resources/js/app/services/connection_manager.ts"));
 var authSlice_1 = __webpack_require__(/*! ../store/authSlice */ "./resources/js/app/store/authSlice.ts");
 var hooks_1 = __webpack_require__(/*! ../store/hooks */ "./resources/js/app/store/hooks.ts");
+__webpack_require__(/*! @tomtom-international/web-sdk-maps/dist/maps.css */ "./node_modules/@tomtom-international/web-sdk-maps/dist/maps.css");
+__webpack_require__(/*! ../../../css/homesMap.css */ "./resources/css/homesMap.css");
 var Homes = function Homes() {
   var _ref = (0, react_1.useState)([]),
     _ref2 = _slicedToArray(_ref, 2),
@@ -11947,6 +11950,31 @@ var Homes = function Homes() {
     _ref4 = _slicedToArray(_ref3, 2),
     photos = _ref4[0],
     setPhotos = _ref4[1];
+  var _ref5 = (0, react_1.useState)(""),
+    _ref6 = _slicedToArray(_ref5, 2),
+    city = _ref6[0],
+    setCity = _ref6[1];
+  var _ref7 = (0, react_1.useState)(""),
+    _ref8 = _slicedToArray(_ref7, 2),
+    address = _ref8[0],
+    setAddress = _ref8[1];
+  var _ref9 = (0, react_1.useState)(12.92935),
+    _ref10 = _slicedToArray(_ref9, 2),
+    mapLongitude = _ref10[0],
+    setMapLongitude = _ref10[1];
+  var _ref11 = (0, react_1.useState)(42.37644),
+    _ref12 = _slicedToArray(_ref11, 2),
+    mapLatitude = _ref12[0],
+    setMapLatitude = _ref12[1];
+  var _ref13 = (0, react_1.useState)(4),
+    _ref14 = _slicedToArray(_ref13, 2),
+    mapZoom = _ref14[0],
+    setMapZoom = _ref14[1];
+  var _ref15 = (0, react_1.useState)(),
+    _ref16 = _slicedToArray(_ref15, 2),
+    map = _ref16[0],
+    setMap = _ref16[1];
+  var mapElement = react_1["default"].useRef();
   var dispatch = (0, hooks_1.useAppDispatch)();
   var authSelector = (0, hooks_1.useAppSelector)(function (state) {
     return state.auth;
@@ -11986,6 +12014,32 @@ var Homes = function Homes() {
       }, _callee, null, [[1, 8]]);
     }));
   };
+  var searchHomes = function searchHomes(e) {
+    e.preventDefault();
+    console.log("search homes");
+    console.log("city", city);
+    console.log("address", address);
+  };
+  (0, react_1.useEffect)(function () {
+    var map = web_sdk_maps_1["default"].map({
+      key: "CskONgb89uswo1PwlNDOtG4txMKrp1yQ",
+      container: mapElement.current,
+      center: [mapLongitude, mapLatitude],
+      zoom: mapZoom
+    });
+    var createMarkers = function createMarkers() {
+      houses.forEach(function (el) {
+        new web_sdk_maps_1["default"].Marker().setLngLat([parseFloat(el.lon), parseFloat(el.lat)]).addTo(map);
+      });
+    };
+    createMarkers();
+    if (!authSelector.isLoading) {
+      setMap(map);
+    }
+    return function () {
+      return map.remove();
+    };
+  }, [mapLatitude || mapLongitude]);
   (0, react_1.useEffect)(function () {
     var isMounted = true;
     if (isMounted) {
@@ -12002,12 +12056,54 @@ var Homes = function Homes() {
   }, react_1["default"].createElement("div", {
     className: "container m-auto px-6 text-gray-600 md:px-12 xl:px-6"
   }, react_1["default"].createElement("div", {
-    className: "mb-12 space-y-2 text-center"
-  }, react_1["default"].createElement("h2", {
-    className: "text-2xl text-cyan-900 font-bold md:text-4xl"
-  }, "Sharing is Caring"), react_1["default"].createElement("p", {
-    className: "lg:w-6/12 lg:mx-auto"
-  }, "Quam hic dolore cumque voluptate rerum beatae et quae, tempore sunt, debitis dolorum officia aliquid explicabo? Excepturi, voluptate?")), react_1["default"].createElement("div", {
+    className: "mb-6 space-y-2 flex justify-center items-center"
+  }, react_1["default"].createElement("form", {
+    onSubmit: function onSubmit(e) {
+      return searchHomes(e);
+    }
+  }, react_1["default"].createElement("div", {
+    className: "flex flex-row justify-center items-center"
+  }, react_1["default"].createElement("input", {
+    type: "text",
+    value: city,
+    onChange: function onChange(e) {
+      return setCity(e.target.value);
+    },
+    id: "search-city",
+    className: "p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-l-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500",
+    placeholder: "citt\xE0..."
+  }), react_1["default"].createElement("input", {
+    type: "text",
+    value: address,
+    onChange: function onChange(e) {
+      return setAddress(e.target.value);
+    },
+    id: "search-address",
+    className: "p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500",
+    placeholder: "indirizzo..."
+  }), react_1["default"].createElement("button", {
+    type: "submit",
+    className: "p-2.5 ml-2 text-sm font-medium text-white bg-blue-800 rounded-lg border border-black hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+  }, react_1["default"].createElement("svg", {
+    "aria-hidden": "true",
+    className: "w-5 h-5",
+    fill: "none",
+    stroke: "currentColor",
+    viewBox: "0 0 24 24",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, react_1["default"].createElement("path", {
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeWidth: "2",
+    d: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+  })), react_1["default"].createElement("span", {
+    className: "sr-only"
+  }, "Cerca"))))), react_1["default"].createElement("div", {
+    className: "mb-12 space-y-2 flex justify-center items-center"
+  }, react_1["default"].createElement("div", {
+    ref: mapElement,
+    className: "map"
+  })), react_1["default"].createElement("div", {
     className: "grid gap-12 grid-cols-1"
   }, !authSelector.isLoading ? houses.map(function (house) {
     var p = photos.filter(function (photo) {
@@ -12595,10 +12691,8 @@ var HouseView = function HouseView(props) {
       center: [mapLongitude, mapLatitude],
       zoom: mapZoom
     });
-    var marker = new web_sdk_maps_1["default"].Marker().setLngLat([mapLongitude, mapLatitude]).addTo(map);
+    new web_sdk_maps_1["default"].Marker().setLngLat([mapLongitude, mapLatitude]).addTo(map);
     setMap(map);
-    // console.log("lat", mapLatitude);
-    // console.log("lon", mapLongitude);
     return function () {
       return map.remove();
     };
@@ -14456,6 +14550,30 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_main_background_mirror_house_jpg__WEBPACK_IMPORTED_MODULE_2__["default"]);
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "#house-container{\r\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\r\n    background-repeat: no-repeat;\r\n    background-position: center;\r\n    background-size: cover;\r\n    background-color: #000000;\r\n}\r\n\r\n#small-container{\r\n    background-color: rgba(0, 0, 0, 0.5);\r\n    box-shadow: 3px 9px 17px 3px #000000;\r\n}\r\n\r\n#black-space{\r\n    height: 80px;\r\n    background-color: black;\r\n}\r\n\r\n@media (max-width: 640px) {\r\n    #small-container {\r\n        background-color: rgba(0, 0, 0, 0.5);\r\n        /* border-color: rgb(30, 64, 175); */\r\n        box-shadow: 0px;\r\n    }\r\n}", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[2]!./resources/css/homesMap.css":
+/*!**********************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[2]!./resources/css/homesMap.css ***!
+  \**********************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".map {\r\n    height: 350px;\r\n    width: 650px;\r\n    margin: 25px 0;\r\n    border-radius: 8px;\r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -50597,6 +50715,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_8_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_8_oneOf_1_use_2_home_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
+/***/ "./resources/css/homesMap.css":
+/*!************************************!*\
+  !*** ./resources/css/homesMap.css ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_8_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_8_oneOf_1_use_2_homesMap_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[1]!../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[2]!./homesMap.css */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[2]!./resources/css/homesMap.css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_8_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_8_oneOf_1_use_2_homesMap_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_8_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_8_oneOf_1_use_2_homesMap_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
