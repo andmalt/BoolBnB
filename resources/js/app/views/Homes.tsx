@@ -10,6 +10,7 @@ import '@tomtom-international/web-sdk-maps/dist/maps.css'
 import "../../../css/homesMap.css"
 
 const Homes = () => {
+    const [mounted, setMounted] = useState<boolean>(false);
     const [houses, setHouses] = useState<House[]>([]);
     const [photos, setPhotos] = useState<Photos[]>([]);
     const [city, setCity] = useState<string>("");
@@ -39,6 +40,7 @@ const Homes = () => {
             dispatch(error())
             console.log("error allHouses:", e);
         }
+        setMounted(true)
     }
 
     const searchHomes = (e: any) => {
@@ -63,12 +65,11 @@ const Homes = () => {
         }
 
         createMarkers()
-        if (!authSelector.isLoading) {
-            setMap(map);
-        }
+
+        setMap(map);
 
         return () => map.remove();
-    }, [mapLatitude || mapLongitude]);
+    }, [mounted]);
 
     useEffect(() => {
         let isMounted = true

@@ -11942,38 +11942,42 @@ var hooks_1 = __webpack_require__(/*! ../store/hooks */ "./resources/js/app/stor
 __webpack_require__(/*! @tomtom-international/web-sdk-maps/dist/maps.css */ "./node_modules/@tomtom-international/web-sdk-maps/dist/maps.css");
 __webpack_require__(/*! ../../../css/homesMap.css */ "./resources/css/homesMap.css");
 var Homes = function Homes() {
-  var _ref = (0, react_1.useState)([]),
+  var _ref = (0, react_1.useState)(false),
     _ref2 = _slicedToArray(_ref, 2),
-    houses = _ref2[0],
-    setHouses = _ref2[1];
+    mounted = _ref2[0],
+    setMounted = _ref2[1];
   var _ref3 = (0, react_1.useState)([]),
     _ref4 = _slicedToArray(_ref3, 2),
-    photos = _ref4[0],
-    setPhotos = _ref4[1];
-  var _ref5 = (0, react_1.useState)(""),
+    houses = _ref4[0],
+    setHouses = _ref4[1];
+  var _ref5 = (0, react_1.useState)([]),
     _ref6 = _slicedToArray(_ref5, 2),
-    city = _ref6[0],
-    setCity = _ref6[1];
+    photos = _ref6[0],
+    setPhotos = _ref6[1];
   var _ref7 = (0, react_1.useState)(""),
     _ref8 = _slicedToArray(_ref7, 2),
-    address = _ref8[0],
-    setAddress = _ref8[1];
-  var _ref9 = (0, react_1.useState)(12.92935),
+    city = _ref8[0],
+    setCity = _ref8[1];
+  var _ref9 = (0, react_1.useState)(""),
     _ref10 = _slicedToArray(_ref9, 2),
-    mapLongitude = _ref10[0],
-    setMapLongitude = _ref10[1];
-  var _ref11 = (0, react_1.useState)(42.37644),
+    address = _ref10[0],
+    setAddress = _ref10[1];
+  var _ref11 = (0, react_1.useState)(12.92935),
     _ref12 = _slicedToArray(_ref11, 2),
-    mapLatitude = _ref12[0],
-    setMapLatitude = _ref12[1];
-  var _ref13 = (0, react_1.useState)(4),
+    mapLongitude = _ref12[0],
+    setMapLongitude = _ref12[1];
+  var _ref13 = (0, react_1.useState)(42.37644),
     _ref14 = _slicedToArray(_ref13, 2),
-    mapZoom = _ref14[0],
-    setMapZoom = _ref14[1];
-  var _ref15 = (0, react_1.useState)(),
+    mapLatitude = _ref14[0],
+    setMapLatitude = _ref14[1];
+  var _ref15 = (0, react_1.useState)(4),
     _ref16 = _slicedToArray(_ref15, 2),
-    map = _ref16[0],
-    setMap = _ref16[1];
+    mapZoom = _ref16[0],
+    setMapZoom = _ref16[1];
+  var _ref17 = (0, react_1.useState)(),
+    _ref18 = _slicedToArray(_ref17, 2),
+    map = _ref18[0],
+    setMap = _ref18[1];
   var mapElement = react_1["default"].useRef();
   var dispatch = (0, hooks_1.useAppDispatch)();
   var authSelector = (0, hooks_1.useAppSelector)(function (state) {
@@ -12008,6 +12012,8 @@ var Homes = function Homes() {
             dispatch((0, authSlice_1.error)());
             console.log("error allHouses:", _context.t0);
           case 12:
+            setMounted(true);
+          case 13:
           case "end":
             return _context.stop();
         }
@@ -12033,13 +12039,11 @@ var Homes = function Homes() {
       });
     };
     createMarkers();
-    if (!authSelector.isLoading) {
-      setMap(map);
-    }
+    setMap(map);
     return function () {
       return map.remove();
     };
-  }, [mapLatitude || mapLongitude]);
+  }, [mounted]);
   (0, react_1.useEffect)(function () {
     var isMounted = true;
     if (isMounted) {
