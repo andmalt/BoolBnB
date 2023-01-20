@@ -720,6 +720,9 @@ select {
 .top-28 {
   top: 7rem;
 }
+.top-16 {
+  top: 4rem;
+}
 .z-0 {
   z-index: 0;
 }
@@ -731,6 +734,9 @@ select {
 }
 .z-30 {
   z-index: 30;
+}
+.z-20 {
+  z-index: 20;
 }
 .order-2 {
   order: 2;
@@ -993,6 +999,9 @@ select {
 .h-14 {
   height: 3.5rem;
 }
+.max-h-60 {
+  max-height: 15rem;
+}
 .min-h-screen {
   min-height: 100vh;
 }
@@ -1177,6 +1186,11 @@ select {
 }
 .cursor-pointer {
   cursor: pointer;
+}
+.select-none {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 .list-inside {
   list-style-position: inside;
@@ -1376,6 +1390,9 @@ select {
 }
 .border-solid {
   border-style: solid;
+}
+.border-none {
+  border-style: none;
 }
 .border-gray-300 {
   --tw-border-opacity: 1;
@@ -1591,6 +1608,10 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(254 226 226 / var(--tw-bg-opacity));
 }
+.bg-teal-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(13 148 136 / var(--tw-bg-opacity));
+}
 .bg-opacity-25 {
   --tw-bg-opacity: 0.25;
 }
@@ -1719,6 +1740,14 @@ select {
   padding-top: 0px;
   padding-bottom: 0px;
 }
+.py-2\.5 {
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+}
+.px-7 {
+  padding-left: 1.75rem;
+  padding-right: 1.75rem;
+}
 .pt-8 {
   padding-top: 2rem;
 }
@@ -1778,6 +1807,12 @@ select {
 }
 .pt-12 {
   padding-top: 3rem;
+}
+.pr-10 {
+  padding-right: 2.5rem;
+}
+.pl-10 {
+  padding-left: 2.5rem;
 }
 .text-left {
   text-align: left;
@@ -1844,6 +1879,9 @@ select {
 }
 .font-extrabold {
   font-weight: 800;
+}
+.font-normal {
+  font-weight: 400;
 }
 .uppercase {
   text-transform: uppercase;
@@ -2010,6 +2048,10 @@ select {
 .text-yellow-700 {
   --tw-text-opacity: 1;
   color: rgb(161 98 7 / var(--tw-text-opacity));
+}
+.text-teal-600 {
+  --tw-text-opacity: 1;
+  color: rgb(13 148 136 / var(--tw-text-opacity));
 }
 .underline {
   text-decoration-line: underline;
@@ -2302,6 +2344,10 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(59 130 246 / var(--tw-bg-opacity));
 }
+.hover\:bg-gray-200:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+}
 .hover\:text-gray-500:hover {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
@@ -2449,6 +2495,11 @@ select {
   --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
 }
+.focus\:ring-0:focus {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
 .focus\:ring-indigo-200:focus {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(199 210 254 / var(--tw-ring-opacity));
@@ -2473,6 +2524,10 @@ select {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(147 197 253 / var(--tw-ring-opacity));
 }
+.focus\:ring-gray-100:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(243 244 246 / var(--tw-ring-opacity));
+}
 .focus\:ring-opacity-50:focus {
   --tw-ring-opacity: 0.5;
 }
@@ -2491,8 +2546,18 @@ select {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(59 130 246 / var(--tw-ring-opacity));
 }
+.focus-visible\:ring-white:focus-visible {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(255 255 255 / var(--tw-ring-opacity));
+}
+.focus-visible\:ring-opacity-75:focus-visible {
+  --tw-ring-opacity: 0.75;
+}
 .focus-visible\:ring-offset-2:focus-visible {
   --tw-ring-offset-width: 2px;
+}
+.focus-visible\:ring-offset-teal-300:focus-visible {
+  --tw-ring-offset-color: #5eead4;
 }
 .active\:bg-gray-100:active {
   --tw-bg-opacity: 1;
@@ -2764,6 +2829,11 @@ select {
   .dark\:focus\:ring-blue-800:focus {
     --tw-ring-opacity: 1;
     --tw-ring-color: rgb(30 64 175 / var(--tw-ring-opacity));
+  }
+
+  .dark\:focus\:ring-gray-700:focus {
+    --tw-ring-opacity: 1;
+    --tw-ring-color: rgb(55 65 81 / var(--tw-ring-opacity));
   }
 
   .dark\:active\:text-gray-700:active {

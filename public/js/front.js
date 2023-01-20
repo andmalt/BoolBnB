@@ -11227,6 +11227,24 @@ exports.convertInputForm = convertInputForm;
 
 /***/ }),
 
+/***/ "./resources/js/app/services/variables.ts":
+/*!************************************************!*\
+  !*** ./resources/js/app/services/variables.ts ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.REGIONS = exports.MAX_ZOOM = void 0;
+exports.MAX_ZOOM = 13;
+exports.REGIONS = ['Abruzzo', 'Basilicata', 'Calabria', 'Campania', 'Emilia-Romagna', 'Friuli Venezia Giulia', 'Lazio', 'Liguria', 'Lombardia', 'Marche', 'Molise', 'Piemonte', 'Puglia', 'Sardegna', 'Sicilia', 'Toscana', 'Trentino-Alto Adige', 'Umbria', 'Valle d\'Aosta', 'Veneto'];
+
+/***/ }),
+
 /***/ "./resources/js/app/store/authSlice.ts":
 /*!*********************************************!*\
   !*** ./resources/js/app/store/authSlice.ts ***!
@@ -11939,6 +11957,7 @@ var components_1 = __webpack_require__(/*! ../components */ "./resources/js/app/
 var connection_manager_1 = __importDefault(__webpack_require__(/*! ../services/connection_manager */ "./resources/js/app/services/connection_manager.ts"));
 var authSlice_1 = __webpack_require__(/*! ../store/authSlice */ "./resources/js/app/store/authSlice.ts");
 var hooks_1 = __webpack_require__(/*! ../store/hooks */ "./resources/js/app/store/hooks.ts");
+var variables_1 = __webpack_require__(/*! ../services/variables */ "./resources/js/app/services/variables.ts");
 __webpack_require__(/*! @tomtom-international/web-sdk-maps/dist/maps.css */ "./node_modules/@tomtom-international/web-sdk-maps/dist/maps.css");
 __webpack_require__(/*! ../../../css/homesMap.css */ "./resources/css/homesMap.css");
 var Homes = function Homes() {
@@ -11956,28 +11975,40 @@ var Homes = function Homes() {
     setPhotos = _ref6[1];
   var _ref7 = (0, react_1.useState)(""),
     _ref8 = _slicedToArray(_ref7, 2),
-    city = _ref8[0],
-    setCity = _ref8[1];
+    region = _ref8[0],
+    setRegion = _ref8[1];
   var _ref9 = (0, react_1.useState)(""),
     _ref10 = _slicedToArray(_ref9, 2),
-    address = _ref10[0],
-    setAddress = _ref10[1];
-  var _ref11 = (0, react_1.useState)(12.92935),
+    city = _ref10[0],
+    setCity = _ref10[1];
+  var _ref11 = (0, react_1.useState)(""),
     _ref12 = _slicedToArray(_ref11, 2),
-    mapLongitude = _ref12[0],
-    setMapLongitude = _ref12[1];
-  var _ref13 = (0, react_1.useState)(42.37644),
+    address = _ref12[0],
+    setAddress = _ref12[1];
+  var _ref13 = (0, react_1.useState)(false),
     _ref14 = _slicedToArray(_ref13, 2),
-    mapLatitude = _ref14[0],
-    setMapLatitude = _ref14[1];
-  var _ref15 = (0, react_1.useState)(4),
+    isPressed = _ref14[0],
+    setIsPressed = _ref14[1];
+  var _ref15 = (0, react_1.useState)(12.92935),
     _ref16 = _slicedToArray(_ref15, 2),
-    mapZoom = _ref16[0],
-    setMapZoom = _ref16[1];
-  var _ref17 = (0, react_1.useState)(),
+    mapLongitude = _ref16[0],
+    setMapLongitude = _ref16[1];
+  var _ref17 = (0, react_1.useState)(42.37644),
     _ref18 = _slicedToArray(_ref17, 2),
-    map = _ref18[0],
-    setMap = _ref18[1];
+    mapLatitude = _ref18[0],
+    setMapLatitude = _ref18[1];
+  var _ref19 = (0, react_1.useState)(4),
+    _ref20 = _slicedToArray(_ref19, 2),
+    mapZoom = _ref20[0],
+    setMapZoom = _ref20[1];
+  var _ref21 = (0, react_1.useState)(),
+    _ref22 = _slicedToArray(_ref21, 2),
+    map = _ref22[0],
+    setMap = _ref22[1];
+  var _ref23 = (0, react_1.useState)(),
+    _ref24 = _slicedToArray(_ref23, 2),
+    housesFiltered = _ref24[0],
+    setHousesFiltered = _ref24[1];
   var mapElement = react_1["default"].useRef();
   var dispatch = (0, hooks_1.useAppDispatch)();
   var authSelector = (0, hooks_1.useAppSelector)(function (state) {
@@ -11999,6 +12030,7 @@ var Homes = function Homes() {
               console.log(response);
               setPhotos(response.data.photos);
               setHouses(response.data.apartments);
+              setHousesFiltered(response.data.apartments);
               dispatch((0, authSlice_1.clear)());
             } else {
               console.log("error response houses");
@@ -12022,9 +12054,23 @@ var Homes = function Homes() {
   };
   var searchHomes = function searchHomes(e) {
     e.preventDefault();
+    var filtered = city && address ? houses.filter(function (house) {
+      return house.city.toLowerCase() === city.toLowerCase() && house.address.toLowerCase() === address.toLowerCase();
+    }) : city && address === "" ? houses.filter(function (house) {
+      return house.city.toLowerCase() === city.toLowerCase();
+    }) : address && city === "" ? houses.filter(function (house) {
+      return house.city.toLowerCase() === city.toLowerCase();
+    }) : houses;
+    setHousesFiltered(filtered);
     console.log("search homes");
     console.log("city", city);
     console.log("address", address);
+    console.log("region", region);
+    // if (city === "" && address === "") {
+    //     setHousesFiltered(houses)
+    // }
+    setCity("");
+    setAddress("");
   };
   (0, react_1.useEffect)(function () {
     var map = web_sdk_maps_1["default"].map({
@@ -12067,14 +12113,30 @@ var Homes = function Homes() {
     }
   }, react_1["default"].createElement("div", {
     className: "flex flex-row justify-center items-center"
-  }, react_1["default"].createElement("input", {
+  }, react_1["default"].createElement("select", {
+    onClick: function onClick() {
+      return setIsPressed(true);
+    },
+    className: 'flex-shrink-0 inline-flex items-center py-2.5 px-7 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600'
+  }, react_1["default"].createElement("option", {
+    value: "",
+    className: "".concat(isPressed ? "hidden" : "block")
+  }, "Regioni"), variables_1.REGIONS.map(function (region) {
+    return react_1["default"].createElement("option", {
+      key: region,
+      onClick: function onClick() {
+        return setRegion(region);
+      },
+      value: region
+    }, region);
+  })), react_1["default"].createElement("input", {
     type: "text",
     value: city,
     onChange: function onChange(e) {
       return setCity(e.target.value);
     },
     id: "search-city",
-    className: "p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-l-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500",
+    className: "p-2.5 w-full text-sm text-gray-900 bg-gray-50 border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500",
     placeholder: "citt\xE0..."
   }), react_1["default"].createElement("input", {
     type: "text",
@@ -12109,7 +12171,7 @@ var Homes = function Homes() {
     className: "map"
   })), react_1["default"].createElement("div", {
     className: "grid gap-12 grid-cols-1"
-  }, !authSelector.isLoading ? houses.map(function (house) {
+  }, !authSelector.isLoading ? housesFiltered === null || housesFiltered === void 0 ? void 0 : housesFiltered.map(function (house) {
     var p = photos.filter(function (photo) {
       return photo.apartment_id == house.id;
     });
