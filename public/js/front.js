@@ -12684,15 +12684,17 @@ var HouseView = function HouseView(props) {
   var dispatch = (0, hooks_1.useAppDispatch)();
   var getHome = function getHome() {
     return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-      var response;
+      var page, response;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
+            page = document.getElementById("main");
+            page === null || page === void 0 ? void 0 : page.scrollIntoView();
             dispatch((0, authSlice_1.loading)());
-            _context.prev = 1;
-            _context.next = 4;
+            _context.prev = 3;
+            _context.next = 6;
             return connection_manager_1["default"].getHome(houseId);
-          case 4:
+          case 6:
             response = _context.sent;
             if (response.data.success) {
               console.log(response);
@@ -12706,18 +12708,18 @@ var HouseView = function HouseView(props) {
               setMapLatitude(response.data.apartment[0].lat);
               dispatch((0, authSlice_1.clear)());
             }
-            _context.next = 12;
+            _context.next = 14;
             break;
-          case 8:
-            _context.prev = 8;
-            _context.t0 = _context["catch"](1);
+          case 10:
+            _context.prev = 10;
+            _context.t0 = _context["catch"](3);
             console.log("error House getHome:", _context.t0);
             dispatch((0, authSlice_1.error)());
-          case 12:
+          case 14:
           case "end":
             return _context.stop();
         }
-      }, _callee, null, [[1, 8]]);
+      }, _callee, null, [[3, 10]]);
     }));
   };
   var nextImage = function nextImage() {
@@ -12773,6 +12775,7 @@ var HouseView = function HouseView(props) {
     };
   }, []);
   return react_1["default"].createElement("div", {
+    id: 'main',
     className: 'h-full w-full flex flex-col flex-wrap items-center sm:px-10 py-10'
   }, react_1["default"].createElement("div", {
     className: 'w-full py-3'

@@ -67,5 +67,4 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## Next steps
 
--   Add HTML DOM Element scrollIntoView in house page.
 -   To fix searchbar in homes page.

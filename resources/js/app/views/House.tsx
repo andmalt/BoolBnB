@@ -31,6 +31,8 @@ const HouseView = (props: HouseProps) => {
     const dispatch = useAppDispatch();
 
     const getHome = async () => {
+        const page = document.getElementById("main");
+        page?.scrollIntoView();
         dispatch(loading())
         try {
             const response = await api.getHome(houseId)
@@ -112,7 +114,7 @@ const HouseView = (props: HouseProps) => {
     }, []);
 
     return (
-        <div className='h-full w-full flex flex-col flex-wrap items-center sm:px-10 py-10'>
+        <div id='main' className='h-full w-full flex flex-col flex-wrap items-center sm:px-10 py-10'>
             <div className='w-full py-3'>
                 <Link to={"/homes"}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-blue-800 font-bold">
