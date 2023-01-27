@@ -119,6 +119,7 @@ const HouseSmallCard = (props: HouseCard) => {
 
                         <p className="text-left font-bold">{city}</p>
                         <p className="text-left font-semibold">{address}</p>
+                        <p className="text-left font-semibold">{region}</p>
                         <div className='flex flex-row flex-wrap'>
                             <p className='font-bold mx-2'>{square} <span className='font-semibold'>mq</span></p>
                             <p className='font-bold mx-2'>{beds} <span className='font-semibold'>camere</span> </p>

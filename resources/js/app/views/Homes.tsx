@@ -51,41 +51,59 @@ const Homes = () => {
     const searchHomes = (e: any) => {
         e.preventDefault();
 
-        const filtered = city && address ? houses.filter(house => {
-            return (
-                house.city.toLowerCase() === city.toLowerCase() &&
-                house.address.toLowerCase() === address.toLowerCase()
-            )
+        let filtered = houses.filter(el => {
+            if (city && address && region) {
+                if (el.city.trim().toLowerCase().slice(0, city.length).includes(city.trim().toLowerCase()) &&
+                    el.address.trim().toLowerCase().slice(0, address.length).includes(address.trim().toLowerCase()) &&
+                    el.region.trim().toLowerCase().slice(0, region.length).includes(region.trim().toLowerCase())) {
+                    return el;
+                }
+            } else if (city && !address && region) {
+                if (el.city.trim().toLowerCase().slice(0, city.length).includes(city.trim().toLowerCase()) &&
+                    el.region.trim().toLowerCase().slice(0, region.length).includes(region.trim().toLowerCase())) {
+                    return el;
+                }
+            } else if (city && address && !region) {
+                if (el.city.trim().toLowerCase().slice(0, city.length).includes(city.trim().toLowerCase()) &&
+                    el.address.trim().toLowerCase().slice(0, address.length).includes(address.trim().toLowerCase())) {
+                    return el;
+                }
+            } else if (!city && address && region) {
+                if (el.address.trim().toLowerCase().slice(0, address.length).includes(address.trim().toLowerCase()) &&
+                    el.region.trim().toLowerCase().slice(0, region.length).includes(region.trim().toLowerCase())) {
+                    return el;
+                }
+            } else if (region && !city && !address) {
+                if (el.region.trim().toLowerCase().slice(0, region.length).includes(region.trim().toLowerCase())) {
+                    return el;
+                }
+            } else if (!region && city && !address) {
+                if (el.city.trim().toLowerCase().slice(0, city.length).includes(city.trim().toLowerCase())) {
+                    return el;
+                }
+            } else if (!region && !city && address) {
+                if (el.address.trim().toLowerCase().slice(0, address.length).includes(address.trim().toLowerCase())) {
+                    return el;
+                }
+            } else {
+                return el;
+            }
         })
-            :
-            city && address === "" ?
-                houses.filter(house => {
-                    return (
-                        house.city.toLowerCase() === city.toLowerCase()
-                    )
-                })
-                :
-                address && city === "" ?
-                    houses.filter(house => {
-                        return (
-                            house.city.toLowerCase() === city.toLowerCase()
-                        )
-                    })
-                    :
-                    houses
-
+        // set the housesFiltered array
         setHousesFiltered(filtered)
+
         console.log("search homes");
         console.log("city", city);
         console.log("address", address);
         console.log("region", region);
-        // if (city === "" && address === "") {
-        //     setHousesFiltered(houses)
-        // }
+
         setCity("")
         setAddress("")
     }
 
+    /**
+     * make map with markers
+     */
     useEffect(() => {
         let map = tt.map({
             key: "CskONgb89uswo1PwlNDOtG4txMKrp1yQ",
@@ -94,17 +112,16 @@ const Homes = () => {
             zoom: mapZoom
         });
         const createMarkers = () => {
-            houses.forEach(el => {
+            housesFiltered?.forEach(el => {
                 new tt.Marker().setLngLat([parseFloat(el.lon), parseFloat(el.lat)]).addTo(map);
             })
+            setMap(map);
         }
 
         createMarkers()
 
-        setMap(map);
-
         return () => map.remove();
-    }, [mounted]);
+    }, [housesFiltered]);
 
     useEffect(() => {
         let isMounted = true
@@ -125,7 +142,7 @@ const Homes = () => {
                         <form onSubmit={e => searchHomes(e)}>
                             <div className="flex flex-row justify-center items-center">
                                 <select onClick={() => setIsPressed(true)} className='flex-shrink-0 inline-flex items-center py-2.5 px-7 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600'>
-                                    <option value={""} className={`${isPressed ? "hidden" : "block"}`}>Regioni</option>
+                                    <option value={""} onClick={() => setRegion("")} className="font-bold" >REGIONI</option>
                                     {
                                         REGIONS.map(region => {
                                             return <option key={region} onClick={() => setRegion(region)} value={region}>{region}</option>

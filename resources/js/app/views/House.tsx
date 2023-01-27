@@ -44,8 +44,6 @@ const HouseView = (props: HouseProps) => {
                 setPhoto(response.data.apartment[0].photos[0])
                 setPhotos(response.data.apartment[0].photos)
                 setLengthPhotos(response.data.apartment[0].photos.length)
-                setMapLongitude(response.data.apartment[0].lon)
-                setMapLatitude(response.data.apartment[0].lat)
                 dispatch(clear())
             }
         } catch (e) {
@@ -176,6 +174,7 @@ const HouseView = (props: HouseProps) => {
             <div className='flex flex-col flex-wrap w-full items-center'>
                 <div className='bg-gradient-to-br from-blue-800 to-[rgb(20,20,20)] rounded-lg p-3 w-[80%] text-white mb-4'>
                     <h3 className='mb-3 font-bold uppercase'>{home?.city}</h3>
+                    <h4 className='italic'>{home?.region}</h4>
                     <h4 className='italic'>{home?.address}</h4>
                 </div>
                 <div className='bg-gradient-to-br from-blue-800 to-[rgb(20,20,20)] rounded-lg p-3 w-[80%] text-white'>

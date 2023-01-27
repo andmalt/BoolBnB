@@ -8083,7 +8083,9 @@ var HouseSmallCard = function HouseSmallCard(props) {
     className: "text-left font-bold"
   }, city), react_1["default"].createElement("p", {
     className: "text-left font-semibold"
-  }, address), react_1["default"].createElement("div", {
+  }, address), react_1["default"].createElement("p", {
+    className: "text-left font-semibold"
+  }, region), react_1["default"].createElement("div", {
     className: 'flex flex-row flex-wrap'
   }, react_1["default"].createElement("p", {
     className: 'font-bold mx-2'
@@ -12054,24 +12056,51 @@ var Homes = function Homes() {
   };
   var searchHomes = function searchHomes(e) {
     e.preventDefault();
-    var filtered = city && address ? houses.filter(function (house) {
-      return house.city.toLowerCase() === city.toLowerCase() && house.address.toLowerCase() === address.toLowerCase();
-    }) : city && address === "" ? houses.filter(function (house) {
-      return house.city.toLowerCase() === city.toLowerCase();
-    }) : address && city === "" ? houses.filter(function (house) {
-      return house.city.toLowerCase() === city.toLowerCase();
-    }) : houses;
+    var filtered = houses.filter(function (el) {
+      if (city && address && region) {
+        if (el.city.trim().toLowerCase().slice(0, city.length).includes(city.trim().toLowerCase()) && el.address.trim().toLowerCase().slice(0, address.length).includes(address.trim().toLowerCase()) && el.region.trim().toLowerCase().slice(0, region.length).includes(region.trim().toLowerCase())) {
+          return el;
+        }
+      } else if (city && !address && region) {
+        if (el.city.trim().toLowerCase().slice(0, city.length).includes(city.trim().toLowerCase()) && el.region.trim().toLowerCase().slice(0, region.length).includes(region.trim().toLowerCase())) {
+          return el;
+        }
+      } else if (city && address && !region) {
+        if (el.city.trim().toLowerCase().slice(0, city.length).includes(city.trim().toLowerCase()) && el.address.trim().toLowerCase().slice(0, address.length).includes(address.trim().toLowerCase())) {
+          return el;
+        }
+      } else if (!city && address && region) {
+        if (el.address.trim().toLowerCase().slice(0, address.length).includes(address.trim().toLowerCase()) && el.region.trim().toLowerCase().slice(0, region.length).includes(region.trim().toLowerCase())) {
+          return el;
+        }
+      } else if (region && !city && !address) {
+        if (el.region.trim().toLowerCase().slice(0, region.length).includes(region.trim().toLowerCase())) {
+          return el;
+        }
+      } else if (!region && city && !address) {
+        if (el.city.trim().toLowerCase().slice(0, city.length).includes(city.trim().toLowerCase())) {
+          return el;
+        }
+      } else if (!region && !city && address) {
+        if (el.address.trim().toLowerCase().slice(0, address.length).includes(address.trim().toLowerCase())) {
+          return el;
+        }
+      } else {
+        return el;
+      }
+    });
+    // set the housesFiltered array
     setHousesFiltered(filtered);
     console.log("search homes");
     console.log("city", city);
     console.log("address", address);
     console.log("region", region);
-    // if (city === "" && address === "") {
-    //     setHousesFiltered(houses)
-    // }
     setCity("");
     setAddress("");
   };
+  /**
+   * make map with markers
+   */
   (0, react_1.useEffect)(function () {
     var map = web_sdk_maps_1["default"].map({
       key: "CskONgb89uswo1PwlNDOtG4txMKrp1yQ",
@@ -12080,16 +12109,16 @@ var Homes = function Homes() {
       zoom: mapZoom
     });
     var createMarkers = function createMarkers() {
-      houses.forEach(function (el) {
+      housesFiltered === null || housesFiltered === void 0 ? void 0 : housesFiltered.forEach(function (el) {
         new web_sdk_maps_1["default"].Marker().setLngLat([parseFloat(el.lon), parseFloat(el.lat)]).addTo(map);
       });
+      setMap(map);
     };
     createMarkers();
-    setMap(map);
     return function () {
       return map.remove();
     };
-  }, [mounted]);
+  }, [housesFiltered]);
   (0, react_1.useEffect)(function () {
     var isMounted = true;
     if (isMounted) {
@@ -12120,8 +12149,11 @@ var Homes = function Homes() {
     className: 'flex-shrink-0 inline-flex items-center py-2.5 px-7 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600'
   }, react_1["default"].createElement("option", {
     value: "",
-    className: "".concat(isPressed ? "hidden" : "block")
-  }, "Regioni"), variables_1.REGIONS.map(function (region) {
+    onClick: function onClick() {
+      return setRegion("");
+    },
+    className: "font-bold"
+  }, "REGIONI"), variables_1.REGIONS.map(function (region) {
     return react_1["default"].createElement("option", {
       key: region,
       onClick: function onClick() {
@@ -12704,8 +12736,6 @@ var HouseView = function HouseView(props) {
               setPhoto(response.data.apartment[0].photos[0]);
               setPhotos(response.data.apartment[0].photos);
               setLengthPhotos(response.data.apartment[0].photos.length);
-              setMapLongitude(response.data.apartment[0].lon);
-              setMapLatitude(response.data.apartment[0].lat);
               dispatch((0, authSlice_1.clear)());
             }
             _context.next = 14;
@@ -12879,6 +12909,8 @@ var HouseView = function HouseView(props) {
   }, react_1["default"].createElement("h3", {
     className: 'mb-3 font-bold uppercase'
   }, home === null || home === void 0 ? void 0 : home.city), react_1["default"].createElement("h4", {
+    className: 'italic'
+  }, home === null || home === void 0 ? void 0 : home.region), react_1["default"].createElement("h4", {
     className: 'italic'
   }, home === null || home === void 0 ? void 0 : home.address)), react_1["default"].createElement("div", {
     className: 'bg-gradient-to-br from-blue-800 to-[rgb(20,20,20)] rounded-lg p-3 w-[80%] text-white'
