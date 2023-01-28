@@ -67,4 +67,4 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## Next steps
 
--   To fix searchbar in homes page.
+-   Make the Dashboard.

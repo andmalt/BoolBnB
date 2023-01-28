@@ -9108,6 +9108,9 @@ exports["default"] = Form;
 "use strict";
 
 
+function _objectDestructuringEmpty(obj) {
+  if (obj == null) throw new TypeError("Cannot destructure " + obj);
+}
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -9121,9 +9124,10 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
  *
  *
  */
-var Sidebar = function Sidebar() {
+var Sidebar = function Sidebar(props) {
+  _objectDestructuringEmpty(props);
   return react_1["default"].createElement("div", {
-    className: "flex flex-col top-28 left-0 w-14 hover:w-60 md:w-48 bg-black border-blue-800 shadow-[25px_16px_15px_-19px_rgb(30,64,175)] h-full text-white transition-all duration-300 rounded-r-md"
+    className: "flex flex-col left-0 w-14 hover:w-60 md:w-48 bg-black border-blue-800 shadow-[25px_16px_15px_-19px_rgb(30,64,175)] text-white transition-all duration-300 rounded-r-md absolute h-[600px] z-30"
   }, react_1["default"].createElement("div", {
     className: "overflow-y-auto overflow-x-hidden flex flex-col justify-between flex-grow"
   }, react_1["default"].createElement("ul", {
@@ -9134,7 +9138,7 @@ var Sidebar = function Sidebar() {
     className: "flex flex-row items-center h-8"
   }, react_1["default"].createElement("div", {
     className: "text-sm tracking-wide text-blue-800 font-bold uppercase"
-  }, "Principale"))), react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
+  }, "My Dashboard"))), react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
     href: "#",
     className: "relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-600 dark:hover:border-gray-800 pr-6"
   }, react_1["default"].createElement("span", {
@@ -9152,7 +9156,7 @@ var Sidebar = function Sidebar() {
     d: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
   }))), react_1["default"].createElement("span", {
     className: "ml-2 text-sm tracking-wide truncate"
-  }, "Dashboard"))), react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
+  }, "Case"))), react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
     href: "#",
     className: "relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-600 dark:hover:border-gray-800 pr-6"
   }, react_1["default"].createElement("span", {
@@ -9728,8 +9732,8 @@ var Table = function Table() {
     viewBox: "0 0 20 20"
   }, react_1["default"].createElement("path", {
     d: "M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z",
-    "clip-rule": "evenodd",
-    "fill-rule": "evenodd"
+    clipRule: "evenodd",
+    fillRule: "evenodd"
   })))), react_1["default"].createElement("li", null, react_1["default"].createElement("button", {
     className: "px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
   }, "1")), react_1["default"].createElement("li", null, react_1["default"].createElement("button", {
@@ -9753,8 +9757,8 @@ var Table = function Table() {
     viewBox: "0 0 20 20"
   }, react_1["default"].createElement("path", {
     d: "M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z",
-    "clip-rule": "evenodd",
-    "fill-rule": "evenodd"
+    clipRule: "evenodd",
+    fillRule: "evenodd"
   }))))))))));
 };
 exports["default"] = Table;
@@ -11468,7 +11472,7 @@ var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_mod
 var components_1 = __webpack_require__(/*! ../components */ "./resources/js/app/components/index.ts");
 var hooks_1 = __webpack_require__(/*! ../store/hooks */ "./resources/js/app/store/hooks.ts");
 __webpack_require__(/*! ../../../css/dashboard.css */ "./resources/css/dashboard.css");
-var Dashboard = function Dashboard(props) {
+var Dashboard = function Dashboard() {
   var _ref = (0, react_1.useState)(),
     _ref2 = _slicedToArray(_ref, 2),
     email = _ref2[0],
@@ -11479,8 +11483,24 @@ var Dashboard = function Dashboard(props) {
     setName = _ref4[1];
   var _ref5 = (0, react_1.useState)(true),
     _ref6 = _slicedToArray(_ref5, 2),
-    isMount = _ref6[0],
-    setIsMount = _ref6[1];
+    isHouses = _ref6[0],
+    setIsHouses = _ref6[1];
+  var _ref7 = (0, react_1.useState)(false),
+    _ref8 = _slicedToArray(_ref7, 2),
+    isStatistic = _ref8[0],
+    setIsStatistic = _ref8[1];
+  var _ref9 = (0, react_1.useState)(false),
+    _ref10 = _slicedToArray(_ref9, 2),
+    isMessage = _ref10[0],
+    setIsMessage = _ref10[1];
+  var _ref11 = (0, react_1.useState)(false),
+    _ref12 = _slicedToArray(_ref11, 2),
+    isProfile = _ref12[0],
+    setIsProfile = _ref12[1];
+  var _ref13 = (0, react_1.useState)(false),
+    _ref14 = _slicedToArray(_ref13, 2),
+    isSettings = _ref14[0],
+    setIsSettings = _ref14[1];
   var navigate = (0, react_router_dom_1.useNavigate)();
   var authSelector = (0, hooks_1.useAppSelector)(function (state) {
     return state.auth;
@@ -11495,20 +11515,23 @@ var Dashboard = function Dashboard(props) {
     }
   };
   (0, react_1.useEffect)(function () {
+    var isMount = true;
     if (isMount) {
       checkAuth();
       controlAuth();
     }
     return function () {
-      return setIsMount(false);
+      isMount = false;
     };
   }, []);
   return react_1["default"].createElement("div", {
     id: 'dashboard',
-    className: "flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white"
-  }, react_1["default"].createElement(components_1.Sidebar, null), react_1["default"].createElement("div", {
-    className: "h-full ml-14 mt-14 mb-10 md:ml-64"
+    className: "flex flex-row flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white"
   }, react_1["default"].createElement("div", {
+    className: 'w-1/4 h-full'
+  }, react_1["default"].createElement(components_1.Sidebar, null)), react_1["default"].createElement("div", {
+    className: "h-full mt-4 mb-10 w-3/4"
+  }, isHouses ? react_1["default"].createElement(components_1.Table, null) : null, react_1["default"].createElement("div", {
     className: "grid grid-cols-1 lg:grid-cols-2 p-4 gap-4"
   })));
 };

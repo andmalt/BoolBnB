@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { Sidebar } from '../components';
+import { Sidebar, Table } from '../components';
 import { useAppSelector } from '../store/hooks';
 import "../../../css/dashboard.css"
-interface DashboardProps {
-}
 
-const Dashboard = (props: DashboardProps) => {
+const Dashboard = () => {
     const [email, setEmail] = useState<string | null>();
     const [name, setName] = useState<string | null>();
-    const [isMount, setIsMount] = useState<boolean>(true);
+    const [isHouses, setIsHouses] = useState<boolean>(true);
+    const [isStatistic, setIsStatistic] = useState<boolean>(false);
+    const [isMessage, setIsMessage] = useState<boolean>(false);
+    const [isProfile, setIsProfile] = useState<boolean>(false);
+    const [isSettings, setIsSettings] = useState<boolean>(false);
     const navigate = useNavigate();
     const authSelector = useAppSelector(state => state.auth);
 
@@ -25,19 +27,28 @@ const Dashboard = (props: DashboardProps) => {
     }
 
     useEffect(() => {
+        let isMount = true;
         if (isMount) {
             checkAuth()
             controlAuth()
         }
-        return () => setIsMount(false)
+        return () => { isMount = false; }
     }, []);
     return (
-        <div id='dashboard' className="flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white">
+        <div id='dashboard' className="flex flex-row flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white">
+            <div className='w-1/4 h-full'>
+                {/* <!-- Sidebar --> */}
+                <Sidebar />
+            </div>
 
-            {/* <!-- Sidebar --> */}
-            <Sidebar />
 
-            <div className="h-full ml-14 mt-14 mb-10 md:ml-64">
+            <div className="h-full mt-4 mb-10 w-3/4">
+                {
+                    isHouses ?
+                        <Table />
+                        :
+                        null
+                }
 
                 {/* <!-- Statistics Cards --> */}
 
