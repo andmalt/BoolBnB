@@ -23,3 +23,12 @@ export const REGIONS = [
     'Valle d\'Aosta',
     'Veneto',
 ];
+
+
+export const variablesDashboard = {
+    HOUSES: "HOUSES",
+    STATISTIC: "STATISTIC",
+    MESSAGE: "MESSAGE",
+    PROFILE: "PROFILE",
+    SETTINGS: "SETTINGS"
+}

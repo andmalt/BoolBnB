@@ -33,3 +33,18 @@ export const convertInputForm = (e: string) => {
     const response = lowerCase.charAt(0).toUpperCase() + lowerCase.slice(1);
     return response;
 }
+
+/**
+ * 
+ */
+export const setDashboardComponents = (e:string) => {
+    localStorage.setItem("Dashboard", e);
+}
+
+/**
+ * 
+ */
+export const getDashboardComponents = () => {
+    const store = localStorage.getItem("Dashboard");
+    return store;
+}

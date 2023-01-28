@@ -9111,21 +9111,65 @@ exports["default"] = Form;
 function _objectDestructuringEmpty(obj) {
   if (obj == null) throw new TypeError("Cannot destructure " + obj);
 }
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  var desc = Object.getOwnPropertyDescriptor(m, k);
+  if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+    desc = {
+      enumerable: true,
+      get: function get() {
+        return m[k];
+      }
+    };
+  }
+  Object.defineProperty(o, k2, desc);
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  __setModuleDefault(result, mod);
+  return result;
 };
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var functions_1 = __webpack_require__(/*! ../../services/functions */ "./resources/js/app/services/functions.ts");
+var variables_1 = __webpack_require__(/*! ../../services/variables */ "./resources/js/app/services/variables.ts");
+var dashboardSlice_1 = __webpack_require__(/*! ../../store/dashboardSlice */ "./resources/js/app/store/dashboardSlice.ts");
+var hooks_1 = __webpack_require__(/*! ../../store/hooks */ "./resources/js/app/store/hooks.ts");
 /**
  *
  *
  */
 var Sidebar = function Sidebar(props) {
   _objectDestructuringEmpty(props);
+  var dispatch = (0, hooks_1.useAppDispatch)();
+  var changeComponents = function changeComponents(e) {
+    (0, functions_1.setDashboardComponents)(e);
+    dispatch((0, dashboardSlice_1.change)(e));
+  };
+  (0, react_1.useEffect)(function () {
+    var isMount = true;
+    if (isMount) {
+      (0, functions_1.setDashboardComponents)(variables_1.variablesDashboard.HOUSES);
+    }
+    return function () {
+      isMount = false;
+    };
+  }, []);
   return react_1["default"].createElement("div", {
     className: "flex flex-col left-0 w-14 hover:w-60 md:w-48 bg-black border-blue-800 shadow-[25px_16px_15px_-19px_rgb(30,64,175)] text-white transition-all duration-300 rounded-r-md absolute h-[600px] z-30"
   }, react_1["default"].createElement("div", {
@@ -9140,6 +9184,9 @@ var Sidebar = function Sidebar(props) {
     className: "text-sm tracking-wide text-blue-800 font-bold uppercase"
   }, "My Dashboard"))), react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
     href: "#",
+    onClick: function onClick() {
+      return changeComponents(variables_1.variablesDashboard.HOUSES);
+    },
     className: "relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-600 dark:hover:border-gray-800 pr-6"
   }, react_1["default"].createElement("span", {
     className: "inline-flex justify-center items-center ml-4"
@@ -9158,6 +9205,9 @@ var Sidebar = function Sidebar(props) {
     className: "ml-2 text-sm tracking-wide truncate"
   }, "Case"))), react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
     href: "#",
+    onClick: function onClick() {
+      return changeComponents(variables_1.variablesDashboard.STATISTIC);
+    },
     className: "relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-600 dark:hover:border-gray-800 pr-6"
   }, react_1["default"].createElement("span", {
     className: "inline-flex justify-center items-center ml-4"
@@ -9176,6 +9226,9 @@ var Sidebar = function Sidebar(props) {
     className: "ml-2 text-sm tracking-wide truncate"
   }, "Statistiche"))), react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
     href: "#",
+    onClick: function onClick() {
+      return changeComponents(variables_1.variablesDashboard.MESSAGE);
+    },
     className: "relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-600 dark:hover:border-gray-800 pr-6"
   }, react_1["default"].createElement("span", {
     className: "inline-flex justify-center items-center ml-4"
@@ -9217,6 +9270,9 @@ var Sidebar = function Sidebar(props) {
   }, react_1["default"].createElement("div", {
     className: "text-sm tracking-wide text-blue-800 font-bold uppercase"
   }, "Impostazioni"))), react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
+    onClick: function onClick() {
+      return changeComponents(variables_1.variablesDashboard.PROFILE);
+    },
     href: "#",
     className: "relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-600 dark:hover:border-gray-800 pr-6"
   }, react_1["default"].createElement("span", {
@@ -9236,6 +9292,9 @@ var Sidebar = function Sidebar(props) {
     className: "ml-2 text-sm tracking-wide truncate"
   }, "Profilo"))), react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
     href: "#",
+    onClick: function onClick() {
+      return changeComponents(variables_1.variablesDashboard.SETTINGS);
+    },
     className: "relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-600 dark:hover:border-gray-800 pr-6"
   }, react_1["default"].createElement("span", {
     className: "inline-flex justify-center items-center ml-4"
@@ -9478,9 +9537,9 @@ var Statistics = function Statistics() {
     stroke: "currentColor",
     className: "stroke-current text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out"
   }, react_1["default"].createElement("path", {
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round",
-    "stroke-width": "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeWidth: "2",
     d: "M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
   }))), react_1["default"].createElement("div", {
     className: "text-right"
@@ -9498,9 +9557,9 @@ var Statistics = function Statistics() {
     stroke: "currentColor",
     className: "stroke-current text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out"
   }, react_1["default"].createElement("path", {
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round",
-    "stroke-width": "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeWidth: "2",
     d: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
   }))), react_1["default"].createElement("div", {
     className: "text-right"
@@ -9518,9 +9577,9 @@ var Statistics = function Statistics() {
     stroke: "currentColor",
     className: "stroke-current text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out"
   }, react_1["default"].createElement("path", {
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round",
-    "stroke-width": "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeWidth: "2",
     d: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
   }))), react_1["default"].createElement("div", {
     className: "text-right"
@@ -11193,7 +11252,7 @@ exports["default"] = api;
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.convertInputForm = exports.deleteLocalStorage = exports.getLocalStorage = exports.setLocalStorage = void 0;
+exports.getDashboardComponents = exports.setDashboardComponents = exports.convertInputForm = exports.deleteLocalStorage = exports.getLocalStorage = exports.setLocalStorage = void 0;
 var setLocalStorage = function setLocalStorage(response) {
   localStorage.setItem("token", response.data.token);
   localStorage.setItem("name", "".concat(response.data.user.name, " ").concat(response.data.user.surname));
@@ -11230,6 +11289,21 @@ var convertInputForm = function convertInputForm(e) {
   return response;
 };
 exports.convertInputForm = convertInputForm;
+/**
+ *
+ */
+var setDashboardComponents = function setDashboardComponents(e) {
+  localStorage.setItem("Dashboard", e);
+};
+exports.setDashboardComponents = setDashboardComponents;
+/**
+ *
+ */
+var getDashboardComponents = function getDashboardComponents() {
+  var store = localStorage.getItem("Dashboard");
+  return store;
+};
+exports.getDashboardComponents = getDashboardComponents;
 
 /***/ }),
 
@@ -11245,9 +11319,16 @@ exports.convertInputForm = convertInputForm;
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.REGIONS = exports.MAX_ZOOM = void 0;
+exports.variablesDashboard = exports.REGIONS = exports.MAX_ZOOM = void 0;
 exports.MAX_ZOOM = 13;
 exports.REGIONS = ['Abruzzo', 'Basilicata', 'Calabria', 'Campania', 'Emilia-Romagna', 'Friuli Venezia Giulia', 'Lazio', 'Liguria', 'Lombardia', 'Marche', 'Molise', 'Piemonte', 'Puglia', 'Sardegna', 'Sicilia', 'Toscana', 'Trentino-Alto Adige', 'Umbria', 'Valle d\'Aosta', 'Veneto'];
+exports.variablesDashboard = {
+  HOUSES: "HOUSES",
+  STATISTIC: "STATISTIC",
+  MESSAGE: "MESSAGE",
+  PROFILE: "PROFILE",
+  SETTINGS: "SETTINGS"
+};
 
 /***/ }),
 
@@ -11327,6 +11408,41 @@ exports["default"] = exports.authSlice.reducer;
 
 /***/ }),
 
+/***/ "./resources/js/app/store/dashboardSlice.ts":
+/*!**************************************************!*\
+  !*** ./resources/js/app/store/dashboardSlice.ts ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.change = exports.dashboardSlice = void 0;
+var toolkit_1 = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
+var functions_1 = __webpack_require__(/*! ../services/functions */ "./resources/js/app/services/functions.ts");
+var data = (0, functions_1.getDashboardComponents)();
+var dashboard = data;
+var initialState = {
+  dashboard: dashboard
+};
+exports.dashboardSlice = (0, toolkit_1.createSlice)({
+  name: 'Dashboard',
+  initialState: initialState,
+  reducers: {
+    change: function change(state, token) {
+      state.dashboard = token.payload;
+    }
+  }
+});
+exports.change = exports.dashboardSlice.actions.change;
+// export const selectToken = (state: RootState) => state.auth.token
+exports["default"] = exports.dashboardSlice.reducer;
+
+/***/ }),
+
 /***/ "./resources/js/app/store/hooks.ts":
 /*!*****************************************!*\
   !*** ./resources/js/app/store/hooks.ts ***!
@@ -11366,9 +11482,11 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 var toolkit_1 = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
 var authSlice_1 = __importDefault(__webpack_require__(/*! ./authSlice */ "./resources/js/app/store/authSlice.ts"));
+var dashboardSlice_1 = __importDefault(__webpack_require__(/*! ./dashboardSlice */ "./resources/js/app/store/dashboardSlice.ts"));
 var store = (0, toolkit_1.configureStore)({
   reducer: {
-    auth: authSlice_1["default"]
+    auth: authSlice_1["default"],
+    dashboard: dashboardSlice_1["default"]
   }
 });
 exports["default"] = store;
@@ -11472,6 +11590,7 @@ var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_mod
 var components_1 = __webpack_require__(/*! ../components */ "./resources/js/app/components/index.ts");
 var hooks_1 = __webpack_require__(/*! ../store/hooks */ "./resources/js/app/store/hooks.ts");
 __webpack_require__(/*! ../../../css/dashboard.css */ "./resources/css/dashboard.css");
+var variables_1 = __webpack_require__(/*! ../services/variables */ "./resources/js/app/services/variables.ts");
 var Dashboard = function Dashboard() {
   var _ref = (0, react_1.useState)(),
     _ref2 = _slicedToArray(_ref, 2),
@@ -11481,29 +11600,12 @@ var Dashboard = function Dashboard() {
     _ref4 = _slicedToArray(_ref3, 2),
     name = _ref4[0],
     setName = _ref4[1];
-  var _ref5 = (0, react_1.useState)(true),
-    _ref6 = _slicedToArray(_ref5, 2),
-    isHouses = _ref6[0],
-    setIsHouses = _ref6[1];
-  var _ref7 = (0, react_1.useState)(false),
-    _ref8 = _slicedToArray(_ref7, 2),
-    isStatistic = _ref8[0],
-    setIsStatistic = _ref8[1];
-  var _ref9 = (0, react_1.useState)(false),
-    _ref10 = _slicedToArray(_ref9, 2),
-    isMessage = _ref10[0],
-    setIsMessage = _ref10[1];
-  var _ref11 = (0, react_1.useState)(false),
-    _ref12 = _slicedToArray(_ref11, 2),
-    isProfile = _ref12[0],
-    setIsProfile = _ref12[1];
-  var _ref13 = (0, react_1.useState)(false),
-    _ref14 = _slicedToArray(_ref13, 2),
-    isSettings = _ref14[0],
-    setIsSettings = _ref14[1];
   var navigate = (0, react_router_dom_1.useNavigate)();
   var authSelector = (0, hooks_1.useAppSelector)(function (state) {
     return state.auth;
+  });
+  var dashSelector = (0, hooks_1.useAppSelector)(function (state) {
+    return state.dashboard;
   });
   var controlAuth = function controlAuth() {
     setName(authSelector.name);
@@ -11531,7 +11633,7 @@ var Dashboard = function Dashboard() {
     className: 'w-1/4 h-full'
   }, react_1["default"].createElement(components_1.Sidebar, null)), react_1["default"].createElement("div", {
     className: "h-full mt-4 mb-10 w-3/4"
-  }, isHouses ? react_1["default"].createElement(components_1.Table, null) : null, react_1["default"].createElement("div", {
+  }, dashSelector.dashboard == variables_1.variablesDashboard.HOUSES ? react_1["default"].createElement(components_1.Table, null) : dashSelector.dashboard == variables_1.variablesDashboard.STATISTIC ? react_1["default"].createElement(components_1.Statistics, null) : null, react_1["default"].createElement("div", {
     className: "grid grid-cols-1 lg:grid-cols-2 p-4 gap-4"
   })));
 };

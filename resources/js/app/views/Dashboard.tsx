@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { Sidebar, Table } from '../components';
+import { Sidebar, Statistics, Table } from '../components';
 import { useAppSelector } from '../store/hooks';
+import { getDashboardComponents } from '../services/functions';
 import "../../../css/dashboard.css"
+import { variablesDashboard } from '../services/variables';
 
 const Dashboard = () => {
     const [email, setEmail] = useState<string | null>();
     const [name, setName] = useState<string | null>();
-    const [isHouses, setIsHouses] = useState<boolean>(true);
-    const [isStatistic, setIsStatistic] = useState<boolean>(false);
-    const [isMessage, setIsMessage] = useState<boolean>(false);
-    const [isProfile, setIsProfile] = useState<boolean>(false);
-    const [isSettings, setIsSettings] = useState<boolean>(false);
     const navigate = useNavigate();
     const authSelector = useAppSelector(state => state.auth);
+    const dashSelector = useAppSelector(state => state.dashboard)
 
     const controlAuth = () => {
         setName(authSelector.name)
@@ -44,11 +42,15 @@ const Dashboard = () => {
 
             <div className="h-full mt-4 mb-10 w-3/4">
                 {
-                    isHouses ?
+                    dashSelector.dashboard == variablesDashboard.HOUSES ?
                         <Table />
                         :
-                        null
+                        dashSelector.dashboard == variablesDashboard.STATISTIC ?
+                            <Statistics />
+                            :
+                            null
                 }
+
 
                 {/* <!-- Statistics Cards --> */}
 
