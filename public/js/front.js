@@ -8243,195 +8243,6 @@ exports["default"] = Loading;
 
 /***/ }),
 
-/***/ "./resources/js/app/components/dashboard/Activities.tsx":
-/*!**************************************************************!*\
-  !*** ./resources/js/app/components/dashboard/Activities.tsx ***!
-  \**************************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-/**
- *
- *
- */
-var Activities = function Activities() {
-  return react_1["default"].createElement("div", {
-    className: "relative flex flex-col min-w-0 break-words bg-gray-50 dark:bg-gray-800 w-full shadow-lg rounded"
-  }, react_1["default"].createElement("div", {
-    className: "rounded-t mb-0 px-0 border-0"
-  }, react_1["default"].createElement("div", {
-    className: "flex flex-wrap items-center px-4 py-2"
-  }, react_1["default"].createElement("div", {
-    className: "relative w-full max-w-full flex-grow flex-1"
-  }, react_1["default"].createElement("h3", {
-    className: "font-semibold text-base text-gray-900 dark:text-gray-50"
-  }, "Recent Activities")), react_1["default"].createElement("div", {
-    className: "relative w-full max-w-full flex-grow flex-1 text-right"
-  }, react_1["default"].createElement("button", {
-    className: "bg-blue-500 dark:bg-gray-100 text-white active:bg-blue-600 dark:text-gray-800 dark:active:text-gray-700 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150",
-    type: "button"
-  }, "See all"))), react_1["default"].createElement("div", {
-    className: "block w-full"
-  }, react_1["default"].createElement("div", {
-    className: "px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
-  }, "Today"), react_1["default"].createElement("ul", {
-    className: "my-1"
-  }, react_1["default"].createElement("li", {
-    className: "flex px-4"
-  }, react_1["default"].createElement("div", {
-    className: "w-9 h-9 rounded-full flex-shrink-0 bg-indigo-500 my-2 mr-3"
-  }, react_1["default"].createElement("svg", {
-    className: "w-9 h-9 fill-current text-indigo-50",
-    viewBox: "0 0 36 36"
-  }, react_1["default"].createElement("path", {
-    d: "M18 10c-4.4 0-8 3.1-8 7s3.6 7 8 7h.6l5.4 2v-4.4c1.2-1.2 2-2.8 2-4.6 0-3.9-3.6-7-8-7zm4 10.8v2.3L18.9 22H18c-3.3 0-6-2.2-6-5s2.7-5 6-5 6 2.2 6 5c0 2.2-2 3.8-2 3.8z"
-  }))), react_1["default"].createElement("div", {
-    className: "flex-grow flex items-center border-b border-gray-100 dark:border-gray-400 text-sm text-gray-600 dark:text-gray-100 py-2"
-  }, react_1["default"].createElement("div", {
-    className: "flex-grow flex justify-between items-center"
-  }, react_1["default"].createElement("div", {
-    className: "self-center"
-  }, react_1["default"].createElement("a", {
-    className: "font-medium text-gray-800 hover:text-gray-900 dark:text-gray-50 dark:hover:text-gray-100",
-    href: "#0",
-    style: {
-      outline: "none"
-    }
-  }, "Nick Mark"), " mentioned ", react_1["default"].createElement("a", {
-    className: "font-medium text-gray-800 dark:text-gray-50 dark:hover:text-gray-100",
-    href: "#0",
-    style: {
-      outline: "none"
-    }
-  }, "Sara Smith"), " in a new post"), react_1["default"].createElement("div", {
-    className: "flex-shrink-0 ml-2"
-  }, react_1["default"].createElement("a", {
-    className: "flex items-center font-medium text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-500",
-    href: "#0",
-    style: {
-      outline: "none"
-    }
-  }, "View", react_1["default"].createElement("span", null, react_1["default"].createElement("svg", {
-    width: "20",
-    height: "20",
-    viewBox: "0 0 20 20",
-    fill: "currentColor",
-    className: "transform transition-transform duration-500 ease-in-out"
-  }, react_1["default"].createElement("path", {
-    "fill-rule": "evenodd",
-    d: "M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z",
-    "clip-rule": "evenodd"
-  })))))))), react_1["default"].createElement("li", {
-    className: "flex px-4"
-  }, react_1["default"].createElement("div", {
-    className: "w-9 h-9 rounded-full flex-shrink-0 bg-red-500 my-2 mr-3"
-  }, react_1["default"].createElement("svg", {
-    className: "w-9 h-9 fill-current text-red-50",
-    viewBox: "0 0 36 36"
-  }, react_1["default"].createElement("path", {
-    d: "M25 24H11a1 1 0 01-1-1v-5h2v4h12v-4h2v5a1 1 0 01-1 1zM14 13h8v2h-8z"
-  }))), react_1["default"].createElement("div", {
-    className: "flex-grow flex items-center border-gray-100 text-sm text-gray-600 dark:text-gray-50 py-2"
-  }, react_1["default"].createElement("div", {
-    className: "flex-grow flex justify-between items-center"
-  }, react_1["default"].createElement("div", {
-    className: "self-center"
-  }, "The post ", react_1["default"].createElement("a", {
-    className: "font-medium text-gray-800 dark:text-gray-50 dark:hover:text-gray-100",
-    href: "#0",
-    style: {
-      outline: "none"
-    }
-  }, "Post Name"), " was removed by ", react_1["default"].createElement("a", {
-    className: "font-medium text-gray-800 hover:text-gray-900 dark:text-gray-50 dark:hover:text-gray-100",
-    href: "#0",
-    style: {
-      outline: "none"
-    }
-  }, "Nick Mark")), react_1["default"].createElement("div", {
-    className: "flex-shrink-0 ml-2"
-  }, react_1["default"].createElement("a", {
-    className: "flex items-center font-medium text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-500",
-    href: "#0",
-    style: {
-      outline: "none"
-    }
-  }, "View", react_1["default"].createElement("span", null, react_1["default"].createElement("svg", {
-    width: "20",
-    height: "20",
-    viewBox: "0 0 20 20",
-    fill: "currentColor",
-    className: "transform transition-transform duration-500 ease-in-out"
-  }, react_1["default"].createElement("path", {
-    "fill-rule": "evenodd",
-    d: "M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z",
-    "clip-rule": "evenodd"
-  }))))))))), react_1["default"].createElement("div", {
-    className: "px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
-  }, "Yesterday"), react_1["default"].createElement("ul", {
-    className: "my-1"
-  }, react_1["default"].createElement("li", {
-    className: "flex px-4"
-  }, react_1["default"].createElement("div", {
-    className: "w-9 h-9 rounded-full flex-shrink-0 bg-green-500 my-2 mr-3"
-  }, react_1["default"].createElement("svg", {
-    className: "w-9 h-9 fill-current text-light-blue-50",
-    viewBox: "0 0 36 36"
-  }, react_1["default"].createElement("path", {
-    d: "M23 11v2.085c-2.841.401-4.41 2.462-5.8 4.315-1.449 1.932-2.7 3.6-5.2 3.6h-1v2h1c3.5 0 5.253-2.338 6.8-4.4 1.449-1.932 2.7-3.6 5.2-3.6h3l-4-4zM15.406 16.455c.066-.087.125-.162.194-.254.314-.419.656-.872 1.033-1.33C15.475 13.802 14.038 13 12 13h-1v2h1c1.471 0 2.505.586 3.406 1.455zM24 21c-1.471 0-2.505-.586-3.406-1.455-.066.087-.125.162-.194.254-.316.422-.656.873-1.028 1.328.959.878 2.108 1.573 3.628 1.788V25l4-4h-3z"
-  }))), react_1["default"].createElement("div", {
-    className: "flex-grow flex items-center border-gray-100 text-sm text-gray-600 dark:text-gray-50 py-2"
-  }, react_1["default"].createElement("div", {
-    className: "flex-grow flex justify-between items-center"
-  }, react_1["default"].createElement("div", {
-    className: "self-center"
-  }, react_1["default"].createElement("a", {
-    className: "font-medium text-gray-800 hover:text-gray-900 dark:text-gray-50 dark:hover:text-gray-100",
-    href: "#0",
-    style: {
-      outline: "none"
-    }
-  }, "240+"), " users have subscribed to ", react_1["default"].createElement("a", {
-    className: "font-medium text-gray-800 dark:text-gray-50 dark:hover:text-gray-100",
-    href: "#0",
-    style: {
-      outline: "none"
-    }
-  }, "Newsletter #1")), react_1["default"].createElement("div", {
-    className: "flex-shrink-0 ml-2"
-  }, react_1["default"].createElement("a", {
-    className: "flex items-center font-medium text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-500",
-    href: "#0",
-    style: {
-      outline: "none"
-    }
-  }, "View", react_1["default"].createElement("span", null, react_1["default"].createElement("svg", {
-    width: "20",
-    height: "20",
-    viewBox: "0 0 20 20",
-    fill: "currentColor",
-    className: "transform transition-transform duration-500 ease-in-out"
-  }, react_1["default"].createElement("path", {
-    "fill-rule": "evenodd",
-    d: "M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z",
-    "clip-rule": "evenodd"
-  }))))))))))));
-};
-exports["default"] = Activities;
-
-/***/ }),
-
 /***/ "./resources/js/app/components/dashboard/Form.tsx":
 /*!********************************************************!*\
   !*** ./resources/js/app/components/dashboard/Form.tsx ***!
@@ -9096,6 +8907,60 @@ var Form = function Form(props) {
   }, "Submit"))));
 };
 exports["default"] = Form;
+
+/***/ }),
+
+/***/ "./resources/js/app/components/dashboard/Messages.tsx":
+/*!************************************************************!*\
+  !*** ./resources/js/app/components/dashboard/Messages.tsx ***!
+  \************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var Messages = function Messages() {
+  return react_1["default"].createElement("div", null, react_1["default"].createElement("h1", {
+    className: 'text-white'
+  }, "Messages"));
+};
+exports["default"] = Messages;
+
+/***/ }),
+
+/***/ "./resources/js/app/components/dashboard/Notifications.tsx":
+/*!*****************************************************************!*\
+  !*** ./resources/js/app/components/dashboard/Notifications.tsx ***!
+  \*****************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var Notifications = function Notifications() {
+  return react_1["default"].createElement("div", null, react_1["default"].createElement("h1", {
+    className: 'text-white'
+  }, "Notifications"));
+};
+exports["default"] = Notifications;
 
 /***/ }),
 
@@ -9841,11 +9706,9 @@ var __importDefault = this && this.__importDefault || function (mod) {
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.DialogModal = exports.Loading = exports.Error = exports.HouseSmallCard = exports.Sidebar = exports.Form = exports.Table = exports.SocialTraffic = exports.Activities = exports.Statistics = void 0;
+exports.Notifications = exports.Messages = exports.DialogModal = exports.Loading = exports.Error = exports.HouseSmallCard = exports.Sidebar = exports.Form = exports.Table = exports.SocialTraffic = exports.Statistics = void 0;
 var Statistics_1 = __importDefault(__webpack_require__(/*! ./dashboard/Statistics */ "./resources/js/app/components/dashboard/Statistics.tsx"));
 exports.Statistics = Statistics_1["default"];
-var Activities_1 = __importDefault(__webpack_require__(/*! ./dashboard/Activities */ "./resources/js/app/components/dashboard/Activities.tsx"));
-exports.Activities = Activities_1["default"];
 var SocialTraffic_1 = __importDefault(__webpack_require__(/*! ./dashboard/SocialTraffic */ "./resources/js/app/components/dashboard/SocialTraffic.tsx"));
 exports.SocialTraffic = SocialTraffic_1["default"];
 var Table_1 = __importDefault(__webpack_require__(/*! ./dashboard/Table */ "./resources/js/app/components/dashboard/Table.tsx"));
@@ -9862,6 +9725,10 @@ var Loading_1 = __importDefault(__webpack_require__(/*! ./Loading */ "./resource
 exports.Loading = Loading_1["default"];
 var DialogModal_1 = __importDefault(__webpack_require__(/*! ./DialogModal */ "./resources/js/app/components/DialogModal.tsx"));
 exports.DialogModal = DialogModal_1["default"];
+var Messages_1 = __importDefault(__webpack_require__(/*! ./dashboard/Messages */ "./resources/js/app/components/dashboard/Messages.tsx"));
+exports.Messages = Messages_1["default"];
+var Notifications_1 = __importDefault(__webpack_require__(/*! ./dashboard/Notifications */ "./resources/js/app/components/dashboard/Notifications.tsx"));
+exports.Notifications = Notifications_1["default"];
 
 /***/ }),
 
@@ -11630,12 +11497,10 @@ var Dashboard = function Dashboard() {
     id: 'dashboard',
     className: "flex flex-row flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white"
   }, react_1["default"].createElement("div", {
-    className: 'w-1/4 h-full'
+    className: 'w-1/4 lg:w-1/5 h-full'
   }, react_1["default"].createElement(components_1.Sidebar, null)), react_1["default"].createElement("div", {
-    className: "h-full mt-4 mb-10 w-3/4"
-  }, dashSelector.dashboard == variables_1.variablesDashboard.HOUSES ? react_1["default"].createElement(components_1.Table, null) : dashSelector.dashboard == variables_1.variablesDashboard.STATISTIC ? react_1["default"].createElement(components_1.Statistics, null) : null, react_1["default"].createElement("div", {
-    className: "grid grid-cols-1 lg:grid-cols-2 p-4 gap-4"
-  })));
+    className: "h-full mt-4 mb-10 w-3/4 lg:w-4/5 lg:m-6"
+  }, dashSelector.dashboard == variables_1.variablesDashboard.HOUSES ? react_1["default"].createElement(components_1.Table, null) : dashSelector.dashboard == variables_1.variablesDashboard.STATISTIC ? react_1["default"].createElement(components_1.Statistics, null) : dashSelector.dashboard == variables_1.variablesDashboard.MESSAGE ? react_1["default"].createElement(components_1.Messages, null) : dashSelector.dashboard == variables_1.variablesDashboard.MESSAGE ? react_1["default"].createElement(components_1.Notifications, null) : dashSelector.dashboard == variables_1.variablesDashboard.PROFILE ? react_1["default"].createElement(components_1.Form, null) : dashSelector.dashboard == variables_1.variablesDashboard.SETTINGS ? react_1["default"].createElement(components_1.SocialTraffic, null) : null));
 };
 exports["default"] = Dashboard;
 

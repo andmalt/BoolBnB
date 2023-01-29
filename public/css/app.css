@@ -2997,12 +2997,32 @@ select {
 }
 @media (min-width: 1024px) {
 
+  .lg\:m-2 {
+    margin: 0.5rem;
+  }
+
+  .lg\:m-4 {
+    margin: 1rem;
+  }
+
+  .lg\:m-6 {
+    margin: 1.5rem;
+  }
+
   .lg\:mb-0 {
     margin-bottom: 0px;
   }
 
   .lg\:block {
     display: block;
+  }
+
+  .lg\:w-1\/5 {
+    width: 20%;
+  }
+
+  .lg\:w-4\/5 {
+    width: 80%;
   }
 
   .lg\:max-w-4xl {

@@ -1,5 +1,4 @@
 import Statistics from "./dashboard/Statistics"
-import Activities from "./dashboard/Activities"
 import SocialTraffic from "./dashboard/SocialTraffic"
 import Table from "./dashboard/Table"
 import Form from "./dashboard/Form"
@@ -8,13 +7,14 @@ import HouseSmallCard from "./HouseSmallCard"
 import Error from "./Error"
 import Loading from "./Loading"
 import DialogModal from "./DialogModal"
+import Messages from "./dashboard/Messages"
+import Notifications from "./dashboard/Notifications"
 
 /**
  * application component
  */
 export {
     Statistics,
-    Activities,
     SocialTraffic,
     Table,
     Form,
@@ -23,4 +23,6 @@ export {
     Error,
     Loading,
     DialogModal,
+    Messages,
+    Notifications
 }
