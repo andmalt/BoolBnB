@@ -38,13 +38,13 @@ export const convertInputForm = (e: string) => {
  * 
  */
 export const setDashboardComponents = (e:string) => {
-    localStorage.setItem("Dashboard", e);
+    localStorage.setItem("dashboard", e);
 }
 
 /**
  * 
  */
 export const getDashboardComponents = () => {
-    const store = localStorage.getItem("Dashboard");
+    const store = localStorage.getItem("dashboard");
     return store;
 }

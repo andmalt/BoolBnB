@@ -26,9 +26,10 @@ export const REGIONS = [
 
 
 export const variablesDashboard = {
-    HOUSES: "HOUSES",
-    STATISTIC: "STATISTIC",
-    MESSAGE: "MESSAGE",
-    PROFILE: "PROFILE",
-    SETTINGS: "SETTINGS"
+    HOUSES: "houses",
+    STATISTIC: "statistic",
+    MESSAGE: "message",
+    NOTIFY: "notify",
+    PROFILE: "profile",
+    SETTINGS: "settings"
 }

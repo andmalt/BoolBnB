@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { Form, Messages, Notifications, Sidebar, SocialTraffic, Statistics, Table } from '../components';
+import {
+    HousesDaBo,
+    Messages,
+    Notifications,
+    Profile,
+    Settings,
+    Sidebar,
+    Statistics
+} from '../components';
 import { useAppSelector } from '../store/hooks';
-import { getDashboardComponents } from '../services/functions';
 import "../../../css/dashboard.css"
 import { variablesDashboard } from '../services/variables';
 
@@ -33,7 +40,7 @@ const Dashboard = () => {
         return () => { isMount = false; }
     }, []);
     return (
-        <div id='dashboard' className="flex flex-row flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white">
+        <div id='dashboard' className="flex flex-row flex-auto flex-shrink-0 antialiased text-black">
             <div className='w-1/4 lg:w-1/5 h-full'>
                 {/* <!-- Sidebar --> */}
                 <Sidebar />
@@ -43,7 +50,7 @@ const Dashboard = () => {
             <div className="h-full mt-4 mb-10 w-3/4 lg:w-4/5 lg:m-6">
                 {
                     dashSelector.dashboard == variablesDashboard.HOUSES ?
-                        <Table />
+                        <HousesDaBo />
                         :
                         dashSelector.dashboard == variablesDashboard.STATISTIC ?
                             <Statistics />
@@ -51,14 +58,14 @@ const Dashboard = () => {
                             dashSelector.dashboard == variablesDashboard.MESSAGE ?
                                 <Messages />
                                 :
-                                dashSelector.dashboard == variablesDashboard.MESSAGE ?
+                                dashSelector.dashboard == variablesDashboard.NOTIFY ?
                                     <Notifications />
                                     :
                                     dashSelector.dashboard == variablesDashboard.PROFILE ?
-                                        <Form />
+                                        <Profile />
                                         :
                                         dashSelector.dashboard == variablesDashboard.SETTINGS ?
-                                            <SocialTraffic />
+                                            <Settings />
                                             :
                                             null
                 }

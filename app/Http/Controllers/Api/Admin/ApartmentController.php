@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use App\Models\Facility;
 use App\Models\Photo;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
@@ -25,7 +26,7 @@ class ApartmentController extends Controller
 
         $apartments = Apartment::where('user_id', '=', $request->user()->id)
             ->with('photos')
-            ->paginate(5);
+            ->paginate(3);
 
         if ($apartments) {
             $response = [

@@ -9,7 +9,7 @@ interface DashboardState {
     dashboard: string | null,
 }
 const initialState: DashboardState = {
-    dashboard,
+    dashboard: dashboard||"houses"
 }
 
 export const dashboardSlice = createSlice({

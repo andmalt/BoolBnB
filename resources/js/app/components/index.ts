@@ -9,6 +9,9 @@ import Loading from "./Loading"
 import DialogModal from "./DialogModal"
 import Messages from "./dashboard/Messages"
 import Notifications from "./dashboard/Notifications"
+import HousesDaBo from "./dashboard/HousesDaBo"
+import Settings from "./dashboard/Settings"
+import Profile from "./dashboard/Profile"
 
 /**
  * application component
@@ -24,5 +27,8 @@ export {
     Loading,
     DialogModal,
     Messages,
-    Notifications
+    Notifications,
+    HousesDaBo,
+    Settings,
+    Profile
 }
