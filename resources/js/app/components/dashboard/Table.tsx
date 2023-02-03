@@ -1,4 +1,6 @@
+import moment from 'moment';
 import React, { useEffect, useState } from 'react'
+import { moveMessagePortToContext } from 'worker_threads';
 import { House, Links, PaginateHouses, Photos } from '../../services/interfaces'
 
 interface TableProp {
@@ -7,8 +9,6 @@ interface TableProp {
 
 const Table = (props: TableProp) => {
     const { houses } = props;
-    const [data, setData] = useState<PaginateHouses>();
-
 
     useEffect(() => {
         let isMount = true;
@@ -36,19 +36,19 @@ const Table = (props: TableProp) => {
                         <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                             {
                                 houses?.data.length != 0 && houses?.data != undefined ?
-                                    houses?.data.map((el, i) => {
+                                    houses?.data.map((house, i) => {
                                         let photo: Photos = {
                                             id: 0,
-                                            image_url: "https://via.placeholder.com/640x480.png/00ff77?text=minima",
+                                            image_url: "https://via.placeholder.com/640x480.png/#C0C0C0?text=",
                                             apartment_id: 0
                                         }
-                                        el.photos?.forEach((el, i) => {
+                                        house.photos?.forEach((el, i) => {
                                             if (i == 0) {
                                                 photo = el;
                                             }
                                         })
                                         return (
-                                            <tr key={`${el.title}-${i}`} className="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
+                                            <tr key={`${house.title}-${i}`} className="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
                                                 <td className="px-4 py-3">
                                                     <div className="flex items-center text-sm">
                                                         <div className="relative hidden w-8 h-8 mr-3 rounded-full md:block">
@@ -56,21 +56,27 @@ const Table = (props: TableProp) => {
                                                             <div className="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
                                                         </div>
                                                         <div>
-                                                            <p className="font-semibold">{el.title}</p>
-                                                            <p className="text-xs text-gray-600 dark:text-gray-400">10x Developer</p>
+                                                            <p className="font-semibold">{house.title}</p>
+                                                            <p className="text-xs text-gray-600 dark:text-gray-400">{house.city}</p>
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td className="px-4 py-3 text-sm">$855.85</td>
-                                                <td className="px-4 py-3 text-xs">
-                                                    <span className="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"> Approved </span>
-                                                </td>
-                                                <td className="px-4 py-3 text-sm">15-01-2021</td>
+                                                <td className="px-4 py-3 text-sm">{moment(house.created_at).format("DD/MM/YY HH:mm:ss")}</td>
+                                                <td className="px-4 py-3 text-sm">{moment(house.updated_at).format("DD/MM/YY HH:mm:ss")}</td>
+                                                <td className="px-4 py-3 text-sm">{ }</td>
                                             </tr>
                                         )
                                     })
                                     :
-                                    null
+                                    <tr className="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
+                                        <td className="px-4 py-3">
+                                            <div className="flex items-center text-sm">
+                                                <div>
+                                                    <p className="font-semibold">Non hai inserito nessuna casa</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
                             }
                         </tbody>
                     </table>
