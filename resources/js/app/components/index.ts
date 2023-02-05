@@ -12,6 +12,8 @@ import Notifications from "./dashboard/Notifications"
 import HousesDaBo from "./dashboard/HousesDaBo"
 import Settings from "./dashboard/Settings"
 import Profile from "./dashboard/Profile"
+import ChevronDoubleLeft from "./dashboard/ChevronDoubleLeft"
+import ChevronDoubleRight from "./dashboard/ChevronDoubleRight"
 
 /**
  * application component
@@ -30,5 +32,7 @@ export {
     Notifications,
     HousesDaBo,
     Settings,
-    Profile
+    Profile,
+    ChevronDoubleLeft,
+    ChevronDoubleRight
 }

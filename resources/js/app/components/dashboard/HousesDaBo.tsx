@@ -21,8 +21,21 @@ const HousesDaBo = () => {
             }
             dispatch(clear())
         } catch (e) {
+            console.log("paginate error:", e);
             dispatch(error())
-            return { success: false, error: 500 }
+        }
+    }
+    const paginate = async (link: string) => {
+        dispatch(loading())
+        try {
+            const response = await api.paginateMyHouses(authSelector.token, link);
+            if (response.data.success) {
+                setMyHouses(response.data.apartments)
+            }
+            dispatch(clear())
+        } catch (e) {
+            console.log("paginate error:", e);
+            dispatch(error())
         }
     }
 
@@ -40,7 +53,7 @@ const HousesDaBo = () => {
 
     return (
         <div>
-            <Table houses={myHouses} />
+            <Table houses={myHouses} paginate={paginate} />
         </div>
     )
 }

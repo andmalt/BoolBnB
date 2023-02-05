@@ -126,6 +126,19 @@ const api = {
         } catch (e) {
             return { data: { success: false, error: { code: 500, message: e } } }
         }
+    },
+    paginateMyHouses: async function (token:string|null,link:string) {
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            'X-CSRF-TOKEN': `${csrf}`
+        }
+        try {
+            const response = await axios.get(link, { headers });
+            return response;
+        } catch (e) {
+            return { data: { success: false, error: { code: 500, message: e } } }
+        }
     }
 }
 
