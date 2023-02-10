@@ -8,6 +8,7 @@ use App\Models\Facility;
 use App\Models\Photo;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -145,13 +146,20 @@ class ApartmentController extends Controller
         }
 
         // remember change this query
-        $apartment = Apartment::find($id);
-        $messages = $apartment->messages()->get();
-        $stats = $apartment->stats()->get();
-        $photos = $apartment->photos()->get();
-        $reviews = $apartment->reviews()->get();
-        $facilities = $apartment->facilities()->get();
-        $sponsorships = $apartment->sponsorships()->get();
+        // $apartment = Apartment::find($id);
+        // $messages = $apartment->messages()->get();
+        // $stats = $apartment->stats()->get();
+        // $photos = $apartment->photos()->get();
+        // $reviews = $apartment->reviews()->get();
+        // $facilities = $apartment->facilities()->get();
+        // $sponsorships = $apartment->sponsorships()->get();
+
+        $apartment = DB::table('apartments')
+            ->where('id', $id)
+            ->join('photos', 'apartments.id', '=', 'photos.apartment_id')
+            ->join('messages', 'apartments.id', '=', 'messages.apartment_id')
+            ->select('users', 'photos', 'messages')
+            ->get();
 
         if ($request->user()->id !== $apartment->user_id) {
 
@@ -165,16 +173,15 @@ class ApartmentController extends Controller
 
             $response = [
                 'success' => true,
-                'item' =>
-                [
-                    'apartment' => $apartment,
-                    'messages' => $messages,
-                    'stats' => $stats,
-                    'photos' => $photos,
-                    'reviews' => $reviews,
-                    'facilities' => $facilities,
-                    'sponsorships' => $sponsorships,
-                ],
+                'apartment' => $apartment
+                // [
+                //     // 'messages' => $messages,
+                //     // 'stats' => $stats,
+                //     // 'photos' => $photos,
+                //     // 'reviews' => $reviews,
+                //     // 'facilities' => $facilities,
+                //     // 'sponsorships' => $sponsorships,
+                // ],
             ];
 
             return response()->json($response);

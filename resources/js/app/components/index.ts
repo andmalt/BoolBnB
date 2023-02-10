@@ -9,7 +9,7 @@ import Loading from "./Loading"
 import DialogModal from "./DialogModal"
 import Messages from "./dashboard/Messages"
 import Notifications from "./dashboard/Notifications"
-import HousesDaBo from "./dashboard/HousesDaBo"
+import MyHomes from "./dashboard/MyHomes"
 import Settings from "./dashboard/Settings"
 import Profile from "./dashboard/Profile"
 import ChevronDoubleLeft from "./dashboard/icons/ChevronDoubleLeft"
@@ -32,7 +32,7 @@ export {
     DialogModal,
     Messages,
     Notifications,
-    HousesDaBo,
+    MyHomes,
     Settings,
     Profile,
     ChevronDoubleLeft,

@@ -1203,14 +1203,11 @@ select {
 .justify-between {
   justify-content: space-between;
 }
-.justify-around {
-  justify-content: space-around;
+.gap-12 {
+  gap: 3rem;
 }
 .gap-4 {
   gap: 1rem;
-}
-.gap-12 {
-  gap: 3rem;
 }
 .space-x-8 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
@@ -1580,17 +1577,14 @@ select {
 .fill-current {
   fill: currentColor;
 }
-.fill-red-600 {
-  fill: #dc2626;
-}
 .stroke-current {
   stroke: currentColor;
 }
-.stroke-red-600 {
-  stroke: #dc2626;
-}
 .stroke-blue-600 {
   stroke: #2563eb;
+}
+.stroke-red-600 {
+  stroke: #dc2626;
 }
 .object-cover {
   -o-object-fit: cover;
@@ -2940,10 +2934,6 @@ select {
 
   .lg\:max-w-4xl {
     max-width: 56rem;
-  }
-
-  .lg\:grid-cols-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .lg\:grid-cols-4 {

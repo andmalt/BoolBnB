@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import {
-    HousesDaBo,
     Messages,
+    MyHomes,
     Notifications,
     Profile,
     Settings,
@@ -12,6 +12,7 @@ import {
 import { useAppSelector } from '../store/hooks';
 import "../../../css/dashboard.css"
 import { variablesDashboard } from '../services/variables';
+import MyHome from '../components/dashboard/MyHome';
 
 const Dashboard = () => {
     const [email, setEmail] = useState<string | null>();
@@ -50,12 +51,12 @@ const Dashboard = () => {
             <div className="h-full mt-4 mb-10 w-3/4 lg:w-4/5 lg:m-6">
                 {
                     dashSelector.dashboard == variablesDashboard.HOUSES ?
-                        <HousesDaBo />
+                        <MyHomes />
                         :
                         dashSelector.dashboard == variablesDashboard.STATISTIC ?
                             <Statistics />
                             :
-                            dashSelector.dashboard == variablesDashboard.MESSAGE ?
+                            dashSelector.dashboard == variablesDashboard.MESSAGES ?
                                 <Messages />
                                 :
                                 dashSelector.dashboard == variablesDashboard.NOTIFY ?
@@ -67,7 +68,10 @@ const Dashboard = () => {
                                         dashSelector.dashboard == variablesDashboard.SETTINGS ?
                                             <Settings />
                                             :
-                                            null
+                                            dashSelector.dashboard == variablesDashboard.HOME ?
+                                                <MyHome />
+                                                :
+                                                null
                 }
             </div>
         </div>

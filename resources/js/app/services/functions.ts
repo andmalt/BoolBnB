@@ -48,3 +48,12 @@ export const getDashboardComponents = () => {
     const store = localStorage.getItem("dashboard");
     return store;
 }
+
+export const setIdNumber = (number:number|null) => {
+    localStorage.setItem("number", JSON.stringify(number));
+}
+
+export const getNumber = () => {
+    const store: number|null = JSON.parse(`${localStorage.getItem("number")}`)
+    return store;
+}

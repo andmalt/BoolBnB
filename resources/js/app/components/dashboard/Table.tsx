@@ -1,7 +1,11 @@
 import moment from 'moment';
 import React, { useEffect } from 'react'
 import { TrashIcon, ChevronDoubleLeft, ChevronDoubleRight, ModifyIcon } from '..';
+import { setDashboardComponents, setIdNumber } from '../../services/functions';
 import { PaginateHouses, Photos } from '../../services/interfaces'
+import { variablesDashboard } from '../../services/variables';
+import { setDashboard, setNumber } from '../../store/dashboardSlice';
+import { useAppDispatch } from '../../store/hooks';
 interface TableProps {
     houses?: PaginateHouses
     paginate(link: string | null): Promise<void>
@@ -9,12 +13,16 @@ interface TableProps {
 
 const Table = (props: TableProps) => {
     const { houses, paginate } = props;
+    const dispatch = useAppDispatch()
 
     /**
      * 
      */
     const showMyHouse = (id: number) => {
-        // 
+        setDashboardComponents(variablesDashboard.HOME);
+        dispatch(setDashboard(variablesDashboard.HOME));
+        setIdNumber(id);
+        dispatch(setNumber(id));
     }
 
     return (
@@ -63,7 +71,7 @@ const Table = (props: TableProps) => {
                                                 {/* action row */}
                                                 <td className="px-4 py-3 text-sm">
                                                     <div className="flex flex-row flex-wrap justify-between items-center">
-                                                        <button>{<ModifyIcon className='stroke-blue-600' />}</button>
+                                                        <button onClick={() => showMyHouse(house.id)}>{<ModifyIcon className='stroke-blue-600' />}</button>
                                                         <button>{<TrashIcon className='stroke-red-600' />}</button>
                                                     </div>
                                                 </td>

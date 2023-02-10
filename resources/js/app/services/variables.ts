@@ -1,6 +1,9 @@
 
 export const MAX_ZOOM: number = 13;
 
+/**
+ * 
+ */
 export const REGIONS = [
     'Abruzzo',
     'Basilicata',
@@ -24,12 +27,16 @@ export const REGIONS = [
     'Veneto',
 ];
 
-
+/**
+ * 
+ */
 export const variablesDashboard = {
     HOUSES: "houses",
     STATISTIC: "statistic",
+    MESSAGES: "messages",
     MESSAGE: "message",
     NOTIFY: "notify",
     PROFILE: "profile",
-    SETTINGS: "settings"
+    SETTINGS: "settings",
+    HOME: "home",
 }
