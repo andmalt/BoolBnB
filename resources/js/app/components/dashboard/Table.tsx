@@ -1,26 +1,21 @@
 import moment from 'moment';
 import React, { useEffect } from 'react'
-import { House, Links, PaginateHouses, Photos } from '../../services/interfaces'
-import ChevronDoubleLeft from './ChevronDoubleLeft';
-import ChevronDoubleRight from './ChevronDoubleRight';
-
-interface TableProp {
+import { TrashIcon, ChevronDoubleLeft, ChevronDoubleRight, ModifyIcon } from '..';
+import { PaginateHouses, Photos } from '../../services/interfaces'
+interface TableProps {
     houses?: PaginateHouses
     paginate(link: string | null): Promise<void>
 }
 
-const Table = (props: TableProp) => {
+const Table = (props: TableProps) => {
     const { houses, paginate } = props;
 
-    useEffect(() => {
-        let isMount = true;
-        if (isMount) {
-            console.log("houses:", houses);
-        }
-        return () => {
-            isMount = false;
-        }
-    }, [])
+    /**
+     * 
+     */
+    const showMyHouse = (id: number) => {
+        // 
+    }
 
     return (
         <div className="mt-4 mx-4">
@@ -65,7 +60,13 @@ const Table = (props: TableProp) => {
                                                 </td>
                                                 <td className="px-4 py-3 text-sm">{moment(house.created_at).format("DD/MM/YY HH:mm:ss")}</td>
                                                 <td className="px-4 py-3 text-sm">{moment(house.updated_at).format("DD/MM/YY HH:mm:ss")}</td>
-                                                <td className="px-4 py-3 text-sm">{ }</td>
+                                                {/* action row */}
+                                                <td className="px-4 py-3 text-sm">
+                                                    <div className="flex flex-row flex-wrap justify-between items-center">
+                                                        <button>{<ModifyIcon className='stroke-blue-600' />}</button>
+                                                        <button>{<TrashIcon className='stroke-red-600' />}</button>
+                                                    </div>
+                                                </td>
                                             </tr>
                                         )
                                     })

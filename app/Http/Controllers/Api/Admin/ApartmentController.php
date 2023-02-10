@@ -144,6 +144,7 @@ class ApartmentController extends Controller
             return response()->json($response, 404);
         }
 
+        // remember change this query
         $apartment = Apartment::find($id);
         $messages = $apartment->messages()->get();
         $stats = $apartment->stats()->get();
