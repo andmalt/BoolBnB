@@ -60,9 +60,9 @@ const Table = (props: TableProps) => {
                                                             <img className="object-cover w-full h-full rounded-full" src={photo.image_url} alt="" loading="lazy" />
                                                             <div className="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
                                                         </div>
-                                                        <div>
-                                                            <p className="font-semibold">{house.title}</p>
-                                                            <p className="text-xs text-gray-600 dark:text-gray-400">{house.city}</p>
+                                                        <div onClick={() => showMyHouse(house.id)}>
+                                                            <p className="font-semibold cursor-pointer">{house.title}</p>
+                                                            <p className="text-xs text-gray-600 dark:text-gray-400 cursor-pointer">{house.city}</p>
                                                         </div>
                                                     </div>
                                                 </td>

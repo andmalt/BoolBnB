@@ -139,6 +139,19 @@ const api = {
         } catch (e) {
             return { data: { success: false, error: { code: 500, message: e } } }
         }
+    },
+    getMyHome: async function (token:string|null,id:number|null) {
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            'X-CSRF-TOKEN': `${csrf}`
+        }
+        try {
+            const response = await axios.get(`${BASE_URL}/api/my/apartment/${id}`, { headers });
+            return response;
+        } catch (e) {
+            return { data: { success: false, error: { code: 500, message: e } } }
+        }
     }
 }
 

@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import api from '../../services/connection_manager';
 import { House, Photos } from '../../services/interfaces';
+import { clear, error, loading } from '../../store/authSlice';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import '@tomtom-international/web-sdk-maps/dist/maps.css'
+import tt from '@tomtom-international/web-sdk-maps';
 
 const MyHome = () => {
     const [home, setHome] = useState<House | null>(null);
@@ -8,6 +13,14 @@ const MyHome = () => {
     const [count, setCount] = useState<number>(0);
     const [photos, setPhotos] = useState<Photos[]>();
     const [photo, setPhoto] = useState<Photos | null>(null);
+    const authSelector = useAppSelector(store => store.auth);
+    const dashSelector = useAppSelector(store => store.dashboard);
+    const [mapLongitude, setMapLongitude] = useState<number>(0);
+    const [mapLatitude, setMapLatitude] = useState<number>(0);
+    const [mapZoom, setMapZoom] = useState<number>(5);
+    const [map, setMap] = useState<tt.Map>();
+    const mapElement = React.useRef() as React.MutableRefObject<HTMLInputElement>;
+    const dispatch = useAppDispatch();
 
     const nextImage = () => {
         if (count == lengthPhotos - 1) {
@@ -30,8 +43,53 @@ const MyHome = () => {
     }
 
     const getMyHouse = async () => {
-        // 
+        dispatch(loading())
+        try {
+            const response = await api.getMyHome(authSelector.token, dashSelector.id);
+            if (response.data.success) {
+                console.log("apartment", response.data.apartment);
+                setMapLongitude(response.data.apartment.lon)
+                setMapLatitude(response.data.apartment.lat)
+                setHome(response.data.apartment)
+                setPhotos(response.data.apartment.photos)
+                setPhoto(response.data.apartment.photos[0])
+                setLengthPhotos(response.data.apartment.photos.length)
+            }
+            dispatch(clear())
+        } catch (e) {
+            console.log("error myhome", e);
+            dispatch(error())
+        }
     }
+
+    const getPhoto = (index: number) => {
+        if (photos) {
+            photos.forEach((element, i) => {
+                if (i == index) {
+                    setPhoto(element)
+                }
+            });
+        }
+    }
+
+    useEffect(() => {
+        let map = tt.map({
+            key: "CskONgb89uswo1PwlNDOtG4txMKrp1yQ",
+            container: mapElement.current,
+            center: [mapLongitude, mapLatitude],
+            zoom: mapZoom
+        });
+        new tt.Marker().setLngLat([mapLongitude, mapLatitude]).addTo(map);
+
+        setMap(map);
+
+        return () => map.remove();
+
+    }, [mapLatitude || mapLongitude]);
+
+    useEffect(() => {
+        getPhoto(count)
+    }, [count])
 
     useEffect(() => {
         let isMount = true;
@@ -106,6 +164,8 @@ const MyHome = () => {
                 <div className='bg-gradient-to-br from-blue-800 to-[rgb(20,20,20)] rounded-lg p-3 w-[80%] text-white'>
                     <p>{home?.description}</p>
                 </div>
+                {/* map component */}
+                <div ref={mapElement} className="mapDiv"></div>
             </div>
         </div>
     )
