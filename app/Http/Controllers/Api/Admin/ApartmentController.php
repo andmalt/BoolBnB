@@ -115,14 +115,14 @@ class ApartmentController extends Controller
             }
         }
 
+        $apart = Apartment::where('id', $apartment->id)
+            ->with('facilities', 'photos')
+            ->first();
+
         $response = [
             'success' => true,
             'message' => "the apartment has been created",
-            'item' => [
-                'apartment' => $apartment,
-                'facilities' => $apartment->facilities()->get(),
-                'photos' => $apartment->photos()->get(),
-            ],
+            'apartment' => $apart
         ];
 
         return response()->json($response, 201);
@@ -136,9 +136,11 @@ class ApartmentController extends Controller
      */
     public function show($id, Request $request)
     {
-        $apartment = Apartment::find($id);
-        if (!$apartment) {
+        $apartment = Apartment::where('id', $id)
+            ->with('photos', 'messages', 'reviews', 'facilities', 'stats', 'sponsorships')
+            ->first();
 
+        if (!$apartment) {
             $response = [
                 'success' => false,
                 'message' => "there isn't any apartment",
@@ -146,34 +148,17 @@ class ApartmentController extends Controller
             return response()->json($response, 404);
         }
 
-        $messages = $apartment->messages;
-        $stats = $apartment->stats;
-        $photos = $apartment->photos;
-        $reviews = $apartment->reviews;
-        $facilities = $apartment->facilities;
-        $sponsorships = $apartment->sponsorships;
-
         if ($request->user()->id !== $apartment->user_id) {
-
             $response = [
                 'success' => false,
-                'message' => "you aren't the user",
+                'message' => "you are not the user",
             ];
-
-            return response()->json($response, 404);
+            return response()->json($response, 401);
         } else {
-
             $response = [
                 'success' => true,
                 'apartment' => $apartment,
-                'messages' => $messages,
-                'stats' => $stats,
-                'photos' => $photos,
-                'reviews' => $reviews,
-                'facilities' => $facilities,
-                'sponsorships' => $sponsorships,
             ];
-
             return response()->json($response);
         }
     }
@@ -278,7 +263,7 @@ class ApartmentController extends Controller
                 'message' => "you aren't the user",
             ];
 
-            return response()->json($response, 404);
+            return response()->json($response, 401);
         }
     }
 }
