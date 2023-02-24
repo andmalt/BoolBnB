@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import {
+    CreateUpdate,
     Messages,
     MyHomes,
     Notifications,
@@ -71,7 +72,10 @@ const Dashboard = () => {
                                             dashSelector.dashboard == variablesDashboard.HOME ?
                                                 <MyHome />
                                                 :
-                                                null
+                                                dashSelector.dashboard == variablesDashboard.CREATE_UPDATE ?
+                                                    <CreateUpdate />
+                                                    :
+                                                    null
                 }
             </div>
         </div>

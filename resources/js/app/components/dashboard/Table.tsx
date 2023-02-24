@@ -18,11 +18,11 @@ const Table = (props: TableProps) => {
     /**
      * 
      */
-    const showMyHouse = (id: number) => {
-        setDashboardComponents(variablesDashboard.HOME);
-        dispatch(setDashboard(variablesDashboard.HOME));
-        setIdNumber(id);
-        dispatch(setNumber(id));
+    const changePage = (varName: string, id: number) => {
+        setDashboardComponents(varName);
+        dispatch(setDashboard(varName))
+        setIdNumber(id)
+        dispatch(setNumber(id))
     }
 
     return (
@@ -60,7 +60,7 @@ const Table = (props: TableProps) => {
                                                             <img className="object-cover w-full h-full rounded-full" src={photo.image_url} alt="" loading="lazy" />
                                                             <div className="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
                                                         </div>
-                                                        <div onClick={() => showMyHouse(house.id)}>
+                                                        <div onClick={() => changePage(variablesDashboard.HOME, house.id)}>
                                                             <p className="font-semibold cursor-pointer">{house.title}</p>
                                                             <p className="text-xs text-gray-600 dark:text-gray-400 cursor-pointer">{house.city}</p>
                                                         </div>
@@ -71,7 +71,7 @@ const Table = (props: TableProps) => {
                                                 {/* action row */}
                                                 <td className="px-4 py-3 text-sm">
                                                     <div className="flex flex-row flex-wrap justify-between items-center">
-                                                        <button onClick={() => showMyHouse(house.id)}>{<ModifyIcon className='stroke-blue-600' />}</button>
+                                                        <button onClick={() => changePage(variablesDashboard.CREATE_UPDATE, house.id)}>{<ModifyIcon className='stroke-blue-600' />}</button>
                                                         <button>{<TrashIcon className='stroke-red-600' />}</button>
                                                     </div>
                                                 </td>

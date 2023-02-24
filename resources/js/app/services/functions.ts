@@ -35,20 +35,25 @@ export const convertInputForm = (e: string) => {
 }
 
 /**
- * 
+ * set in the storage the name of the variable for displaying a view in the dashboard
  */
 export const setDashboardComponents = (e:string) => {
     localStorage.setItem("dashboard", e);
 }
 
 /**
- * 
+ * return variable name for displaying a view in the dashboard
  */
 export const getDashboardComponents = () => {
     const store = localStorage.getItem("dashboard");
     return store;
 }
 
+/**
+ * This function saves a house id number in the storage
+ * 
+ * @param number id House
+ */
 export const setIdNumber = (number:number|null) => {
     localStorage.setItem("number", JSON.stringify(number));
 }

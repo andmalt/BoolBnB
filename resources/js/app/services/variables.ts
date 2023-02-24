@@ -39,4 +39,5 @@ export const variablesDashboard = {
     PROFILE: "profile",
     SETTINGS: "settings",
     HOME: "home",
+    CREATE_UPDATE: "createUpdate",
 }

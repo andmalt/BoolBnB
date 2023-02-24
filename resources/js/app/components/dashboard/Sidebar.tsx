@@ -19,6 +19,7 @@ const Sidebar = (props: SidebarProps) => {
     const changeComponents = (e: string) => {
         setDashboardComponents(e);
         dispatch(setDashboard(e))
+        // clear home number in the store
         setIdNumber(null)
         dispatch(setNumber(null))
     }

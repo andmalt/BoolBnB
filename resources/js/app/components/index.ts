@@ -16,6 +16,7 @@ import ChevronDoubleLeft from "./dashboard/icons/ChevronDoubleLeft"
 import ChevronDoubleRight from "./dashboard/icons/ChevronDoubleRight"
 import TrashIcon from "./dashboard/icons/TrashIcon"
 import ModifyIcon from "./dashboard/icons/ModifyIcon"
+import CreateUpdate from "./dashboard/CreateUpdateHome"
 
 /**
  * application component
@@ -39,4 +40,5 @@ export {
     ChevronDoubleRight,
     TrashIcon,
     ModifyIcon,
+    CreateUpdate,
 }
