@@ -14,7 +14,8 @@ export interface House {
     address: string,
     lat: string,
     lon: string,
-    price: number,
+    price: string,
+    facilities?: Facilities[],
     photos?: Photos[],
     created_at: string,
     updated_at: string,
@@ -49,4 +50,9 @@ export interface Links {
     active: boolean;
     label: string | null;
     url: string | null;
+}
+
+export interface Facilities {
+    id: number,
+    name: string,
 }

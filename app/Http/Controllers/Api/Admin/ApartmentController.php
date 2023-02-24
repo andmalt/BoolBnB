@@ -140,6 +140,8 @@ class ApartmentController extends Controller
             ->with('photos', 'messages', 'reviews', 'facilities', 'stats', 'sponsorships')
             ->first();
 
+        $facilities = Facility::all();
+
         if (!$apartment) {
             $response = [
                 'success' => false,
@@ -158,6 +160,7 @@ class ApartmentController extends Controller
             $response = [
                 'success' => true,
                 'apartment' => $apartment,
+                'facilities' => $facilities,
             ];
             return response()->json($response);
         }
