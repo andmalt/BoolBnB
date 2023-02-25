@@ -55,14 +55,6 @@ const CreateUpdateHome = () => {
 
     const updateMyHome = async (e: any) => {
         e.preventDefault();
-        console.log(facilityChecked);
-        let newFacilities: number[] = []
-        facilities?.filter((item,index )=>{
-            if(checkedState[index] == true){
-                newFacilities.push(item.id)
-            }
-        });
-        setFacilityChecked(newFacilities)
         try{
             const data = {
                 address,
@@ -144,7 +136,7 @@ const CreateUpdateHome = () => {
                         {
                             facilities?.map((facility, i) => {
                                 return (
-                                    <div key={i} className="mt-1 px-3 py-2">
+                                    <div key={i} className="mt-1 px-3 py-2 flex flex-col justify-center items-center">
                                         <label htmlFor={`facility-${facility.id}`} className="block text-sm font-medium text-slate-700">
                                             {facility.name}
                                         </label>
