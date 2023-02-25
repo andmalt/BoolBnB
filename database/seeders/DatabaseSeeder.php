@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             ApartmentSponsorshipTableSeeder::class,
             FacilityTableSeeder::class,
             ApartmentFacilityTableSeeder::class,
+            RegionTableSeeder::class,
         ]);
     }
 }

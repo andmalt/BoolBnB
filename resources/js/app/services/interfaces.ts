@@ -56,3 +56,8 @@ export interface Facilities {
     id: number,
     name: string,
 }
+
+export interface Regions {
+    id: number,
+    name: string,
+}

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { SetStateAction, useEffect, useState } from 'react'
 import api from '../../services/connection_manager';
-import { Facilities, House } from '../../services/interfaces';
+import { Facilities, House, Regions } from '../../services/interfaces';
 import { clear, error, loading } from '../../store/authSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
@@ -8,6 +8,7 @@ const CreateUpdateHome = () => {
     const [home, setHome] = useState<House>();
     const [homeFacilities, setHomeFacilities] = useState<Facilities[]>()
     const [facilities, setFacilities] = useState<Facilities[]>();
+    const [regions, setRegions] = useState<Regions[]>();
     // 
     const [address, setAddress] = useState<string | undefined>();
     const [bathrooms, setBathrooms] = useState<any | undefined>();
@@ -18,6 +19,8 @@ const CreateUpdateHome = () => {
     const [rooms, setRooms] = useState<any | undefined>();
     const [square, setSquare] = useState<any | undefined>();
     const [region, setRegion] = useState<string | undefined>();
+    const [checkedState, setCheckedState] = useState(new Array(facilities?.length).fill(false));
+    const [facilityChecked, setFacilityChecked] = useState<number[]>();
     const [title, setTitle] = useState<string | undefined>();
     const authSelector = useAppSelector(state => state.auth)
     const dashSelector = useAppSelector(state => state.dashboard)
@@ -28,11 +31,20 @@ const CreateUpdateHome = () => {
         try {
             const response = await api.getMyHome(authSelector.token, dashSelector.id);
             if (response.data.success) {
-                console.log("apartment", response.data.apartment);
-                setHome(response.data.apartment)
-                setBathrooms(response.data.apartment.bathrooms)
-                setAddress(response.data.apartment.address)
+                console.log("data", response.data);
                 setFacilities(response.data.facilities)
+                setHome(response.data.apartment)
+                setCheckedState(new Array(response.data.facilities.length).fill(false))
+                setRegions(response.data.regions)
+                setAddress(response.data.apartment.address)
+                setBathrooms(response.data.apartment.bathrooms)
+                setBeds(response.data.apartment.beds)
+                setCity(response.data.apartment.city)
+                setDescription(response.data.apartment.description)
+                setPrice(response.data.apartment.price)
+                setRooms(response.data.apartment.rooms)
+                setSquare(response.data.apartment.square)
+                setRegion(response.data.apartment.region)
             }
             dispatch(clear())
         } catch (e) {
@@ -41,9 +53,50 @@ const CreateUpdateHome = () => {
         }
     }
 
-    const updateMyHome = (e: any) => {
+    const updateMyHome = async (e: any) => {
         e.preventDefault();
+        console.log(facilityChecked);
+        let newFacilities: number[] = []
+        facilities?.filter((item,index )=>{
+            if(checkedState[index] == true){
+                newFacilities.push(item.id)
+            }
+        });
+        setFacilityChecked(newFacilities)
+        try{
+            const data = {
+                address,
+                bathrooms,
+                city,
+                description,
+                facilities: facilityChecked,
+                price,
+                region,
+                rooms,
+                square,
+            }
+            console.log("data",data);
+        } catch (e) {
+            console.log("error fetch form apart",e);
+        }
     }
+
+    const handleInputChange = async (position: any) => {
+        const updatedCheckedState = checkedState?.map((item, index) =>
+            index === position ? !item : item
+        );
+        setCheckedState(updatedCheckedState);
+    };
+
+    useEffect(()=> {
+        let newFacilities: number[] = []
+        facilities?.filter((item,index )=>{
+            if(checkedState[index] == true){
+                newFacilities.push(item.id)
+            }
+        });
+        setFacilityChecked(newFacilities)
+    },[checkedState])
 
     useEffect(() => {
         let isMount = true
@@ -57,12 +110,12 @@ const CreateUpdateHome = () => {
 
     return (
         <div>
-            <form id="update-apartment" onSubmit={(e) => updateMyHome(e)} encType="multipart/form-data" >
+            <form id="update-apartment" onSubmit={(e) => updateMyHome(e)} >
                 <label className="block mt-3">
                     <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
                         Camere
                     </span>
-                    <input type={"text"} name="rooms" className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="numero di camere" value={rooms} />
+                    <input type={"text"} name="rooms" className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="numero di camere" value={rooms} onChange={(e) => setRooms(e.target.value)} />
                 </label>
                 <label className="block mt-3">
                     <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
@@ -74,13 +127,13 @@ const CreateUpdateHome = () => {
                     <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
                         Bagni
                     </span>
-                    <input type={"text"} name="bathrooms" className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="numero di bagni" value={bathrooms} />
+                    <input type={"text"} name="bathrooms" className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="numero di bagni" value={bathrooms} onChange={(e) => setBathrooms(e.target.value)} />
                 </label>
                 <label className="block mt-3">
                     <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
                         Metri quadri
                     </span>
-                    <input type="text" name="square" className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="numero di metri quadri" value={square} />
+                    <input type="text" name="square" className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="numero di metri quadri" value={square} onChange={(e) => setSquare(e.target.value)} />
                 </label>
 
                 <div className="block mt-5">
@@ -96,7 +149,7 @@ const CreateUpdateHome = () => {
                                             {facility.name}
                                         </label>
                                         {
-                                            <input type="checkbox" id={`facility-${facility.id}`} value={facility.id} className="mt-1 px-2 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" />
+                                            <input type="checkbox" id={`facility-${facility.id}`} name={facility.name} checked={checkedState[i]} value={facility.id} onChange={() => handleInputChange(i)} className="mt-1 px-2 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" />
                                         }
                                     </div>
                                 )
@@ -109,8 +162,19 @@ const CreateUpdateHome = () => {
                     <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
                         Regione
                     </span>
-                    <select name="region" id="region" className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1">
-
+                    <select value={region} onChange={e => setRegion(e.target.value)} name="region" id="region" className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1">
+                        <option className='hidden' value={region}>
+                            {region}
+                        </option>
+                        {
+                            regions?.map((reg, i) => {
+                                return (
+                                    <option key={i} value={reg.name}>
+                                        {reg.name}
+                                    </option>
+                                )
+                            })
+                        }
                     </select>
                 </label>
 
@@ -118,7 +182,7 @@ const CreateUpdateHome = () => {
                     <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
                         Città
                     </span>
-                    <input type="text" name="city" className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="in quale città si trova" value={city} />
+                    <input type="text" name="city" className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="in quale città si trova" value={city} onChange={(e) => setCity(e.target.value)} />
                 </label>
                 <label className="block mt-3">
                     <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
@@ -130,13 +194,13 @@ const CreateUpdateHome = () => {
                     <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
                         Descrivi la casa
                     </span>
-                    <textarea cols={20} rows={5} name="description" className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="una breve descrizione dell'abitazione" value={description}></textarea>
+                    <textarea cols={20} rows={5} name="description" className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="una breve descrizione dell'abitazione" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
                 </label>
                 <label className="block mt-3">
                     <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
                         Prezzo
                     </span>
-                    <input type="text" name="price" className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="prezzo in euro per notte" value={price} />
+                    <input type="text" name="price" className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="prezzo in euro per notte" value={price} onChange={(e) => setPrice(e.target.value)} />
                 </label>
 
                 <button className="bg-green-700 hover:bg-green-800 text-white rounded-xl py-2 px-6 m-5" type="submit">Modifica</button>
@@ -146,4 +210,4 @@ const CreateUpdateHome = () => {
     )
 }
 
-export default CreateUpdateHome
+export default CreateUpdateHome;

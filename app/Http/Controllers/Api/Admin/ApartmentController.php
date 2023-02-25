@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use App\Models\Facility;
 use App\Models\Photo;
+use App\Models\Region;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -141,6 +142,7 @@ class ApartmentController extends Controller
             ->first();
 
         $facilities = Facility::all();
+        $regions = Region::all();
 
         if (!$apartment) {
             $response = [
@@ -161,6 +163,7 @@ class ApartmentController extends Controller
                 'success' => true,
                 'apartment' => $apartment,
                 'facilities' => $facilities,
+                'regions' => $regions,
             ];
             return response()->json($response);
         }
