@@ -40,4 +40,5 @@ export const variablesDashboard = {
     SETTINGS: "settings",
     HOME: "home",
     CREATE_UPDATE: "createUpdate",
+    PHOTO: "photo",
 }

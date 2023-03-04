@@ -73,13 +73,23 @@ class PhotoController extends Controller
      * @param  mixed $photo
      * @return void
      */
-    public function deleteImage(Photo $photo)
+    public function deleteImage(Photo $photo, Request $request)
     {
-        // \dd($photo->apartment->id);
+        if ($photo->apartment->user->id == $request->user()->id) {
+            Storage::disk('public')->delete('apartments/images/' . $photo->image_url);
+            $photo->delete();
 
-        Storage::disk('public')->delete('apartments/images/' . $photo->image_url);
-        $photo->delete();
-
-        return response()->json();
+            $response = [
+                'success' => true,
+                'message' => 'image is deleted',
+            ];
+            return response()->json($response);
+        } else {
+            $response = [
+                'success' => false,
+                'message' => 'image is not deleted',
+            ];
+            return response()->json($response, 401);
+        }
     }
 }

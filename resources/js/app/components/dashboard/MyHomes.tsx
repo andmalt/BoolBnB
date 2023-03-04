@@ -17,7 +17,7 @@ const MyHomes = () => {
         dispatch(loading())
         try {
             const response = await api.getAllMyHouses(authSelector.token);
-            console.log("response:", response.data.apartments);
+            // console.log("response:", response.data.apartments);
 
             if (response.data.success) {
                 setMyHouses(response.data.apartments)

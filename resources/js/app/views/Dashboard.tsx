@@ -14,6 +14,7 @@ import { useAppSelector } from '../store/hooks';
 import "../../../css/dashboard.css"
 import { variablesDashboard } from '../services/variables';
 import MyHome from '../components/dashboard/MyHome';
+import PhotoModify from '../components/dashboard/PhotoModify';
 
 const Dashboard = () => {
     const [email, setEmail] = useState<string | null>();
@@ -75,7 +76,10 @@ const Dashboard = () => {
                                                 dashSelector.dashboard == variablesDashboard.CREATE_UPDATE ?
                                                     <CreateUpdate />
                                                     :
-                                                    null
+                                                    dashSelector.dashboard == variablesDashboard.PHOTO ?
+                                                        <PhotoModify />
+                                                        :
+                                                        null
                 }
             </div>
         </div>

@@ -47,7 +47,7 @@ const MyHome = () => {
         try {
             const response = await api.getMyHome(authSelector.token, dashSelector.id);
             if (response.data.success) {
-                console.log("apartment", response.data.apartment);
+                // console.log("apartment", response.data.apartment);
                 setMapLongitude(response.data.apartment.lon)
                 setMapLatitude(response.data.apartment.lat)
                 setHome(response.data.apartment)

@@ -1,4 +1,4 @@
-import React, { SetStateAction, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import api from '../../services/connection_manager';
 import { setDashboardComponents, setIdNumber } from '../../services/functions';
 import { Facilities, House, Regions } from '../../services/interfaces';
@@ -8,7 +8,7 @@ import { setDashboard, setNumber } from '../../store/dashboardSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 const CreateUpdateHome = () => {
-    const [home, setHome] = useState<House>();
+    const [home, setHome] = useState<House|null>(null);
     const [homeFacilities, setHomeFacilities] = useState<Facilities[]>()
     const [facilities, setFacilities] = useState<Facilities[]>();
     const [regions, setRegions] = useState<Regions[]>();
@@ -114,6 +114,11 @@ const CreateUpdateHome = () => {
         setCheckedState(checked)
     }
 
+    const photoPage = () => {
+        setDashboardComponents(variablesDashboard.PHOTO);
+        dispatch(setDashboard(variablesDashboard.PHOTO));
+    }
+
     useEffect(()=> {
         let newFacilities: number[] = []
         facilities?.filter((item,index )=>{
@@ -140,6 +145,9 @@ const CreateUpdateHome = () => {
 
     return (
         <div id='main'>
+            <div className='flex justify-end items-center'>
+                <button onClick={photoPage} className='bg-blue-500 hover:bg-blue-600 rounded-xl py-2 px-4 m-5'>Inserisci e cambia foto</button>
+            </div>
             <form id="update-apartment" onSubmit={(e) => updateMyHome(e)} >
                 <label className="block mt-3">
                     <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
