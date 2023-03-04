@@ -178,8 +178,16 @@ class ApartmentController extends Controller
      */
     public function update($id, Request $request)
     {
+        $apartment = Apartment::find($id);
+        if ($request->user()->id !== $apartment->user_id) {
+            $response = [
+                'success' => false,
+                'message' => "you are not the user",
+            ];
+            return response()->json($response, 401);
+        }
         // validations
-        $validator = Validator::make($request->all(), [
+        $data = $request->validate([
             'city' => 'required|string|min:2|max:100',
             'region' => 'required|string|min:5|max:100',
             'address' => 'required|string|min:5|max:150',
@@ -192,33 +200,23 @@ class ApartmentController extends Controller
             'price' => 'required|numeric|min:1.00|max:9999.00',
         ]);
 
-        if ($validator->fails()) {
-
-            $response = [
-                'success' => false,
-                'error' => $validator->errors(),
-            ];
-
-            return response()->json($response, 400);
-        }
-
-        $validated = $validator->validated();
-
-        $data = $validated;
-
         // call api to TomTom and response decoding
         $address = str_replace(' ', '-', $data['address']);
         $call = Http::get('https://api.tomtom.com/search/2/geocode/' . $data['region'] . '-' . $data['city'] . '-' . $address . '.JSON?key=CskONgb89uswo1PwlNDOtG4txMKrp1yQ');
 
         $response = json_decode($call);
+        // write condition here... if there isn't apartment
+
+
         // inserted in data the results lat,lon in the response 
         $data['lat'] = $response->results[0]->position->lat;
         $data['lon'] = $response->results[0]->position->lon;
 
-        $apartment = Apartment::find($id);
-
         if ($apartment) {
             $apartment->update($data);
+            if (array_key_exists('facilities', $data)) {
+                $apartment->facilities()->sync($data['facilities']);
+            }
 
             $response = [
                 'success' => true,

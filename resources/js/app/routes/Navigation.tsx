@@ -27,7 +27,9 @@ const Navigation = (props: NavigationProps) => {
     }, []);
 
     return (
-        <div className='bg-black'>
+        <div 
+        className='bg-black'
+        id='body-container'>
             {
                 authSelector.isError ?
                     <Error />

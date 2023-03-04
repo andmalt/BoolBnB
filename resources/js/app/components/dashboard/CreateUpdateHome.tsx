@@ -1,7 +1,10 @@
 import React, { SetStateAction, useEffect, useState } from 'react'
 import api from '../../services/connection_manager';
+import { setDashboardComponents, setIdNumber } from '../../services/functions';
 import { Facilities, House, Regions } from '../../services/interfaces';
+import { variablesDashboard } from '../../services/variables';
 import { clear, error, loading } from '../../store/authSlice';
+import { setDashboard, setNumber } from '../../store/dashboardSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 const CreateUpdateHome = () => {
@@ -21,6 +24,7 @@ const CreateUpdateHome = () => {
     const [region, setRegion] = useState<string | undefined>();
     const [checkedState, setCheckedState] = useState(new Array(facilities?.length).fill(false));
     const [facilityChecked, setFacilityChecked] = useState<number[]>();
+    const [facChecked,setFacChecked] = useState<Facilities[]>();
     const [title, setTitle] = useState<string | undefined>();
     const authSelector = useAppSelector(state => state.auth)
     const dashSelector = useAppSelector(state => state.dashboard)
@@ -31,7 +35,7 @@ const CreateUpdateHome = () => {
         try {
             const response = await api.getMyHome(authSelector.token, dashSelector.id);
             if (response.data.success) {
-                console.log("data", response.data);
+                // console.log("data", response.data);
                 setFacilities(response.data.facilities)
                 setHome(response.data.apartment)
                 setCheckedState(new Array(response.data.facilities.length).fill(false))
@@ -45,6 +49,7 @@ const CreateUpdateHome = () => {
                 setRooms(response.data.apartment.rooms)
                 setSquare(response.data.apartment.square)
                 setRegion(response.data.apartment.region)
+                setFacChecked(response.data.apartment.facilities)
             }
             dispatch(clear())
         } catch (e) {
@@ -55,10 +60,14 @@ const CreateUpdateHome = () => {
 
     const updateMyHome = async (e: any) => {
         e.preventDefault();
+        const page = document.getElementById("body-container");
+        page?.scrollIntoView();
+        dispatch(loading())
         try{
             const data = {
                 address,
                 bathrooms,
+                beds,
                 city,
                 description,
                 facilities: facilityChecked,
@@ -67,18 +76,43 @@ const CreateUpdateHome = () => {
                 rooms,
                 square,
             }
-            console.log("data",data);
+            const response = api.updateMyHome(authSelector.token,dashSelector.id,data);
+            // console.log("resp=",(await response).data);
+            if((await response).data.success){
+                setDashboardComponents(variablesDashboard.HOUSES);
+                dispatch(setDashboard(variablesDashboard.HOUSES));
+                setIdNumber(null)
+                dispatch(setNumber(null))
+            }else{
+                // console.log("error=",(await response).data.error.message.response.data.errors);
+                let array = []
+                for (const key in (await response).data.error.message.response.data.errors) {
+                    array.push((await response).data.error.message.response.data.errors[key]);
+                }
+                // change alert with modal
+                alert(array.length >= 1?array:"Non esiste il luogo selezionato")
+            }
+            dispatch(clear())
         } catch (e) {
-            console.log("error fetch form apart",e);
+            console.log("error fetch from apartment form",e);
+            dispatch(error())
         }
     }
 
-    const handleInputChange = async (position: any) => {
+    const handleInputChange = (position: any) => {
         const updatedCheckedState = checkedState?.map((item, index) =>
             index === position ? !item : item
-        );
+        );  
         setCheckedState(updatedCheckedState);
     };
+    
+    const setMyFacilities = () => {
+        let checked = new Array(facilities?.length).fill(false)
+        facChecked?.forEach(element => {
+            checked[element.id - 1] = true
+        });
+        setCheckedState(checked)
+    }
 
     useEffect(()=> {
         let newFacilities: number[] = []
@@ -89,6 +123,10 @@ const CreateUpdateHome = () => {
         });
         setFacilityChecked(newFacilities)
     },[checkedState])
+
+    useEffect(()=>{
+        setMyFacilities()
+    },[authSelector.isLoading])
 
     useEffect(() => {
         let isMount = true
@@ -101,7 +139,7 @@ const CreateUpdateHome = () => {
     }, [])
 
     return (
-        <div>
+        <div id='main'>
             <form id="update-apartment" onSubmit={(e) => updateMyHome(e)} >
                 <label className="block mt-3">
                     <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">

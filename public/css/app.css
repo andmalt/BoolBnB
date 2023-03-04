@@ -2305,9 +2305,6 @@ select {
 .focus\:z-10:focus {
   z-index: 10;
 }
-.focus\:hidden:focus {
-  display: none;
-}
 .focus\:border-blue-300:focus {
   --tw-border-opacity: 1;
   border-color: rgb(147 197 253 / var(--tw-border-opacity));
@@ -2452,9 +2449,6 @@ select {
 }
 .focus-visible\:ring-offset-2:focus-visible {
   --tw-ring-offset-width: 2px;
-}
-.active\:hidden:active {
-  display: none;
 }
 .active\:bg-gray-100:active {
   --tw-bg-opacity: 1;
