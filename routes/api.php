@@ -48,5 +48,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('my/apartment/{id}/update', [ApartmentController::class, 'update']);
     Route::delete('my/apartment/{id}/delete', [ApartmentController::class, 'destroy']);
     Route::post('my/apartment/{id}/img/upload', [PhotoController::class, 'uploadImage']);
-    Route::delete('my/apartment/{id}/img/delete', [PhotoController::class, 'deleteImage']);
+    Route::delete('my/apartment/img/{id}/delete', [PhotoController::class, 'deleteImage']);
 });

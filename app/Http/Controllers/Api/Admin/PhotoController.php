@@ -17,7 +17,7 @@ class PhotoController extends Controller
      *
      * @param  mixed $request
      * @param  mixed $apartment
-     * @return void
+     * @return \Illuminate\Http\Response|\Illuminate\Contracts\Routing\ResponseFactory
      */
     public function uploadImage(Request $request, $id)
     {
@@ -73,8 +73,9 @@ class PhotoController extends Controller
      * @param  mixed $photo
      * @return void
      */
-    public function deleteImage(Photo $photo, Request $request)
+    public function deleteImage(int $id, Request $request)
     {
+        $photo = Photo::find($id);
         if ($photo->apartment->user->id == $request->user()->id) {
             Storage::disk('public')->delete('apartments/images/' . $photo->image_url);
             $photo->delete();

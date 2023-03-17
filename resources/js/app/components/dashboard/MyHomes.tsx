@@ -15,6 +15,8 @@ const MyHomes = () => {
 
     const getMyHouses = async () => {
         dispatch(loading())
+        const page = document.getElementById("body-container");
+        page?.scrollIntoView();
         try {
             const response = await api.getAllMyHouses(authSelector.token);
             // console.log("response:", response.data.apartments);

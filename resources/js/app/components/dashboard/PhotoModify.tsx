@@ -35,14 +35,20 @@ const PhotoModify = () => {
 
   const sendPhotos = (e: any) => {
     e.preventDefault()
+    const confirm = window.confirm('Sicuro di voler inserire la/le foto?');
+    if (!confirm) {
+      return;
+    }
     if (!fileList) {
       return;
     }
+    dispatch(loading())
     const data = new FormData()
     files.forEach((file, i) => {
       data.append(`file-${i}`, file, file.name);
     });
     console.log("data=", data);
+    dispatch(clear())
   }
 
   const updatePage = () => {

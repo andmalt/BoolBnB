@@ -8,7 +8,7 @@ import { setDashboard, setNumber } from '../../store/dashboardSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 const CreateUpdateHome = () => {
-    const [home, setHome] = useState<House|null>(null);
+    const [home, setHome] = useState<House | null>(null);
     const [homeFacilities, setHomeFacilities] = useState<Facilities[]>()
     const [facilities, setFacilities] = useState<Facilities[]>();
     const [regions, setRegions] = useState<Regions[]>();
@@ -24,7 +24,7 @@ const CreateUpdateHome = () => {
     const [region, setRegion] = useState<string | undefined>();
     const [checkedState, setCheckedState] = useState(new Array(facilities?.length).fill(false));
     const [facilityChecked, setFacilityChecked] = useState<number[]>();
-    const [facChecked,setFacChecked] = useState<Facilities[]>();
+    const [facChecked, setFacChecked] = useState<Facilities[]>();
     const [title, setTitle] = useState<string | undefined>();
     const authSelector = useAppSelector(state => state.auth)
     const dashSelector = useAppSelector(state => state.dashboard)
@@ -60,10 +60,14 @@ const CreateUpdateHome = () => {
 
     const updateMyHome = async (e: any) => {
         e.preventDefault();
+        const confirm = window.confirm('Sei sicuro di voler modificare la casa?');
+        if (!confirm) {
+            return;
+        }
         const page = document.getElementById("body-container");
         page?.scrollIntoView();
         dispatch(loading())
-        try{
+        try {
             const data = {
                 address,
                 bathrooms,
@@ -76,25 +80,25 @@ const CreateUpdateHome = () => {
                 rooms,
                 square,
             }
-            const response = api.updateMyHome(authSelector.token,dashSelector.id,data);
+            const response = api.updateMyHome(authSelector.token, dashSelector.id, data);
             // console.log("resp=",(await response).data);
-            if((await response).data.success){
+            if ((await response).data.success) {
                 setDashboardComponents(variablesDashboard.HOUSES);
                 dispatch(setDashboard(variablesDashboard.HOUSES));
                 setIdNumber(null)
                 dispatch(setNumber(null))
-            }else{
+            } else {
                 // console.log("error=",(await response).data.error.message.response.data.errors);
                 let array = []
                 for (const key in (await response).data.error.message.response.data.errors) {
                     array.push((await response).data.error.message.response.data.errors[key]);
                 }
                 // change alert with modal
-                alert(array.length >= 1?array:"Non esiste il luogo selezionato")
+                alert(array.length >= 1 ? array : "Non esiste il luogo selezionato")
             }
             dispatch(clear())
         } catch (e) {
-            console.log("error fetch from apartment form",e);
+            console.log("error fetch from apartment form", e);
             dispatch(error())
         }
     }
@@ -102,10 +106,10 @@ const CreateUpdateHome = () => {
     const handleInputChange = (position: any) => {
         const updatedCheckedState = checkedState?.map((item, index) =>
             index === position ? !item : item
-        );  
+        );
         setCheckedState(updatedCheckedState);
     };
-    
+
     const setMyFacilities = () => {
         let checked = new Array(facilities?.length).fill(false)
         facChecked?.forEach(element => {
@@ -118,20 +122,26 @@ const CreateUpdateHome = () => {
         setDashboardComponents(variablesDashboard.PHOTO);
         dispatch(setDashboard(variablesDashboard.PHOTO));
     }
+    const exitPage = () => {
+        setDashboardComponents(variablesDashboard.HOUSES);
+        dispatch(setDashboard(variablesDashboard.HOUSES));
+        setIdNumber(null)
+        dispatch(setNumber(null))
+    }
 
-    useEffect(()=> {
+    useEffect(() => {
         let newFacilities: number[] = []
-        facilities?.filter((item,index )=>{
-            if(checkedState[index] == true){
+        facilities?.filter((item, index) => {
+            if (checkedState[index] == true) {
                 newFacilities.push(item.id)
             }
         });
         setFacilityChecked(newFacilities)
-    },[checkedState])
+    }, [checkedState])
 
-    useEffect(()=>{
+    useEffect(() => {
         setMyFacilities()
-    },[authSelector.isLoading])
+    }, [authSelector.isLoading])
 
     useEffect(() => {
         let isMount = true
@@ -186,9 +196,7 @@ const CreateUpdateHome = () => {
                                         <label htmlFor={`facility-${facility.id}`} className="block text-sm font-medium text-slate-700">
                                             {facility.name}
                                         </label>
-                                        {
-                                            <input type="checkbox" id={`facility-${facility.id}`} name={facility.name} checked={checkedState[i]} value={facility.id} onChange={() => handleInputChange(i)} className="mt-1 px-2 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" />
-                                        }
+                                        <input type="checkbox" id={`facility-${facility.id}`} name={facility.name} checked={checkedState[i]} value={facility.id} onChange={() => handleInputChange(i)} className="mt-1 px-2 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" />
                                     </div>
                                 )
                             })
@@ -242,7 +250,7 @@ const CreateUpdateHome = () => {
                 </label>
 
                 <button className="bg-green-700 hover:bg-green-800 text-white rounded-xl py-2 px-6 m-5" type="submit">Modifica</button>
-                <a className="bg-blue-500 hover:bg-blue-600 rounded-xl py-2 px-4 m-5" href="{{route('admin.apartment.show',$apartment->id)}}">Torna indietro</a>
+                <button className="bg-blue-500 hover:bg-blue-600 rounded-xl py-2 px-4 m-5" onClick={exitPage}>Torna indietro</button>
             </form>
         </div >
     )
