@@ -32,10 +32,9 @@ class PhotoController extends Controller
             return response()->json($response, 404);
         }
 
-
-        $validator = Validator::make($request->file('images'), [
-            'images' => "required",
-            'images.*' => 'mimes:jpg,png,jpeg,gif,svg',
+        $validator = Validator::make($request->all(), [
+            'image-1' => "required",
+            'image-1.*' => 'mimes:jpg,png,jpeg,gif,svg',
         ]);
 
         if ($validator->fails()) {
@@ -48,8 +47,8 @@ class PhotoController extends Controller
             return response()->json($response, 400);
         }
 
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
+        if ($request->hasFile('image-1')) {
+            foreach ($request->all() as $image) {
                 $photo = new Photo();
                 $url = time() . Str::random(20) . '.' . $image->extension();
                 $image->move(storage_path('app/public/apartments/images/'), $url);

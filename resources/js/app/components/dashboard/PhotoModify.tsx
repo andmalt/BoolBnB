@@ -13,6 +13,7 @@ const PhotoModify = () => {
   const authSelector = useAppSelector(state => state.auth);
   const dashSelector = useAppSelector(state => state.dashboard);
   const dispatch = useAppDispatch();
+  const files = fileList ? [...fileList] : [];
 
   const getMyPhotos = async () => {
     dispatch(loading())
@@ -30,10 +31,11 @@ const PhotoModify = () => {
   }
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    console.log("fileList=", e.target.files);
     setFileList(e.target.files);
   };
 
-  const sendPhotos = (e: any) => {
+  const sendPhotos = async (e: any) => {
     e.preventDefault()
     const confirm = window.confirm('Sicuro di voler inserire la/le foto?');
     if (!confirm) {
@@ -45,9 +47,14 @@ const PhotoModify = () => {
     dispatch(loading())
     const data = new FormData()
     files.forEach((file, i) => {
-      data.append(`file-${i}`, file, file.name);
+      data.append(`image-${i}`, file)
     });
     console.log("data=", data);
+    const response = await api.updatePhotos(authSelector.token, dashSelector.id, data);
+    if (response.data.success) {
+      getMyPhotos()
+    }
+    console.log("response=", response);
     dispatch(clear())
   }
 
@@ -56,7 +63,6 @@ const PhotoModify = () => {
     dispatch(setDashboard(variablesDashboard.CREATE_UPDATE));
   }
 
-  const files = fileList ? [...fileList] : [];
 
   useEffect(() => {
     let isMount = true;

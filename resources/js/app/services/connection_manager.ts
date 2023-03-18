@@ -165,7 +165,20 @@ const api = {
         } catch (e) {
             return { data: { success: false, error: { code: 500, message: e } } }
         }
-    }
+    },
+    updatePhotos: async function(token:string|null,id:number|null,data:any){
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+            'X-CSRF-TOKEN': `${csrf}`
+        }
+        try {
+            const response = await axios.post(`${BASE_URL}/api/my/apartment/${id}/img/upload`, data ,{ headers });
+            return response;
+        } catch (e) {
+            return { data: { success: false, error: { code: 500, message: e } } }
+        }
+    },
 }
 
 export default api;
