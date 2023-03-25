@@ -166,6 +166,19 @@ const api = {
             return { data: { success: false, error: { code: 500, message: e } } }
         }
     },
+    deleteMyHome: async function(token:string|null,id:number|null){
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            'X-CSRF-TOKEN': `${csrf}`
+        }
+        try {
+            const response = await axios.delete(`${BASE_URL}/api/my/apartment/${id}/delete`,{ headers });
+            return response;
+        } catch (e) {
+            return { data: { success: false, error: { code: 500, message: e } } }
+        }
+    },
     updatePhotos: async function(token:string|null,id:number|null,data:any){
         const headers = {
             Authorization: `Bearer ${token}`,

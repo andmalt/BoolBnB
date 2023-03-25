@@ -13,23 +13,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call([
+            UserTableSeeder::class,
+            RegionTableSeeder::class,
+        ]);
         // examples
         // 
         \App\Models\User::factory(10)->create();
-        \App\Models\Apartment::factory(30)->create();
-        \App\Models\Photo::factory(100)->create();
-        \App\Models\Message::factory(80)->create();
-        \App\Models\Stat::factory(650)->create();
-        \App\Models\Apartmentreview::factory(150)->create();
-        \App\Models\Userreview::factory(70)->create();
-
+        \App\Models\Apartment::factory(300)->create();
+        \App\Models\Photo::factory(1500)->create();
+        \App\Models\Message::factory(180)->create();
+        \App\Models\Stat::factory(750)->create();
 
         $this->call([
             SponsorshipTableSeeder::class,
             ApartmentSponsorshipTableSeeder::class,
             FacilityTableSeeder::class,
             ApartmentFacilityTableSeeder::class,
-            RegionTableSeeder::class,
         ]);
     }
 }

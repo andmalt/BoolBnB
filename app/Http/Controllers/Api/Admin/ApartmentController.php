@@ -7,9 +7,7 @@ use App\Models\Apartment;
 use App\Models\Facility;
 use App\Models\Photo;
 use App\Models\Region;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -21,7 +19,7 @@ class ApartmentController extends Controller
      * Display all my apartments
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request)
     {
@@ -49,7 +47,7 @@ class ApartmentController extends Controller
      * Store a newly created apartment in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
@@ -59,8 +57,6 @@ class ApartmentController extends Controller
             'city' => 'required|string|min:2|max:100',
             'region' => 'required|string|min:5|max:100',
             'address' => 'required|string|min:5|max:150',
-            'images' => "required",
-            'images.*' => 'mimes:jpg,png,jpeg,gif,svg',
             'rooms' => "required|integer|between:1,20",
             'bathrooms' => "required|integer|between:1,20",
             'beds' => "required|integer|between:1,40",
@@ -133,12 +129,12 @@ class ApartmentController extends Controller
      * Display the specified apartment.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show($id, Request $request)
     {
         $apartment = Apartment::where('id', $id)
-            ->with('photos', 'messages', 'reviews', 'facilities', 'stats', 'sponsorships')
+            ->with('photos', 'messages', 'facilities', 'sponsorships')
             ->first();
 
         $facilities = Facility::all();
@@ -174,7 +170,7 @@ class ApartmentController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update($id, Request $request)
     {
@@ -238,21 +234,23 @@ class ApartmentController extends Controller
      * Remove the apartments from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id, Request $request)
     {
         $apartment = Apartment::find($id);
 
         if ($request->user()->id === $apartment->user_id) {
-            if ($apartment->facilities) $apartment->facilities()->detach();
+
+            $apartment->delete();
+
+            if ($apartment->facilities)
+                $apartment->facilities()->detach();
 
             foreach ($apartment->photos as $photo) {
                 $path = $photo->image_url;
                 Storage::disk('public')->delete('apartments/images/' . $path);
             }
-
-            $apartment->delete();
 
             $response = [
                 'success' => true,

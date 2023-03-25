@@ -21,8 +21,14 @@ class CreateApartmentSponsorshipTable extends Migration
             $table->dateTime('end_date');
             $table->timestamps();
 
-            $table->foreign('apartment_id')->references('id')->on('apartments');
-            $table->foreign('sponsorship_id')->references('id')->on('sponsorships');
+            $table->foreign('apartment_id')
+                ->references('id')
+                ->on('apartments')
+                ->onDelete('cascade');
+            $table->foreign('sponsorship_id')
+                ->references('id')
+                ->on('sponsorships')
+                ->onDelete('cascade');
         });
     }
 

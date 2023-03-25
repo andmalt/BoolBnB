@@ -26,11 +26,6 @@ class Apartment extends Model
         return $this->hasMany(Stat::class);
     }
 
-    public function reviews()
-    {
-        return $this->hasMany(Apartmentreview::class);
-    }
-
     public function photos()
     {
         return $this->hasMany(Photo::class);

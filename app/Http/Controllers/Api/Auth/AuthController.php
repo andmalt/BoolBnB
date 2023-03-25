@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
+    /**
+     * Summary of register
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function register(Request $request)
     {
 
@@ -38,6 +43,12 @@ class AuthController extends Controller
         return response()->json($response, 201);
     }
 
+    /**
+     * Summary of login
+     * 
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function login(Request $request)
     {
         $fields = $request->validate([
@@ -71,6 +82,11 @@ class AuthController extends Controller
         return response()->json($response, 201);
     }
 
+    /**
+     * Summary of logout
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function logout(Request $request)
     {
         // all user tokens will be deleted

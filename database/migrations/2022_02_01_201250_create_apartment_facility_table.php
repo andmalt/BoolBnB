@@ -20,12 +20,14 @@ class CreateApartmentFacilityTable extends Migration
             $table->timestamps();
 
             $table->foreign('apartment_id')
-            ->references('id')
-            ->on('apartments');
-            
+                ->references('id')
+                ->on('apartments')
+                ->onDelete('cascade');
+
             $table->foreign('facility_id')
-            ->references('id')
-            ->on('facilities');
+                ->references('id')
+                ->on('facilities')
+                ->onDelete('cascade');
         });
     }
 

@@ -1,18 +1,21 @@
 import moment from 'moment';
-import React, { useEffect } from 'react'
+import React from 'react'
 import { TrashIcon, ChevronDoubleLeft, ChevronDoubleRight, ModifyIcon } from '..';
+import api from '../../services/connection_manager';
 import { setDashboardComponents, setIdNumber } from '../../services/functions';
 import { PaginateHouses, Photos } from '../../services/interfaces'
 import { variablesDashboard } from '../../services/variables';
+import { loading } from '../../store/authSlice';
 import { setDashboard, setNumber } from '../../store/dashboardSlice';
-import { useAppDispatch } from '../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 interface TableProps {
     houses?: PaginateHouses
     paginate(link: string | null): Promise<void>
+    deleteHome(e: any, id: number): Promise<void>
 }
 
 const Table = (props: TableProps) => {
-    const { houses, paginate } = props;
+    const { houses, paginate, deleteHome } = props;
     const dispatch = useAppDispatch()
 
     /**
@@ -72,7 +75,7 @@ const Table = (props: TableProps) => {
                                                 <td className="px-4 py-3 text-sm">
                                                     <div className="flex flex-row flex-wrap justify-between items-center">
                                                         <button onClick={() => changePage(variablesDashboard.CREATE_UPDATE, house.id)}>{<ModifyIcon className='stroke-blue-600' />}</button>
-                                                        <button>{<TrashIcon className='stroke-red-600' />}</button>
+                                                        <button onClick={(e) => deleteHome(e, house.id)}>{<TrashIcon className='stroke-red-600' />}</button>
                                                     </div>
                                                 </td>
                                             </tr>

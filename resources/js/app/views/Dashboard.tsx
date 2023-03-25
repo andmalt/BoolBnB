@@ -10,16 +10,20 @@ import {
     Sidebar,
     Statistics
 } from '../components';
-import { useAppSelector } from '../store/hooks';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 import "../../../css/dashboard.css"
 import { variablesDashboard } from '../services/variables';
 import MyHome from '../components/dashboard/MyHome';
 import PhotoModify from '../components/dashboard/PhotoModify';
+import { deleteLocalStorage } from '../services/functions';
+import { logout } from '../store/authSlice';
+import api from '../services/connection_manager';
 
 const Dashboard = () => {
     const [email, setEmail] = useState<string | null>();
     const [name, setName] = useState<string | null>();
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
     const authSelector = useAppSelector(state => state.auth);
     const dashSelector = useAppSelector(state => state.dashboard)
 
@@ -28,8 +32,10 @@ const Dashboard = () => {
         setEmail(authSelector.email)
     }
 
-    const checkAuth = () => {
+    const checkAuth = async () => {
         if (authSelector.token == null) {
+            deleteLocalStorage()
+            dispatch(logout())
             navigate("/")
         }
     }
