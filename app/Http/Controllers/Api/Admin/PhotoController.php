@@ -17,7 +17,7 @@ class PhotoController extends Controller
      *
      * @param  mixed $request
      * @param  mixed $apartment
-     * @return \Illuminate\Http\Response|\Illuminate\Contracts\Routing\ResponseFactory
+     * @return \Illuminate\Http\JsonResponse
      */
     public function uploadImage(Request $request, $id)
     {
@@ -34,7 +34,7 @@ class PhotoController extends Controller
 
         $validator = Validator::make($request->all(), [
             'image-1' => "required",
-            'image-1.*' => 'mimes:jpg,png,jpeg,gif,svg',
+            '*' => 'mimes:jpg,png,jpeg,gif,svg',
         ]);
 
         if ($validator->fails()) {
@@ -70,7 +70,7 @@ class PhotoController extends Controller
      * delete a model photo
      *
      * @param  mixed $photo
-     * @return void
+     * @return \Illuminate\Http\JsonResponse
      */
     public function deleteImage(int $id, Request $request)
     {

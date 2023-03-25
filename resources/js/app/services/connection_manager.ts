@@ -179,6 +179,19 @@ const api = {
             return { data: { success: false, error: { code: 500, message: e } } }
         }
     },
+    deletePhotos: async function(token:string|null,id:number|null){
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+            'X-CSRF-TOKEN': `${csrf}`
+        }
+        try {
+            const response = await axios.delete(`${BASE_URL}/api/my/apartment/img/${id}/delete`,{ headers });
+            return response;
+        } catch (e) {
+            return { data: { success: false, error: { code: 500, message: e } } }
+        }
+    },
 }
 
 export default api;

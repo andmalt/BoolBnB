@@ -11,7 +11,7 @@ class Photo extends Model
 
     public function apartment()
     {
-        return $this->belongsTo(Apartment::class,'apartment_id');
+        return $this->belongsTo(Apartment::class, 'apartment_id');
     }
 
     public function getImagePrefix()
@@ -19,7 +19,7 @@ class Photo extends Model
         if (str_starts_with($this->image_url, "http")) {
             return '';
         } else {
-            return asset('/storage/apartments/images') . '/';
+            return asset('/storage/apartments/images/');
         }
     }
 }
