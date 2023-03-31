@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../services/connection_manager';
-import { setDashboardComponents, setIdNumber } from '../../services/functions';
+import { setDashboardComponents, setIdNumber, setIsCreate } from '../../services/functions';
 import { Facilities, House, Regions } from '../../services/interfaces';
 import { variablesDashboard } from '../../services/variables';
 import { clear, error, loading } from '../../store/authSlice';
-import { setDashboard, setNumber } from '../../store/dashboardSlice';
+import { setDashboard, setIsCte, setNumber } from '../../store/dashboardSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 const CreateUpdateHome = () => {
@@ -33,24 +33,35 @@ const CreateUpdateHome = () => {
     const getMyHouse = async () => {
         dispatch(loading())
         try {
-            const response = await api.getMyHome(authSelector.token, dashSelector.id);
-            if (response.data.success) {
-                // console.log("data", response.data);
-                setFacilities(response.data.facilities)
-                setHome(response.data.apartment)
-                setCheckedState(new Array(response.data.facilities.length).fill(false))
-                setRegions(response.data.regions)
-                setAddress(response.data.apartment.address)
-                setBathrooms(response.data.apartment.bathrooms)
-                setBeds(response.data.apartment.beds)
-                setCity(response.data.apartment.city)
-                setDescription(response.data.apartment.description)
-                setPrice(response.data.apartment.price)
-                setRooms(response.data.apartment.rooms)
-                setSquare(response.data.apartment.square)
-                setRegion(response.data.apartment.region)
-                setFacChecked(response.data.apartment.facilities)
+            if (dashSelector.isCreate == false) {
+                const response = await api.getMyHome(authSelector.token, dashSelector.id);
+                if (response.data.success) {
+                    // console.log("data", response.data);
+                    setFacilities(response.data.facilities)
+                    setHome(response.data.apartment)
+                    setCheckedState(new Array(response.data.facilities.length).fill(false))
+                    setRegions(response.data.regions)
+                    setAddress(response.data.apartment.address)
+                    setBathrooms(response.data.apartment.bathrooms)
+                    setBeds(response.data.apartment.beds)
+                    setCity(response.data.apartment.city)
+                    setDescription(response.data.apartment.description)
+                    setPrice(response.data.apartment.price)
+                    setRooms(response.data.apartment.rooms)
+                    setSquare(response.data.apartment.square)
+                    setRegion(response.data.apartment.region)
+                    setFacChecked(response.data.apartment.facilities)
+                }
+            } else {
+                const response = await api.getFacReg(authSelector.token);
+                if (response.data.success) {
+                    // console.log("data", response.data);
+                    setFacilities(response.data.facilities)
+                    setCheckedState(new Array(response.data.facilities.length).fill(false))
+                    setRegions(response.data.regions)
+                }
             }
+
             dispatch(clear())
         } catch (e) {
             console.log("error myhome", e);
@@ -67,34 +78,58 @@ const CreateUpdateHome = () => {
         const page = document.getElementById("body-container");
         page?.scrollIntoView();
         dispatch(loading())
+        const data = {
+            title,
+            address,
+            bathrooms,
+            beds,
+            city,
+            description,
+            facilities: facilityChecked,
+            price,
+            region,
+            rooms,
+            square,
+        }
         try {
-            const data = {
-                address,
-                bathrooms,
-                beds,
-                city,
-                description,
-                facilities: facilityChecked,
-                price,
-                region,
-                rooms,
-                square,
-            }
-            const response = api.updateMyHome(authSelector.token, dashSelector.id, data);
-            // console.log("resp=",(await response).data);
-            if ((await response).data.success) {
-                setDashboardComponents(variablesDashboard.HOUSES);
-                dispatch(setDashboard(variablesDashboard.HOUSES));
-                setIdNumber(null)
-                dispatch(setNumber(null))
-            } else {
-                // console.log("error=",(await response).data.error.message.response.data.errors);
-                let array = []
-                for (const key in (await response).data.error.message.response.data.errors) {
-                    array.push((await response).data.error.message.response.data.errors[key]);
+            if (dashSelector.isCreate == false) {
+                const response = api.updateMyHome(authSelector.token, dashSelector.id, data);
+                // console.log("resp=",(await response).data);
+                if ((await response).data.success) {
+                    setDashboardComponents(variablesDashboard.HOUSES);
+                    dispatch(setDashboard(variablesDashboard.HOUSES));
+                    setIsCreate(false)
+                    dispatch(setIsCte(false))
+                    setIdNumber(null)
+                    dispatch(setNumber(null))
+                } else {
+                    // console.log("error=",(await response).data.error.message.response.data.errors);
+                    let array = []
+                    for (const key in (await response).data.error.message.response.data.errors) {
+                        array.push((await response).data.error.message.response.data.errors[key]);
+                    }
+                    // change alert with modal
+                    alert(array.length >= 1 ? array : "Non esiste il luogo selezionato")
                 }
-                // change alert with modal
-                alert(array.length >= 1 ? array : "Non esiste il luogo selezionato")
+            } else {
+                const response = api.createMyHome(authSelector.token, data);
+                // console.log("resp=",(await response).data);
+                if ((await response).data.success) {
+                    setDashboardComponents(variablesDashboard.HOUSES);
+                    dispatch(setDashboard(variablesDashboard.HOUSES));
+                    setIsCreate(false)
+                    dispatch(setIsCte(false))
+                    setIdNumber(null)
+                    dispatch(setNumber(null))
+                } else {
+                    // console.log("error=",(await response).data.error.message.response.data.errors);
+                    let array = []
+                    for (const key in (await response).data.error.message.response.data.errors) {
+                        array.push((await response).data.error.message.response.data.errors[key]);
+                    }
+                    // change alert with modal
+                    alert(array.length >= 1 ? array : "Non esiste il luogo selezionato")
+                }
             }
             dispatch(clear())
         } catch (e) {
@@ -159,6 +194,12 @@ const CreateUpdateHome = () => {
                 <button onClick={photoPage} className='bg-blue-500 hover:bg-blue-600 rounded-xl py-2 px-4 m-5'>Inserisci e cambia foto</button>
             </div>
             <form id="update-apartment" onSubmit={(e) => updateMyHome(e)} >
+                <label className="block mt-3">
+                    <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+                        Titolo
+                    </span>
+                    <input type={"text"} name="title" className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="Titolo di identificazione della casa" value={title} onChange={(e) => setTitle(e.target.value)} />
+                </label>
                 <label className="block mt-3">
                     <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
                         Camere
@@ -248,8 +289,12 @@ const CreateUpdateHome = () => {
                     </span>
                     <input type="text" name="price" className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="prezzo in euro per notte" value={price} onChange={(e) => setPrice(e.target.value)} />
                 </label>
-
-                <button className="bg-green-700 hover:bg-green-800 text-white rounded-xl py-2 px-6 m-5" type="submit">Modifica</button>
+                {
+                    dashSelector.isCreate ?
+                        <button className="bg-green-700 hover:bg-green-800 text-white rounded-xl py-2 px-6 m-5" type="submit">Inserisci</button>
+                        :
+                        <button className="bg-green-700 hover:bg-green-800 text-white rounded-xl py-2 px-6 m-5" type="submit">Modifica</button>
+                }
                 <button className="bg-blue-500 hover:bg-blue-600 rounded-xl py-2 px-4 m-5" onClick={exitPage}>Torna indietro</button>
             </form>
         </div >

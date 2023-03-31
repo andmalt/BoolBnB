@@ -48,6 +48,14 @@ export const getDashboardComponents = () => {
     const store = localStorage.getItem("dashboard");
     return store;
 }
+export const getIsCreate = () => {
+    const store = JSON.parse(`${localStorage.getItem("isCreate")}`);
+    return store;
+}
+export const setIsCreate = (item:boolean) => {
+    const store = localStorage.setItem("isCreate",JSON.stringify(item));
+    return store;
+}
 
 /**
  * This function saves a house id number in the storage

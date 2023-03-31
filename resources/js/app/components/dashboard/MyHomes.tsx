@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import api from '../../services/connection_manager';
-import { deleteLocalStorage } from '../../services/functions';
+import { deleteLocalStorage, setDashboardComponents, setIdNumber, setIsCreate } from '../../services/functions';
 import { PaginateHouses } from '../../services/interfaces';
+import { variablesDashboard } from '../../services/variables';
 import { clear, error, loading, logout } from '../../store/authSlice';
+import { setDashboard, setIsCte, setNumber } from '../../store/dashboardSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import Table from './Table';
 
 const MyHomes = () => {
     const [myHouses, setMyHouses] = useState<PaginateHouses>();
     const authSelector = useAppSelector(state => state.auth);
-    const dashSelector = useAppSelector(state => state.dashboard)
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
@@ -34,6 +35,16 @@ const MyHomes = () => {
             console.log("paginate error:", e);
             dispatch(error())
         }
+    }
+
+    const createHome = () => {
+        setDashboardComponents(variablesDashboard.CREATE_UPDATE);
+        dispatch(setDashboard(variablesDashboard.CREATE_UPDATE))
+        // clear home number in the store
+        setIsCreate(true)
+        dispatch(setIsCte(true))
+        setIdNumber(null)
+        dispatch(setNumber(null))
     }
 
     const deleteHome = async (e: any, id: number) => {
@@ -79,6 +90,9 @@ const MyHomes = () => {
 
     return (
         <div>
+            <div className='p-3'>
+                <button className='bg-blue-700 rounded-md hover:bg-blue-800 px-4 py-2' onClick={() => createHome()}>Inserisci una casa</button>
+            </div>
             <Table houses={myHouses} paginate={paginate} deleteHome={deleteHome} />
         </div>
     )

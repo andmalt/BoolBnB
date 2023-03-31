@@ -26,7 +26,7 @@ class ApartmentController extends Controller
 
         $apartments = Apartment::where('user_id', '=', $request->user()->id)
             ->with('photos')
-            ->paginate(3);
+            ->paginate(6);
 
         if ($apartments) {
             $response = [
@@ -40,6 +40,25 @@ class ApartmentController extends Controller
                 'message' => "There aren't any apartments",
             ];
             return response()->json($response, 404);
+        }
+    }
+
+    public function myFacReg(Request $request)
+    {
+        $response = [];
+        if ($request->bearerToken() != null) {
+            $facilities = Facility::all();
+            $regions = Region::all();
+            $response['success'] = true;
+            $response['facilities'] = $facilities;
+            $response['regions'] = $regions;
+
+            return response()->json($response, 200);
+        } else {
+            $response['success'] = false;
+            $response['message'] = 'You aren\'t authenticated';
+
+            return response()->json($response, 401);
         }
     }
 

@@ -1,16 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { getDashboardComponents, getNumber } from '../services/functions'
+import { getDashboardComponents, getIsCreate, getNumber } from '../services/functions'
 
 const dashboard: string|null = getDashboardComponents();
-const id: number|null = getNumber();
+const id: number | null = getNumber();
+const isCreate = getIsCreate();
 
 interface DashboardState {
     dashboard: string | null,
-    id: number|null,
+    id: number | null,
+    isCreate: boolean,
 }
 const initialState: DashboardState = {
     dashboard: dashboard || "houses",
     id,
+    isCreate: isCreate || false, 
 }
 
 export const dashboardSlice = createSlice({
@@ -22,11 +25,14 @@ export const dashboardSlice = createSlice({
         },
         setNumber: (state,number:PayloadAction<number|null>) => {
             state.id = number.payload;
+        },
+        setIsCte: (state, boolean: PayloadAction<boolean>) => {
+            state.isCreate = boolean.payload;
         }
     }
 })
 
-export const { setDashboard, setNumber } = dashboardSlice.actions
+export const { setDashboard, setNumber , setIsCte } = dashboardSlice.actions
 
 // export const selectToken = (state: RootState) => state.auth.token
 

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
-import { setDashboardComponents, setIdNumber } from '../../services/functions';
+import { setDashboardComponents, setIdNumber, setIsCreate } from '../../services/functions';
 import { variablesDashboard } from "../../services/variables";
-import { setDashboard, setNumber } from '../../store/dashboardSlice';
+import { setDashboard, setIsCte, setNumber } from '../../store/dashboardSlice';
 import { useAppDispatch } from '../../store/hooks';
 
 interface SidebarProps {
@@ -20,6 +20,8 @@ const Sidebar = (props: SidebarProps) => {
         setDashboardComponents(e);
         dispatch(setDashboard(e))
         // clear home number in the store
+        setIsCreate(false)
+        dispatch(setIsCte(false))
         setIdNumber(null)
         dispatch(setNumber(null))
     }

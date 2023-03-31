@@ -60,7 +60,8 @@ const HouseSmallCard = (props: HouseCard) => {
                         {
                             photos.length != 0 ?
                                 <div className="duration-700 ease-in-out">
-                                    <img src={photo.image_url} className="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt={`image ${photo.id}`} />
+                                    <img src={photo?.image_url.includes("https://") ||
+                                        photo?.image_url.includes("http://") ? photo?.image_url : `/storage/apartments/images/${photo?.image_url}`} className="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt={`image ${photo.id}`} />
                                 </div>
                                 :
                                 <div className="duration-700 ease-in-out">

@@ -42,6 +42,7 @@ Route::middleware('auth:sanctum')->group(function () {
  * Admin
  */
 Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('my/apartments/recfac', [ApartmentController::class, 'myFacReg']);
     Route::get('my/apartments', [ApartmentController::class, 'index']);
     Route::get('my/apartment/{id}', [ApartmentController::class, 'show']);
     Route::post('my/apartment/create', [ApartmentController::class, 'store']);
