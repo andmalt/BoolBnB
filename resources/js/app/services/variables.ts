@@ -35,7 +35,6 @@ export const variablesDashboard = {
     STATISTIC: "statistic",
     MESSAGES: "messages",
     MESSAGE: "message",
-    NOTIFY: "notify",
     PROFILE: "profile",
     SETTINGS: "settings",
     HOME: "home",

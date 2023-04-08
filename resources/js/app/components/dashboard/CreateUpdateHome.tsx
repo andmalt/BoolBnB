@@ -40,6 +40,7 @@ const CreateUpdateHome = () => {
                     setFacilities(response.data.facilities)
                     setHome(response.data.apartment)
                     setCheckedState(new Array(response.data.facilities.length).fill(false))
+                    setTitle(response.data.apartment.title)
                     setRegions(response.data.regions)
                     setAddress(response.data.apartment.address)
                     setBathrooms(response.data.apartment.bathrooms)
@@ -190,9 +191,14 @@ const CreateUpdateHome = () => {
 
     return (
         <div id='main'>
-            <div className='flex justify-end items-center'>
-                <button onClick={photoPage} className='bg-blue-500 hover:bg-blue-600 rounded-xl py-2 px-4 m-5'>Inserisci e cambia foto</button>
-            </div>
+            {
+                !dashSelector.isCreate ?
+                    <div className='flex justify-end items-center'>
+                        <button onClick={photoPage} className='bg-blue-500 hover:bg-blue-600 rounded-xl py-2 px-4 m-5'>Inserisci e cambia foto</button>
+                    </div>
+                    :
+                    null
+            }
             <form id="update-apartment" onSubmit={(e) => updateMyHome(e)} >
                 <label className="block mt-3">
                     <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">

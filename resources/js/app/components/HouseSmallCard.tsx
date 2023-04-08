@@ -82,34 +82,6 @@ const HouseSmallCard = (props: HouseCard) => {
                             </span>
                         </button>
                     </div>
-                    {/* Slider indicators */}
-                    {/* <div className="flex absolute bottom-5 left-1/2 z-30 space-x-3 -translate-x-1/2">
-                        <button type="button" className="w-3 h-3 rounded-full bg-black"></button>
-                        <button type="button" className="w-3 h-3 rounded-full bg-black"></button>
-                        <button type="button" className="w-3 h-3 rounded-full bg-black"></button>
-                        <button type="button" className="w-3 h-3 rounded-full bg-black"></button>
-                        <button type="button" className="w-3 h-3 rounded-full bg-black"></button>
-                        <button type="button" className="w-3 h-3 rounded-full bg-black"></button>
-                        <button type="button" className="w-3 h-3 rounded-full bg-black"></button>
-                        <button type="button" className="w-3 h-3 rounded-full bg-black"></button>
-                        <button type="button" className="w-3 h-3 rounded-full bg-black"></button>
-                        <button type="button" className="w-3 h-3 rounded-full bg-black"></button>
-                        <button type="button" className="w-3 h-3 rounded-full bg-black"></button>
-                        <button type="button" className="w-3 h-3 rounded-full bg-black"></button>
-                        <button type="button" className="w-3 h-3 rounded-full bg-black"></button>
-                        <button type="button" className="w-3 h-3 rounded-full bg-black"></button>
-                        <button type="button" className="w-3 h-3 rounded-full bg-black"></button>
-                        <button type="button" className="w-3 h-3 rounded-full bg-black"></button>
-                        <button type="button" className="w-3 h-3 rounded-full bg-black"></button>
-                        <button type="button" className="w-3 h-3 rounded-full bg-black"></button>
-                        <button type="button" className="w-3 h-3 rounded-full bg-black"></button>
-                        <button type="button" className="w-3 h-3 rounded-full bg-black"></button>
-                        <button type="button" className="w-3 h-3 rounded-full bg-black"></button>
-                        <button type="button" className="w-3 h-3 rounded-full bg-black"></button>
-                        <button type="button" className="w-3 h-3 rounded-full bg-black"></button>
-                        <button type="button" className="w-3 h-3 rounded-full bg-black"></button>
-                        <button type="button" className="w-3 h-3 rounded-full bg-black"></button>
-                    </div> */}
                 </div>
             </div>
             <div onClick={() => getHome(id)} className="sm:w-7/12 pl-0 p-5 overflow-auto cursor-pointer">
@@ -123,7 +95,8 @@ const HouseSmallCard = (props: HouseCard) => {
                         <p className="text-left font-semibold">{region}</p>
                         <div className='flex flex-row flex-wrap'>
                             <p className='font-bold mx-2'>{square} <span className='font-semibold'>mq</span></p>
-                            <p className='font-bold mx-2'>{beds} <span className='font-semibold'>camere</span> </p>
+                            <p className='font-bold mx-2'>{beds} <span className='font-semibold'>letti</span> </p>
+                            <p className='font-bold mx-2'>{rooms} <span className='font-semibold'>camere</span> </p>
                             <p className='font-bold mx-2'>{bathrooms} <span className='font-semibold'>bagni</span></p>
                             <p className='font-bold mx-2'>&euro;{price} per notte</p>
                         </div>

@@ -4,7 +4,6 @@ import {
     CreateUpdate,
     Messages,
     MyHomes,
-    Notifications,
     Profile,
     Settings,
     Sidebar,
@@ -17,7 +16,6 @@ import MyHome from '../components/dashboard/MyHome';
 import PhotoModify from '../components/dashboard/PhotoModify';
 import { deleteLocalStorage } from '../services/functions';
 import { logout } from '../store/authSlice';
-import api from '../services/connection_manager';
 
 const Dashboard = () => {
     const [email, setEmail] = useState<string | null>();
@@ -67,25 +65,22 @@ const Dashboard = () => {
                             dashSelector.dashboard == variablesDashboard.MESSAGES ?
                                 <Messages />
                                 :
-                                dashSelector.dashboard == variablesDashboard.NOTIFY ?
-                                    <Notifications />
+                                dashSelector.dashboard == variablesDashboard.PROFILE ?
+                                    <Profile />
                                     :
-                                    dashSelector.dashboard == variablesDashboard.PROFILE ?
-                                        <Profile />
+                                    dashSelector.dashboard == variablesDashboard.SETTINGS ?
+                                        <Settings />
                                         :
-                                        dashSelector.dashboard == variablesDashboard.SETTINGS ?
-                                            <Settings />
+                                        dashSelector.dashboard == variablesDashboard.HOME ?
+                                            <MyHome />
                                             :
-                                            dashSelector.dashboard == variablesDashboard.HOME ?
-                                                <MyHome />
+                                            dashSelector.dashboard == variablesDashboard.CREATE_UPDATE ?
+                                                <CreateUpdate />
                                                 :
-                                                dashSelector.dashboard == variablesDashboard.CREATE_UPDATE ?
-                                                    <CreateUpdate />
+                                                dashSelector.dashboard == variablesDashboard.PHOTO ?
+                                                    <PhotoModify />
                                                     :
-                                                    dashSelector.dashboard == variablesDashboard.PHOTO ?
-                                                        <PhotoModify />
-                                                        :
-                                                        null
+                                                    null
                 }
             </div>
         </div>

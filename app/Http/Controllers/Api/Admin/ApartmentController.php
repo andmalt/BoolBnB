@@ -5,13 +5,11 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use App\Models\Facility;
-use App\Models\Photo;
 use App\Models\Region;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 
 class ApartmentController extends Controller
 {
@@ -56,7 +54,7 @@ class ApartmentController extends Controller
             return response()->json($response, 200);
         } else {
             $response['success'] = false;
-            $response['message'] = 'You aren\'t authenticated';
+            $response['message'] = 'You are not authenticated';
 
             return response()->json($response, 401);
         }
@@ -72,10 +70,10 @@ class ApartmentController extends Controller
     {
         // validations
         $validator = Validator::make($request->all(), [
-            'title' => 'required|string|unique:apartments|min:5|max:255',
+            'title' => 'required|string|min:2|max:255|unique:apartments,title',
             'city' => 'required|string|min:2|max:100',
-            'region' => 'required|string|min:5|max:100',
-            'address' => 'required|string|min:5|max:150',
+            'region' => 'required|string|min:5|max:60',
+            'address' => 'required|string|min:5|max:255',
             'rooms' => "required|integer|between:1,20",
             'bathrooms' => "required|integer|between:1,20",
             'beds' => "required|integer|between:1,40",
@@ -119,26 +117,9 @@ class ApartmentController extends Controller
             $apartment->facilities()->sync($data['facilities']);
         }
 
-        if ($request->hasfile('images')) {
-
-            foreach ($request->file('images') as $image) {
-                $photo = new Photo();
-                $url = time() . Str::random(20) . '.' . $image->extension();
-                $image->move(storage_path('app/public/apartments/images/'), $url);
-                $photo->image_url = $url;
-                $photo->apartment_id = $apartment->id;
-                $photo->save();
-            }
-        }
-
-        $apart = Apartment::where('id', $apartment->id)
-            ->with('facilities', 'photos')
-            ->first();
-
         $response = [
             'success' => true,
             'message' => "the apartment has been created",
-            'apartment' => $apart
         ];
 
         return response()->json($response, 201);
@@ -150,7 +131,7 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id, Request $request)
+    public function show(int $id, Request $request)
     {
         $apartment = Apartment::where('id', $id)
             ->with('photos', 'messages', 'facilities', 'sponsorships')
@@ -191,7 +172,7 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update($id, Request $request)
+    public function update(int $id, Request $request)
     {
         $apartment = Apartment::find($id);
         if ($request->user()->id !== $apartment->user_id) {
@@ -203,9 +184,10 @@ class ApartmentController extends Controller
         }
         // validations
         $data = $request->validate([
+            'title' => 'required|string|min:2|max:255|unique:apartments,title',
             'city' => 'required|string|min:2|max:100',
-            'region' => 'required|string|min:5|max:100',
-            'address' => 'required|string|min:5|max:150',
+            'region' => 'required|string|min:5|max:60',
+            'address' => 'required|string|min:5|max:255',
             'rooms' => "required|integer|between:1,20",
             'bathrooms' => "required|integer|between:1,20",
             'beds' => "required|integer|between:1,40",
@@ -255,7 +237,7 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id, Request $request)
+    public function destroy(int $id, Request $request)
     {
         $apartment = Apartment::find($id);
 

@@ -8,7 +8,6 @@ import Error from "./Error"
 import Loading from "./Loading"
 import DialogModal from "./DialogModal"
 import Messages from "./dashboard/Messages"
-import Notifications from "./dashboard/Notifications"
 import MyHomes from "./dashboard/MyHomes"
 import Settings from "./dashboard/Settings"
 import Profile from "./dashboard/Profile"
@@ -33,7 +32,6 @@ export {
     Loading,
     DialogModal,
     Messages,
-    Notifications,
     MyHomes,
     Settings,
     Profile,

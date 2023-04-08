@@ -19,7 +19,7 @@ class PhotoController extends Controller
      * @param  mixed $apartment
      * @return \Illuminate\Http\JsonResponse
      */
-    public function uploadImage(Request $request, $id)
+    public function uploadImage(Request $request, int $id)
     {
         $apartment = Apartment::find($id);
 
@@ -61,7 +61,6 @@ class PhotoController extends Controller
         $response = [
             'success' => true,
             'message' => 'image or images uploaded',
-            'photos' => $photo,
         ];
         return response()->json($response, 201);
     }
