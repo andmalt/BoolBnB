@@ -65,7 +65,7 @@ const MyHomes = () => {
     const paginate = async (link: string) => {
         dispatch(loading())
         try {
-            const response = await api.paginateMyHouses(authSelector.token, link);
+            const response = await api.paginateMyHM(authSelector.token, link);
             if (response.data.success) {
                 setMyHouses(response.data.apartments)
             }

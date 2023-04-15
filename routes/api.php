@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Admin\ApartmentController;
+use App\Http\Controllers\Api\Admin\MessageController as AdminMessageController;
 use App\Http\Controllers\Api\Admin\PhotoController;
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Guest\ApartmentController as GuestApartmentController;
@@ -50,4 +51,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::delete('my/apartment/{id}/delete', [ApartmentController::class, 'destroy']);
     Route::post('my/apartment/{id}/img/upload', [PhotoController::class, 'uploadImage']);
     Route::delete('my/apartment/img/{id}/delete', [PhotoController::class, 'deleteImage']);
+    Route::get('my/messages', [AdminMessageController::class, 'index']);
 });

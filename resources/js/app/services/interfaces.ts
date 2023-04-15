@@ -46,6 +46,22 @@ export interface PaginateHouses {
     total: number,
 }
 
+export interface PaginateMessages {
+    current_page: number,
+    data: Messages[]
+    first_page_url: string,
+    from: number,
+    last_page: number,
+    last_page_url: string,
+    links: Links[]
+    next_page_url: string,
+    path: string,
+    per_page: number,
+    prev_page_url: string|null,
+    to: number,
+    total: number,
+}
+
 export interface Links {
     active: boolean;
     label: string | null;
@@ -60,4 +76,15 @@ export interface Facilities {
 export interface Regions {
     id: number,
     name: string,
+}
+
+export interface Messages{
+    id: number,
+    apartment_id: number,
+    email: string,
+    message_content: string,
+    name: string,
+    surname: string,
+    created_at: Date,
+    updated_at: Date,
 }

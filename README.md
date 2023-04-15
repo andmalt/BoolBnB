@@ -5,7 +5,7 @@
 </p>
 
 ## About
-Boolbnb is my final project modification of [boolean.careers](https://boolean.careers/), using a frontend exclusively with react typescript and a backend with [Laravel 8](https://laravel.com/).
+Boolbnb is my final project modification of [boolean.careers](https://boolean.careers/), using a frontend exclusively with TypeScript React and a backend with [Laravel 8](https://laravel.com/).
 
 ## Getting started
 

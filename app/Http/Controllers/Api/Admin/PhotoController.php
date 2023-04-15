@@ -34,7 +34,7 @@ class PhotoController extends Controller
 
         $validator = Validator::make($request->all(), [
             'image-1' => "required",
-            '*' => 'mimes:jpg,png,jpeg,gif,svg',
+            '*' => 'mimes:jpg,png,jpeg,gif,svg|max:10240',
         ]);
 
         if ($validator->fails()) {

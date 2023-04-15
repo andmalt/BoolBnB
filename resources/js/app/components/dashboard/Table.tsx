@@ -1,13 +1,11 @@
 import moment from 'moment';
 import React from 'react'
 import { TrashIcon, ChevronDoubleLeft, ChevronDoubleRight, ModifyIcon } from '..';
-import api from '../../services/connection_manager';
 import { setDashboardComponents, setIdNumber } from '../../services/functions';
 import { PaginateHouses, Photos } from '../../services/interfaces'
 import { variablesDashboard } from '../../services/variables';
-import { loading } from '../../store/authSlice';
 import { setDashboard, setNumber } from '../../store/dashboardSlice';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { useAppDispatch } from '../../store/hooks';
 interface TableProps {
     houses?: PaginateHouses
     paginate(link: string | null): Promise<void>
