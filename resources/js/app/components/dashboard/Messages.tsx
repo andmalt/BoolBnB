@@ -35,12 +35,27 @@ const Messages = () => {
         }
     }
 
+    const deleteMessage = async (e: any, id: number) => {
+        e.preventDefault()
+        const confirm = window.confirm('Sicuro di voler cancellare il messaggio?');
+        if (!confirm) {
+            return;
+        }
+        dispatch(loading())
+        const response = await api.deleteMyMessage(authSelector.token, id);
+        if (response.data.success) {
+            getMyMessages()
+        }
+        // console.log("response=", response);
+        dispatch(clear())
+    }
+
     const paginate = async (link: string) => {
         dispatch(loading())
         try {
             const response = await api.paginateMyHM(authSelector.token, link);
             if (response.data.success) {
-                setMyMessages(response.data.apartments)
+                setMyMessages(response.data.messages)
             }
             dispatch(clear())
         } catch (e) {
@@ -63,7 +78,7 @@ const Messages = () => {
     return (
         <div>
             <div>
-                <MessagesTable messages={myMessages} paginate={paginate} />
+                <MessagesTable messages={myMessages} paginate={paginate} deleteMessage={deleteMessage} />
             </div>
         </div>
     )

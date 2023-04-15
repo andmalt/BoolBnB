@@ -37,7 +37,7 @@ class ApartmentController extends Controller
         }
 
         $apartment = Apartment::where('id', '=', $id)
-            ->with('photos')->get();
+            ->with('photos')->first();
 
         if (!$apartment) {
 

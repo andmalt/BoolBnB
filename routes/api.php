@@ -47,9 +47,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('my/apartments', [ApartmentController::class, 'index']);
     Route::get('my/apartment/{id}', [ApartmentController::class, 'show']);
     Route::post('my/apartment/create', [ApartmentController::class, 'store']);
-    Route::post('my/apartment/{id}/update', [ApartmentController::class, 'update']);
+    Route::patch('my/apartment/{id}/update', [ApartmentController::class, 'update']);
     Route::delete('my/apartment/{id}/delete', [ApartmentController::class, 'destroy']);
     Route::post('my/apartment/{id}/img/upload', [PhotoController::class, 'uploadImage']);
     Route::delete('my/apartment/img/{id}/delete', [PhotoController::class, 'deleteImage']);
     Route::get('my/messages', [AdminMessageController::class, 'index']);
+    Route::get('my/message/{id}', [AdminMessageController::class, 'show']);
+    Route::delete('my/message/{id}/delete', [AdminMessageController::class, 'destroy']);
 });

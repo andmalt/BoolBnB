@@ -200,12 +200,17 @@ const CreateUpdateHome = () => {
                     null
             }
             <form id="update-apartment" onSubmit={(e) => updateMyHome(e)} >
-                <label className="block mt-3">
-                    <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
-                        Titolo
-                    </span>
-                    <input type={"text"} name="title" className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="Titolo di identificazione della casa" value={title} onChange={(e) => setTitle(e.target.value)} />
-                </label>
+                {
+                    dashSelector.isCreate ?
+                        <label className="block mt-3">
+                            <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+                                Titolo
+                            </span>
+                            <input type={"text"} name="title" className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="Titolo di identificazione della casa" value={title} onChange={(e) => setTitle(e.target.value)} />
+                        </label>
+                        :
+                        null
+                }
                 <label className="block mt-3">
                     <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
                         Camere

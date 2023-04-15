@@ -9,7 +9,10 @@ class Stat extends Model
 {
     use HasFactory;
 
-    public function apartment(){
+    protected $fillable = ['apartment_id', 'ip', 'date'];
+
+    public function apartment()
+    {
         return $this->belongsTo(Apartment::class);
     }
 }

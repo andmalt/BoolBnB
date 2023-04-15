@@ -26,14 +26,14 @@ const Form = (props: FormProps) => {
     const sendMessage = async (e: any) => {
         e.preventDefault()
         dispatch(loading())
-        const data = {
-            name,
-            surname,
-            email,
-            message,
-            houseId,
-        }
-        console.log("data:", data);
+        // const data = {
+        //     name,
+        //     surname,
+        //     email,
+        //     message,
+        //     houseId,
+        // }
+        // console.log("data:", data);
         try {
             const response = await api.guestSendEmail(name, surname, email, message, houseId);
             if (response.data.success) {

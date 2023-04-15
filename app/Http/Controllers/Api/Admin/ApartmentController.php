@@ -184,7 +184,6 @@ class ApartmentController extends Controller
         }
         // validations
         $data = $request->validate([
-            'title' => 'required|string|min:2|max:255|unique:apartments,title',
             'city' => 'required|string|min:2|max:100',
             'region' => 'required|string|min:5|max:60',
             'address' => 'required|string|min:5|max:255',

@@ -186,7 +186,7 @@ const api = {
             'X-CSRF-TOKEN': `${csrf}`
         }
         try {
-            const response = await axios.post(`${BASE_URL}/api/my/apartment/${id}/update`, data ,{ headers });
+            const response = await axios.patch(`${BASE_URL}/api/my/apartment/${id}/update`, data ,{ headers });
             return response;
         } catch (e) {
             return { data: { success: false, error: { code: 500, message: e } } }
@@ -239,6 +239,32 @@ const api = {
         }
         try {
             const response = await axios.get(`${BASE_URL}/api/my/messages`, { headers });
+            return response;
+        } catch (e) {
+            return { data: { success: false, error: { code: 500, message: e } } }
+        }
+    },
+    getMyMessage: async function (token:string|null, id:number|null) {
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            'X-CSRF-TOKEN': `${csrf}`
+        }
+        try {
+            const response = await axios.get(`${BASE_URL}/api/my/message/${id}`, { headers });
+            return response;
+        } catch (e) {
+            return { data: { success: false, error: { code: 500, message: e } } }
+        }
+    },
+     deleteMyMessage: async function(token:string|null,id:number|null){
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            'X-CSRF-TOKEN': `${csrf}`
+        }
+        try {
+            const response = await axios.delete(`${BASE_URL}/api/my/message/${id}/delete`,{ headers });
             return response;
         } catch (e) {
             return { data: { success: false, error: { code: 500, message: e } } }

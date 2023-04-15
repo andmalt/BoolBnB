@@ -38,12 +38,12 @@ const HouseView = (props: HouseProps) => {
             const response = await api.getHome(houseId)
             if (response.data.success) {
                 console.log(response);
-                setMapLongitude(response.data.apartment[0].lon)
-                setMapLatitude(response.data.apartment[0].lat)
-                setHome(response.data.apartment[0])
-                setPhoto(response.data.apartment[0].photos[0])
-                setPhotos(response.data.apartment[0].photos)
-                setLengthPhotos(response.data.apartment[0].photos.length)
+                setMapLongitude(response.data.apartment.lon)
+                setMapLatitude(response.data.apartment.lat)
+                setHome(response.data.apartment)
+                setPhoto(response.data.apartment.photos[0])
+                setPhotos(response.data.apartment.photos)
+                setLengthPhotos(response.data.apartment.photos.length)
                 dispatch(clear())
             }
         } catch (e) {
