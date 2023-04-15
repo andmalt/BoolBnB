@@ -42,7 +42,7 @@ const MessagesTable = (props: MessageTableProps) => {
                                                 <td className="px-4 py-3 text-xs">{moment(message.created_at).format("DD/MM/YY HH:mm:ss")}</td>
                                                 {/* action row */}
                                                 <td className="px-4 py-3 text-sm">
-                                                    <div className="flex flex-row flex-wrap justify-between items-center">
+                                                    <div className="flex flex-row flex-wrap justify-end items-center">
                                                         <form onSubmit={(e) => deleteMessage(e, message.id)}>
                                                             <button type="submit">{<TrashIcon className='stroke-red-600' />}</button>
                                                         </form>

@@ -29,6 +29,7 @@ class MessageController extends Controller
             ->join('apartments', 'messages.apartment_id', '=', 'apartments.id')
             ->join('users', 'apartments.user_id', '=', 'users.id')
             ->where('users.id', '=', $request->user()->id)
+            ->whereNull('messages.deleted_at')
             ->select('messages.*')
             ->orderByDesc('created_at')
             ->paginate(6);
