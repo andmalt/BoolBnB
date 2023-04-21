@@ -18,6 +18,7 @@ import ModifyIcon from "./dashboard/icons/ModifyIcon"
 import CreateUpdate from "./dashboard/CreateUpdateHome"
 import PhotoPage from "./dashboard/PhotoModify"
 import MessagesTable from "./dashboard/MessagesTable"
+import TopBarMessages from "./dashboard/TopBarMessages"
 
 /**
  * application component
@@ -42,5 +43,6 @@ export {
     ModifyIcon,
     CreateUpdate,
     PhotoPage,
-    MessagesTable
+    MessagesTable,
+    TopBarMessages
 }

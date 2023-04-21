@@ -5,13 +5,18 @@ import { deleteLocalStorage } from '../../services/functions';
 import { PaginateMessages } from '../../services/interfaces';
 import { clear, error, loading, logout } from '../../store/authSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import MessagesTable from './MessagesTable';
+import { TopBarMessages, MessagesTable } from '..';
 
 const Messages = () => {
     const [myMessages, setMyMessages] = useState<PaginateMessages>();
     const authSelector = useAppSelector(state => state.auth);
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+
+    const update = async () => {
+        await getMyMessages()
+        console.log("message update");
+    }
 
     const getMyMessages = async () => {
         dispatch(loading())
@@ -77,6 +82,9 @@ const Messages = () => {
 
     return (
         <div>
+            <div>
+                <TopBarMessages update={update} />
+            </div>
             <div>
                 <MessagesTable messages={myMessages} paginate={paginate} deleteMessage={deleteMessage} />
             </div>

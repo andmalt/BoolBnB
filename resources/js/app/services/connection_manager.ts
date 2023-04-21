@@ -244,6 +244,19 @@ const api = {
             return { data: { success: false, error: { code: 500, message: e } } }
         }
     },
+    getAllMyTrashedMessages: async function (token:string|null) {
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            'X-CSRF-TOKEN': `${csrf}`
+        }
+        try {
+            const response = await axios.get(`${BASE_URL}/api/my/messages/trashed`, { headers });
+            return response;
+        } catch (e) {
+            return { data: { success: false, error: { code: 500, message: e } } }
+        }
+    },
     getMyMessage: async function (token:string|null, id:number|null) {
         const headers = {
             Authorization: `Bearer ${token}`,
@@ -257,7 +270,20 @@ const api = {
             return { data: { success: false, error: { code: 500, message: e } } }
         }
     },
-     deleteMyMessage: async function(token:string|null,id:number|null){
+    restoreMyMessage: async function (token:string|null, id:number|null) {
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            'X-CSRF-TOKEN': `${csrf}`
+        }
+        try {
+            const response = await axios.patch(`${BASE_URL}/api/my/message/${id}/restore`,{},{ headers });
+            return response;
+        } catch (e) {
+            return { data: { success: false, error: { code: 500, message: e } } }
+        }
+    },
+    deleteMyMessage: async function(token:string|null,id:number|null){
         const headers = {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
@@ -265,6 +291,19 @@ const api = {
         }
         try {
             const response = await axios.delete(`${BASE_URL}/api/my/message/${id}/delete`,{ headers });
+            return response;
+        } catch (e) {
+            return { data: { success: false, error: { code: 500, message: e } } }
+        }
+    },
+    destroyMyMessage: async function(token:string|null,id:number|null){
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            'X-CSRF-TOKEN': `${csrf}`
+        }
+        try {
+            const response = await axios.delete(`${BASE_URL}/api/my/message/${id}/destroy`,{ headers });
             return response;
         } catch (e) {
             return { data: { success: false, error: { code: 500, message: e } } }

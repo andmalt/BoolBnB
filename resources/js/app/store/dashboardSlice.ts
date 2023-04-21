@@ -23,7 +23,7 @@ export const dashboardSlice = createSlice({
         setDashboard: (state, token: PayloadAction<string>) => {
             state.dashboard = token.payload;
         },
-        setNumber: (state,number:PayloadAction<number|null>) => {
+        setNumber: (state, number:PayloadAction<number|null>) => {
             state.id = number.payload;
         },
         setIsCte: (state, boolean: PayloadAction<boolean>) => {
