@@ -70,3 +70,29 @@ export const getNumber = () => {
     const store: number|null = JSON.parse(`${localStorage.getItem("number")}`)
     return store;
 }
+
+/**
+ * set the messages if trashed or not in sidebar messages
+ * 
+ * @param boolean 
+ */
+export const setTrashed = (boolean: boolean) => {
+    if (boolean) {
+        localStorage.setItem("isTrashed",JSON.stringify(true))
+    } else {
+        localStorage.setItem("isTrashed",JSON.stringify(false))
+    }
+}
+
+/**
+ * check if messages are trash or not
+ * 
+ * @returns boolean
+ */
+export const isTrashed = () => {
+    const boolean: boolean|null = JSON.parse(`${localStorage.getItem("isTrashed")}`);
+    if (boolean) {
+        return true
+    }
+    return false
+}

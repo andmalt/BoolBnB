@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
-import { setDashboardComponents, setIdNumber, setIsCreate } from '../../services/functions';
+import { setDashboardComponents, setIdNumber, setIsCreate, setTrashed } from '../../services/functions';
 import { variablesDashboard } from "../../services/variables";
 import { setDashboard, setIsCte, setNumber } from '../../store/dashboardSlice';
 import { useAppDispatch } from '../../store/hooks';
+import { setIsTrashMessages } from '../../store/messageSlice';
 
 interface SidebarProps {
 
@@ -24,6 +25,10 @@ const Sidebar = (props: SidebarProps) => {
         dispatch(setIsCte(false))
         setIdNumber(null)
         dispatch(setNumber(null))
+        if (e === variablesDashboard.MESSAGES) {
+            dispatch(setIsTrashMessages(false))
+            setTrashed(false)
+        }
     }
 
     useEffect(() => {
