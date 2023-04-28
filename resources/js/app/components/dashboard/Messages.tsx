@@ -2,14 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../services/connection_manager';
 import { deleteLocalStorage, setTrashed } from '../../services/functions';
-import { PaginateMessages } from '../../services/interfaces';
+import { PaginateMessages, Messages } from '../../services/interfaces';
 import { clear, error, loading, logout } from '../../store/authSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { TopBarMessages, MessagesTable } from '..';
+import { TopBarMessages, MessagesTable, MessageModal } from '..';
 import { setIsTrashMessages } from '../../store/messageSlice';
 
 const Messages = () => {
     const [myMessages, setMyMessages] = useState<PaginateMessages>();
+    const [myMessage, setMyMessage] = useState<Messages>();
+    const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
     const authSelector = useAppSelector(state => state.auth);
     const messagesSelector = useAppSelector(state => state.messages);
     const navigate = useNavigate();
@@ -48,8 +50,40 @@ const Messages = () => {
         }
     }
 
+    const closeModal = () => {
+        // add api for get my homes
+        setModalIsOpen(false)
+    }
+
+    const getMyMessage = async (id: number) => {
+        dispatch(loading())
+        dispatch(setIsTrashMessages(false))
+        setTrashed(false)
+        const page = document.getElementById("body-container");
+        page?.scrollIntoView();
+        try {
+            const response = await api.getMyMessage(authSelector.token, id);
+            // console.log("response:", response.data.messages);
+
+            if (response.data.success) {
+                setMyMessage(response.data.message)
+                setModalIsOpen(true)
+            } else {
+                dispatch(logout())
+                deleteLocalStorage()
+                navigate("/")
+            }
+            dispatch(clear())
+        } catch (e) {
+            console.log("paginate error:", e);
+            dispatch(error())
+        }
+    }
+
     const getMyMessages = async () => {
         dispatch(loading())
+        dispatch(setIsTrashMessages(false))
+        setTrashed(false)
         const page = document.getElementById("body-container");
         page?.scrollIntoView();
         try {
@@ -70,33 +104,79 @@ const Messages = () => {
         }
     }
 
-    const deleteMessage = async (e: any, id: number) => {
+    const restoreMessage = async (e: any, id: number) => {
         e.preventDefault()
-        const confirm = window.confirm('Sicuro di voler cancellare il messaggio?');
+        const confirm = window.confirm('Sicuro di voler ripristinare questo messaggio nei ricevuti?');
         if (!confirm) {
             return;
         }
+        const page = document.getElementById("body-container");
+        page?.scrollIntoView();
         dispatch(loading())
-        const response = await api.deleteMyMessage(authSelector.token, id);
-        if (response.data.success) {
-            getMyMessages()
+        try {
+            const response = await api.restoreMyMessage(authSelector.token, id);
+            if (response.data.success) {
+                getTrashedMessages()
+            }
+        } catch (err) {
+            console.log("ERROR: delete message=", err);
         }
-        // console.log("response=", response);
+        dispatch(clear())
+    }
+
+    const deleteMessage = async (e: any, id: number) => {
+        e.preventDefault()
+        const confirm = window.confirm('Sicuro di voler inviare il messaggio nel cestino?');
+        if (!confirm) {
+            return;
+        }
+        const page = document.getElementById("body-container");
+        page?.scrollIntoView();
+        dispatch(loading())
+        try {
+            const response = await api.deleteMyMessage(authSelector.token, id);
+            if (response.data.success) {
+                getMyMessages()
+            }
+        } catch (err) {
+            console.log("ERROR: delete message=", err);
+        }
+        dispatch(clear())
+    }
+    const destroyMessage = async (e: any, id: number) => {
+        e.preventDefault()
+        const confirm = window.confirm('Sicuro di voler cancellare definitivamente il messaggio?');
+        if (!confirm) {
+            return;
+        }
+        const page = document.getElementById("body-container");
+        page?.scrollIntoView();
+        dispatch(loading())
+        try {
+            const response = await api.destroyMyMessage(authSelector.token, id);
+            if (response.data.success) {
+                getTrashedMessages()
+            }
+        } catch (err) {
+            console.log("ERROR: delete message=", err);
+        }
         dispatch(clear())
     }
 
     const paginate = async (link: string) => {
         dispatch(loading())
+        const page = document.getElementById("body-container");
+        page?.scrollIntoView();
         try {
             const response = await api.paginateMyHM(authSelector.token, link);
             if (response.data.success) {
                 setMyMessages(response.data.messages)
             }
-            dispatch(clear())
         } catch (e) {
             console.log("paginate error:", e);
             dispatch(error())
         }
+        dispatch(clear())
     }
 
     useEffect(() => {
@@ -113,14 +193,20 @@ const Messages = () => {
         }
     }, [messagesSelector.isTrashedMessages])
 
-
     return (
         <div>
+            <MessageModal isOpen={modalIsOpen} message={myMessage} closeModal={closeModal} />
             <div>
                 <TopBarMessages update={update} trashedMessages={getTrashedMessages} />
             </div>
             <div>
-                <MessagesTable messages={myMessages} paginate={paginate} deleteMessage={deleteMessage} />
+                <MessagesTable
+                    messages={myMessages}
+                    paginate={paginate}
+                    deleteMessage={deleteMessage}
+                    destroyMessage={destroyMessage}
+                    restoreMessage={restoreMessage}
+                    getMyMessage={getMyMessage} />
             </div>
         </div>
     )

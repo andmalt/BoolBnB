@@ -3,14 +3,14 @@ import { isTrashed} from '../services/functions'
 
 const isTrashedMessages: boolean = isTrashed()
 
-interface DashboardState {
+interface MessageState {
     isTrashedMessages: boolean,
 }
-const initialState: DashboardState = {
+const initialState: MessageState = {
     isTrashedMessages,
 }
 
-export const dashboardSlice = createSlice({
+export const messageSlice = createSlice({
     name: 'Messages',
     initialState,
     reducers: {
@@ -20,8 +20,8 @@ export const dashboardSlice = createSlice({
     }
 })
 
-export const { setIsTrashMessages } = dashboardSlice.actions
+export const { setIsTrashMessages } = messageSlice.actions
 
 // export const selectToken = (state: RootState) => state.auth.token
 
-export default dashboardSlice.reducer;
+export default messageSlice.reducer;

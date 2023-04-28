@@ -22,14 +22,10 @@ const Navigation = (props: NavigationProps) => {
     const { } = props;
     const authSelector = useAppSelector(state => state.auth);
 
-    useEffect(() => {
-        //  
-    }, []);
-
     return (
-        <div 
-        className='bg-black'
-        id='body-container'>
+        <div
+            className='bg-black'
+            id='body-container'>
             {
                 authSelector.isError ?
                     <Error />

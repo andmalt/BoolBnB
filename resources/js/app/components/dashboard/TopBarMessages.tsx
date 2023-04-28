@@ -33,11 +33,11 @@ const TopBarMessages = (props: TopBarMessagesProps) => {
                 {
                     !messagesSelector.isTrashedMessages ?
                         <div className='flex justify-center items-center w-1/2'>
-                            <h2 className='uppercase'>Messaggi ricevuti</h2>
+                            <h2 className='uppercase font-semibold'>Messaggi ricevuti</h2>
                         </div>
                         :
                         <div className='flex justify-center items-center w-1/2'>
-                            <h2 className='uppercase'>Messaggi nel cestino</h2>
+                            <h2 className='uppercase font-semibold'>Messaggi nel cestino</h2>
                         </div>
                 }
 

@@ -19,6 +19,7 @@ import CreateUpdate from "./dashboard/CreateUpdateHome"
 import PhotoPage from "./dashboard/PhotoModify"
 import MessagesTable from "./dashboard/MessagesTable"
 import TopBarMessages from "./dashboard/TopBarMessages"
+import MessageModal from "./dashboard/MessageModal"
 
 /**
  * application component
@@ -44,5 +45,6 @@ export {
     CreateUpdate,
     PhotoPage,
     MessagesTable,
-    TopBarMessages
+    TopBarMessages,
+    MessageModal
 }
