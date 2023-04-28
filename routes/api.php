@@ -52,7 +52,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('my/apartment/{id}/img/upload', [PhotoController::class, 'uploadImage']);
     Route::delete('my/apartment/img/{id}/delete', [PhotoController::class, 'deleteImage']);
     Route::get('my/messages', [AdminMessageController::class, 'index']);
-    Route::get('my/message/{id}', [AdminMessageController::class, 'show']);
+    Route::post('my/message/{id}', [AdminMessageController::class, 'show']);
     Route::get('my/messages/trashed', [AdminMessageController::class, 'trash_index']);
     Route::patch('my/message/{id}/restore', [AdminMessageController::class, 'restore']);
     Route::delete('my/message/{id}/delete', [AdminMessageController::class, 'delete']);

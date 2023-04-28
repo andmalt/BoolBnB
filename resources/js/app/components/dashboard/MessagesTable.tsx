@@ -34,9 +34,15 @@ const MessagesTable = (props: MessageTableProps) => {
                             {
                                 messages?.data.length != 0 && messages?.data != undefined ?
                                     messages?.data.map((message, i) => {
+                                        const isRead = (isRead: boolean) => {
+                                            if (isRead) {
+                                                return " bg-white "
+                                            }
+                                            return " bg-gray-100 "
+                                        }
 
                                         return (
-                                            <tr key={`${message.id}-${i}`} className="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
+                                            <tr key={`${message.id}-${i}`} className={" dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400" + isRead(message.is_read)}>
                                                 <td className="px-4 py-3">
                                                     <div className="flex items-center text-sm overflow-hidden">
                                                         {

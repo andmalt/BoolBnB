@@ -87,4 +87,5 @@ export interface Messages{
     surname: string,
     created_at: Date,
     updated_at: Date,
+    is_read: boolean,
 }

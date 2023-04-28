@@ -111,6 +111,8 @@ class MessageController extends Controller
             ->first();
 
         if ($message && $message->apartment->user->id == $request->user()->id) {
+            $message['is_read'] = true;
+            $message->update();
             $response = [
                 'success' => true,
                 'message' => $message,

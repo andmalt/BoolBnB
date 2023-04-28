@@ -50,8 +50,28 @@ const Messages = () => {
         }
     }
 
-    const closeModal = () => {
-        // add api for get my homes
+    const closeModal = async () => {
+        dispatch(loading())
+        dispatch(setIsTrashMessages(false))
+        setTrashed(false)
+        const page = document.getElementById("body-container");
+        page?.scrollIntoView();
+        try {
+            const response = await api.getAllMyMessages(authSelector.token);
+            // console.log("response:", response.data.messages);
+
+            if (response.data.success) {
+                setMyMessages(response.data.messages)
+            } else {
+                dispatch(logout())
+                deleteLocalStorage()
+                navigate("/")
+            }
+            dispatch(clear())
+        } catch (e) {
+            console.log("paginate error:", e);
+            dispatch(error())
+        }
         setModalIsOpen(false)
     }
 
