@@ -96,3 +96,24 @@ export const isTrashed = () => {
     }
     return false
 }
+
+/**
+ * 
+ * @param number 
+ */
+export const setLengthMessagesRead = (number:number) => {
+    localStorage.setItem('readMessagesLength', JSON.stringify(number));
+}
+
+/**
+ * 
+ * @returns 
+ */
+export const getLengthMessagesRead = () => {
+    const length = localStorage.getItem('readMessagesLength')
+    const response: number | null = JSON.parse(length!)
+    if (!response) {
+        return 0
+    }
+    return response;
+}

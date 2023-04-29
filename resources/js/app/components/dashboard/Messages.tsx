@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../services/connection_manager';
-import { deleteLocalStorage, setTrashed } from '../../services/functions';
+import { deleteLocalStorage, setLengthMessagesRead, setTrashed } from '../../services/functions';
 import { PaginateMessages, Messages } from '../../services/interfaces';
 import { clear, error, loading, logout } from '../../store/authSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { TopBarMessages, MessagesTable, MessageModal } from '..';
-import { setIsTrashMessages } from '../../store/messageSlice';
+import { setIsTrashMessages, setMessagesNotRead } from '../../store/messageSlice';
 
 const Messages = () => {
     const [myMessages, setMyMessages] = useState<PaginateMessages>();
@@ -51,27 +51,7 @@ const Messages = () => {
     }
 
     const closeModal = async () => {
-        dispatch(loading())
-        dispatch(setIsTrashMessages(false))
-        setTrashed(false)
-        const page = document.getElementById("body-container");
-        page?.scrollIntoView();
-        try {
-            const response = await api.getAllMyMessages(authSelector.token);
-            // console.log("response:", response.data.messages);
-
-            if (response.data.success) {
-                setMyMessages(response.data.messages)
-            } else {
-                dispatch(logout())
-                deleteLocalStorage()
-                navigate("/")
-            }
-            dispatch(clear())
-        } catch (e) {
-            console.log("paginate error:", e);
-            dispatch(error())
-        }
+        await getMyMessages()
         setModalIsOpen(false)
     }
 
@@ -108,9 +88,10 @@ const Messages = () => {
         page?.scrollIntoView();
         try {
             const response = await api.getAllMyMessages(authSelector.token);
-            // console.log("response:", response.data.messages);
-
+            console.log("response:", response.data);
             if (response.data.success) {
+                setLengthMessagesRead(response.data.messagesNotRead)
+                dispatch(setMessagesNotRead(response.data.messagesNotRead))
                 setMyMessages(response.data.messages)
             } else {
                 dispatch(logout())

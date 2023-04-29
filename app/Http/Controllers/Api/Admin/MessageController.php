@@ -34,10 +34,20 @@ class MessageController extends Controller
             ->orderByDesc('created_at')
             ->paginate(10);
 
+        $messagesNotReadLength = DB::table('messages')
+            ->join('apartments', 'messages.apartment_id', '=', 'apartments.id')
+            ->join('users', 'apartments.user_id', '=', 'users.id')
+            ->where('users.id', '=', $request->user()->id)
+            ->where('messages.is_read', '=', false)
+            ->select('messages.*')
+            ->orderByDesc('created_at')
+            ->count();
+
         if ($messages) {
             $response = [
                 'success' => true,
                 'messages' => $messages,
+                'messagesNotRead' => $messagesNotReadLength,
             ];
             return response()->json($response);
         } else {

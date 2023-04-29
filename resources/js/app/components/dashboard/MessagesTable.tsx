@@ -19,7 +19,7 @@ const MessagesTable = (props: MessageTableProps) => {
     const messagesSelector = useAppSelector(state => state.messages);
 
     return (
-        <div className="mt-4 mx-4">
+        <div className="mt-4 mx-4 mb-6">
             <div className="w-full overflow-hidden rounded-lg shadow-xs">
                 <div className="w-full overflow-x-auto">
                     <table className="w-full">
@@ -34,6 +34,7 @@ const MessagesTable = (props: MessageTableProps) => {
                             {
                                 messages?.data.length != 0 && messages?.data != undefined ?
                                     messages?.data.map((message, i) => {
+                                        // to check messages whether they have been read or not
                                         const isRead = (isRead: boolean) => {
                                             if (isRead) {
                                                 return " bg-white "
@@ -42,7 +43,7 @@ const MessagesTable = (props: MessageTableProps) => {
                                         }
 
                                         return (
-                                            <tr key={`${message.id}-${i}`} className={" dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400" + isRead(message.is_read)}>
+                                            <tr key={`${message.id}-${i}`} className={" dark:bg-gray-800 hover:border-y-black hover:border-y dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400" + isRead(message.is_read)}>
                                                 <td className="px-4 py-3">
                                                     <div className="flex items-center text-sm overflow-hidden">
                                                         {
