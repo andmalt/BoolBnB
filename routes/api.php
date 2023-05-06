@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Admin\ApartmentController;
 use App\Http\Controllers\Api\Admin\MessageController as AdminMessageController;
 use App\Http\Controllers\Api\Admin\PhotoController;
+use App\Http\Controllers\Api\Admin\SponsorshipController;
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Guest\ApartmentController as GuestApartmentController;
 use App\Http\Controllers\Api\Guest\MessageController;
@@ -57,4 +58,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::patch('my/message/{id}/restore', [AdminMessageController::class, 'restore']);
     Route::delete('my/message/{id}/delete', [AdminMessageController::class, 'delete']);
     Route::delete('my/message/{id}/destroy', [AdminMessageController::class, 'destroy']);
+    Route::get('my/apartment/{id}/sponsorship', [SponsorshipController::class, 'index']);
+    Route::post('my/apartment/{id}/sponsorship/update', [SponsorshipController::class, 'update']);
 });

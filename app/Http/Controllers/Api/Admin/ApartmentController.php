@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class ApartmentController extends Controller
 {
@@ -25,6 +26,32 @@ class ApartmentController extends Controller
         $apartments = Apartment::where('user_id', '=', $request->user()->id)
             ->with('photos')
             ->paginate(6);
+
+        foreach ($apartments as $apartment) {
+            $sponsorshipD = '0000-00-00';
+
+            foreach ($apartment->sponsorships as $sponsorship) {
+                $sponsorshipD = $sponsorship->pivot->end_date;
+            }
+
+            /* example time "2022-01-08" */
+            $timeNow = Carbon::now();
+
+            if ($sponsorshipD !== '0000-00-00') {
+                $tn = str_replace('-', '', $timeNow);
+                $sn = str_replace('-', '', $sponsorshipD);
+
+                if ($tn > $sn) {
+                    $apartment->sponsorships()->detach();
+                    // $a = Apartment::where('id', $apartment->id)->first();
+                    // $a->visible = false;
+                    // $a->update();
+                    $apartment->visible = false;
+                    $apartment->update();
+                }
+            }
+        }
+
 
         if ($apartments) {
             $response = [

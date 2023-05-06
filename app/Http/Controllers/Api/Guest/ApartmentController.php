@@ -7,6 +7,7 @@ use App\Models\Apartment;
 use App\Models\Stat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ApartmentController extends Controller
 {
@@ -15,6 +16,27 @@ class ApartmentController extends Controller
         $apartments = DB::table('apartments')
             ->orderByDesc('visible')->get();
         $photos = DB::table('photos')->get();
+
+
+        // foreach ($apartments as $apartment) {
+        //     $sponsorshipD = '0000-00-00';
+
+        //     foreach ($apartment->sponsorships as $sponsorship) {
+        //         $sponsorshipD = $sponsorship->pivot->end_date;
+        //     }
+
+        //     /* example time "2022-01-08" */
+        //     $timeNow = Carbon::now();
+
+        //     if ($sponsorshipD !== '0000-00-00') {
+        //         $tn = str_replace('-', '', $timeNow);
+        //         $sn = str_replace('-', '', $sponsorshipD);
+
+        //         if ($tn > $sn) {
+        //             $apartment->sponsorships()->detach();
+        //         }
+        //     }
+        // }
 
         $response = [
             "apartments" => $apartments,
@@ -47,6 +69,24 @@ class ApartmentController extends Controller
             ];
 
             return response()->json($response);
+        }
+
+        $sponsorshipD = '0000-00-00';
+
+        foreach ($apartment->sponsorships as $sponsorship) {
+            $sponsorshipD = $sponsorship->pivot->end_date;
+        }
+
+        /* example time "2022-01-08" */
+        $timeNow = Carbon::now();
+
+        if ($sponsorshipD !== '0000-00-00') {
+            $tn = str_replace('-', '', $timeNow);
+            $sn = str_replace('-', '', $sponsorshipD);
+
+            if ($tn > $sn) {
+                $apartment->sponsorships()->detach();
+            }
         }
 
         $stat = new Stat();

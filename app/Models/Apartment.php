@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,6 +11,20 @@ class Apartment extends Model
     use HasFactory;
 
     protected $fillable = ['title', 'user_id', 'description', 'rooms', 'beds', 'bathrooms', 'square', 'region', 'city', 'address', 'lat', 'lon', 'price'];
+
+    public function checkDateSponsorship()
+    {
+        // if ($this->sponsorships->pivot->end_date < Carbon::now()) {
+        //     $this->sponsorships()->detach();
+        //     $this->visible = false;
+        // };
+        // foreach ($this->sponsorships as $sponsorship) {
+        //     if ($sponsorship->pivot->end_date < Carbon::now()) {
+        //         $this->sponsorships()->detach();
+        //         $this->visible = false;
+        //     };
+        // }
+    }
 
     public function user()
     {
