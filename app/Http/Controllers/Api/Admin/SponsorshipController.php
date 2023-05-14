@@ -44,31 +44,32 @@ class SponsorshipController extends Controller
     {
         $data = $request->all();
 
+        $response = [];
         if (array_key_exists('sponsorship', $data)) {
             /* $apartment->sponsorships()->sync($data['sponsorship']); */
 
             $apartment = Apartment::find($id);
 
-            $response = [];
+            $sponsorship = end($data['sponsorship']);
 
             if ($apartment->user->id == $request->user()->id) {
                 $apartment->sponsorships()->detach();
 
-                if ($data['sponsorship'] == 1) {
+                if ($sponsorship == 1) {
                     $apartment->sponsorships()->attach($apartment, [
-                        'sponsorship_id' => $data['sponsorship'],
+                        'sponsorship_id' => $sponsorship,
                         'start_date' => Carbon::now(),
                         'end_date' => Carbon::now()->addHours(24),
                     ]);
-                } elseif ($data['sponsorship'] == 2) {
+                } elseif ($sponsorship == 2) {
                     $apartment->sponsorships()->attach($apartment, [
-                        'sponsorship_id' => $data['sponsorship'],
+                        'sponsorship_id' => $sponsorship,
                         'start_date' => Carbon::now(),
                         'end_date' => Carbon::now()->addHours(72),
                     ]);
-                } elseif ($data['sponsorship'] == 3) {
+                } elseif ($sponsorship == 3) {
                     $apartment->sponsorships()->attach($apartment, [
-                        'sponsorship_id' => $data['sponsorship'],
+                        'sponsorship_id' => $sponsorship,
                         'start_date' => Carbon::now(),
                         'end_date' => Carbon::now()->addHours(144),
                     ]);
@@ -85,5 +86,8 @@ class SponsorshipController extends Controller
                 return response()->json($response, 401);
             }
         }
+        $response['success'] = false;
+        $response['message'] = 'error value';
+        return response()->json($response, 404);
     }
 }
