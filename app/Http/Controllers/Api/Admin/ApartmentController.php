@@ -43,12 +43,12 @@ class ApartmentController extends Controller
 
                 if ($tn > $sn) {
                     $apartment->sponsorships()->detach();
-                    // $a = Apartment::where('id', $apartment->id)->first();
-                    // $a->visible = false;
-                    // $a->update();
                     $apartment->visible = false;
-                    $apartment->update();
+                    $apartment->save();
                 }
+            } else {
+                $apartment->visible = false;
+                $apartment->save();
             }
         }
 

@@ -9,6 +9,9 @@ use Carbon\Carbon;
 
 class SponsorshipController extends Controller
 {
+    /**
+     * check if the house has a sponsorship
+     */
     public function index(Request $request, int $id)
     {
         $apartment = Apartment::find($id);
@@ -34,6 +37,9 @@ class SponsorshipController extends Controller
         }
     }
 
+    /**
+     * add sponsorship to the house
+     */
     public function update(Request $request, int $id)
     {
         $data = $request->all();
@@ -68,7 +74,7 @@ class SponsorshipController extends Controller
                     ]);
                 }
                 $apartment->visible = true;
-                $apartment->update();
+                $apartment->save();
 
                 $response['success'] = true;
                 $response['message'] = 'The apartment is successfuly sponsored';

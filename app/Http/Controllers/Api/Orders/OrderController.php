@@ -10,6 +10,9 @@ use Braintree\Gateway;
 
 class OrderController extends Controller
 {
+    /**
+     * generate the token for make a payment
+     */
     public function generate(Request $request)
     {
         if ($request->user()) {
@@ -23,7 +26,7 @@ class OrderController extends Controller
             $clientToken = $gateway->clientToken()->generate();
             $response = [
                 'success' => true,
-                'token' => $clientToken
+                'token' => $clientToken,
             ];
             return response()->json($response, 200);
         }
@@ -34,6 +37,9 @@ class OrderController extends Controller
         return response()->json($response, 200);
     }
 
+    /**
+     * make a payment and check if it is successful
+     */
     public function makePayment(OrderRequest $request, Gateway $gateway)
     {
 
@@ -49,13 +55,13 @@ class OrderController extends Controller
         if ($result->success) {
             $data = [
                 'success' => true,
-                'messagge' => 'Transazione eseguita con successo'
+                'messagge' => 'Transaction completed successfully'
             ];
             return response()->json($data, 200);
         } else {
             $data = [
                 'success' => false,
-                'messagge' => 'Transazione fallita'
+                'messagge' => 'Transaction failed'
             ];
 
             return response()->json($data, 401);

@@ -12,20 +12,6 @@ class Apartment extends Model
 
     protected $fillable = ['title', 'user_id', 'description', 'rooms', 'beds', 'bathrooms', 'square', 'region', 'city', 'address', 'lat', 'lon', 'price'];
 
-    public function checkDateSponsorship()
-    {
-        // if ($this->sponsorships->pivot->end_date < Carbon::now()) {
-        //     $this->sponsorships()->detach();
-        //     $this->visible = false;
-        // };
-        // foreach ($this->sponsorships as $sponsorship) {
-        //     if ($sponsorship->pivot->end_date < Carbon::now()) {
-        //         $this->sponsorships()->detach();
-        //         $this->visible = false;
-        //     };
-        // }
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

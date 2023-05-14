@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\Admin\SponsorshipController;
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Guest\ApartmentController as GuestApartmentController;
 use App\Http\Controllers\Api\Guest\MessageController;
+use App\Http\Controllers\Api\Orders\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,7 +26,7 @@ use Illuminate\Support\Facades\Route;
  */
 Route::middleware('guest')->group(function () {
     Route::get('homes', [GuestApartmentController::class, 'index']);
-    Route::get('house/{id}', [GuestApartmentController::class, 'show']);
+    Route::post('house/{id}', [GuestApartmentController::class, 'show']);
     Route::post('message/send', [MessageController::class, 'sendEmail']);
 });
 
@@ -60,4 +61,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::delete('my/message/{id}/destroy', [AdminMessageController::class, 'destroy']);
     Route::get('my/apartment/{id}/sponsorship', [SponsorshipController::class, 'index']);
     Route::post('my/apartment/{id}/sponsorship/update', [SponsorshipController::class, 'update']);
+    Route::post('generate/token', [OrderController::class, 'generate']);
+    Route::post('make/payment', [OrderController::class, 'makePayment']);
 });

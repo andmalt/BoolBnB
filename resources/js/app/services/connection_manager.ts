@@ -83,7 +83,7 @@ const api = {
             "Content-Type": "application/json",
         }
         try {
-            const response = await axios.get(`${BASE_URL}/api/house/${id}`, { headers })
+            const response = await axios.post(`${BASE_URL}/api/house/${id}`,{},{ headers })
             return response;
         } catch (e) {
             return { data: { success: false, error: { code: 500, message: e }}}
