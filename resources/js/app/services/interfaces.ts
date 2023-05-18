@@ -89,3 +89,14 @@ export interface Messages{
     updated_at: Date,
     is_read: boolean,
 }
+
+export interface Sponsorship{
+    id: number;
+    name: string;
+    price: number;
+    duration: number;
+    pivot: {
+        start_date: Date;
+        end_date: Date;
+    }
+}

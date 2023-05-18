@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Apartment;
+use App\Models\Sponsorship;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -12,23 +13,16 @@ class SponsorshipController extends Controller
     /**
      * check if the house has a sponsorship
      */
-    public function index(Request $request, int $id)
+    public function index(Request $request)
     {
-        $apartment = Apartment::find($id);
+        $sponsorships = Sponsorship::all();
         $response = [];
 
-        if (!$apartment) {
-            $response['success'] = false;
-            $response['message'] = 'The apartment does not exist';
-            return response()->json($response, 200);
-        }
-
-
-        if ($apartment->user->id == $request->user()->id) {
+        if ($request->user()) {
             // insert here the code if the Apartment have the sponsorship
 
             $response['success'] = true;
-            $response['sponsorship'] = $apartment->sponsorships;
+            $response['sponsorships'] = $sponsorships;
             return response()->json($response, 200);
         } else {
             $response['success'] = false;

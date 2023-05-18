@@ -7,6 +7,7 @@ import {
     Profile,
     Settings,
     Sidebar,
+    Sponsorships,
     Statistics
 } from '../components';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
@@ -80,7 +81,10 @@ const Dashboard = () => {
                                                 dashSelector.dashboard == variablesDashboard.PHOTO ?
                                                     <PhotoModify />
                                                     :
-                                                    null
+                                                    dashSelector.dashboard == variablesDashboard.SPONSORSHIPS ?
+                                                        <Sponsorships />
+                                                        :
+                                                        null
                 }
             </div>
         </div>
