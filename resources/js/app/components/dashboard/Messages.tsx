@@ -16,6 +16,7 @@ const Messages = () => {
     const messagesSelector = useAppSelector(state => state.messages);
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+    const page = document.getElementById("body-container");
 
     const update = async () => {
         if (messagesSelector.isTrashedMessages) {
@@ -30,7 +31,6 @@ const Messages = () => {
         dispatch(loading())
         dispatch(setIsTrashMessages(true))
         setTrashed(true)
-        const page = document.getElementById("body-container");
         page?.scrollIntoView();
         try {
             const response = await api.getAllMyTrashedMessages(authSelector.token);
@@ -59,7 +59,6 @@ const Messages = () => {
         dispatch(loading())
         dispatch(setIsTrashMessages(false))
         setTrashed(false)
-        const page = document.getElementById("body-container");
         page?.scrollIntoView();
         try {
             const response = await api.getMyMessage(authSelector.token, id);
@@ -84,7 +83,6 @@ const Messages = () => {
         dispatch(loading())
         dispatch(setIsTrashMessages(false))
         setTrashed(false)
-        const page = document.getElementById("body-container");
         page?.scrollIntoView();
         try {
             const response = await api.getAllMyMessages(authSelector.token);
@@ -111,7 +109,6 @@ const Messages = () => {
         if (!confirm) {
             return;
         }
-        const page = document.getElementById("body-container");
         page?.scrollIntoView();
         dispatch(loading())
         try {
@@ -131,7 +128,6 @@ const Messages = () => {
         if (!confirm) {
             return;
         }
-        const page = document.getElementById("body-container");
         page?.scrollIntoView();
         dispatch(loading())
         try {
@@ -166,7 +162,6 @@ const Messages = () => {
 
     const paginate = async (link: string) => {
         dispatch(loading())
-        const page = document.getElementById("body-container");
         page?.scrollIntoView();
         try {
             const response = await api.paginateMyHM(authSelector.token, link);

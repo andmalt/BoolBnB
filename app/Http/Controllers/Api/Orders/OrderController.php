@@ -53,18 +53,18 @@ class OrderController extends Controller
             ]
         ]);
         if ($result->success) {
-            $data = [
+            $response = [
                 'success' => true,
                 'messagge' => 'Transaction completed successfully'
             ];
-            return response()->json($data, 200);
+            return response()->json($response, 200);
         } else {
-            $data = [
+            $response = [
                 'success' => false,
                 'messagge' => 'Transaction failed'
             ];
 
-            return response()->json($data, 401);
+            return response()->json($response, 401);
         }
     }
 }

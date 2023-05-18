@@ -1,6 +1,6 @@
 import moment from 'moment';
 import React from 'react'
-import { TrashIcon, ChevronDoubleLeft, ChevronDoubleRight, ModifyIcon } from '..';
+import { TrashIcon, ChevronDoubleLeft, ChevronDoubleRight, ModifyIcon, PaymentIcon } from '..';
 import { setDashboardComponents, setIdNumber } from '../../services/functions';
 import { PaginateHouses, Photos } from '../../services/interfaces'
 import { variablesDashboard } from '../../services/variables';
@@ -73,6 +73,7 @@ const Table = (props: TableProps) => {
                                                 {/* action row */}
                                                 <td className="px-4 py-3 text-sm">
                                                     <div className="flex flex-row flex-wrap justify-between items-center">
+                                                        <button onClick={() => changePage(variablesDashboard.SPONSORSHIPS, house.id)}>{<PaymentIcon className='stroke-black' />}</button>
                                                         <button onClick={() => changePage(variablesDashboard.CREATE_UPDATE, house.id)}>{<ModifyIcon className='stroke-blue-600' />}</button>
                                                         <button onClick={(e) => deleteHome(e, house.id)}>{<TrashIcon className='stroke-red-600' />}</button>
                                                     </div>

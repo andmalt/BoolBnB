@@ -40,4 +40,5 @@ export const variablesDashboard = {
     HOME: "home",
     CREATE_UPDATE: "createUpdate",
     PHOTO: "photo",
+    SPONSORSHIPS:"sponsorships"
 }

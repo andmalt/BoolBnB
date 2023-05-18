@@ -1617,6 +1617,12 @@ select {
 .stroke-slate-400 {
   stroke: #94a3b8;
 }
+.stroke-green-600 {
+  stroke: #16a34a;
+}
+.stroke-black {
+  stroke: #000;
+}
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;

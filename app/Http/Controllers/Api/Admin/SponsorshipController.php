@@ -56,23 +56,20 @@ class SponsorshipController extends Controller
                 $apartment->sponsorships()->detach();
 
                 if ($sponsorship == 1) {
-                    $apartment->sponsorships()->attach($apartment, [
-                        'sponsorship_id' => $sponsorship,
+                    $apartment->sponsorships()->attach([$sponsorship => [
                         'start_date' => Carbon::now(),
                         'end_date' => Carbon::now()->addHours(24),
-                    ]);
+                    ]]);
                 } elseif ($sponsorship == 2) {
-                    $apartment->sponsorships()->attach($apartment, [
-                        'sponsorship_id' => $sponsorship,
+                    $apartment->sponsorships()->attach([$sponsorship => [
                         'start_date' => Carbon::now(),
                         'end_date' => Carbon::now()->addHours(72),
-                    ]);
+                    ]]);
                 } elseif ($sponsorship == 3) {
-                    $apartment->sponsorships()->attach($apartment, [
-                        'sponsorship_id' => $sponsorship,
+                    $apartment->sponsorships()->attach([$sponsorship => [
                         'start_date' => Carbon::now(),
                         'end_date' => Carbon::now()->addHours(144),
-                    ]);
+                    ]]);
                 }
                 $apartment->visible = true;
                 $apartment->save();

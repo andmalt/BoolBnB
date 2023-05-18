@@ -20,6 +20,7 @@ import PhotoPage from "./dashboard/PhotoModify"
 import MessagesTable from "./dashboard/MessagesTable"
 import TopBarMessages from "./dashboard/TopBarMessages"
 import MessageModal from "./dashboard/MessageModal"
+import PaymentIcon from "./dashboard/icons/PaymentIcon"
 
 /**
  * application component
@@ -46,5 +47,6 @@ export {
     PhotoPage,
     MessagesTable,
     TopBarMessages,
-    MessageModal
+    MessageModal,
+    PaymentIcon,
 }
