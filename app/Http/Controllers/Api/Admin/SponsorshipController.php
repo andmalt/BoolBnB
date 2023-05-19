@@ -11,7 +11,7 @@ use Carbon\Carbon;
 class SponsorshipController extends Controller
 {
     /**
-     * check if the house has a sponsorship
+     * get sponsorships
      */
     public function index(Request $request)
     {

@@ -2,3 +2,7 @@
     min-height: calc(100vh - 130px);
     background-color: black;
 }
+
+#stroke-title{
+    -webkit-text-stroke: 1px gray;
+}

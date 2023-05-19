@@ -59,7 +59,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::patch('my/message/{id}/restore', [AdminMessageController::class, 'restore']);
     Route::delete('my/message/{id}/delete', [AdminMessageController::class, 'delete']);
     Route::delete('my/message/{id}/destroy', [AdminMessageController::class, 'destroy']);
-    Route::get('my/apartment/{id}/sponsorship', [SponsorshipController::class, 'index']);
+    Route::get('my/sponsorships', [SponsorshipController::class, 'index']);
     Route::post('my/apartment/{id}/sponsorship/update', [SponsorshipController::class, 'update']);
     Route::post('generate/token', [OrderController::class, 'generate']);
     Route::post('make/payment', [OrderController::class, 'makePayment']);

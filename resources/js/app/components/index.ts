@@ -22,6 +22,7 @@ import TopBarMessages from "./dashboard/TopBarMessages"
 import MessageModal from "./dashboard/MessageModal"
 import PaymentIcon from "./dashboard/icons/PaymentIcon"
 import Sponsorships from "./dashboard/Sponsorships"
+import SponsorshipCard from "./dashboard/SponsorshipCard"
 
 /**
  * application component
@@ -50,5 +51,6 @@ export {
     TopBarMessages,
     MessageModal,
     PaymentIcon,
-    Sponsorships
+    Sponsorships,
+    SponsorshipCard,
 }

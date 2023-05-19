@@ -9,7 +9,8 @@ class Sponsorship extends Model
 {
     use HasFactory;
 
-    public function apartments(){
-        return $this->belongsToMany(Apartment::class)->withPivot('start_date','end_date');
+    public function apartments()
+    {
+        return $this->belongsToMany(Apartment::class);
     }
 }
