@@ -7,6 +7,7 @@ import { clear, logout, loading, error } from '../store/authSlice';
 import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
+import { classNames } from '../services/functions';
 
 interface HeaderProps {
 }
@@ -32,10 +33,6 @@ const Header = (props: HeaderProps) => {
       dispatch(logout())
       dispatch(error())
     }
-  }
-
-  function classNames(...classes:any) {
-    return classes.filter(Boolean).join(' ')
   }
 
   useEffect(() => {

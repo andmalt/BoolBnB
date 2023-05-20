@@ -23,6 +23,7 @@ import MessageModal from "./dashboard/MessageModal"
 import PaymentIcon from "./dashboard/icons/PaymentIcon"
 import Sponsorships from "./dashboard/Sponsorships"
 import SponsorshipCard from "./dashboard/SponsorshipCard"
+import Braintree from "./Braintree"
 
 /**
  * application component
@@ -53,4 +54,5 @@ export {
     PaymentIcon,
     Sponsorships,
     SponsorshipCard,
+    Braintree,
 }

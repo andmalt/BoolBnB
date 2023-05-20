@@ -1,23 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import dropin, { Dropin, PaymentMethodPayload } from 'braintree-web-drop-in'
 import { classNames } from '../services/functions';
+import api from '../services/connection_manager';
+import { useAppSelector } from '../store/hooks';
 
 interface BraintreeProps {
     clientToken: string;
     show: boolean;
-    checkout: (nonce: string) => void;
     className?: string;
+    id: number;
 }
 
 const Braintree = (props: BraintreeProps) => {
-    const { clientToken, show, checkout, className } = props;
+    const { clientToken, show, className, id } = props;
     const [braintreeInstance, setBraintreeInstance] = useState<Dropin | undefined>();
+    const authSelector = useAppSelector(state => state.auth);
 
     useEffect(() => {
         if (show) {
             const config = {
                 authorization: clientToken,
-                container: "#braintree-drop-in-container"
+                container: "#braintree-drop-in-container",
+                locale: "it_IT"
             }
 
             /**
@@ -44,13 +48,18 @@ const Braintree = (props: BraintreeProps) => {
     }, [show])
 
     const requestPaymentMethod = () => {
-        const callback = (error: object | null, payload: PaymentMethodPayload) => {
+        const callback = async (error: object | null, payload: PaymentMethodPayload) => {
             if (error) {
                 console.error(error);
             } else {
-                const paymentMethodNonce = payload.nonce;
+                // const paymentMethodNonce = payload.nonce;
                 console.log("payment method nonce", payload.nonce);
-                checkout(paymentMethodNonce);
+                const data = {
+                    token: payload.nonce,
+                    sponsorship: id,
+                }
+                const response = await api.makePayment(authSelector.token, data)
+                console.log("response", response.data)
             }
         }
         braintreeInstance && braintreeInstance.requestPaymentMethod(callback);
@@ -59,15 +68,14 @@ const Braintree = (props: BraintreeProps) => {
 
     return (
         <div className={classNames(show ? 'block' : 'hidden', className)}>
-            <div id='braintree-drop-in-container'>
-                {
-                    braintreeInstance && (
-                        <button disabled={!braintreeInstance} onClick={requestPaymentMethod}>
-                            Paga Adesso
-                        </button>
-                    )
-                }
-            </div>
+            <div id='braintree-drop-in-container' className='mb-3' />
+            {
+                braintreeInstance && (
+                    <button className='bg-white hover:bg-slate-200 p-3 mb-4 rounded-lg' disabled={!braintreeInstance} onClick={requestPaymentMethod}>
+                        Paga Adesso
+                    </button>
+                )
+            }
         </div>
     )
 }

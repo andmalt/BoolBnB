@@ -13,17 +13,11 @@ class OrderController extends Controller
     /**
      * generate the token for make a payment
      */
-    public function generate(Request $request)
+    public function generate(Request $request, Gateway $gateway)
     {
         if ($request->user()) {
-            $gateway = new Gateway([
-                'environment' => env('BRAINTREE_ENVIRONMENT'),
-                'merchantId' => env("BRAINTREE_MERCHANT_ID"),
-                'publicKey' => env("BRAINTREE_PUBLIC_KEY"),
-                'privateKey' => env("BRAINTREE_PRIVATE_KEY")
-            ]);
-
             $clientToken = $gateway->clientToken()->generate();
+
             $response = [
                 'success' => true,
                 'token' => $clientToken,

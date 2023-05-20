@@ -1,5 +1,6 @@
 import React from 'react'
 import "../../../../css/dashboard.css"
+import { classNames } from '../../services/functions';
 
 interface SponsorshipCardProps {
     name: string;
@@ -10,10 +11,6 @@ interface SponsorshipCardProps {
 
 const SponsorshipCard = (props: SponsorshipCardProps) => {
     const { name, price, duration, generateToken } = props;
-
-    const classNames = (...classNames: any) => {
-        return classNames.filter(Boolean).join(' ');
-    }
 
     return (
         <div className={classNames(name == 'silver' ? 'bg-[rgb(192,192,192)]' : name == 'gold' ? 'bg-[rgb(255,215,0)]' : 'bg-[rgb(229,228,226)]', 'w-[90%] sm:w-[65%] md:w-[40%] lg:w-[30%] p-4 m-2 rounded-md')}>

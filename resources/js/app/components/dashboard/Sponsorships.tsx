@@ -4,7 +4,7 @@ import { House, Sponsorship } from '../../services/interfaces';
 import { clear, error, loading } from '../../store/authSlice';
 import api from '../../services/connection_manager';
 import moment from 'moment';
-import { SponsorshipCard } from '..';
+import { Braintree, SponsorshipCard } from '..';
 
 const Sponsorships = () => {
     const authSelector = useAppSelector(store => store.auth);
@@ -12,8 +12,9 @@ const Sponsorships = () => {
     const [home, setHome] = useState<House | null>(null);
     const [sponsorship, setSponsorship] = useState<Sponsorship>();
     const [sponsorships, setSponsorships] = useState<Sponsorship[]>();
-    const [token, setToken] = useState<string>();
-    const [idSponsorship, setIdSponsorship] = useState<number>();
+    const [token, setToken] = useState<string>("");
+    const [show, setShow] = useState<boolean>(false);
+    const [idSponsorship, setIdSponsorship] = useState<number>(0);
     const dispatch = useAppDispatch();
 
     const getMyHouse = async () => {
@@ -57,6 +58,7 @@ const Sponsorships = () => {
             if (response.data.success) {
                 setToken(response.data.token)
                 setIdSponsorship(id)
+                setShow(true)
             }
             dispatch(clear())
         } catch (e) {
@@ -111,7 +113,7 @@ const Sponsorships = () => {
                 }
             </div>
             <div>
-                {/*  */}
+                <Braintree clientToken={token} show={show} id={idSponsorship} />
             </div>
         </div>
     )
