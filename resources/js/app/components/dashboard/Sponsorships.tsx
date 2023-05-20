@@ -13,6 +13,7 @@ const Sponsorships = () => {
     const [sponsorship, setSponsorship] = useState<Sponsorship>();
     const [sponsorships, setSponsorships] = useState<Sponsorship[]>();
     const [token, setToken] = useState<string>();
+    const [idSponsorship, setIdSponsorship] = useState<number>();
     const dispatch = useAppDispatch();
 
     const getMyHouse = async () => {
@@ -47,13 +48,15 @@ const Sponsorships = () => {
         }
     }
 
-    const generateToken = async () => {
+    const generateToken = async (id: number) => {
         dispatch(loading())
+        // console.log(id);
         try {
             const response = await api.generateToken(authSelector.token);
             // console.log(response.data);
             if (response.data.success) {
                 setToken(response.data.token)
+                setIdSponsorship(id)
             }
             dispatch(clear())
         } catch (e) {
@@ -98,7 +101,7 @@ const Sponsorships = () => {
                                 {
                                     sponsorships?.map((sp, i) => {
                                         return (
-                                            <SponsorshipCard key={i} name={sp.name} price={sp.price} duration={sp.duration} generateToken={generateToken} />
+                                            <SponsorshipCard key={i} name={sp.name} price={sp.price} duration={sp.duration} generateToken={() => generateToken(sp.id)} />
                                         )
                                     })
                                 }
@@ -106,6 +109,9 @@ const Sponsorships = () => {
 
                         </div>
                 }
+            </div>
+            <div>
+                {/*  */}
             </div>
         </div>
     )

@@ -5,7 +5,7 @@ interface SponsorshipCardProps {
     name: string;
     price: number;
     duration: number;
-    generateToken(): void
+    generateToken(): Promise<void>
 }
 
 const SponsorshipCard = (props: SponsorshipCardProps) => {
@@ -21,12 +21,12 @@ const SponsorshipCard = (props: SponsorshipCardProps) => {
                 {name}
             </h5>
             <p className="font-normal text-gray-600 mb-2">
-                ha una durata di {duration} ore
+                ha una durata di <span className='font-bold'>{duration} </span>ore
             </p>
             <p className="font-normal text-gray-600 mb-3">
-                costo {price}&euro;
+                costo <span className=' font-bold'>{price}&euro;</span>
             </p>
-            <button className='bg-blue-600 w-full flex justify-center items-center flex-wrap mb-2 rounded-md p-2 hover:bg-blue-500 active:bg-green-600' onClick={() => alert("hai premuto paga")}>
+            <button className='bg-blue-600 w-full flex justify-center items-center flex-wrap mb-2 rounded-md p-2 hover:bg-blue-500 active:bg-green-600' onClick={generateToken}>
                 Paga
                 <svg
                     className="ml-2 -mr-1 h-4 w-4"

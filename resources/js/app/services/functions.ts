@@ -117,3 +117,7 @@ export const getLengthMessagesRead = () => {
     }
     return response;
 }
+
+export const classNames = (...className:any) => {
+    return className.filter(Boolean).join(' ');
+} 
