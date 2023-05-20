@@ -64,6 +64,10 @@ class SponsorshipController extends Controller
                         'start_date' => Carbon::now(),
                         'end_date' => Carbon::now()->addHours(144),
                     ]]);
+                } else {
+                    $response['success'] = false;
+                    $response['message'] = 'There is a problem with the sponsorship';
+                    return response()->json($response, 400);
                 }
                 $apartment->visible = true;
                 $apartment->save();

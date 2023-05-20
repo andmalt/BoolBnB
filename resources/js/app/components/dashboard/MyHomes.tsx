@@ -14,11 +14,11 @@ const MyHomes = () => {
     const authSelector = useAppSelector(state => state.auth);
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+    const page = document.getElementById("body-container");
 
     const getMyHouses = async () => {
-        dispatch(loading())
-        const page = document.getElementById("body-container");
         page?.scrollIntoView();
+        dispatch(loading())
         try {
             const response = await api.getAllMyHouses(authSelector.token);
             // console.log("response:", response.data.apartments);
@@ -63,6 +63,7 @@ const MyHomes = () => {
     }
 
     const paginate = async (link: string) => {
+        page?.scrollIntoView();
         dispatch(loading())
         try {
             const response = await api.paginateMyHM(authSelector.token, link);

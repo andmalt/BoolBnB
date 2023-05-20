@@ -322,14 +322,14 @@ const api = {
             return { data: { success: false, error: { code: 500, message: e } } }
         }
     },
-    updateSponsorshipToTheHouse: async function(token:string|null,id:number|null){
+    updateSponsorshipToTheHouse: async function(token:string|null,id:number|null,data:any){
         const headers = {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
             'X-CSRF-TOKEN': `${csrf}`
         }
         try {
-            const response = await axios.post(`${BASE_URL}/api/my/apartment/${id}/sponsorship/update`,{},{ headers });
+            const response = await axios.post(`${BASE_URL}/api/my/apartment/${id}/sponsorship/update`,data,{ headers });
             return response;
         } catch (e) {
             return { data: { success: false, error: { code: 500, message: e } } }

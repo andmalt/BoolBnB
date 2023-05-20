@@ -16,8 +16,10 @@ const Sponsorships = () => {
     const [show, setShow] = useState<boolean>(false);
     const [idSponsorship, setIdSponsorship] = useState<number>(0);
     const dispatch = useAppDispatch();
+    const page = document.getElementById("body-container");
 
     const getMyHouse = async () => {
+        page?.scrollIntoView();
         dispatch(loading())
         try {
             const response = await api.getMyHome(authSelector.token, dashSelector.id);
@@ -35,6 +37,7 @@ const Sponsorships = () => {
     }
 
     const getSponsorships = async () => {
+        page?.scrollIntoView();
         dispatch(loading())
         try {
             const response = await api.getSponsorships(authSelector.token);
@@ -50,6 +53,7 @@ const Sponsorships = () => {
     }
 
     const generateToken = async (id: number) => {
+        page?.scrollIntoView();
         dispatch(loading())
         // console.log(id);
         try {
@@ -94,7 +98,7 @@ const Sponsorships = () => {
                 {
                     sponsorship ?
                         <div>
-                            <p className='text-white'>La casa <span className='uppercase'>{home?.title}</span> è gia sponsorizzata con il livello <span className='uppercase'>{sponsorship.name}</span> e scadrà il {moment(sponsorship.pivot.end_date).format("DD/MM/YYYY HH:mm")} .</p>
+                            <p className='text-white'>La casa <span className='uppercase'>{home?.title}</span> è sponsorizzata con il livello <span className='uppercase'>{sponsorship.name}</span> e scadrà il {moment(sponsorship.pivot.end_date).format("DD/MM/YYYY HH:mm")} .</p>
                         </div>
                         :
                         <div className='flex flex-col justify-center items-center'>
@@ -113,7 +117,7 @@ const Sponsorships = () => {
                 }
             </div>
             <div>
-                <Braintree clientToken={token} show={show} id={idSponsorship} />
+                <Braintree clientToken={token} show={show} id={idSponsorship} getMyHouse={getMyHouse} />
             </div>
         </div>
     )
