@@ -10,10 +10,11 @@ interface BraintreeProps {
     className?: string;
     id: number;
     getMyHouse(): void;
+    closeDrawer(): void;
 }
 
 const Braintree = (props: BraintreeProps) => {
-    const { clientToken, show, className, id, getMyHouse } = props;
+    const { clientToken, show, className, id, getMyHouse, closeDrawer } = props;
     const [braintreeInstance, setBraintreeInstance] = useState<Dropin | undefined>();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isPaid, setIsPaid] = useState<boolean>(false);
@@ -69,6 +70,7 @@ const Braintree = (props: BraintreeProps) => {
                     try {
                         await api.updateSponsorshipToTheHouse(authSelector.token, dashSelector.id, data)
                         setIsPaid(true)
+                        closeDrawer()
                         getMyHouse()
                     } catch (e) {
                         console.log("error updateSponsorshipToTheHouse", e);
@@ -87,11 +89,11 @@ const Braintree = (props: BraintreeProps) => {
             {
                 !isPaid ?
                     <div>
-                        <div id='braintree-drop-in-container' className='mb-3' />
+                        <div id='braintree-drop-in-container' className='mb-10' />
                         {
                             braintreeInstance && (
                                 <div className='w-full flex justify-center items-center'>
-                                    <button className='bg-white hover:bg-slate-200 p-3 mb-4 rounded-lg' disabled={!braintreeInstance} onClick={requestPaymentMethod}>
+                                    <button className='bg-white hover:bg-slate-200 text-black p-3 mb-4 rounded-lg' disabled={!braintreeInstance} onClick={requestPaymentMethod}>
                                         {isLoading ? 'Pagamento in corso' : 'Paga Adesso'}
                                     </button>
                                 </div>

@@ -24,6 +24,7 @@ import PaymentIcon from "./dashboard/icons/PaymentIcon"
 import Sponsorships from "./dashboard/Sponsorships"
 import SponsorshipCard from "./dashboard/SponsorshipCard"
 import Braintree from "./Braintree"
+import Xmark from "./dashboard/icons/Xmark"
 
 /**
  * application component
@@ -55,4 +56,5 @@ export {
     Sponsorships,
     SponsorshipCard,
     Braintree,
+    Xmark,
 }

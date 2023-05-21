@@ -4,7 +4,8 @@ import { House, Sponsorship } from '../../services/interfaces';
 import { clear, error, loading } from '../../store/authSlice';
 import api from '../../services/connection_manager';
 import moment from 'moment';
-import { Braintree, SponsorshipCard } from '..';
+import { Braintree, SponsorshipCard, Xmark } from '..';
+import { classNames } from '../../services/functions';
 
 const Sponsorships = () => {
     const authSelector = useAppSelector(store => store.auth);
@@ -17,6 +18,8 @@ const Sponsorships = () => {
     const [idSponsorship, setIdSponsorship] = useState<number>(0);
     const dispatch = useAppDispatch();
     const page = document.getElementById("body-container");
+
+    const closeDrawer = () => setShow(false);
 
     const getMyHouse = async () => {
         page?.scrollIntoView();
@@ -117,7 +120,18 @@ const Sponsorships = () => {
                 }
             </div>
             <div>
-                <Braintree clientToken={token} show={show} id={idSponsorship} getMyHouse={getMyHouse} />
+                {/* Drawer where is displayed the Braintree drop in */}
+                <div className={classNames(show ? "translate-x-0 " : "translate-x-full", 'fixed z-30 w-[100vw] h-[100vh] top-0 right-0 ease-in-out ea duration-300 bg-[rgba(0,0,0,0.5)]')}>
+                    <div
+                        className={classNames('top-0 right-0 xl:w-[35vw] lg:w-[45vw] md:w-[75vw] w-[100vw] bg-blue-600  p-10 pl-20 text-white fixed h-full z-40  ease-in-out duration-300', show ? "translate-x-0 " : "translate-x-full")}
+                    >
+                        <div className='flex justify-end items-center w-full mb-6'>
+                            <Xmark onClick={() => closeDrawer()} className=' cursor-pointer hover:scale-90' />
+                        </div>
+                        <Braintree clientToken={token} show={show} id={idSponsorship} getMyHouse={getMyHouse} closeDrawer={closeDrawer} />
+                    </div>
+                </div>
+
             </div>
         </div>
     )
