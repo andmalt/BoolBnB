@@ -1,9 +1,61 @@
 import React from 'react'
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend,
+} from 'chart.js';
+import { Line } from 'react-chartjs-2';
+import { WEEK } from '../../services/variables';
 
 /**
  * statistics card
  */
 const Statistics = () => {
+
+
+    const options = {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top' as const,
+            },
+            // title: {
+            //     display: true,
+            //     text: "Visualizzazioni nell'anno",
+            // },
+        },
+    };
+
+    // const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+
+    ChartJS.register(
+        CategoryScale,
+        LinearScale,
+        PointElement,
+        LineElement,
+        Title,
+        Tooltip,
+        Legend
+    );
+
+    const data = {
+        // labels: MONTHS.map(el => el),
+        // datasets: [
+        //     {
+        //         label: 'Visualizzazioni nell\'anno',
+        //         data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
+        //         borderColor: 'rgb(255, 99, 132)',
+        //         backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        //     },
+        // ],
+    };
+
+
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-4 gap-4">
             <div className="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
@@ -41,6 +93,10 @@ const Statistics = () => {
                     <p className="text-2xl">$75,257</p>
                     <p>Balances</p>
                 </div>
+            </div>
+            <div>
+                {/* Chart */}
+                {/* <Line options={options} data={data} /> */}
             </div>
         </div>
     )

@@ -6,12 +6,12 @@ import { useAppSelector } from '../../store/hooks';
 
 
 interface MessageTableProps {
-    messages?: PaginateMessages,
-    paginate(link: string | null): Promise<void>
-    deleteMessage(e: any, id: number): Promise<void>
-    destroyMessage(e: any, id: number): Promise<void>
-    restoreMessage(e: any, id: number): Promise<void>
-    getMyMessage(id: number): Promise<void>
+    messages?: PaginateMessages;
+    paginate(link: string | null): Promise<void>;
+    deleteMessage(e: any, id: number): Promise<void>;
+    destroyMessage(e: any, id: number): Promise<void>;
+    restoreMessage(e: any, id: number): Promise<void>;
+    getMyMessage(id: number): Promise<void>;
 }
 
 const MessagesTable = (props: MessageTableProps) => {
@@ -43,7 +43,7 @@ const MessagesTable = (props: MessageTableProps) => {
                                         }
 
                                         return (
-                                            <tr key={`${message.id}-${i}`} className={" dark:bg-gray-800 hover:border-y-black hover:border-y dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400" + isRead(message.is_read)}>
+                                            <tr key={`${message.id}-${i}`} className={" dark:bg-gray-800 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400" + isRead(message.is_read)}>
                                                 <td className="px-4 py-3">
                                                     <div className="flex items-center text-sm overflow-hidden">
                                                         {

@@ -3,6 +3,7 @@ import dropin, { Dropin, PaymentMethodPayload } from 'braintree-web-drop-in'
 import { classNames } from '../services/functions';
 import api from '../services/connection_manager';
 import { useAppSelector } from '../store/hooks';
+import { Sponsorship } from '../services/interfaces';
 
 interface BraintreeProps {
     clientToken: string;
@@ -11,10 +12,11 @@ interface BraintreeProps {
     id: number;
     getMyHouse(): void;
     closeDrawer(): void;
+    sponsorship?: Sponsorship;
 }
 
 const Braintree = (props: BraintreeProps) => {
-    const { clientToken, show, className, id, getMyHouse, closeDrawer } = props;
+    const { clientToken, show, className, id, getMyHouse, closeDrawer, sponsorship } = props;
     const [braintreeInstance, setBraintreeInstance] = useState<Dropin | undefined>();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isPaid, setIsPaid] = useState<boolean>(false);
@@ -94,7 +96,7 @@ const Braintree = (props: BraintreeProps) => {
                             braintreeInstance && (
                                 <div className='w-full flex justify-center items-center'>
                                     <button className='bg-white hover:bg-slate-200 text-black p-3 mb-4 rounded-lg' disabled={!braintreeInstance} onClick={requestPaymentMethod}>
-                                        {isLoading ? 'Pagamento in corso' : 'Paga Adesso'}
+                                        Paga {sponsorship?.price}&euro;
                                     </button>
                                 </div>
                             )

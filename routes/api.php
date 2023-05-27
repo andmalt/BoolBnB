@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\Admin\ApartmentController;
 use App\Http\Controllers\Api\Admin\MessageController as AdminMessageController;
 use App\Http\Controllers\Api\Admin\PhotoController;
 use App\Http\Controllers\Api\Admin\SponsorshipController;
+use App\Http\Controllers\Api\Admin\StatController;
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Guest\ApartmentController as GuestApartmentController;
 use App\Http\Controllers\Api\Guest\MessageController;
@@ -63,4 +64,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('my/apartment/{id}/sponsorship/update', [SponsorshipController::class, 'update']);
     Route::post('generate/token', [OrderController::class, 'generate']);
     Route::post('make/payment', [OrderController::class, 'makePayment']);
+    Route::get('my/apartment/{id}/stat/total', [StatController::class, 'index_total']);
+    Route::get('my/apartment/{id}/stat/year', [StatController::class, 'index_year']);
 });

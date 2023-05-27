@@ -25,6 +25,7 @@ class MessageController extends Controller
             return response()->json($response, 401);
         }
 
+        // all messages that have not been soft-deleted by the user
         $messages = DB::table('messages')
             ->join('apartments', 'messages.apartment_id', '=', 'apartments.id')
             ->join('users', 'apartments.user_id', '=', 'users.id')
@@ -34,6 +35,7 @@ class MessageController extends Controller
             ->orderByDesc('created_at')
             ->paginate(10);
 
+        // is a count of all messages that have not been seen by the user
         $messagesNotReadLength = DB::table('messages')
             ->join('apartments', 'messages.apartment_id', '=', 'apartments.id')
             ->join('users', 'apartments.user_id', '=', 'users.id')

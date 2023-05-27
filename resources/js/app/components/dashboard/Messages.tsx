@@ -24,7 +24,7 @@ const Messages = () => {
         } else {
             await getMyMessages()
         }
-        console.log("message update");
+        console.log("message updated");
     }
 
     const getTrashedMessages = async () => {

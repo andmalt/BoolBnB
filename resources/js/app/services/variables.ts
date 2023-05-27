@@ -42,3 +42,28 @@ export const variablesDashboard = {
     PHOTO: "photo",
     SPONSORSHIPS:"sponsorships"
 }
+
+export const YEAR = [
+    "Gennaio",
+    "Febbraio",
+    "Marzo",
+    "Aprile",
+    "Maggio",
+    "Giugno",
+    "Luglio",
+    "Agosto",
+    "Settembre",
+    "Ottobre",
+    "Novembre",
+    "Dicembre"
+];
+
+export const WEEK = [
+    "Lunedi",
+    "Martedi",
+    "Mercoledi",
+    "Giovedi",
+    "Venerdi",
+    "Sabato",
+    "Domenica"
+];
