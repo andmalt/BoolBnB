@@ -121,7 +121,7 @@ const api = {
             'X-CSRF-TOKEN': `${csrf}`
         }
         try {
-            const response = await axios.get(`${BASE_URL}/api/my/apartments`, { headers });
+            const response = await axios.post(`${BASE_URL}/api/my/apartments`,{},{ headers });
             return response;
         } catch (e) {
             return { data: { success: false, error: { code: 500, message: e } } }
@@ -134,7 +134,7 @@ const api = {
             'X-CSRF-TOKEN': `${csrf}`
         }
         try {
-            const response = await axios.get(link, { headers });
+            const response = await axios.post(link,{},{ headers });
             return response;
         } catch (e) {
             return { data: { success: false, error: { code: 500, message: e } } }
@@ -147,7 +147,7 @@ const api = {
             'X-CSRF-TOKEN': `${csrf}`
         }
         try {
-            const response = await axios.get(`${BASE_URL}/api/my/apartment/${id}`, { headers });
+            const response = await axios.post(`${BASE_URL}/api/my/apartment/${id}`,{},{ headers });
             return response;
         } catch (e) {
             return { data: { success: false, error: { code: 500, message: e } } }
@@ -160,7 +160,7 @@ const api = {
             'X-CSRF-TOKEN': `${csrf}`
         }
         try {
-            const response = await axios.get(`${BASE_URL}/api/my/apartments/recfac`, { headers });
+            const response = await axios.post(`${BASE_URL}/api/my/apartments/recfac`,{},{ headers });
             return response;
         } catch (e) {
             return { data: { success: false, error: { code: 500, message: e } } }
@@ -238,7 +238,7 @@ const api = {
             'X-CSRF-TOKEN': `${csrf}`
         }
         try {
-            const response = await axios.get(`${BASE_URL}/api/my/messages`, { headers });
+            const response = await axios.post(`${BASE_URL}/api/my/messages`, {},{ headers });
             return response;
         } catch (e) {
             return { data: { success: false, error: { code: 500, message: e } } }
@@ -251,7 +251,7 @@ const api = {
             'X-CSRF-TOKEN': `${csrf}`
         }
         try {
-            const response = await axios.get(`${BASE_URL}/api/my/messages/trashed`, { headers });
+            const response = await axios.post(`${BASE_URL}/api/my/messages/trashed`, {},{ headers });
             return response;
         } catch (e) {
             return { data: { success: false, error: { code: 500, message: e } } }
@@ -316,7 +316,7 @@ const api = {
             'X-CSRF-TOKEN': `${csrf}`
         }
         try {
-            const response = await axios.get(`${BASE_URL}/api/my/sponsorships`,{ headers });
+            const response = await axios.post(`${BASE_URL}/api/my/sponsorships`,{},{ headers });
             return response;
         } catch (e) {
             return { data: { success: false, error: { code: 500, message: e } } }

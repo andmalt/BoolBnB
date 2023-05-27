@@ -25,7 +25,7 @@ class StatController extends Controller
             return response()->json($response, 401);
         }
 
-        $stat = Stat::where('apartment_id', '=', $apartment->id)->get();
+        $stat = Stat::where('apartment_id', '=', $apartment->id)->count();
 
         $response['success'] = true;
         $response['statistic'] = $stat;
@@ -47,7 +47,8 @@ class StatController extends Controller
             return response()->json($response, 401);
         }
 
-        // get visit count in the month based on year.
+        // get visits count in the month based on year.
+        // 
         //  but if in the month there isn't visits don't creates the month
         $stats = DB::table('stats')
             ->where('apartment_id', '=', $apartment->id)
@@ -76,6 +77,54 @@ class StatController extends Controller
         $response['success'] = true;
         $response['statistic'] = $newStat;
 
+        return response()->json($response);
+    }
+
+    public function index_month(Request $request, int $id)
+    {
+        $response = [];
+        $apartment = Apartment::find($id);
+        if (!$apartment) {
+            $response['success'] = false;
+            $response['message'] = 'There isn\'t the house!';
+            return response()->json($response, 404);
+        } elseif ($request->user()->id != $apartment->user_id) {
+            $response['success'] = false;
+            $response['message'] = 'You are not authenticated!';
+            return response()->json($response, 401);
+        }
+
+        $stats = DB::table('stats')
+            ->where('apartment_id', '=', $apartment->id)
+            ->whereMonth('date', Carbon::now()->month)
+            ->select(DB::raw("day(date) as day"), DB::raw("count('day') as total"))
+            ->groupBy('day')
+            ->get();
+        // $statist = DB::table('stats')
+        //     ->whereMonth('date', Carbon::now()->month)
+        //     ->where('apartment_id', '=', $apartment->id)
+        //     ->orderBy('date')
+        //     ->get();
+
+        $days = Carbon::now()->daysInMonth;
+        $newStat = [];
+        for ($i = 1; $i <= $days; $i++) {
+            $stat = [
+                'day' => $i,
+                'total' => 0,
+            ];
+            array_push($newStat, $stat);
+        }
+
+        foreach ($stats as $stat) {
+            if ($stat->day == $newStat[$stat->day - 1]['day']) {
+                $newStat[$stat->day - 1]['total'] = $stat->total;
+            };
+        }
+
+        $response['success'] = true;
+        $response['statistics'] = $newStat;
+        // $response['arr'] = $statist;
         return response()->json($response);
     }
 }

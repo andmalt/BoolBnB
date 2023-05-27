@@ -46,24 +46,25 @@ Route::middleware('auth:sanctum')->group(function () {
  * Admin
  */
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::get('my/apartments/recfac', [ApartmentController::class, 'myFacReg']);
-    Route::get('my/apartments', [ApartmentController::class, 'index']);
-    Route::get('my/apartment/{id}', [ApartmentController::class, 'show']);
+    Route::post('my/apartments/recfac', [ApartmentController::class, 'myFacReg']);
+    Route::post('my/apartments', [ApartmentController::class, 'index']);
+    Route::post('my/apartment/{id}', [ApartmentController::class, 'show']);
     Route::post('my/apartment/create', [ApartmentController::class, 'store']);
     Route::patch('my/apartment/{id}/update', [ApartmentController::class, 'update']);
     Route::delete('my/apartment/{id}/delete', [ApartmentController::class, 'destroy']);
     Route::post('my/apartment/{id}/img/upload', [PhotoController::class, 'uploadImage']);
     Route::delete('my/apartment/img/{id}/delete', [PhotoController::class, 'deleteImage']);
-    Route::get('my/messages', [AdminMessageController::class, 'index']);
+    Route::post('my/messages', [AdminMessageController::class, 'index']);
     Route::post('my/message/{id}', [AdminMessageController::class, 'show']);
-    Route::get('my/messages/trashed', [AdminMessageController::class, 'trash_index']);
+    Route::post('my/messages/trashed', [AdminMessageController::class, 'trash_index']);
     Route::patch('my/message/{id}/restore', [AdminMessageController::class, 'restore']);
     Route::delete('my/message/{id}/delete', [AdminMessageController::class, 'delete']);
     Route::delete('my/message/{id}/destroy', [AdminMessageController::class, 'destroy']);
-    Route::get('my/sponsorships', [SponsorshipController::class, 'index']);
+    Route::post('my/sponsorships', [SponsorshipController::class, 'index']);
     Route::post('my/apartment/{id}/sponsorship/update', [SponsorshipController::class, 'update']);
     Route::post('generate/token', [OrderController::class, 'generate']);
     Route::post('make/payment', [OrderController::class, 'makePayment']);
-    Route::get('my/apartment/{id}/stat/total', [StatController::class, 'index_total']);
-    Route::get('my/apartment/{id}/stat/year', [StatController::class, 'index_year']);
+    Route::post('my/apartment/{id}/stat/total', [StatController::class, 'index_total']);
+    Route::post('my/apartment/{id}/stat/year', [StatController::class, 'index_year']);
+    Route::post('my/apartment/{id}/stat/month', [StatController::class, 'index_month']);
 });
