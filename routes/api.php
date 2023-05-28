@@ -67,4 +67,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('my/apartment/{id}/stat/total', [StatController::class, 'index_total']);
     Route::post('my/apartment/{id}/stat/year', [StatController::class, 'index_year']);
     Route::post('my/apartment/{id}/stat/month', [StatController::class, 'index_month']);
+    Route::post('my/apartment/{id}/stat/week', [StatController::class, 'index_week']);
 });

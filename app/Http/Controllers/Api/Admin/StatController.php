@@ -100,11 +100,6 @@ class StatController extends Controller
             ->select(DB::raw("day(date) as day"), DB::raw("count('day') as total"))
             ->groupBy('day')
             ->get();
-        // $statist = DB::table('stats')
-        //     ->whereMonth('date', Carbon::now()->month)
-        //     ->where('apartment_id', '=', $apartment->id)
-        //     ->orderBy('date')
-        //     ->get();
 
         $days = Carbon::now()->daysInMonth;
         $newStat = [];
@@ -124,7 +119,36 @@ class StatController extends Controller
 
         $response['success'] = true;
         $response['statistics'] = $newStat;
-        // $response['arr'] = $statist;
+
+        return response()->json($response);
+    }
+
+    public function index_week(Request $request, int $id)
+    {
+        $response = [];
+        $apartment = Apartment::find($id);
+        if (!$apartment) {
+            $response['success'] = false;
+            $response['message'] = 'There isn\'t the house!';
+            return response()->json($response, 404);
+        } elseif ($request->user()->id != $apartment->user_id) {
+            $response['success'] = false;
+            $response['message'] = 'You are not authenticated!';
+            return response()->json($response, 401);
+        }
+
+        $stats = DB::table('stats')
+            ->where('apartment_id', $apartment->id)
+            ->whereBetween('date', [Carbon::now()->subWeek(), Carbon::now()])
+            ->select(DB::raw("dayofweek(date) as day"), DB::raw("count('day') as total"))
+            ->groupBy('day')
+            ->get();
+
+        // day 1=sunday, 2=monday, 3=tuesday, 4=wednesday, 5=thursday, 6=friday, 7=saturday
+
+        $response['success'] = true;
+        $response['statistics'] = $stats;
+
         return response()->json($response);
     }
 }
