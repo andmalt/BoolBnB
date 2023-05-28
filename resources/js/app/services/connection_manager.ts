@@ -361,6 +361,58 @@ const api = {
             return { data: { success: false, error: { code: 500, message: e } } }
         }
     },
+    getTotalVisits:async function(token:string|null,id: number){
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            'X-CSRF-TOKEN': `${csrf}`
+        }
+        try {
+            const response = await axios.post(`${BASE_URL}/api/my/apartment/${id}/stat/total`, {}, { headers });
+            return response;
+        } catch (e) {
+            return { data: { success: false, error: { code: 500, message: e } } }
+        }
+    },
+    getYearVisits:async function(token:string|null,id: number){
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            'X-CSRF-TOKEN': `${csrf}`
+        }
+        try {
+            const response = await axios.post(`${BASE_URL}/api/my/apartment/${id}/stat/year`, {}, { headers });
+            return response;
+        } catch (e) {
+            return { data: { success: false, error: { code: 500, message: e } } }
+        }
+    },
+    getMonthVisits:async function(token:string|null,id: number){
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            'X-CSRF-TOKEN': `${csrf}`
+        }
+        try {
+            const response = await axios.post(`${BASE_URL}/api/my/apartment/${id}/stat/month`, {}, { headers });
+            return response;
+        } catch (e) {
+            return { data: { success: false, error: { code: 500, message: e } } }
+        }
+    },
+    getWeekVisits:async function(token:string|null,id: number){
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            'X-CSRF-TOKEN': `${csrf}`
+        }
+        try {
+            const response = await axios.post(`${BASE_URL}/api/my/apartment/${id}/stat/week`, {}, { headers });
+            return response;
+        } catch (e) {
+            return { data: { success: false, error: { code: 500, message: e } } }
+        }
+    },
 }
 
 export default api;

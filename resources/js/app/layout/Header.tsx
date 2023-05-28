@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import '../../../css/header.css';
 import { Link, useNavigate } from 'react-router-dom';
 import api from '../services/connection_manager';
@@ -9,12 +9,8 @@ import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import { classNames } from '../services/functions';
 
-interface HeaderProps {
-}
 
-const Header = (props: HeaderProps) => {
-  const { } = props;
-  const [isMount, setIsMount] = useState<boolean>(true);
+const Header = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const authSelector = useAppSelector(state => state.auth);
@@ -34,13 +30,6 @@ const Header = (props: HeaderProps) => {
       dispatch(error())
     }
   }
-
-  useEffect(() => {
-    if (isMount) {
-      // 
-    }
-    return () => setIsMount(false)
-  }, [])
 
   return (
     <div id="header">
