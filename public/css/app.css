@@ -809,6 +809,10 @@ select {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 }
+.my-10 {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
 .-ml-px {
   margin-left: -1px;
 }
@@ -1084,6 +1088,9 @@ select {
 }
 .w-screen {
   width: 100vw;
+}
+.w-\[100\%\] {
+  width: 100%;
 }
 .min-w-0 {
   min-width: 0px;

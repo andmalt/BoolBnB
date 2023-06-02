@@ -75,7 +75,7 @@ class StatController extends Controller
 
 
         $response['success'] = true;
-        $response['statistic'] = $newStat;
+        $response['statistics'] = $newStat;
 
         return response()->json($response);
     }
@@ -120,7 +120,7 @@ class StatController extends Controller
 
         $response['success'] = true;
         $response['statistics'] = $newStat;
-        $response['month'] = Carbon::now()->monthName;
+        $response['month'] = Carbon::now()->month;
 
         return response()->json($response);
     }

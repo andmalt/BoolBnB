@@ -43,7 +43,7 @@ export const variablesDashboard = {
     SPONSORSHIPS:"sponsorships"
 }
 
-export const YEAR = [
+export const MONTHS = [
     "Gennaio",
     "Febbraio",
     "Marzo",
@@ -67,3 +67,24 @@ export const WEEK = [
     "Sabato",
     "Domenica"
 ];
+
+export type YearStat = {
+    month: number;
+    total: number;
+}
+
+
+export const DEFAULT_PROPERTIES_YEAR: YearStat[] = [
+    { month: 1, total: 0 },
+    { month: 2, total: 0 },
+    { month: 3, total: 0 },
+    { month: 4, total: 0 },
+    { month: 5, total: 0 },
+    { month: 6, total: 0 },
+    { month: 7, total: 0 },
+    { month: 8, total: 0 },
+    { month: 9, total: 0 },
+    { month: 10, total: 0 },
+    { month: 11, total: 0 },
+    { month: 12, total: 0 },
+]
