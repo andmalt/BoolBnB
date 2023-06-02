@@ -12,11 +12,7 @@ const api = {
                 email,
                 password
             }
-            const response = await axios.post(`${BASE_URL}/api/login`, data, {
-                headers: {
-                    'X-CSRF-TOKEN': `${csrf}`,
-                }
-            });
+            const response = await axios.post(`${BASE_URL}/api/login`, data);
             if (response.data.success) {
                 setLocalStorage(response)
             }
@@ -40,11 +36,7 @@ const api = {
             password_confirmation: passwordConfirmation
         }
         try {
-            const response = await axios.post(`${BASE_URL}/api/register`, data, {
-                headers: {
-                    'X-CSRF-TOKEN': `${csrf}`
-                }
-            });
+            const response = await axios.post(`${BASE_URL}/api/register`, data)
             if (response.data.success) {
                 setLocalStorage(response)
             }
@@ -408,6 +400,19 @@ const api = {
         }
         try {
             const response = await axios.post(`${BASE_URL}/api/my/apartment/${id}/stat/week`, {}, { headers });
+            return response;
+        } catch (e) {
+            return { data: { success: false, error: { code: 500, message: e } } }
+        }
+    },
+    getTodayVisits:async function(token:string|null,id: number){
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            'X-CSRF-TOKEN': `${csrf}`
+        }
+        try {
+            const response = await axios.post(`${BASE_URL}/api/my/apartment/${id}/stat/day`, {}, { headers });
             return response;
         } catch (e) {
             return { data: { success: false, error: { code: 500, message: e } } }

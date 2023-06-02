@@ -64,8 +64,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('my/apartment/{id}/sponsorship/update', [SponsorshipController::class, 'update']);
     Route::post('generate/token', [OrderController::class, 'generate']);
     Route::post('make/payment', [OrderController::class, 'makePayment']);
-    Route::post('my/apartment/{id}/stat/total', [StatController::class, 'index_total']);
-    Route::post('my/apartment/{id}/stat/year', [StatController::class, 'index_year']);
-    Route::post('my/apartment/{id}/stat/month', [StatController::class, 'index_month']);
-    Route::post('my/apartment/{id}/stat/week', [StatController::class, 'index_week']);
+    Route::post('my/apartment/{id}/stat/total', [StatController::class, 'get_total']);
+    Route::post('my/apartment/{id}/stat/year', [StatController::class, 'get_year']);
+    Route::post('my/apartment/{id}/stat/month', [StatController::class, 'get_month']);
+    Route::post('my/apartment/{id}/stat/week', [StatController::class, 'get_week']);
+    Route::post('my/apartment/{id}/stat/day', [StatController::class, 'get_today']);
 });
