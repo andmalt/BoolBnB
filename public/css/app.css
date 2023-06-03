@@ -789,6 +789,10 @@ select {
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
 }
+.my-10 {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
 .my-2 {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
@@ -808,10 +812,6 @@ select {
 .my-6 {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
-}
-.my-10 {
-  margin-top: 2.5rem;
-  margin-bottom: 2.5rem;
 }
 .-ml-px {
   margin-left: -1px;
@@ -1068,6 +1068,9 @@ select {
 .w-8 {
   width: 2rem;
 }
+.w-\[100\%\] {
+  width: 100%;
+}
 .w-\[100vw\] {
   width: 100vw;
 }
@@ -1088,9 +1091,6 @@ select {
 }
 .w-screen {
   width: 100vw;
-}
-.w-\[100\%\] {
-  width: 100%;
 }
 .min-w-0 {
   min-width: 0px;
@@ -1248,6 +1248,9 @@ select {
 }
 .justify-between {
   justify-content: space-between;
+}
+.justify-around {
+  justify-content: space-around;
 }
 .gap-12 {
   gap: 3rem;

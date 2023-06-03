@@ -24,23 +24,29 @@ class StatFactory extends Factory
             Carbon::now()->subDays(3),
             Carbon::now()->subDays(4),
             Carbon::now()->subDays(5),
+            Carbon::now()->subDays(6),
+            Carbon::now()->subDays(7),
+            Carbon::now()->subDays(8),
+            Carbon::now()->subDays(9),
+            Carbon::now()->subDays(10),
             Carbon::now()->subWeek(),
             Carbon::now()->subWeeks(2),
             Carbon::now()->subWeeks(3),
-            Carbon::now()->subWeeks(4),
             Carbon::now()->subMonth(),
             Carbon::now()->subMonths(2),
             Carbon::now()->subMonths(3),
             Carbon::now()->subMonths(4),
             Carbon::now()->subMonths(5),
             Carbon::now()->subMonths(6),
+            Carbon::now()->subMonths(7),
+            Carbon::now()->subMonths(8),
+            Carbon::now()->subMonths(9),
+            Carbon::now()->subMonths(10),
         ];
 
         return [
-            // 'apartment_id' => Arr::random($apartment_ids),
-            'apartment_id' => 32,
+            'apartment_id' => Arr::random($apartment_ids),
             'ip' => $this->faker->ipv4(),
-            // 'date' => $this->faker->date(),
             'date' => Arr::random($date),
         ];
     }

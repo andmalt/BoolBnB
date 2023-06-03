@@ -28,7 +28,7 @@ class StatController extends Controller
         $stat = Stat::where('apartment_id', '=', $apartment->id)->count();
 
         $response['success'] = true;
-        $response['statistic'] = $stat;
+        $response['statistics'] = $stat;
 
         return response()->json($response);
     }
