@@ -86,7 +86,7 @@ const Messages = () => {
         page?.scrollIntoView();
         try {
             const response = await api.getAllMyMessages(authSelector.token);
-            console.log("response:", response.data);
+            // console.log("response:", response.data);
             if (response.data.success) {
                 setLengthMessagesRead(response.data.messagesNotRead)
                 dispatch(setMessagesNotRead(response.data.messagesNotRead))

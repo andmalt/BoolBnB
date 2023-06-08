@@ -19,6 +19,11 @@ export const deleteLocalStorage = () => {
     localStorage.removeItem("token")
     localStorage.removeItem("name")
     localStorage.removeItem("email")
+    localStorage.removeItem("dashboard")
+    localStorage.removeItem("number")
+    localStorage.removeItem("isCreate")
+    localStorage.removeItem("isTrashed")
+    localStorage.removeItem("readMessagesLength")
 }
 
 /**
@@ -49,7 +54,7 @@ export const getDashboardComponents = () => {
     return store;
 }
 export const getIsCreate = () => {
-    const store = JSON.parse(`${localStorage.getItem("isCreate")}`);
+    const store = JSON.parse(String(localStorage.getItem("isCreate")));
     return store;
 }
 export const setIsCreate = (item:boolean) => {
@@ -67,7 +72,7 @@ export const setIdNumber = (number:number|null) => {
 }
 
 export const getNumber = () => {
-    const store: number|null = JSON.parse(`${localStorage.getItem("number")}`)
+    const store: number|null = JSON.parse(String(localStorage.getItem("number")))
     return store;
 }
 
@@ -77,11 +82,7 @@ export const getNumber = () => {
  * @param boolean 
  */
 export const setTrashed = (boolean: boolean) => {
-    if (boolean) {
-        localStorage.setItem("isTrashed",JSON.stringify(true))
-    } else {
-        localStorage.setItem("isTrashed",JSON.stringify(false))
-    }
+    localStorage.setItem("isTrashed",JSON.stringify(boolean))
 }
 
 /**
@@ -90,7 +91,7 @@ export const setTrashed = (boolean: boolean) => {
  * @returns boolean
  */
 export const isTrashed = () => {
-    const boolean: boolean|null = JSON.parse(`${localStorage.getItem("isTrashed")}`);
+    const boolean: boolean|null = JSON.parse(String(localStorage.getItem("isTrashed")));
     if (boolean) {
         return true
     }

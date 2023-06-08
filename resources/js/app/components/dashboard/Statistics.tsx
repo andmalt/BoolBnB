@@ -43,6 +43,7 @@ const Statistics = () => {
     const page = document.getElementById("body-container");
 
     const getHomes = async () => {
+        page?.scrollIntoView();
         dispatch(loading())
         try {
             const response = await api.getAllMyHouses(authSelector.token)
@@ -199,8 +200,6 @@ const Statistics = () => {
         Tooltip,
         Legend
     );
-
-
 
     useEffect(() => {
         let isMount = true;

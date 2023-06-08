@@ -43,24 +43,16 @@ const MessagesTable = (props: MessageTableProps) => {
                                         }
 
                                         return (
-                                            <tr key={`${message.id}-${i}`} className={" dark:bg-gray-800 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400" + isRead(message.is_read)}>
-                                                <td className="px-4 py-3">
+                                            <tr key={`${message.id}-${i}`} className={" dark:bg-gray-800 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400 " + isRead(message.is_read)}>
+                                                <td onClick={!messagesSelector.isTrashedMessages ? () => getMyMessage(message.id) : () => { }} className="px-4 py-3 cursor-pointer ">
                                                     <div className="flex items-center text-sm overflow-hidden">
-                                                        {
-                                                            !messagesSelector.isTrashedMessages ?
-                                                                <div onClick={() => getMyMessage(message.id)}>
-                                                                    <p className="font-semibold cursor-pointer text-lg">{message.name} {message.surname}</p>
-                                                                    <p className="cursor-pointer">{message.email}</p>
-                                                                </div>
-                                                                :
-                                                                <div>
-                                                                    <p className="font-semibold cursor-pointer text-lg">{message.name} {message.surname}</p>
-                                                                    <p className="cursor-pointer">{message.email}</p>
-                                                                </div>
-                                                        }
+                                                        <div>
+                                                            <p className="font-semibold text-lg">{message.name} {message.surname}</p>
+                                                            <p className="">{message.email}</p>
+                                                        </div>
                                                     </div>
                                                 </td>
-                                                <td className="px-4 py-3 text-xs">{moment(message.created_at).format("DD/MM/YY HH:mm:ss")}</td>
+                                                <td onClick={!messagesSelector.isTrashedMessages ? () => getMyMessage(message.id) : () => { }} className="px-4 py-3 text-xs cursor-pointer">{moment(message.created_at).format("DD/MM/YY HH:mm:ss")}</td>
                                                 {/* action row */}
                                                 <td className="px-4 py-3 text-sm">
                                                     <div className="flex flex-row flex-wrap justify-end items-center">
@@ -76,16 +68,21 @@ const MessagesTable = (props: MessageTableProps) => {
                                                                         </button>
                                                                     </form>
                                                                     <form onSubmit={(e) => destroyMessage(e, message.id)}>
-                                                                        <button type="submit" className='mx-2'>{<TrashIcon className='stroke-red-600' />}</button>
+                                                                        <button type="submit" className='mx-2 '>{<TrashIcon className='stroke-red-600' />}</button>
                                                                     </form>
                                                                 </div>
 
 
 
                                                                 :
-                                                                <form onSubmit={(e) => deleteMessage(e, message.id)}>
-                                                                    <button type="submit">{<TrashIcon className='stroke-red-600' />}</button>
-                                                                </form>
+                                                                <div>
+                                                                    <form onSubmit={(e) => deleteMessage(e, message.id)}>
+                                                                        <div>
+                                                                            <button className='p-2 rounded-full hover:bg-[rgba(220,38,38,0.2)]' type="submit" >{<TrashIcon className='stroke-red-600 ' />}</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+
                                                         }
 
                                                     </div>

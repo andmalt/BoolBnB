@@ -11,7 +11,7 @@ interface DashboardState {
     isCreate: boolean,
 }
 const initialState: DashboardState = {
-    dashboard: dashboard || "houses",
+    dashboard: dashboard || "profile",
     id,
     isCreate: isCreate || false, 
 }

@@ -25,12 +25,12 @@ const MyHomes = () => {
 
             if (response.data.success) {
                 setMyHouses(response.data.apartments)
+                dispatch(clear())
             } else {
                 dispatch(logout())
                 deleteLocalStorage()
                 navigate("/")
             }
-            dispatch(clear())
         } catch (e) {
             console.log("paginate error:", e);
             dispatch(error())

@@ -45,7 +45,7 @@ Route::middleware('auth:sanctum')->group(function () {
 /**
  * Admin
  */
-Route::middleware(['auth:sanctum'])->group(function () {
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('my/apartments/recfac', [ApartmentController::class, 'myFacReg']);
     Route::post('my/apartments', [ApartmentController::class, 'index']);
     Route::post('my/apartment/{id}', [ApartmentController::class, 'show']);

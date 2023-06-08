@@ -1,10 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\ApartmentController as AdminApartmentController;
-use App\Http\Controllers\Admin\MessageController;
-use App\Http\Controllers\Admin\PhotoController;
-use App\Http\Controllers\Guest\ApartmentController;
-use App\Http\Controllers\Guest\MessageController as GuestMessageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,14 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get("{any?}", function () {
+    return view('index');
+})->where("any", ".*");
+
 // Home page
 /* Route::get('/', function () {
     return view('guest.welcome');
 }); */
-
-Route::get("{any?}", function () {
-    return view('index');
-})->where("any", ".*");
 
 /* Route::resource('/guest/apartment', ApartmentController::class)->names('guest.apartment')->only(['index', 'show']);
 Route::namespace('Guest')
@@ -59,4 +54,4 @@ Route::middleware(['auth', 'verified'])
 //     return view('index');
 // })->where("any", ".*");
 
-require __DIR__ . '/auth.php';
+// require __DIR__ . '/auth.php';

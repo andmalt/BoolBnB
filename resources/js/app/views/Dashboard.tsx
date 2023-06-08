@@ -26,7 +26,7 @@ const Dashboard = () => {
     const authSelector = useAppSelector(state => state.auth);
     const dashSelector = useAppSelector(state => state.dashboard)
 
-    const controlAuth = () => {
+    const setIdentity = () => {
         setName(authSelector.name)
         setEmail(authSelector.email)
     }
@@ -43,7 +43,7 @@ const Dashboard = () => {
         let isMount = true;
         if (isMount) {
             checkAuth()
-            controlAuth()
+            setIdentity()
         }
         return () => { isMount = false; }
     }, []);
