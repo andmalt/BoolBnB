@@ -236,6 +236,19 @@ const api = {
             return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
         }
     },
+    getAllMyMessagesCount: async function (token:string|null) {
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            'X-CSRF-TOKEN': `${csrf}`
+        }
+        try {
+            const response = await axios.post(`${BASE_URL}/api/my/messages/count`, {},{ headers });
+            return response;
+        } catch (e:any) {
+            return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
+        }
+    },
     getAllMyTrashedMessages: async function (token:string|null) {
         const headers = {
             Authorization: `Bearer ${token}`,

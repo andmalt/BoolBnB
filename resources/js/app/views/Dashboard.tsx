@@ -15,12 +15,15 @@ import "../../../css/dashboard.css"
 import { variablesDashboard } from '../services/variables';
 import MyHome from '../components/dashboard/MyHome';
 import PhotoModify from '../components/dashboard/PhotoModify';
-import { deleteLocalStorage } from '../services/functions';
-import { logout } from '../store/authSlice';
+import { deleteLocalStorage, setLengthMessagesRead, setTrashed } from '../services/functions';
+import { clear, error, loading, logout } from '../store/authSlice';
+import { setIsTrashMessages, setMessagesNotRead } from '../store/messageSlice';
+import api from '../services/connection_manager';
 
 const Dashboard = () => {
     const [email, setEmail] = useState<string | null>();
     const [name, setName] = useState<string | null>();
+    const page = document.getElementById("body-container");
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const authSelector = useAppSelector(state => state.auth);
@@ -40,11 +43,35 @@ const Dashboard = () => {
         }
     }
 
+    const getMyMessages = async () => {
+        page?.scrollIntoView();
+        dispatch(loading())
+        dispatch(setIsTrashMessages(false))
+        setTrashed(false)
+        try {
+            const response = await api.getAllMyMessagesCount(authSelector.token);
+            // console.log("response:", response.data);
+            if (response.data.success) {
+                setLengthMessagesRead(response.data.messagesNotRead)
+                dispatch(setMessagesNotRead(response.data.messagesNotRead))
+            } else {
+                dispatch(logout())
+                deleteLocalStorage()
+                navigate("/")
+            }
+            dispatch(clear())
+        } catch (e) {
+            console.log("paginate error:", e);
+            dispatch(error())
+        }
+    }
+
     useEffect(() => {
         let isMount = true;
         if (isMount) {
             checkAuth()
             setIdentity()
+            getMyMessages()
         }
         return () => { isMount = false; }
     }, []);

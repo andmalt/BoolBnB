@@ -35,6 +35,37 @@ class MessageController extends Controller
             ->orderByDesc('created_at')
             ->paginate(10);
 
+        if ($messages) {
+            $response = [
+                'success' => true,
+                'messages' => $messages,
+            ];
+            return response()->json($response);
+        } else {
+            $response = [
+                'success' => false,
+                'message' => "There aren't any apartments",
+            ];
+            return response()->json($response, 404);
+        }
+    }
+
+    /**
+     * Display all my messages count
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function index_count(Request $request)
+    {
+        if (!$request->user()) {
+            $response = [
+                'success' => false,
+                'message' => "You are not authenticated",
+            ];
+            return response()->json($response, 401);
+        }
+
         // is a count of all messages that have not been seen by the user
         $messagesNotReadLength = DB::table('messages')
             ->join('apartments', 'messages.apartment_id', '=', 'apartments.id')
@@ -45,10 +76,9 @@ class MessageController extends Controller
             ->orderByDesc('created_at')
             ->count();
 
-        if ($messages) {
+        if ($messagesNotReadLength) {
             $response = [
                 'success' => true,
-                'messages' => $messages,
                 'messagesNotRead' => $messagesNotReadLength,
             ];
             return response()->json($response);

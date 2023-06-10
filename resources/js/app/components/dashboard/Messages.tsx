@@ -23,6 +23,7 @@ const Messages = () => {
             await getTrashedMessages()
         } else {
             await getMyMessages()
+            await getMyMessagesCount()
         }
         console.log("message updated");
     }
@@ -88,8 +89,6 @@ const Messages = () => {
             const response = await api.getAllMyMessages(authSelector.token);
             // console.log("response:", response.data);
             if (response.data.success) {
-                setLengthMessagesRead(response.data.messagesNotRead)
-                dispatch(setMessagesNotRead(response.data.messagesNotRead))
                 setMyMessages(response.data.messages)
             } else {
                 dispatch(logout())
@@ -99,6 +98,28 @@ const Messages = () => {
             dispatch(clear())
         } catch (e) {
             console.log("paginate error:", e);
+            dispatch(error())
+        }
+    }
+    const getMyMessagesCount = async () => {
+        dispatch(loading())
+        dispatch(setIsTrashMessages(false))
+        setTrashed(false)
+        page?.scrollIntoView();
+        try {
+            const response = await api.getAllMyMessagesCount(authSelector.token);
+            // console.log("response:", response.data);
+            if (response.data.success) {
+                setLengthMessagesRead(response.data.messagesNotRead)
+                dispatch(setMessagesNotRead(response.data.messagesNotRead))
+            } else {
+                dispatch(logout())
+                deleteLocalStorage()
+                navigate("/")
+            }
+            dispatch(clear())
+        } catch (e) {
+            console.log("messages count:", e);
             dispatch(error())
         }
     }
@@ -182,6 +203,7 @@ const Messages = () => {
                 getTrashedMessages()
             } else {
                 getMyMessages()
+                getMyMessagesCount()
             }
         }
         return () => {

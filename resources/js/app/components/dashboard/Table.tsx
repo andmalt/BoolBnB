@@ -115,7 +115,11 @@ const Table = (props: TableProps) => {
                                                             </td>
                                                         </>
                                                         :
-                                                        null
+                                                        <>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </>
                                                 }
                                             </tr>
                                         )
