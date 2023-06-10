@@ -45,7 +45,11 @@ const Table = (props: TableProps) => {
                                         </>
 
                                         :
-                                        null
+                                        <>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                        </>
                                 }
                             </tr>
                         </thead>
@@ -125,6 +129,9 @@ const Table = (props: TableProps) => {
                                                 </div>
                                             </div>
                                         </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                     </tr>
                             }
                         </tbody>

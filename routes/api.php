@@ -9,6 +9,8 @@ use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Guest\ApartmentController as GuestApartmentController;
 use App\Http\Controllers\Api\Guest\MessageController;
 use App\Http\Controllers\Api\Orders\OrderController;
+use App\Http\Controllers\Auth\VerifyEmailController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,10 +34,25 @@ Route::middleware('guest')->group(function () {
 });
 
 /**
+ * email verification
+ */
+Route::get('/verify-email/{id}/{hash}', [VerifyEmailController::class, 'verifyEmail'])
+    ->middleware(['signed'])
+    ->name('verification.verify');
+
+// Resend link to verify email
+Route::post('/email/verify/resend', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+    return response()->json(["success" => true, "message" => "email resent"]);
+})->middleware(['auth:sanctum', 'throttle:6,1'])->name('verification.send');
+
+Route::post('email/verification', [VerifyEmailController::class, 'check'])->middleware('auth:sanctum');
+
+/**
  * Authentication Routes
  */
 Route::middleware('guest')->group(function () {
-    Route::post('login', [AuthController::class, 'login']);
+    Route::post('login', [AuthController::class, 'login'])->name('login');
     Route::post('register', [AuthController::class, 'register']);
 });
 Route::middleware('auth:sanctum')->group(function () {

@@ -24,6 +24,7 @@ export const deleteLocalStorage = () => {
     localStorage.removeItem("isCreate")
     localStorage.removeItem("isTrashed")
     localStorage.removeItem("readMessagesLength")
+    localStorage.removeItem("isVerificatedTheEmail")
 }
 
 /**
@@ -117,6 +118,17 @@ export const getLengthMessagesRead = () => {
         return 0
     }
     return response;
+}
+
+export const setEmailVerification = (boolean:boolean) => {
+    localStorage.setItem("isVerificatedTheEmail",JSON.stringify(boolean))
+}
+export const getEmailVerification = () => {
+    const boolean: boolean|null = JSON.parse(String(localStorage.getItem("isVerificatedTheEmail")))
+    if (!boolean) {
+        return false;
+    }
+    return true;
 }
 
 export const classNames = (...className:any) => {

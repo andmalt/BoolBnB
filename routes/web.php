@@ -50,8 +50,4 @@ Route::middleware(['auth', 'verified'])
         Route::delete('apartment/message/{message}', [MessageController::class, 'deleteMessage'])->name('message.destroy');
     }); */
 
-// Route::get("{any?}", function () {
-//     return view('index');
-// })->where("any", ".*");
-
 // require __DIR__ . '/auth.php';

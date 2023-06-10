@@ -25,6 +25,7 @@ const Dashboard = () => {
     const dispatch = useAppDispatch();
     const authSelector = useAppSelector(state => state.auth);
     const dashSelector = useAppSelector(state => state.dashboard)
+    const emailVerificationSelector = useAppSelector(state => state.emailVerification);
 
     const setIdentity = () => {
         setName(authSelector.name)
@@ -51,7 +52,7 @@ const Dashboard = () => {
         <div id='dashboard' className="flex flex-row flex-auto flex-shrink-0 antialiased text-black">
             <div className='w-1/4 lg:w-1/5 h-full'>
                 {/* <!-- Sidebar --> */}
-                <Sidebar />
+                <Sidebar emailVerification={emailVerificationSelector.emailVerification} />
             </div>
 
 

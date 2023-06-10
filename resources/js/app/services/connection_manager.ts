@@ -418,6 +418,32 @@ const api = {
             return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
         }
     },
+    emailResend:async function(token:string|null){
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            'X-CSRF-TOKEN': `${csrf}`
+        }
+        try {
+            const response = await axios.post(`${BASE_URL}/api/email/verify/resend`, {},{ headers });
+            return response;
+        } catch (e:any) {
+            return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
+        }
+    },
+    emailVerification:async function(token:string|null){
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            'X-CSRF-TOKEN': `${csrf}`
+        }
+        try {
+            const response = await axios.post(`${BASE_URL}/api/email/verification`, {},{ headers });
+            return response;
+        } catch (e:any) {
+            return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
+        }
+    },
 }
 
 export default api;
