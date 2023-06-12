@@ -69,6 +69,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('my/apartment/create', [ApartmentController::class, 'store']);
     Route::patch('my/apartment/{id}/update', [ApartmentController::class, 'update']);
     Route::delete('my/apartment/{id}/delete', [ApartmentController::class, 'destroy']);
+    Route::post('user/image/upload', [PhotoController::class, 'uploadMyImage']);
+    Route::delete('user/image/destroy', [PhotoController::class, 'destroyMyImage']);
     Route::post('my/apartment/{id}/img/upload', [PhotoController::class, 'uploadImage']);
     Route::delete('my/apartment/img/{id}/delete', [PhotoController::class, 'deleteImage']);
     Route::post('my/messages', [AdminMessageController::class, 'index']);

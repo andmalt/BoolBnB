@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use App\Models\Photo;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -13,10 +14,87 @@ use Illuminate\Support\Str;
 class PhotoController extends Controller
 {
     /**
+     * upload user image
+     * 
+     * @param \Illuminate\Http\Request
+     * @return \Illuminate\Http\JsonResponse
+     * 
+     */
+    public function uploadMyImage(Request $request)
+    {
+        $user = $request->user();
+        $response = [];
+
+        if (!$user) {
+            $response['success'] = false;
+            $response['message'] = "You are not authenticated";
+
+            return response()->json($response, 401);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'image' => "required|mimes:jpg,png,jpeg,gif,svg|max:10240",
+        ]);
+
+        if ($validator->fails()) {
+
+            $response = [
+                'success' => false,
+                'message' => $validator->errors(),
+            ];
+
+            return response()->json($response, 400);
+        }
+
+        Storage::delete($user->image);
+        $user->image = Storage::put('public/user/image', $request->file('image'));
+        $user->save();
+
+
+        $response['success'] = true;
+        $response['message'] = "You have uploaded the photo!";
+
+        return response()->json($response);
+    }
+
+    /**
+     * delete user image
+     * 
+     * @param \Illuminate\Http\Request
+     * @return \Illuminate\Http\JsonResponse
+     * 
+     */
+    public function destroyMyImage(Request $request)
+    {
+        $user = $request->user();
+        $response = [];
+
+        if (!$user) {
+            $response['success'] = false;
+            $response['message'] = "You are not authenticated";
+
+            return response()->json($response, 401);
+        }
+
+        $deleted = Storage::delete($user->image);
+
+        if ($deleted) {
+            $user->image = null;
+            $user->save();
+        }
+
+        $response['success'] = true;
+        $response['message'] = "You destroyed the photo!";
+
+        return response()->json($response);
+    }
+
+
+    /**
      * upload images
      *
-     * @param  mixed $request
-     * @param  mixed $apartment
+     * @param  int $id
+     * @param \Illuminate\Http\Request
      * @return \Illuminate\Http\JsonResponse
      */
     public function uploadImage(Request $request, int $id)
@@ -68,7 +146,8 @@ class PhotoController extends Controller
     /**
      * delete a model photo
      *
-     * @param  mixed $photo
+     * @param  int $id
+     * @param \Illuminate\Http\Request
      * @return \Illuminate\Http\JsonResponse
      */
     public function deleteImage(int $id, Request $request)

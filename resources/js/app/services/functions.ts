@@ -3,21 +3,27 @@ import { AxiosResponse } from "axios"
 
 export const setLocalStorage = (response: AxiosResponse<any>) => {
     localStorage.setItem("token", response.data.token)
-    localStorage.setItem("name", `${response.data.user.name} ${response.data.user.surname}`)
+    localStorage.setItem("name", response.data.user.name)
+    localStorage.setItem("surname", response.data.user.surname)
     localStorage.setItem("email", response.data.user.email)
+    localStorage.setItem("userSince", response.data.user.created_at)
 }
 
 export const getLocalStorage = () => {
-    const token = localStorage.getItem("token")
-    const name = localStorage.getItem("name")
-    const email = localStorage.getItem("email")
+    const token = String(localStorage.getItem("token"))
+    const name = String(localStorage.getItem("name"))
+    const surname = String(localStorage.getItem("surname"))
+    const email = String(localStorage.getItem("email"))
+    const userSince = String(localStorage.getItem("userSince"))
 
-    return { token, name, email }
+    return { token, name, surname, email, userSince }
 }
 
 export const deleteLocalStorage = () => {
     localStorage.removeItem("token")
     localStorage.removeItem("name")
+    localStorage.removeItem("surname")
+    localStorage.removeItem("userSince")
     localStorage.removeItem("email")
     localStorage.removeItem("dashboard")
     localStorage.removeItem("number")
