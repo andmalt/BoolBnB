@@ -31,6 +31,7 @@ const MyHomes = () => {
                 deleteLocalStorage()
                 navigate("/")
             }
+            dispatch(clear())
         } catch (e) {
             console.log("paginate error:", e);
             dispatch(error())

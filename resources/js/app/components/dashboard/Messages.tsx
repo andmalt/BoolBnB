@@ -112,16 +112,12 @@ const Messages = () => {
             if (response.data.success) {
                 setLengthMessagesRead(response.data.messagesNotRead)
                 dispatch(setMessagesNotRead(response.data.messagesNotRead))
-            } else {
-                dispatch(logout())
-                deleteLocalStorage()
-                navigate("/")
             }
-            dispatch(clear())
         } catch (e) {
             console.log("messages count:", e);
             dispatch(error())
         }
+        dispatch(clear())
     }
 
     const restoreMessage = async (e: any, id: number) => {

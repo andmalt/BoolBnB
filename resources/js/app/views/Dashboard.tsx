@@ -21,19 +21,12 @@ import { setIsTrashMessages, setMessagesNotRead } from '../store/messageSlice';
 import api from '../services/connection_manager';
 
 const Dashboard = () => {
-    const [email, setEmail] = useState<string | null>();
-    const [name, setName] = useState<string | null>();
     const page = document.getElementById("body-container");
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const authSelector = useAppSelector(state => state.auth);
     const dashSelector = useAppSelector(state => state.dashboard)
     const emailVerificationSelector = useAppSelector(state => state.emailVerification);
-
-    const setIdentity = () => {
-        setName(authSelector.name)
-        setEmail(authSelector.email)
-    }
 
     const checkAuth = async () => {
         if (authSelector.token == null) {
@@ -46,8 +39,6 @@ const Dashboard = () => {
     const getMyMessages = async () => {
         page?.scrollIntoView();
         dispatch(loading())
-        dispatch(setIsTrashMessages(false))
-        setTrashed(false)
         try {
             const response = await api.getAllMyMessagesCount(authSelector.token);
             // console.log("response:", response.data);
@@ -70,7 +61,6 @@ const Dashboard = () => {
         let isMount = true;
         if (isMount) {
             checkAuth()
-            setIdentity()
             getMyMessages()
         }
         return () => { isMount = false; }
@@ -85,8 +75,9 @@ const Dashboard = () => {
 
             <div className="h-full mt-4 mb-10 w-3/4 lg:w-4/5 lg:m-6">
                 {
-                    dashSelector.dashboard == variablesDashboard.HOUSES ?
-                        <MyHomes />
+
+                    dashSelector.dashboard == variablesDashboard.PROFILE ?
+                        <Profile />
                         :
                         dashSelector.dashboard == variablesDashboard.STATISTIC ?
                             <Statistics />
@@ -94,8 +85,8 @@ const Dashboard = () => {
                             dashSelector.dashboard == variablesDashboard.MESSAGES ?
                                 <Messages />
                                 :
-                                dashSelector.dashboard == variablesDashboard.PROFILE ?
-                                    <Profile />
+                                dashSelector.dashboard == variablesDashboard.HOUSES ?
+                                    <MyHomes />
                                     :
                                     dashSelector.dashboard == variablesDashboard.SETTINGS ?
                                         <Settings />

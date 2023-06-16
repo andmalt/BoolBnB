@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { clear, error, loading } from '../../store/authSlice';
 import api from '../../services/connection_manager';
 import { setIsEmailVerification } from '../../store/emailVerificationSlice';
-import { classNames, getLocalStorage, setDashboardComponents, setIdNumber, setIsCreate } from '../../services/functions';
-import { setDashboard, setIsCte, setNumber } from '../../store/dashboardSlice';
-import { variablesDashboard } from '../../services/variables';
+import { classNames, getLocalStorage } from '../../services/functions';
 import moment from 'moment';
 
 type User = {
-    name: string;
-    surname: string;
-    email: string;
-    userSince: string;
+    name: string | null;
+    surname: string | null;
+    email: string | null;
+    userSince: string | null;
 }
 interface ProfileProps {
 
@@ -24,13 +21,12 @@ const Profile = (props: ProfileProps) => {
     const [user, setUser] = useState<User>();
     const authSelector = useAppSelector(state => state.auth);
     const emailVerificationSelector = useAppSelector(state => state.emailVerification);
-    const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const isVerified = emailVerificationSelector.emailVerification
 
     const getUser = () => {
         const { name, surname, email, userSince } = getLocalStorage();
-        const user = {
+        const user: User = {
             name,
             surname,
             email,
@@ -45,12 +41,6 @@ const Profile = (props: ProfileProps) => {
             const response = await api.emailVerification(authSelector.token)
             if (response.data.success) {
                 dispatch(setIsEmailVerification(true))
-                setDashboardComponents(variablesDashboard.HOUSES);
-                dispatch(setDashboard(variablesDashboard.HOUSES))
-                setIsCreate(false)
-                dispatch(setIsCte(false))
-                setIdNumber(null)
-                dispatch(setNumber(null))
             }
             dispatch(clear())
         } catch (e) {

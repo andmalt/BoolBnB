@@ -42,7 +42,7 @@ const Login = (props: LoginProps) => {
                 setEmail("")
                 setPassword("")
                 dispatch(clear())
-                // console.log("store token: " + authSelector.token);
+                console.log("store token: ", response.data.token);
                 return navigate("/dashboard");
             }
             // setIsError(true)
@@ -122,7 +122,7 @@ const Login = (props: LoginProps) => {
                                                 </span>
                                             </label>
                                             <label className="block text-gray-500 font-bold my-4">
-                                                <a href="#" className="cursor-pointer tracking-tighter text-blue-800 hover:text-blue-700">
+                                                <a href="http://localhost:8000/forgot-password" className="cursor-pointer tracking-tighter text-blue-800 hover:text-blue-700">
                                                     <span>
                                                         Password dimenticata?
                                                     </span>

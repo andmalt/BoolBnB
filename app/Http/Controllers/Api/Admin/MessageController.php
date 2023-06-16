@@ -35,19 +35,11 @@ class MessageController extends Controller
             ->orderByDesc('created_at')
             ->paginate(10);
 
-        if ($messages) {
-            $response = [
-                'success' => true,
-                'messages' => $messages,
-            ];
-            return response()->json($response);
-        } else {
-            $response = [
-                'success' => false,
-                'message' => "There aren't any apartments",
-            ];
-            return response()->json($response, 404);
-        }
+        $response = [
+            'success' => true,
+            'messages' => $messages,
+        ];
+        return response()->json($response);
     }
 
     /**
@@ -76,19 +68,12 @@ class MessageController extends Controller
             ->orderByDesc('created_at')
             ->count();
 
-        if ($messagesNotReadLength) {
-            $response = [
-                'success' => true,
-                'messagesNotRead' => $messagesNotReadLength,
-            ];
-            return response()->json($response);
-        } else {
-            $response = [
-                'success' => false,
-                'message' => "There aren't any apartments",
-            ];
-            return response()->json($response, 404);
-        }
+
+        $response = [
+            'success' => true,
+            'messagesNotRead' => $messagesNotReadLength,
+        ];
+        return response()->json($response);
     }
 
     /**
@@ -116,19 +101,12 @@ class MessageController extends Controller
             ->orderByDesc('created_at')
             ->paginate(10);
 
-        if ($messages) {
-            $response = [
-                'success' => true,
-                'messages' => $messages,
-            ];
-            return response()->json($response);
-        } else {
-            $response = [
-                'success' => false,
-                'message' => "There aren't any messages",
-            ];
-            return response()->json($response, 404);
-        }
+
+        $response = [
+            'success' => true,
+            'messages' => $messages,
+        ];
+        return response()->json($response);
     }
 
 
@@ -163,7 +141,7 @@ class MessageController extends Controller
         } else {
             $response = [
                 'success' => false,
-                'message' => "There aren't any message",
+                'message' => "There aren't any message or you are not the user",
             ];
             return response()->json($response, 404);
         }

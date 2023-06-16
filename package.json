@@ -33,7 +33,7 @@
         "@tomtom-international/web-sdk-maps": "^6.22.1",
         "@types/braintree-web-drop-in": "^1.34.2",
         "@types/react-transition-group": "^4.4.5",
-        "axios": "0.21",
+        "axios": "0.27.2",
         "braintree-web-drop-in": "^1.37.0",
         "chart.js": "^4.3.0",
         "moment": "^2.29.4",

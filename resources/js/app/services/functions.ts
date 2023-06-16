@@ -10,11 +10,11 @@ export const setLocalStorage = (response: AxiosResponse<any>) => {
 }
 
 export const getLocalStorage = () => {
-    const token = String(localStorage.getItem("token"))
-    const name = String(localStorage.getItem("name"))
-    const surname = String(localStorage.getItem("surname"))
-    const email = String(localStorage.getItem("email"))
-    const userSince = String(localStorage.getItem("userSince"))
+    const token = localStorage.getItem("token")
+    const name = localStorage.getItem("name")
+    const surname = localStorage.getItem("surname")
+    const email = localStorage.getItem("email")
+    const userSince = localStorage.getItem("userSince")
 
     return { token, name, surname, email, userSince }
 }

@@ -12,7 +12,7 @@
         "braintree/braintree_php": "^6.11",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.4.5",
-        "guzzlehttp/psr7": "2.4.0",
+        "guzzlehttp/psr7": "2.5.0",
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",

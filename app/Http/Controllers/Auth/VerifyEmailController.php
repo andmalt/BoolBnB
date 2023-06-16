@@ -15,21 +15,20 @@ class VerifyEmailController extends Controller
      * @param   \Illuminate\Http\Request  $request
      * @return  \Illuminate\Http\RedirectResponse
      */
-    public function verifyEmail(Request $request, $id, $hash)
+    public function verifyEmail(Request $request)
     {
-        $user = User::find($id);
-        // $request->route();
+        $user = User::find($request->route('id'));
 
         if (!hash_equals(
             (string) $user->getKey(),
-            (string) $id
+            (string) $request->route('id')
         )) {
             return redirect()->to('/');
         }
 
         if (!hash_equals(
             sha1($user->getEmailForVerification()),
-            (string) $hash
+            (string) $request->route('hash')
         )) {
             return redirect()->to('/');
         }
