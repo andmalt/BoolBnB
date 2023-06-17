@@ -22,7 +22,6 @@ const Profile = (props: ProfileProps) => {
     const authSelector = useAppSelector(state => state.auth);
     const emailVerificationSelector = useAppSelector(state => state.emailVerification);
     const dispatch = useAppDispatch();
-    const isVerified = emailVerificationSelector.emailVerification
 
     const getUser = () => {
         const { name, surname, email, userSince } = getLocalStorage();
@@ -80,7 +79,7 @@ const Profile = (props: ProfileProps) => {
     useEffect(() => {
         let isMount = true;
 
-        if (isMount && !isVerified) {
+        if (isMount && !emailVerificationSelector.emailVerification) {
             // function that checks if the user has verified the email
             // if the user is verified he will be taken to the messages page
             emailVerification()
@@ -135,17 +134,17 @@ const Profile = (props: ProfileProps) => {
                             <li className="flex items-center py-3">
                                 <span>Stato</span>
                                 <span className="ml-auto"><span
-                                    className={classNames("py-1 px-2 rounded text-white text-sm", isVerified ? "bg-green-500" : "bg-red-500")}>{isVerified ? 'Attivo' : 'Non Attivo'}</span></span>
+                                    className={classNames("py-1 px-2 rounded text-white text-sm", emailVerificationSelector.emailVerification ? "bg-green-500" : "bg-red-500")}>{emailVerificationSelector.emailVerification ? 'Attivo' : 'Non Attivo'}</span></span>
                             </li>
                             <li className="flex items-center py-3">
-                                <span>Membro dal</span>
+                                <span>Registrato dal</span>
                                 <span className="ml-auto">{moment(user?.userSince).format("DD/MM/YY HH:mm")}</span>
                             </li>
                         </ul>
                     </div>
                 </div>
                 {
-                    !isVerified ?
+                    !emailVerificationSelector.emailVerification ?
                         <h4 className='text-white p-1 my-6'>Per attivare il tuo account devi verificare l'email che ti è stata spedita.</h4>
                         :
                         null
@@ -156,7 +155,7 @@ const Profile = (props: ProfileProps) => {
                     emailVerificationSelector.emailVerification ?
                         null
                         :
-                        <button className=' rounded-lg p-4 bg-slate-400' onClick={() => emailResend()}>Reinvia l'email</button>
+                        <button className=' rounded-lg p-4 bg-slate-400 hover:bg-slate-300' onClick={() => emailResend()}>Reinvia l'email</button>
                 }
             </div>
         </div>

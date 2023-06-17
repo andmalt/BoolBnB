@@ -197,6 +197,32 @@ const api = {
             return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
         }
     },
+    updateUserPhotos: async function(token:string|null,data:any){
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+            'X-CSRF-TOKEN': `${csrf}`
+        }
+        try {
+            const response = await axios.post(`${BASE_URL}/api/user/image/upload`, data ,{ headers });
+            return response;
+        } catch (e:any) {
+            return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
+        }
+    },
+    deleteUserPhotos: async function(token:string|null){
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+            'X-CSRF-TOKEN': `${csrf}`
+        }
+        try {
+            const response = await axios.delete(`${BASE_URL}/api/user/image/destroy`, { headers });
+            return response;
+        } catch (e:any) {
+            return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
+        }
+    },
     updatePhotos: async function(token:string|null,id:number|null,data:any){
         const headers = {
             Authorization: `Bearer ${token}`,
