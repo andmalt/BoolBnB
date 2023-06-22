@@ -5,35 +5,25 @@ import api from '../../services/connection_manager';
 import { setIsEmailVerification } from '../../store/emailVerificationSlice';
 import { classNames, getLocalStorage } from '../../services/functions';
 import moment from 'moment';
+import { User } from '../../services/interfaces';
 
-type User = {
-    name: string | null;
-    surname: string | null;
-    email: string | null;
-    userSince: string | null;
-}
 interface ProfileProps {
 
 }
 
 const Profile = (props: ProfileProps) => {
     const { } = props;
-    const [user, setUser] = useState<User>();
+    const [user, setUser] = useState<User | undefined>();
     const authSelector = useAppSelector(state => state.auth);
     const emailVerificationSelector = useAppSelector(state => state.emailVerification);
     const dispatch = useAppDispatch();
 
     const getUser = () => {
-        const { name, surname, email, userSince } = getLocalStorage();
-        const user: User = {
-            name,
-            surname,
-            email,
-            userSince
-        }
-        setUser(user)
+        const { user } = getLocalStorage();
+        setUser(user!)
     }
 
+    // function that checks if the user has verified the email
     const emailVerification = async () => {
         dispatch(loading())
         try {
@@ -80,8 +70,6 @@ const Profile = (props: ProfileProps) => {
         let isMount = true;
 
         if (isMount && !emailVerificationSelector.emailVerification) {
-            // function that checks if the user has verified the email
-            // if the user is verified he will be taken to the messages page
             emailVerification()
         }
         return () => {
@@ -91,8 +79,8 @@ const Profile = (props: ProfileProps) => {
 
 
     return (
-        <div className='text-white'>
-            <div className='mb-6'>
+        <div className='flex justify-center items-start'>
+            <div className='mb-6 md:w-[60%]'>
                 <div className="bg-white p-3 shadow-sm rounded-sm">
                     <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
                         <span className="text-green-500">
@@ -107,7 +95,7 @@ const Profile = (props: ProfileProps) => {
                     <div className="text-gray-700">
                         <div className="flex flex-col justify-start items-start text-sm">
                             <div className="text-center my-4 flex md:ml-[15%]">
-                                <img className="h-40 w-40 rounded-full border-4 border-white mx-auto my-2" src="https://randomuser.me/api/portraits/women/21.jpg" alt="my photo" />
+                                <img className="h-40 w-40 rounded-full border-4 border-white mx-auto my-2" src={"./default-user/user.png"} alt="my photo" />
                             </div>
                             <div className="grid grid-cols-2">
                                 <div className="px-4 py-2 font-bold">Nome</div>
@@ -138,7 +126,7 @@ const Profile = (props: ProfileProps) => {
                             </li>
                             <li className="flex items-center py-3">
                                 <span>Registrato dal</span>
-                                <span className="ml-auto">{moment(user?.userSince).format("DD/MM/YY HH:mm")}</span>
+                                <span className="ml-auto">{moment(user?.created_at).format("DD/MM/YY HH:mm")}</span>
                             </li>
                         </ul>
                     </div>

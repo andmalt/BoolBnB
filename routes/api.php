@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\Admin\MessageController as AdminMessageController;
 use App\Http\Controllers\Api\Admin\PhotoController;
 use App\Http\Controllers\Api\Admin\SponsorshipController;
 use App\Http\Controllers\Api\Admin\StatController;
+use App\Http\Controllers\Api\Admin\UserController;
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Guest\ApartmentController as GuestApartmentController;
 use App\Http\Controllers\Api\Guest\MessageController;
@@ -91,4 +92,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('my/apartment/{id}/stat/month', [StatController::class, 'get_month']);
     Route::post('my/apartment/{id}/stat/week', [StatController::class, 'get_week']);
     Route::post('my/apartment/{id}/stat/day', [StatController::class, 'get_today']);
+    Route::post('user/info', [UserController::class, 'get_user_detail']);
+    Route::post('user/info/set', [UserController::class, 'set_user_detail']);
+    Route::post('change/password', [UserController::class, 'change_user_password']);
 });

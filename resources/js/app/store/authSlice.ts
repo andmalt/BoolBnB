@@ -1,24 +1,22 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { getLocalStorage } from '../services/functions'
+import { User } from '../services/interfaces';
 // import type { RootState } from './store'
 
 const data = getLocalStorage();
 
 const token: string | null = data.token;
-const name: string | null = data.name;
-const email: string | null = data.email;
+const user: User | null = data.user;
 
 interface AuthState {
-    name: string | null,
-    email: string | null,
+    user:User | null
     token: string | null,
     isLoading: boolean,
     isError: boolean,
     isSuccess: boolean,
 }
 const initialState: AuthState = {
-    name: name,
-    email: email,
+    user,
     token: token,
     isLoading: false,
     isError: false,
@@ -50,24 +48,17 @@ export const authSlice = createSlice({
             state.isSuccess = true;
             state.token = token.payload;
         },
-        sName: (state, name: PayloadAction<string>) => {
-            state.name = name.payload;
-        },
-        sEmail: (state, email: PayloadAction<string>) => {
-            state.email = email.payload;
-        },
         logout: state => {
             state.isLoading = false;
             state.isError = false;
             state.isSuccess = true;
             state.token = null;
-            state.name = null;
-            state.email = null;
+            state.user = null;
         },
     }
 })
 
-export const { loading, error, clear, authenticated, logout, sEmail, sName } = authSlice.actions
+export const { loading, error, clear, authenticated, logout } = authSlice.actions
 
 // export const selectToken = (state: RootState) => state.auth.token
 

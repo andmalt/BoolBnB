@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../../css/index.css';
+import 'react-toastify/dist/ReactToastify.css';
 import { Routes, Route } from 'react-router-dom';
 import {
     Homes,
@@ -14,6 +15,7 @@ import { Header, Footer } from '../layout';
 import { useAppSelector } from '../store/hooks';
 import Loading from '../components/Loading';
 import Error from '../components/Error';
+import { ToastContainer } from 'react-toastify';
 
 interface NavigationProps {
 }
@@ -40,6 +42,7 @@ const Navigation = (props: NavigationProps) => {
             }
             <Header />
             <div id='main-container'>
+                <ToastContainer />
                 <Routes>
                     <Route path='/' element={<Main />} />
                     <Route path='/login' element={<Login />} />

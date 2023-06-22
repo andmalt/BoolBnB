@@ -7,8 +7,6 @@ import {
     authenticated,
     loading,
     error,
-    sEmail,
-    sName
 } from '../store/authSlice';
 
 interface LoginProps {
@@ -36,8 +34,6 @@ const Login = (props: LoginProps) => {
         try {
             const response = await api.login(email, password);
             if (response.data.success) {
-                dispatch(sEmail(response.data.user.email))
-                dispatch(sName(`${response.data.user.name} ${response.data.user.surname}`))
                 dispatch(authenticated(response.data.token))
                 setEmail("")
                 setPassword("")

@@ -5,6 +5,7 @@ import Register from "./Register";
 import Homes from "./Homes";
 import House from "./House";
 import NoMatch from "./NoMatch";
+import ForgetPassword from "./ForgetPassword"
 
 /**
  * application views
@@ -16,5 +17,6 @@ export {
     Register,
     Main,
     House,
-    NoMatch
+    NoMatch,
+    ForgetPassword
 }

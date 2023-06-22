@@ -1,30 +1,22 @@
 import { AxiosResponse } from "axios"
+import { User } from "./interfaces"
 
 
 export const setLocalStorage = (response: AxiosResponse<any>) => {
     localStorage.setItem("token", response.data.token)
-    localStorage.setItem("name", response.data.user.name)
-    localStorage.setItem("surname", response.data.user.surname)
-    localStorage.setItem("email", response.data.user.email)
-    localStorage.setItem("userSince", response.data.user.created_at)
+    localStorage.setItem("user", JSON.stringify(response.data.user))
 }
 
 export const getLocalStorage = () => {
     const token = localStorage.getItem("token")
-    const name = localStorage.getItem("name")
-    const surname = localStorage.getItem("surname")
-    const email = localStorage.getItem("email")
-    const userSince = localStorage.getItem("userSince")
+    const user : User | null = JSON.parse(localStorage.getItem("user")!)
 
-    return { token, name, surname, email, userSince }
+    return { token, user }
 }
 
 export const deleteLocalStorage = () => {
     localStorage.removeItem("token")
-    localStorage.removeItem("name")
-    localStorage.removeItem("surname")
-    localStorage.removeItem("userSince")
-    localStorage.removeItem("email")
+    localStorage.removeItem("user")
     localStorage.removeItem("dashboard")
     localStorage.removeItem("number")
     localStorage.removeItem("isCreate")

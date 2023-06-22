@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import api from '../services/connection_manager';
-import { authenticated, clear, error, loading, sEmail, sName } from '../store/authSlice';
+import { authenticated, clear, error, loading } from '../store/authSlice';
 import { useAppDispatch } from '../store/hooks';
 
 type Form = {
@@ -43,8 +43,6 @@ const Register = (props: RegisterProps) => {
         try {
             const response = await api.register(name, surname, email, password, password2);
             if (response.data.success) {
-                dispatch(sEmail(response.data.user.email))
-                dispatch(sName(`${response.data.user.name} ${response.data.user.surname}`))
                 dispatch(authenticated(response.data.token))
                 setName("")
                 setSurname("")

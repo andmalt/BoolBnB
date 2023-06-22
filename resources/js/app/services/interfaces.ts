@@ -100,3 +100,13 @@ export interface Sponsorship{
         end_date: Date;
     }
 }
+
+export type User = {
+    id: number;
+    name: string ;
+    surname: string ;
+    email: string ;
+    image: string | null;
+    created_at: Date;
+    email_verified_at: Date | null;
+}

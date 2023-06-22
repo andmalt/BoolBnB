@@ -60,10 +60,10 @@ class AuthController extends Controller
 
         $user = User::where('email', $fields['email'])->first();
 
-        // If validation is good check the email and password exist
+        // If the validation is valid, check that the email and password exist
         if (!$user || !Hash::check($fields['password'], $user->password)) {
 
-            // if not exist
+            // if the user doesn't exist or the password doesn't match
             $response = [
                 'success' => false,
                 'message' => 'the credentials are not good',
@@ -72,7 +72,7 @@ class AuthController extends Controller
             return response()->json($response, 401);
         }
 
-        // if exist create token
+        // if the user exist and match the password create the token 
         $token = $user->createToken('BoolBnB')->plainTextToken;
 
         $response = [
