@@ -122,4 +122,30 @@ class UserController extends Controller
 
         return response()->json($response);
     }
+
+    /**
+     * Delete the user account
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function delete_account(Request $request)
+    {
+        $user = $request->user();
+        $response = [];
+
+        if (!$user) {
+            $response['success'] = false;
+            $response['message'] = "You are not authenticated";
+
+            return response()->json($response);
+        }
+
+        $user->delete();
+
+        $response['success'] = true;
+        $response['message'] = "You have deleted the account";
+
+        return response()->json($response);
+    }
 }

@@ -67,18 +67,18 @@ const api = {
             const response = await axios.get(`${BASE_URL}/api/homes`, { headers })
             return response;
         } catch (e) {
-            return { data: { success: false, error: { code: 500, message: e }}}
+            return { data: { success: false, error: { code: 500, message: e } } }
         }
     },
-    getHome: async function(id:string|undefined){
+    getHome: async function (id: string | undefined) {
         const headers = {
             "Content-Type": "application/json",
         }
         try {
-            const response = await axios.post(`${BASE_URL}/api/house/${id}`,{},{ headers })
+            const response = await axios.post(`${BASE_URL}/api/house/${id}`, {}, { headers })
             return response;
         } catch (e) {
-            return { data: { success: false, error: { code: 500, message: e }}}
+            return { data: { success: false, error: { code: 500, message: e } } }
         }
     },
     guestSendEmail: async function (
@@ -86,7 +86,7 @@ const api = {
         surname: string,
         email: string,
         message: string,
-        houseId: number|undefined
+        houseId: number | undefined
     ) {
         const headers = {
             "Content-Type": "application/json",
@@ -96,290 +96,264 @@ const api = {
             name: convertInputForm(name),
             surname: convertInputForm(surname),
             email,
-            message_content:message,
+            message_content: message,
             houseId
         }
         try {
-            const response = await axios.post(`${BASE_URL}/api/message/send`,data, { headers })
-            return response; 
-        } catch (e:any) {
-            return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
-        }
-    },
-    getAllMyHouses: async function (token:string|null) {
-        const headers = {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-            'X-CSRF-TOKEN': `${csrf}`
-        }
-        try {
-            const response = await axios.post(`${BASE_URL}/api/my/apartments`,{},{ headers });
+            const response = await axios.post(`${BASE_URL}/api/message/send`, data, { headers })
             return response;
-        } catch (e:any) {
-            return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
-        }
-    },
-    paginateMyHM: async function (token:string|null,link:string) {
-        const headers = {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-            'X-CSRF-TOKEN': `${csrf}`
-        }
-        try {
-            const response = await axios.post(link,{},{ headers });
-            return response;
-        } catch (e:any) {
-            return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
-        }
-    },
-    getMyHome: async function (token:string|null,id:number|null) {
-        const headers = {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-            'X-CSRF-TOKEN': `${csrf}`
-        }
-        try {
-            const response = await axios.post(`${BASE_URL}/api/my/apartment/${id}`,{},{ headers });
-            return response;
-        } catch (e:any) {
-            return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
-        }
-    },
-    getFacReg: async function (token:string|null) {
-        const headers = {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-            'X-CSRF-TOKEN': `${csrf}`
-        }
-        try {
-            const response = await axios.post(`${BASE_URL}/api/my/apartments/recfac`,{},{ headers });
-            return response;
-        } catch (e:any) {
-            return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
-        }
-    },
-    createMyHome: async function(token:string|null,data:any){
-        const headers = {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-            'X-CSRF-TOKEN': `${csrf}`
-        }
-        try {
-            const response = await axios.post(`${BASE_URL}/api/my/apartment/create`, data ,{ headers });
-            return response;
-        } catch (e:any) {
+        } catch (e: any) {
             return { data: { success: false, error: { code: 500, message: e } }, status: e.response.status }
         }
     },
-    updateMyHome: async function(token:string|null,id:number|null,data:any){
+    getAllMyHouses: async function (token: string | null) {
         const headers = {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
             'X-CSRF-TOKEN': `${csrf}`
         }
         try {
-            const response = await axios.patch(`${BASE_URL}/api/my/apartment/${id}/update`, data ,{ headers });
+            const response = await axios.post(`${BASE_URL}/api/my/apartments`, {}, { headers });
             return response;
-        } catch (e:any) {
-            return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
+        } catch (e: any) {
+            return { data: { success: false, error: { code: 500, message: e } }, status: e.response.status }
         }
     },
-    deleteMyHome: async function(token:string|null,id:number|null){
+    paginateMyHM: async function (token: string | null, link: string) {
         const headers = {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
             'X-CSRF-TOKEN': `${csrf}`
         }
         try {
-            const response = await axios.delete(`${BASE_URL}/api/my/apartment/${id}/delete`,{ headers });
+            const response = await axios.post(link, {}, { headers });
             return response;
-        } catch (e:any) {
-            return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
+        } catch (e: any) {
+            return { data: { success: false, error: { code: 500, message: e } }, status: e.response.status }
         }
     },
-    updateUserPhotos: async function(token:string|null,data:any){
+    getMyHome: async function (token: string | null, id: number | null) {
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            'X-CSRF-TOKEN': `${csrf}`
+        }
+        try {
+            const response = await axios.post(`${BASE_URL}/api/my/apartment/${id}`, {}, { headers });
+            return response;
+        } catch (e: any) {
+            return { data: { success: false, error: { code: 500, message: e } }, status: e.response.status }
+        }
+    },
+    getFacReg: async function (token: string | null) {
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            'X-CSRF-TOKEN': `${csrf}`
+        }
+        try {
+            const response = await axios.post(`${BASE_URL}/api/my/apartments/recfac`, {}, { headers });
+            return response;
+        } catch (e: any) {
+            return { data: { success: false, error: { code: 500, message: e } }, status: e.response.status }
+        }
+    },
+    createMyHome: async function (token: string | null, data: any) {
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            'X-CSRF-TOKEN': `${csrf}`
+        }
+        try {
+            const response = await axios.post(`${BASE_URL}/api/my/apartment/create`, data, { headers });
+            return response;
+        } catch (e: any) {
+            return { data: { success: false, error: { code: 500, message: e } }, status: e.response.status }
+        }
+    },
+    updateMyHome: async function (token: string | null, id: number | null, data: any) {
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            'X-CSRF-TOKEN': `${csrf}`
+        }
+        try {
+            const response = await axios.patch(`${BASE_URL}/api/my/apartment/${id}/update`, data, { headers });
+            return response;
+        } catch (e: any) {
+            return { data: { success: false, error: { code: 500, message: e } }, status: e.response.status }
+        }
+    },
+    deleteMyHome: async function (token: string | null, id: number | null) {
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            'X-CSRF-TOKEN': `${csrf}`
+        }
+        try {
+            const response = await axios.delete(`${BASE_URL}/api/my/apartment/${id}/delete`, { headers });
+            return response;
+        } catch (e: any) {
+            return { data: { success: false, error: { code: 500, message: e } }, status: e.response.status }
+        }
+    },
+    updatePhotos: async function (token: string | null, id: number | null, data: any) {
         const headers = {
             Authorization: `Bearer ${token}`,
             "Content-Type": "multipart/form-data",
             'X-CSRF-TOKEN': `${csrf}`
         }
         try {
-            const response = await axios.post(`${BASE_URL}/api/user/image/upload`, data ,{ headers });
+            const response = await axios.post(`${BASE_URL}/api/my/apartment/${id}/img/upload`, data, { headers });
             return response;
-        } catch (e:any) {
-            return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
+        } catch (e: any) {
+            return { data: { success: false, error: { code: 500, message: e } }, status: e.response.status }
         }
     },
-    deleteUserPhotos: async function(token:string|null){
+    deletePhotos: async function (token: string | null, id: number | null) {
         const headers = {
             Authorization: `Bearer ${token}`,
             "Content-Type": "multipart/form-data",
             'X-CSRF-TOKEN': `${csrf}`
         }
         try {
-            const response = await axios.delete(`${BASE_URL}/api/user/image/destroy`, { headers });
+            const response = await axios.delete(`${BASE_URL}/api/my/apartment/img/${id}/delete`, { headers });
             return response;
-        } catch (e:any) {
-            return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
+        } catch (e: any) {
+            return { data: { success: false, error: { code: 500, message: e } }, status: e.response.status }
         }
     },
-    updatePhotos: async function(token:string|null,id:number|null,data:any){
-        const headers = {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
-            'X-CSRF-TOKEN': `${csrf}`
-        }
-        try {
-            const response = await axios.post(`${BASE_URL}/api/my/apartment/${id}/img/upload`, data ,{ headers });
-            return response;
-        } catch (e:any) {
-            return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
-        }
-    },
-    deletePhotos: async function(token:string|null,id:number|null){
-        const headers = {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
-            'X-CSRF-TOKEN': `${csrf}`
-        }
-        try {
-            const response = await axios.delete(`${BASE_URL}/api/my/apartment/img/${id}/delete`,{ headers });
-            return response;
-        } catch (e:any) {
-            return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
-        }
-    },
-    getAllMyMessages: async function (token:string|null) {
+    getAllMyMessages: async function (token: string | null) {
         const headers = {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
             'X-CSRF-TOKEN': `${csrf}`
         }
         try {
-            const response = await axios.post(`${BASE_URL}/api/my/messages`, {},{ headers });
+            const response = await axios.post(`${BASE_URL}/api/my/messages`, {}, { headers });
             return response;
-        } catch (e:any) {
-            return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
+        } catch (e: any) {
+            return { data: { success: false, error: { code: 500, message: e } }, status: e.response.status }
         }
     },
-    getAllMyMessagesCount: async function (token:string|null) {
+    getAllMyMessagesCount: async function (token: string | null) {
         const headers = {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
             'X-CSRF-TOKEN': `${csrf}`
         }
         try {
-            const response = await axios.post(`${BASE_URL}/api/my/messages/count`, {},{ headers });
+            const response = await axios.post(`${BASE_URL}/api/my/messages/count`, {}, { headers });
             return response;
-        } catch (e:any) {
-            return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
+        } catch (e: any) {
+            return { data: { success: false, error: { code: 500, message: e } }, status: e.response.status }
         }
     },
-    getAllMyTrashedMessages: async function (token:string|null) {
+    getAllMyTrashedMessages: async function (token: string | null) {
         const headers = {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
             'X-CSRF-TOKEN': `${csrf}`
         }
         try {
-            const response = await axios.post(`${BASE_URL}/api/my/messages/trashed`, {},{ headers });
+            const response = await axios.post(`${BASE_URL}/api/my/messages/trashed`, {}, { headers });
             return response;
-        } catch (e:any) {
-            return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
+        } catch (e: any) {
+            return { data: { success: false, error: { code: 500, message: e } }, status: e.response.status }
         }
     },
-    getMyMessage: async function (token:string|null, id:number|null) {
+    getMyMessage: async function (token: string | null, id: number | null) {
         const headers = {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
             'X-CSRF-TOKEN': `${csrf}`
         }
         try {
-            const response = await axios.post(`${BASE_URL}/api/my/message/${id}`,{},{ headers });
+            const response = await axios.post(`${BASE_URL}/api/my/message/${id}`, {}, { headers });
             return response;
-        } catch (e:any) {
-            return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
+        } catch (e: any) {
+            return { data: { success: false, error: { code: 500, message: e } }, status: e.response.status }
         }
     },
-    restoreMyMessage: async function (token:string|null, id:number|null) {
+    restoreMyMessage: async function (token: string | null, id: number | null) {
         const headers = {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
             'X-CSRF-TOKEN': `${csrf}`
         }
         try {
-            const response = await axios.patch(`${BASE_URL}/api/my/message/${id}/restore`,{},{ headers });
+            const response = await axios.patch(`${BASE_URL}/api/my/message/${id}/restore`, {}, { headers });
             return response;
-        } catch (e:any) {
-            return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
+        } catch (e: any) {
+            return { data: { success: false, error: { code: 500, message: e } }, status: e.response.status }
         }
     },
-    deleteMyMessage: async function(token:string|null,id:number|null){
+    deleteMyMessage: async function (token: string | null, id: number | null) {
         const headers = {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
             'X-CSRF-TOKEN': `${csrf}`
         }
         try {
-            const response = await axios.delete(`${BASE_URL}/api/my/message/${id}/delete`,{ headers });
+            const response = await axios.delete(`${BASE_URL}/api/my/message/${id}/delete`, { headers });
             return response;
-        } catch (e:any) {
-            return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
+        } catch (e: any) {
+            return { data: { success: false, error: { code: 500, message: e } }, status: e.response.status }
         }
     },
-    destroyMyMessage: async function(token:string|null,id:number|null){
+    destroyMyMessage: async function (token: string | null, id: number | null) {
         const headers = {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
             'X-CSRF-TOKEN': `${csrf}`
         }
         try {
-            const response = await axios.delete(`${BASE_URL}/api/my/message/${id}/destroy`,{ headers });
+            const response = await axios.delete(`${BASE_URL}/api/my/message/${id}/destroy`, { headers });
             return response;
-        } catch (e:any) {
-            return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
+        } catch (e: any) {
+            return { data: { success: false, error: { code: 500, message: e } }, status: e.response.status }
         }
     },
-    getSponsorships:async function (token:string|null) {
+    getSponsorships: async function (token: string | null) {
         const headers = {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
             'X-CSRF-TOKEN': `${csrf}`
         }
         try {
-            const response = await axios.post(`${BASE_URL}/api/my/sponsorships`,{},{ headers });
+            const response = await axios.post(`${BASE_URL}/api/my/sponsorships`, {}, { headers });
             return response;
-        } catch (e:any) {
-            return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
+        } catch (e: any) {
+            return { data: { success: false, error: { code: 500, message: e } }, status: e.response.status }
         }
     },
-    updateSponsorshipToTheHouse: async function(token:string|null,id:number|null,data:any){
+    updateSponsorshipToTheHouse: async function (token: string | null, id: number | null, data: any) {
         const headers = {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
             'X-CSRF-TOKEN': `${csrf}`
         }
         try {
-            const response = await axios.post(`${BASE_URL}/api/my/apartment/${id}/sponsorship/update`,data,{ headers });
+            const response = await axios.post(`${BASE_URL}/api/my/apartment/${id}/sponsorship/update`, data, { headers });
             return response;
-        } catch (e:any) {
-            return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
+        } catch (e: any) {
+            return { data: { success: false, error: { code: 500, message: e } }, status: e.response.status }
         }
     },
-    generateToken:async function(token:string|null){
+    generateToken: async function (token: string | null) {
         const headers = {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
             'X-CSRF-TOKEN': `${csrf}`
         }
         try {
-            const response = await axios.post(`${BASE_URL}/api/generate/token`,{},{ headers });
+            const response = await axios.post(`${BASE_URL}/api/generate/token`, {}, { headers });
             return response;
-        } catch (e:any) {
-            return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
+        } catch (e: any) {
+            return { data: { success: false, error: { code: 500, message: e } }, status: e.response.status }
         }
     },
-    makePayment:async function(token:string|null,data:any){
+    makePayment: async function (token: string | null, data: any) {
         const headers = {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
@@ -388,11 +362,11 @@ const api = {
         try {
             const response = await axios.post(`${BASE_URL}/api/make/payment`, data, { headers });
             return response;
-        } catch (e:any) {
-            return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
+        } catch (e: any) {
+            return { data: { success: false, error: { code: 500, message: e } }, status: e.response.status }
         }
     },
-    getTotalVisits:async function(token:string|null,id: number){
+    getTotalVisits: async function (token: string | null, id: number) {
         const headers = {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
@@ -401,11 +375,11 @@ const api = {
         try {
             const response = await axios.post(`${BASE_URL}/api/my/apartment/${id}/stat/total`, {}, { headers });
             return response;
-        } catch (e:any) {
-            return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
+        } catch (e: any) {
+            return { data: { success: false, error: { code: 500, message: e } }, status: e.response.status }
         }
     },
-    getYearVisits:async function(token:string|null,id: number){
+    getYearVisits: async function (token: string | null, id: number) {
         const headers = {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
@@ -414,11 +388,11 @@ const api = {
         try {
             const response = await axios.post(`${BASE_URL}/api/my/apartment/${id}/stat/year`, {}, { headers });
             return response;
-        } catch (e:any) {
-            return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
+        } catch (e: any) {
+            return { data: { success: false, error: { code: 500, message: e } }, status: e.response.status }
         }
     },
-    getMonthVisits:async function(token:string|null,id: number){
+    getMonthVisits: async function (token: string | null, id: number) {
         const headers = {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
@@ -427,11 +401,11 @@ const api = {
         try {
             const response = await axios.post(`${BASE_URL}/api/my/apartment/${id}/stat/month`, {}, { headers });
             return response;
-        } catch (e:any) {
-            return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
+        } catch (e: any) {
+            return { data: { success: false, error: { code: 500, message: e } }, status: e.response.status }
         }
     },
-    getWeekVisits:async function(token:string|null,id: number){
+    getWeekVisits: async function (token: string | null, id: number) {
         const headers = {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
@@ -440,11 +414,11 @@ const api = {
         try {
             const response = await axios.post(`${BASE_URL}/api/my/apartment/${id}/stat/week`, {}, { headers });
             return response;
-        } catch (e:any) {
-            return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
+        } catch (e: any) {
+            return { data: { success: false, error: { code: 500, message: e } }, status: e.response.status }
         }
     },
-    getTodayVisits:async function(token:string|null,id: number){
+    getTodayVisits: async function (token: string | null, id: number) {
         const headers = {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
@@ -453,34 +427,136 @@ const api = {
         try {
             const response = await axios.post(`${BASE_URL}/api/my/apartment/${id}/stat/day`, {}, { headers });
             return response;
-        } catch (e:any) {
-            return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
+        } catch (e: any) {
+            return { data: { success: false, error: { code: 500, message: e } }, status: e.response.status }
         }
     },
-    emailResend:async function(token:string|null){
+    emailResend: async function (token: string | null) {
         const headers = {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
             'X-CSRF-TOKEN': `${csrf}`
         }
         try {
-            const response = await axios.post(`${BASE_URL}/api/email/verify/resend`, {},{ headers });
+            const response = await axios.post(`${BASE_URL}/api/email/verify/resend`, {}, { headers });
             return response;
-        } catch (e:any) {
-            return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
+        } catch (e: any) {
+            return { data: { success: false, error: { code: 500, message: e } }, status: e.response.status }
         }
     },
-    emailVerification:async function(token:string|null){
+    emailVerification: async function (token: string | null) {
         const headers = {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
             'X-CSRF-TOKEN': `${csrf}`
         }
         try {
-            const response = await axios.post(`${BASE_URL}/api/email/verification`, {},{ headers });
+            const response = await axios.post(`${BASE_URL}/api/email/verification`, {}, { headers });
             return response;
-        } catch (e:any) {
-            return { data: { success: false, error: { code: 500, message: e } }, status:e.response.status }
+        } catch (e: any) {
+            return { data: { success: false, error: { code: 500, message: e } }, status: e.response.status }
+        }
+    },
+    updateUserPhotos: async function (token: string | null, data: any) {
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+            'X-CSRF-TOKEN': `${csrf}`
+        }
+        try {
+            const response = await axios.post(`${BASE_URL}/api/user/image/upload`, data, { headers });
+            if (response.data.success) {
+                setLocalStorage(response)
+            }
+            return response;
+        } catch (e: any) {
+            return { data: { success: false, error: { code: 500, message: e } }, status: e.response.status }
+        }
+    },
+    deleteUserPhotos: async function (token: string | null) {
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+            'X-CSRF-TOKEN': `${csrf}`
+        }
+        try {
+            const response = await axios.delete(`${BASE_URL}/api/user/image/destroy`, { headers });
+            if (response.data.success) {
+                setLocalStorage(response)
+            }
+            return response;
+        } catch (e: any) {
+            return { data: { success: false, error: { code: 500, message: e } }, status: e.response.status }
+        }
+    },
+    getUser: async function (token: string | null) {
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": `${csrf}`,
+        };
+        try {
+            const response = await axios.post(`${BASE_URL}/user/info`, {}, { headers });
+            return response;
+        } catch (e: any) {
+            return {
+                data: { success: false, error: { code: 500, message: e } },
+                status: e.response.status,
+            };
+        }
+    },
+    setUser: async function (token: string | null, data: any) {
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": `${csrf}`,
+        };
+        try {
+            const response = await axios.post(`${BASE_URL}/user/info/set`, data, { headers });
+            if (response.data.success) {
+                setLocalStorage(response)
+            }
+            return response;
+        } catch (e: any) {
+            return {
+                data: { success: false, error: { code: 500, message: e } },
+                status: e.response.status,
+            };
+        }
+    },
+    changeUserPassword: async function (token: string | null, data: any) {
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": `${csrf}`,
+        };
+        try {
+            const response = await axios.post(`${BASE_URL}/change/password`, data, { headers });
+            if (response.data.success) {
+                setLocalStorage(response)
+            }
+            return response;
+        } catch (e: any) {
+            return {
+                data: { success: false, error: { code: 500, message: e } },
+                status: e.response.status,
+            };
+        }
+    },
+    deleteAccount: async function (token: string | null) {
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": `${csrf}`,
+        };
+        try {
+            const response = await axios.delete(`${BASE_URL}/user/delete`, { headers });
+            return response;
+        } catch (e: any) {
+            return {
+                data: { success: false, error: { code: 500, message: e } },
+                status: e.response.status,
+            };
         }
     },
 }

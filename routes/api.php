@@ -95,4 +95,5 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('user/info', [UserController::class, 'get_user_detail']);
     Route::post('user/info/set', [UserController::class, 'set_user_detail']);
     Route::post('change/password', [UserController::class, 'change_user_password']);
+    Route::delete('user/delete', [UserController::class, 'delete_account']);
 });

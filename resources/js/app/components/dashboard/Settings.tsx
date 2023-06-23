@@ -14,12 +14,14 @@ const Settings = (props: SettingsProps) => {
     const [newPassword, setNewPassword] = useState<string>("")
     const [confirmNewPassword, setConfirmNewPassword] = useState<string>("")
 
+    // toast.success("Success!!", {
+    //     position: toast.POSITION.TOP_RIGHT,
+    //     autoClose: 2000,
+    // });
+
     // function that obtains the user's personal details
     const getUserDetails = () => {
-        // toast.success("Success!!", {
-        //     position: toast.POSITION.TOP_RIGHT,
-        //     autoClose: 2000,
-        // });
+
     }
 
     useEffect(() => {
