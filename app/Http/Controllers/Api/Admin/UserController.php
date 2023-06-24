@@ -3,10 +3,7 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -100,6 +97,9 @@ class UserController extends Controller
         $user = $request->user();
         $response = [];
 
+        // "oldpassword":"******",
+        // "password": "******",
+        // "password_confirmation" : "*******"
         $fields = $request->validate([
             'oldpassword' => 'required|string|max:30',
             'password' => 'required|string|confirmed|max:30'
@@ -120,7 +120,7 @@ class UserController extends Controller
         $user->save();
 
         $response['success'] = true;
-        $response['user'] = $user;
+        $response['message'] = 'You have changed the password correctly!';
 
         return response()->json($response);
     }

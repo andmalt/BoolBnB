@@ -531,7 +531,7 @@ const api = {
             "X-CSRF-TOKEN": `${csrf}`,
         };
         try {
-            const response = await axios.post(`${BASE_URL}/api/change/password`, data, { headers });
+            const response = await axios.put(`${BASE_URL}/api/change/password`, data, { headers });
             if (response.data.success) {
                 setLocalStorage(response)
             }
