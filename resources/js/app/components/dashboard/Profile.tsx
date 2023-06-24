@@ -79,7 +79,7 @@ const Profile = (props: ProfileProps) => {
 
 
     return (
-        <div className='flex justify-center items-start'>
+        <div className='flex flex-col justify-start items-center'>
             <div className='mb-6 md:w-[60%]'>
                 <div className="bg-white p-3 shadow-sm rounded-sm">
                     <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">

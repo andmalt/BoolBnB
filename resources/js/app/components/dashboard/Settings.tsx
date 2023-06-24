@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { loading } from '../../store/authSlice';
+import { clear, error, loading } from '../../store/authSlice';
 import api from '../../services/connection_manager';
+import { convertInputForm } from '../../services/functions';
+import { setIsEmailVerification } from '../../store/emailVerificationSlice';
 
 interface SettingsProps {
 
@@ -18,14 +20,28 @@ const Settings = (props: SettingsProps) => {
     const [confirmNewPassword, setConfirmNewPassword] = useState<string>("")
     const dispatch = useAppDispatch();
     const authSelector = useAppSelector(state => state.auth);
+    const page = document.getElementById("body-container");
 
-    // toast.success("Success!!", {
-    //     position: toast.POSITION.TOP_RIGHT,
-    //     autoClose: 2000,
-    // });
+    // function that checks if the user has verified the email
+    const emailVerification = async () => {
+        dispatch(loading())
+        try {
+            const response = await api.emailVerification(authSelector.token)
+            if (response.data.success) {
+                dispatch(setIsEmailVerification(true))
+            } else {
+                dispatch(setIsEmailVerification(false))
+            }
+            dispatch(clear())
+        } catch (e) {
+            console.log("emailVerification", e);
+            dispatch(error())
+        }
+    }
 
     // function that obtains the user's personal details
     const getUserDetails = async () => {
+        page?.scrollIntoView();
         dispatch(loading())
         try {
             const response = await api.getUser(authSelector.token)
@@ -33,16 +49,78 @@ const Settings = (props: SettingsProps) => {
                 setName(response.data.user.name)
                 setSurname(response.data.user.surname)
                 setEmail(response.data.user.email)
+                emailVerification()
             }
+            dispatch(clear())
         } catch (e) {
             console.log("Error getUser");
+            dispatch(error())
+        }
+    }
+
+    const changeInfo = async (e: any) => {
+        e.preventDefault()
+        page?.scrollIntoView();
+        dispatch(loading())
+        const data = {
+            name: convertInputForm(name),
+            surname: convertInputForm(surname),
+            email,
+        }
+        try {
+            const response = await api.setUser(authSelector.token, data)
+            if (response.data.success) {
+                toast.success("Le tue info sono state cambiate con successo!", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 3000,
+                });
+                getUserDetails()
+            }
+            dispatch(clear())
+        } catch (e) {
+            console.log("Error change info");
+            dispatch(error())
+        }
+    }
+
+    const changePassword = async (e: any) => {
+        e.preventDefault()
+        page?.scrollIntoView();
+        dispatch(loading())
+        const data = {
+            oldpassword: currentPassword,
+            password: newPassword,
+            password_confirmation: confirmNewPassword,
+        }
+        try {
+            if (newPassword == confirmNewPassword) {
+                const response = await api.changeUserPassword(authSelector.token, data)
+                if (response.data.success) {
+                    toast.success("La tua password è stata sostituita con successo!", {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: 3000,
+                    });
+                    setCurrentPassword("")
+                    setNewPassword("")
+                    setConfirmNewPassword("")
+                }
+            } else {
+                toast.error("La tue nuove password non corrispondono", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 3000,
+                })
+            }
+            dispatch(clear())
+        } catch (e) {
+            console.log("Error change password");
+            dispatch(error())
         }
     }
 
     useEffect(() => {
         let isMount = true;
         if (isMount) {
-            // getUserDetails()
+            getUserDetails()
         }
         return () => {
             isMount = false;
@@ -66,7 +144,7 @@ const Settings = (props: SettingsProps) => {
                             <p>JPG, GIF, PNG, JPEG or SVG, 2MB max.</p>
                         </div>
                     </div>
-                    <form method='POST' onSubmit={(e) => { e.preventDefault() }}>
+                    <form method='POST' onSubmit={(e) => changeInfo(e)}>
                         <div className='flex flex-col mb-3'>
                             <label htmlFor="name" className='font-bold'>Nome</label>
                             <input type="text" name="name" id="name" className='rounded-lg text-black' value={name} onChange={(e) => setName(e.target.value)} />
@@ -93,7 +171,7 @@ const Settings = (props: SettingsProps) => {
                     <h4 className='font-bold text-xl mb-2'>Cambia Password</h4>
                     <p>Aggiorna la tua password associata al tuo account.</p>
                 </div>
-                <form method='POST' className='md:px-4 flex flex-col md:w-2/3'>
+                <form method='POST' onSubmit={(e) => changePassword(e)} className='md:px-4 flex flex-col md:w-2/3'>
                     <div className='flex flex-col mb-3'>
                         <label htmlFor="current-password" className='font-bold'>Password attuale</label>
                         <input type="password" name="current_password" id="current-password" className='rounded-lg text-black' value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} />
@@ -107,7 +185,7 @@ const Settings = (props: SettingsProps) => {
                         <input type="password" name="confirm_new_password" id="confirm-new-password" className='rounded-lg text-black' value={confirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target.value)} />
                     </div>
                     <div>
-                        <button onClick={(e) => { e.preventDefault() }} className='bg-[#6366f1] hover:bg-[rgb(109,112,251)] rounded-lg py-2 px-4' type="submit">Salva</button>
+                        <button className='bg-[#6366f1] hover:bg-[rgb(109,112,251)] rounded-lg py-2 px-4' type="submit">Salva</button>
                     </div>
                 </form>
             </div>

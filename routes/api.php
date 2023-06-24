@@ -62,7 +62,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 // 
 Route::post('my/messages/count', [AdminMessageController::class, 'index_count'])->middleware('auth:sanctum');
-
+Route::post('user/info', [UserController::class, 'get_user_detail'])->middleware('auth:sanctum');
 /**
  * Admin
  */
@@ -92,7 +92,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('my/apartment/{id}/stat/month', [StatController::class, 'get_month']);
     Route::post('my/apartment/{id}/stat/week', [StatController::class, 'get_week']);
     Route::post('my/apartment/{id}/stat/day', [StatController::class, 'get_today']);
-    Route::post('user/info', [UserController::class, 'get_user_detail']);
     Route::put('user/info/set', [UserController::class, 'set_user_detail']);
     Route::put('change/password', [UserController::class, 'change_user_password']);
     Route::delete('user/delete', [UserController::class, 'delete_account']);

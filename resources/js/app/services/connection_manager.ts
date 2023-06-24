@@ -532,9 +532,6 @@ const api = {
         };
         try {
             const response = await axios.put(`${BASE_URL}/api/change/password`, data, { headers });
-            if (response.data.success) {
-                setLocalStorage(response)
-            }
             return response;
         } catch (e: any) {
             return {
