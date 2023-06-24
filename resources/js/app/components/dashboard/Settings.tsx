@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { loading } from '../../store/authSlice';
+import api from '../../services/connection_manager';
 
 interface SettingsProps {
 
@@ -13,6 +16,8 @@ const Settings = (props: SettingsProps) => {
     const [currentPassword, setCurrentPassword] = useState<string>("")
     const [newPassword, setNewPassword] = useState<string>("")
     const [confirmNewPassword, setConfirmNewPassword] = useState<string>("")
+    const dispatch = useAppDispatch();
+    const authSelector = useAppSelector(state => state.auth);
 
     // toast.success("Success!!", {
     //     position: toast.POSITION.TOP_RIGHT,
@@ -20,14 +25,24 @@ const Settings = (props: SettingsProps) => {
     // });
 
     // function that obtains the user's personal details
-    const getUserDetails = () => {
-
+    const getUserDetails = async () => {
+        dispatch(loading())
+        try {
+            const response = await api.getUser(authSelector.token)
+            if (response.data.success) {
+                setName(response.data.user.name)
+                setSurname(response.data.user.surname)
+                setEmail(response.data.user.email)
+            }
+        } catch (e) {
+            console.log("Error getUser");
+        }
     }
 
     useEffect(() => {
         let isMount = true;
         if (isMount) {
-            getUserDetails()
+            // getUserDetails()
         }
         return () => {
             isMount = false;

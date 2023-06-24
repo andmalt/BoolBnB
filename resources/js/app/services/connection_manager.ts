@@ -496,7 +496,7 @@ const api = {
             "X-CSRF-TOKEN": `${csrf}`,
         };
         try {
-            const response = await axios.post(`${BASE_URL}/user/info`, {}, { headers });
+            const response = await axios.post(`${BASE_URL}/api/user/info`, {}, { headers });
             return response;
         } catch (e: any) {
             return {
@@ -512,7 +512,7 @@ const api = {
             "X-CSRF-TOKEN": `${csrf}`,
         };
         try {
-            const response = await axios.post(`${BASE_URL}/user/info/set`, data, { headers });
+            const response = await axios.put(`${BASE_URL}/api/user/info/set`, data, { headers });
             if (response.data.success) {
                 setLocalStorage(response)
             }
@@ -531,7 +531,7 @@ const api = {
             "X-CSRF-TOKEN": `${csrf}`,
         };
         try {
-            const response = await axios.post(`${BASE_URL}/change/password`, data, { headers });
+            const response = await axios.post(`${BASE_URL}/api/change/password`, data, { headers });
             if (response.data.success) {
                 setLocalStorage(response)
             }
@@ -550,7 +550,7 @@ const api = {
             "X-CSRF-TOKEN": `${csrf}`,
         };
         try {
-            const response = await axios.delete(`${BASE_URL}/user/delete`, { headers });
+            const response = await axios.delete(`${BASE_URL}/api/user/delete`, { headers });
             return response;
         } catch (e: any) {
             return {

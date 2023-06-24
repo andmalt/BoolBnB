@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -20,7 +22,6 @@ class UserController extends Controller
     {
         $user = $request->user();
         $response = [];
-
 
         if (!$user) {
             $response['success'] = false;
@@ -48,7 +49,7 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255|min:2',
             'surname' => 'required|string|max:255|min:2',
-            'email' => 'required|string|email|max:255|unique:users,email',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
         ]);
 
         if ($validator->fails()) {
@@ -71,15 +72,16 @@ class UserController extends Controller
         // Retrieve the validated input
         $fields = $validator->validate();
 
+        // If you change the email, laravel resends the email verification notification
         if ($user->email != $fields['email']) {
             $user->email = $fields['email'];
-            event(new Registered($user));
+            $user->email_verified_at = null;
+            $user->sendEmailVerificationNotification();
         }
 
         $user->name = $fields['name'];
         $user->surname = $fields['surname'];
         $user->save();
-
 
         $response['success'] = true;
         $response['user'] = $user;
