@@ -465,9 +465,6 @@ const api = {
         }
         try {
             const response = await axios.post(`${BASE_URL}/api/user/image/upload`, data, { headers });
-            if (response.data.success) {
-                setLocalStorage(response)
-            }
             return response;
         } catch (e: any) {
             return { data: { success: false, error: { code: 500, message: e } }, status: e.response.status }
@@ -481,9 +478,6 @@ const api = {
         }
         try {
             const response = await axios.delete(`${BASE_URL}/api/user/image/destroy`, { headers });
-            if (response.data.success) {
-                setLocalStorage(response)
-            }
             return response;
         } catch (e: any) {
             return { data: { success: false, error: { code: 500, message: e } }, status: e.response.status }

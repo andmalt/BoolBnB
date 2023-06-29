@@ -119,13 +119,26 @@ const PhotoModify = () => {
         }
       </div>
       <form onSubmit={(e) => sendPhotos(e)}>
-        <label className="mt-3 block">
-          <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
-            Foto
+        <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 my-3">
+          Foto
+        </span>
+        <div className='flex flex-row items-center my-6'>
+          <label className="mt-3 block">
+            <span className='rounded-lg py-2 px-4  bg-[rgb(41,48,61)] hover:bg-[rgb(51,58,71)] text-white'>
+              Inserisci foto
+              <input type={"file"} name="images" className="hidden" onChange={handleFileChange} multiple />
+            </span>
+          </label>
+          <span className='text-white ml-2'>
+            {
+              fileList?.length! > 0 && fileList?.length != undefined ?
+                <p>Hai inserito {fileList?.length} foto</p>
+                :
+                null
+            }
           </span>
-          <input type={"file"} name="images" className="mt-2 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" onChange={handleFileChange} multiple />
-        </label>
-        <button className='bg-green-500 hover:bg-blue-600 rounded-xl py-2 px-4 m-5' type="submit">Inserisci foto</button>
+        </div>
+        <button className='bg-green-500 hover:bg-blue-600 rounded-xl py-2 px-4 m-5' type="submit">Salva</button>
       </form>
     </div>
   )

@@ -47,7 +47,7 @@ class PhotoController extends Controller
         }
 
         Storage::delete($user->image);
-        $user->image = Storage::put('public/user/image', $request->file('image'));
+        $user->image =  Storage::put('public/user/image', $request->file('image'));
         $user->save();
 
 

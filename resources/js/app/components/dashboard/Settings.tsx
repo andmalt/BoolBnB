@@ -12,12 +12,14 @@ interface SettingsProps {
 
 const Settings = (props: SettingsProps) => {
     const { } = props;
+    const [photo, setPhoto] = useState<string>("")
     const [name, setName] = useState<string>("")
     const [surname, setSurname] = useState<string>("")
     const [email, setEmail] = useState<string>("")
     const [currentPassword, setCurrentPassword] = useState<string>("")
     const [newPassword, setNewPassword] = useState<string>("")
     const [confirmNewPassword, setConfirmNewPassword] = useState<string>("")
+    const [file, setFile] = useState<File | null>(null);
     const dispatch = useAppDispatch();
     const authSelector = useAppSelector(state => state.auth);
     const page = document.getElementById("body-container");
@@ -49,11 +51,12 @@ const Settings = (props: SettingsProps) => {
                 setName(response.data.user.name)
                 setSurname(response.data.user.surname)
                 setEmail(response.data.user.email)
+                setPhoto(response.data.user.image)
                 emailVerification()
             }
             dispatch(clear())
         } catch (e) {
-            console.log("Error getUser");
+            console.log("Error getUser", e);
             dispatch(error())
         }
     }
@@ -78,7 +81,7 @@ const Settings = (props: SettingsProps) => {
             }
             dispatch(clear())
         } catch (e) {
-            console.log("Error change info");
+            console.log("Error change info", e);
             dispatch(error())
         }
     }
@@ -112,9 +115,69 @@ const Settings = (props: SettingsProps) => {
             }
             dispatch(clear())
         } catch (e) {
-            console.log("Error change password");
+            console.log("Error change password", e);
             dispatch(error())
         }
+    }
+
+    const handleFileChange = async (e: any) => {
+        // console.log("fileList=", e.target.files);
+        setFile(e.target.files[0]);
+        toast.info("Hai inserito una foto adesso puoi salvarla!", {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: 3000,
+        });
+    };
+
+
+    const sendPhotos = async (e: any) => {
+        e.preventDefault()
+        const confirm = window.confirm('Sicuro di voler inserire la foto?');
+        if (!confirm) {
+            return;
+        }
+        if (!file) {
+            return;
+        }
+        dispatch(loading())
+        const data = new FormData()
+        data.append(`image`, file)
+        try {
+            const response = await api.updateUserPhotos(authSelector.token, data);
+            if (response.data.success) {
+                getUserDetails()
+                toast.success("La foto è stata salvata con successo!", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 3000,
+                });
+            } else {
+                toast.warning("La foto non è stata salvata!", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 3000,
+                });
+            }
+        } catch (e) {
+            console.log("Error sendUserPhoto", e);
+            dispatch(error())
+        }
+        // console.log("data=", data);      
+        // console.log("response=", response);
+        dispatch(clear())
+    }
+
+    const deletePhoto = async (e: any) => {
+        e.preventDefault()
+        const confirm = window.confirm('Sicuro di voler cancellare la foto?');
+        if (!confirm) {
+            return;
+        }
+        // console.log("data=", data);
+        const response = await api.deleteUserPhotos(authSelector.token);
+        if (response.data.success) {
+            getUserDetails()
+        }
+        // console.log("response=", response);
+        dispatch(clear())
     }
 
     useEffect(() => {
@@ -137,10 +200,20 @@ const Settings = (props: SettingsProps) => {
                 </div>
                 <div className='md:px-4 flex flex-col md:w-2/3'>
                     <div className='flex flex-col mb-6'>
-                        <img className='rounded-lg h-36 w-36' src={"./default-user/user.png"} alt="#" />
+                        <form method="post" onSubmit={(e) => sendPhotos(e)}>
+                            <span className='block'>
+                                <label className='flex flex-col flex-wrap items-start'>
+                                    <input type="file" name="image" id="image" className='hidden' onChange={handleFileChange} />
+                                    <img className='rounded-lg h-36 w-36 cursor-pointer' src={!photo ? "./default-user/user.png" : photo.replace('public/user/image/', 'storage/user/image/')} alt="#" />
+                                </label>
+                                <button className='rounded-lg py-2 px-4 my-1 bg-[rgb(41,48,61)] hover:bg-[rgb(51,58,71)]'>
+                                    Salva immagine
+                                </button>
+                            </span>
+
+                        </form>
                         <div className='flex flex-col flex-wrap items-start'>
-                            <button className='rounded-lg py-2 px-4 my-1 bg-[rgb(41,48,61)] hover:bg-[rgb(51,58,71)]'>Cambia immagine</button>
-                            <button className='rounded-lg py-2 px-4 my-1 bg-[#ef4444] hover:bg-[rgb(259,88,88)]'>Cancella immagine</button>
+                            <button onClick={(e) => deletePhoto(e)} className='rounded-lg py-2 px-4 my-1 bg-[#ef4444] hover:bg-[rgb(259,88,88)]'>Cancella immagine</button>
                             <p>JPG, GIF, PNG, JPEG or SVG, 2MB max.</p>
                         </div>
                     </div>

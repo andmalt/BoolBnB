@@ -300,12 +300,7 @@ const CreateUpdateHome = () => {
                     </span>
                     <input type="text" name="price" className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 w-2/3 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="prezzo in euro per notte" value={price} onChange={(e) => setPrice(e.target.value)} />
                 </label>
-                {
-                    dashSelector.isCreate ?
-                        <button className="bg-green-700 hover:bg-green-800 text-white rounded-xl py-2 px-6 m-5" type="submit">Inserisci</button>
-                        :
-                        <button className="bg-green-700 hover:bg-green-800 text-white rounded-xl py-2 px-6 m-5" type="submit">Modifica</button>
-                }
+                <button className="bg-green-700 hover:bg-green-800 text-white rounded-xl py-2 px-6 m-5" type="submit">Salva</button>
                 <button className="bg-blue-500 hover:bg-blue-600 rounded-xl py-2 px-4 m-5" onClick={exitPage}>Torna indietro</button>
             </form>
         </div >
