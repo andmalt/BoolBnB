@@ -8,6 +8,7 @@ import {
     loading,
     error,
 } from '../store/authSlice';
+import { toast } from 'react-toastify';
 
 interface LoginProps {
 }
@@ -38,21 +39,21 @@ const Login = (props: LoginProps) => {
                 setEmail("")
                 setPassword("")
                 dispatch(clear())
-                console.log("store token: ", response.data.token);
+                toast.success("Hai effettuato il login!", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 3000,
+                });
+                // console.log("store token: ", response.data.token);
                 return navigate("/dashboard");
             }
-            // setIsError(true)
-            // console.log(isError);
-            // setErrors(response.data.errors.response.data.errors)
-            console.log("login failed");
-            //
-            // insert here modal of login not succeded
-            // 
+            toast.error("Le credenziali sono errate!", {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 3000,
+            });
             dispatch(clear())
         } catch (e) {
             dispatch(error())
             console.log("error login");
-            return { data: { success: false, error: e, message: "Le credenziali sono errate" } }
         }
     }
 

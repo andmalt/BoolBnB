@@ -3,9 +3,8 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { clear, error, loading } from '../../store/authSlice';
 import api from '../../services/connection_manager';
 import { setIsEmailVerification } from '../../store/emailVerificationSlice';
-import { classNames, getLocalStorage } from '../../services/functions';
+import { classNames } from '../../services/functions';
 import moment from 'moment';
-import { User } from '../../services/interfaces';
 
 interface ProfileProps {
 
@@ -13,14 +12,34 @@ interface ProfileProps {
 
 const Profile = (props: ProfileProps) => {
     const { } = props;
-    const [user, setUser] = useState<User | undefined>();
+    const [photo, setPhoto] = useState<string>("")
+    const [name, setName] = useState<string>("")
+    const [surname, setSurname] = useState<string>("")
+    const [email, setEmail] = useState<string>("")
+    const [registeredSince, setRegisteredSince] = useState<string>("")
     const authSelector = useAppSelector(state => state.auth);
     const emailVerificationSelector = useAppSelector(state => state.emailVerification);
     const dispatch = useAppDispatch();
+    const page = document.getElementById("body-container");
 
-    const getUser = () => {
-        const { user } = getLocalStorage();
-        setUser(user!)
+    const getUser = async () => {
+        page?.scrollIntoView();
+        dispatch(loading())
+        try {
+            const response = await api.getUser(authSelector.token)
+            if (response.data.success) {
+                setName(response.data.user.name)
+                setSurname(response.data.user.surname)
+                setEmail(response.data.user.email)
+                setPhoto(response.data.user.image)
+                setRegisteredSince(response.data.user.created_at)
+                emailVerification()
+            }
+            dispatch(clear())
+        } catch (e) {
+            console.log("Error getUser", e);
+            dispatch(error())
+        }
     }
 
     // function that checks if the user has verified the email
@@ -80,7 +99,7 @@ const Profile = (props: ProfileProps) => {
 
     return (
         <div className='flex flex-col justify-start items-center'>
-            <div className='mb-6 md:w-[60%]'>
+            <div className='mb-6 md:w-[90%] lg:w-[75%]'>
                 <div className="bg-white p-3 shadow-sm rounded-sm">
                     <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
                         <span className="text-green-500">
@@ -95,27 +114,23 @@ const Profile = (props: ProfileProps) => {
                     <div className="text-gray-700">
                         <div className="flex flex-col justify-start items-start text-sm">
                             <div className="text-center my-4 flex md:ml-[15%]">
-                                <img className="h-40 w-40 rounded-full border-4 border-white mx-auto my-2" src={"./default-user/user.png"} alt="my photo" />
+                                <img className="h-40 w-40 rounded-full border-4 border-white mx-auto my-2" src={!photo ? "./default-user/user.png" : photo.replace('public/user/image/', 'storage/user/image/')} alt="my photo" />
                             </div>
                             <div className="grid grid-cols-2">
                                 <div className="px-4 py-2 font-bold">Nome</div>
-                                <div className="px-4 py-2">{user?.name}</div>
+                                <div className="px-4 py-2">{name}</div>
                             </div>
                             <div className="grid grid-cols-2">
                                 <div className="px-4 py-2 font-bold">Cognome</div>
-                                <div className="px-4 py-2">{user?.surname}</div>
+                                <div className="px-4 py-2">{surname}</div>
                             </div>
                             <div className="grid grid-cols-2">
                                 <div className="px-4 py-2 font-bold">Email</div>
                                 <div className="px-4 py-2">
                                     {/* <a className="text-blue-800" href="mailto:jane@example.com">jane@example.com</a> */}
-                                    <a className="text-blue-800 italic" >{user?.email}</a>
+                                    <a className="text-blue-800 italic" >{email}</a>
                                 </div>
                             </div>
-                            {/* <div className="grid grid-cols-2">
-                                            <div className="px-4 py-2 font-semibold">Birthday</div>
-                                            <div className="px-4 py-2">Feb 06, 1998</div>
-                                        </div> */}
                         </div>
                         <ul
                             className="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
@@ -126,7 +141,7 @@ const Profile = (props: ProfileProps) => {
                             </li>
                             <li className="flex items-center py-3">
                                 <span>Registrato dal</span>
-                                <span className="ml-auto">{moment(user?.created_at).format("DD/MM/YY HH:mm")}</span>
+                                <span className="ml-auto">{moment(registeredSince).format("DD/MM/YY HH:mm")}</span>
                             </li>
                         </ul>
                     </div>

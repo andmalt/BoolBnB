@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import api from '../services/connection_manager';
 import { authenticated, clear, error, loading } from '../store/authSlice';
 import { useAppDispatch } from '../store/hooks';
+import { toast } from 'react-toastify';
 
 type Form = {
     name: string[],
@@ -51,6 +52,10 @@ const Register = (props: RegisterProps) => {
                 setPassword2("")
                 dispatch(clear())
                 // console.log("store token: " + authSelector.token);
+                toast.success("Ti sei registrato correttamente!", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 3000,
+                });
                 return navigate("/dashboard");
             }
             // setIsError(true)
@@ -58,9 +63,10 @@ const Register = (props: RegisterProps) => {
             // setErrors(response.data.errors.response.data.errors)
             console.log("register failed");
             dispatch(clear())
-            //
-            // insert here modal of register not succeed
-            //     
+            toast.error("La registrazione non è andata a buon fine!", {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 3000,
+            });
         } catch (e) {
             /* dispatch(error()) */
             console.log("register error: ", e);

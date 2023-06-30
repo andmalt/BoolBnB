@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { clear, error, loading } from '../../store/authSlice';
+import { clear, error, loading, logout } from '../../store/authSlice';
 import api from '../../services/connection_manager';
-import { convertInputForm } from '../../services/functions';
+import { convertInputForm, deleteLocalStorage } from '../../services/functions';
 import { setIsEmailVerification } from '../../store/emailVerificationSlice';
+import { useNavigate } from 'react-router-dom';
 
 interface SettingsProps {
 
@@ -21,6 +22,7 @@ const Settings = (props: SettingsProps) => {
     const [confirmNewPassword, setConfirmNewPassword] = useState<string>("")
     const [file, setFile] = useState<File | null>(null);
     const dispatch = useAppDispatch();
+    const navigate = useNavigate()
     const authSelector = useAppSelector(state => state.auth);
     const page = document.getElementById("body-container");
 
@@ -180,6 +182,29 @@ const Settings = (props: SettingsProps) => {
         dispatch(clear())
     }
 
+    const destroyAccount = async (e: any) => {
+        e.preventDefault()
+        const confirm = window.confirm("Sicuro di voler cancellare l'account?");
+        if (!confirm) {
+            return;
+        }
+        try {
+            const response = await api.deleteAccount(authSelector.token)
+            if (response.status === 200) {
+                toast.warning("Il tuo account è stato cancellato correttamente!", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 5000,
+                });
+                dispatch(logout())
+                deleteLocalStorage()
+                navigate("/")
+            }
+        } catch (e) {
+            dispatch(error())
+            console.log("Error delete account", e);
+        }
+    }
+
     useEffect(() => {
         let isMount = true;
         if (isMount) {
@@ -272,7 +297,7 @@ const Settings = (props: SettingsProps) => {
                 </div>
                 <form method='POST' className='md:px-4 flex flex-col md:w-2/3'>
                     <div>
-                        <button onClick={(e) => { e.preventDefault() }} className='bg-[#ef4444] hover:bg-[rgb(259,88,88)] rounded-lg py-2 px-4' type="submit">Cancella il mio account</button>
+                        <button onClick={(e) => destroyAccount(e)} className='bg-[#ef4444] hover:bg-[rgb(259,88,88)] rounded-lg py-2 px-4' type="submit">Cancella il mio account</button>
                     </div>
                 </form>
             </div>
