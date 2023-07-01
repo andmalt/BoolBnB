@@ -30,7 +30,7 @@ const Homes = () => {
         try {
             const response = await api.getAllHouses();
             if (response.data.success) {
-                console.log(response);
+                // console.log(response);
                 setPhotos(response.data.photos);
                 setHouses(response.data.apartments);
                 setHousesFiltered(response.data.apartments)
