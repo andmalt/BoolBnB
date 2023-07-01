@@ -10,8 +10,9 @@ use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Guest\ApartmentController as GuestApartmentController;
 use App\Http\Controllers\Api\Guest\MessageController;
 use App\Http\Controllers\Api\Orders\OrderController;
+use App\Http\Controllers\Auth\NewPasswordController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\VerifyEmailController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,12 +43,22 @@ Route::get('/verify-email/{id}/{hash}', [VerifyEmailController::class, 'verifyEm
     ->name('verification.verify');
 
 // Resend link to verify email
-Route::post('/email/verify/resend', function (Request $request) {
-    $request->user()->sendEmailVerificationNotification();
-    return response()->json(["success" => true, "message" => "email resent"]);
-})->middleware(['auth:sanctum', 'throttle:6,1'])->name('verification.send');
+Route::post('/email/verify/resend', [VerifyEmailController::class, 'resendEmail'])
+    ->middleware(['auth:sanctum', 'throttle:6,1'])
+    ->name('verification.send');
 
 Route::post('email/verification', [VerifyEmailController::class, 'check'])->middleware('auth:sanctum');
+
+//
+Route::middleware('guest')->group(function () {
+    Route::post('/forgot-password', [PasswordResetLinkController::class, 'sendResetLinkEmail']);
+
+    Route::get('/reset-password/{token}', [NewPasswordController::class, 'create'])
+        ->name('password.reset');
+
+    // Route::post('/reset-password', [NewPasswordController::class, 'store'])
+    //     ->name('password.update');
+});
 
 /**
  * Authentication Routes
@@ -61,8 +72,13 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 // 
-Route::post('my/messages/count', [AdminMessageController::class, 'index_count'])->middleware('auth:sanctum');
-Route::post('user/info', [UserController::class, 'get_user_detail'])->middleware('auth:sanctum');
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('my/messages/count', [AdminMessageController::class, 'index_count']);
+    Route::post('user/info', [UserController::class, 'get_user_detail']);
+    Route::put('user/info/set', [UserController::class, 'set_user_detail']);
+    Route::put('change/password', [UserController::class, 'change_user_password']);
+});
+
 /**
  * Admin
  */
@@ -92,7 +108,5 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('my/apartment/{id}/stat/month', [StatController::class, 'get_month']);
     Route::post('my/apartment/{id}/stat/week', [StatController::class, 'get_week']);
     Route::post('my/apartment/{id}/stat/day', [StatController::class, 'get_today']);
-    Route::put('user/info/set', [UserController::class, 'set_user_detail']);
-    Route::put('change/password', [UserController::class, 'change_user_password']);
     Route::delete('user/delete', [UserController::class, 'delete_account']);
 });

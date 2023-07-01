@@ -9,7 +9,9 @@ import {
     Register,
     Main,
     House,
-    NoMatch
+    NoMatch,
+    ForgotPassword,
+    ResetPassword,
 } from '../views';
 import { Header, Footer } from '../layout';
 import { useAppSelector } from '../store/hooks';
@@ -47,6 +49,8 @@ const Navigation = (props: NavigationProps) => {
                     <Route path='/' element={<Main />} />
                     <Route path='/login' element={<Login />} />
                     <Route path='/register' element={<Register />} />
+                    <Route path='/forgot-password' element={<ForgotPassword />} />
+                    <Route path='/reset-password/:token' element={<ResetPassword />} />
                     <Route path='/dashboard' element={<Dashboard />} />
                     <Route path='/homes' element={<Homes />} />
                     <Route path='/house/:houseId' element={<House />} />

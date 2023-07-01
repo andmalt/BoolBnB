@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import api from '../services/connection_manager';
 import { useAppDispatch } from '../store/hooks';
 import {
@@ -119,11 +119,11 @@ const Login = (props: LoginProps) => {
                                                 </span>
                                             </label>
                                             <label className="block text-gray-500 font-bold my-4">
-                                                <a href="http://localhost:8000/forgot-password" className="cursor-pointer tracking-tighter text-blue-800 hover:text-blue-700">
+                                                <Link to="/forgot-password" className="cursor-pointer tracking-tighter text-blue-800 hover:text-blue-700">
                                                     <span>
                                                         Password dimenticata?
                                                     </span>
-                                                </a>
+                                                </Link>
                                             </label>
                                         </div>
                                         <button type='button' onClick={(e) => setLogin(e)} className="mt-3 text-lg font-semibold hover:bg-blue-700 w-full rounded-lg px-6 py-3 block shadow-xl text-white bg-blue-800 transition ease-in-out delay-150 hover:-translate-y-1">

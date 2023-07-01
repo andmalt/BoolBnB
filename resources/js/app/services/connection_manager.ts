@@ -550,6 +550,21 @@ const api = {
             };
         }
     },
+    passwordResetLink: async function (data: any) {
+        const headers = {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": `${csrf}`,
+        };
+        try {
+            const response = await axios.post(`${BASE_URL}/api/forgot-password`, data, { headers });
+            return response;
+        } catch (e: any) {
+            return {
+                data: { success: false, error: { code: 500, message: e } },
+                status: e.response.status,
+            };
+        }
+    },
 }
 
 export default api;

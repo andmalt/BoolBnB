@@ -43,6 +43,24 @@ class VerifyEmailController extends Controller
     }
 
     /**
+     * Resend link to verify email
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function resendEmail(Request $request)
+    {
+        $response = [];
+
+        $request->user()->sendEmailVerificationNotification();
+
+        $response['success'] = true;
+        $response['message'] = 'email resent';
+
+        return response()->json($response);
+    }
+
+    /**
      * check if the user has verified the email
      *
      * @param  \Illuminate\Http\Request  $request
