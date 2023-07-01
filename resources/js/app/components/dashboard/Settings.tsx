@@ -227,7 +227,7 @@ const Settings = (props: SettingsProps) => {
                     <div className='flex flex-col mb-6'>
                         <form method="post" onSubmit={(e) => sendPhotos(e)}>
                             <span className='block'>
-                                <label className='flex flex-col flex-wrap items-start'>
+                                <label className='flex flex-col flex-wrap items-start h-36 w-36'>
                                     <input type="file" name="image" id="image" className='hidden' onChange={handleFileChange} />
                                     <img className='rounded-lg h-36 w-36 cursor-pointer' src={!photo ? "./default-user/user.png" : photo.replace('public/user/image/', 'storage/user/image/')} alt="#" />
                                 </label>

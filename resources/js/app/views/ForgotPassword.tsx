@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import api from '../services/connection_manager';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const ForgetPassword = () => {
     const [email, setEmail] = useState<string>("");
+    const navigate = useNavigate()
 
     const resetLink = async (e: any) => {
         e.preventDefault()
@@ -11,7 +14,18 @@ const ForgetPassword = () => {
         }
         try {
             const response = await api.passwordResetLink(data)
-            console.log("Response:", response);
+            if (response.data.success) {
+                toast.success("Reset link della password creato correttamente, controlla la tua email!", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 3000,
+                });
+                navigate('/')
+            } else {
+                toast.error("Reset link della password non creato, controlla che l'email sia giusta!", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 3000,
+                });
+            }
         } catch (e) {
             console.log("Error reset link:", e);
         }

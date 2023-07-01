@@ -36,7 +36,7 @@ Route::middleware('guest')->group(function () {
 });
 
 /**
- * email verification
+ *  Email verification
  */
 Route::get('/verify-email/{id}/{hash}', [VerifyEmailController::class, 'verifyEmail'])
     ->middleware('signed')
@@ -49,15 +49,15 @@ Route::post('/email/verify/resend', [VerifyEmailController::class, 'resendEmail'
 
 Route::post('email/verification', [VerifyEmailController::class, 'check'])->middleware('auth:sanctum');
 
-//
+// To reset passwords
 Route::middleware('guest')->group(function () {
     Route::post('/forgot-password', [PasswordResetLinkController::class, 'sendResetLinkEmail']);
 
     Route::get('/reset-password/{token}', [NewPasswordController::class, 'create'])
         ->name('password.reset');
 
-    // Route::post('/reset-password', [NewPasswordController::class, 'store'])
-    //     ->name('password.update');
+    Route::post('/reset-password', [NewPasswordController::class, 'store'])
+        ->name('password.update');
 });
 
 /**
