@@ -1,6 +1,5 @@
 import tt from '@tomtom-international/web-sdk-maps';
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
 import { HouseSmallCard } from '../components';
 import api from '../services/connection_manager';
 import { House, Photos } from '../services/interfaces';
@@ -17,7 +16,6 @@ const Homes = () => {
     const [region, setRegion] = useState<string>("");
     const [city, setCity] = useState<string>("");
     const [address, setAddress] = useState<string>("");
-    const [isPressed, setIsPressed] = useState<boolean>(false);
     const [mapLongitude, setMapLongitude] = useState<number>(12.92935);
     const [mapLatitude, setMapLatitude] = useState<number>(42.37644);
     const [mapZoom, setMapZoom] = useState<number>(4);
@@ -50,7 +48,6 @@ const Homes = () => {
 
     const searchHomes = (e: any) => {
         e.preventDefault();
-
         let filtered = houses.filter(el => {
             if (city && address && region) {
                 if (el.city.trim().toLowerCase().slice(0, city.length).includes(city.trim().toLowerCase()) &&
@@ -92,10 +89,9 @@ const Homes = () => {
         // set the housesFiltered array
         setHousesFiltered(filtered)
 
-        console.log("search homes");
-        console.log("city", city);
-        console.log("address", address);
-        console.log("region", region);
+        // console.log("city", city);
+        // console.log("address", address);
+        // console.log("region", region);
 
         setCity("")
         setAddress("")
@@ -139,13 +135,13 @@ const Homes = () => {
                 <div className="container m-auto px-6 text-gray-600 md:px-12 xl:px-6">
                     <div className="mb-6 space-y-2 flex justify-center items-center">
                         {/* search bar */}
-                        <form onSubmit={e => searchHomes(e)}>
+                        <form onSubmit={e => searchHomes(e)} method='POST'>
                             <div className="flex flex-row justify-center items-center">
-                                <select onClick={() => setIsPressed(true)} className='flex-shrink-0 inline-flex items-center py-2.5 px-7 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600'>
-                                    <option value={""} onClick={() => setRegion("")} className="font-bold" >REGIONI</option>
+                                <select name='regions' value={region} onChange={(e) => setRegion(e.target.value)} className='flex-shrink-0 inline-flex items-center py-2.5 px-7 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600'>
+                                    <option value={""} className="font-bold" >REGIONI</option>
                                     {
                                         REGIONS.map(region => {
-                                            return <option key={region} onClick={() => setRegion(region)} value={region}>{region}</option>
+                                            return <option key={region} value={region}>{region}</option>
                                         })
 
                                     }
