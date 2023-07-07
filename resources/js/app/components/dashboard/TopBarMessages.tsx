@@ -11,7 +11,7 @@ const TopBarMessages = (props: TopBarMessagesProps) => {
     const messagesSelector = useAppSelector(state => state.messages)
     return (
         <div className='mt-4 mx-4'>
-            <div className='bg-white h-12 rounded-md flex flex-wrap justify-between'>
+            <div className='bg-[#29303d] text-white h-12 rounded-md flex flex-wrap justify-between'>
                 <div className='flex items-center w-1/2'>
                     <button className='mx-4' onClick={update}>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">

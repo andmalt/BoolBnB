@@ -100,7 +100,7 @@ const Profile = (props: ProfileProps) => {
     return (
         <div className='flex flex-col justify-start items-center'>
             <div className='mb-6 md:w-[90%] lg:w-[75%]'>
-                <div className="bg-white p-3 shadow-sm rounded-sm">
+                <div className=" bg-[#29303d] p-3 shadow-sm rounded-sm">
                     <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
                         <span className="text-green-500">
                             <svg className="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -109,9 +109,9 @@ const Profile = (props: ProfileProps) => {
                                     d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                             </svg>
                         </span>
-                        <span className="tracking-wide">Profilo</span>
+                        <span className="tracking-wide text-white">Profilo</span>
                     </div>
-                    <div className="text-gray-700">
+                    <div className=" text-white">
                         <div className="flex flex-col justify-start items-start text-sm">
                             <div className="text-center my-4 flex md:ml-[15%]">
                                 <img className="h-40 w-40 rounded-full border-4 border-white mx-auto my-2" src={!photo ? "./default-user/user.png" : photo.replace('public/user/image/', 'storage/user/image/')} alt="my photo" />
@@ -128,12 +128,12 @@ const Profile = (props: ProfileProps) => {
                                 <div className="px-4 py-2 font-bold">Email</div>
                                 <div className="px-4 py-2">
                                     {/* <a className="text-blue-800" href="mailto:jane@example.com">jane@example.com</a> */}
-                                    <a className="text-blue-800 italic" >{email}</a>
+                                    <a className="text-[#6366f1] italic" >{email}</a>
                                 </div>
                             </div>
                         </div>
                         <ul
-                            className="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
+                            className="bg-[#1d2432] text-white py-2 px-3 mt-3 divide-y rounded shadow-sm">
                             <li className="flex items-center py-3">
                                 <span>Stato</span>
                                 <span className="ml-auto"><span

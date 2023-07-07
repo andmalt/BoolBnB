@@ -5,18 +5,18 @@ const Footer = () => {
     return (
         <div id='footer-container'>
             <div className=" bg-[#0a121e] pt-3">
-                <div className="max-w-2xl mx-auto text-white py-4">
+                <div className="max-w-2xl mx-auto text-white py-4 pl-12 md:pl-0">
                     <div className="text-center">
                         <h3 className="text-3xl mb-4"> Scarica la nostra app</h3>
-                        <div className="flex justify-center my-3 text-[#9ca3af]">
-                            <div onClick={() => alert("premuto Google play Store")} className="flex cursor-pointer items-center border border-[#29303d] w-auto rounded-lg px-4 py-2 mx-2">
+                        <div className="flex flex-wrap justify-center my-3 text-[#9ca3af]">
+                            <div onClick={() => alert("premuto Google play Store")} className="mb-4 sm:mb-0 flex cursor-pointer items-center border border-[#29303d] w-auto rounded-lg px-4 py-2 mx-2">
                                 <img src="https://cdn-icons-png.flaticon.com/512/888/888857.png" className="w-7 md:w-8" />
                                 <div className="text-left ml-3">
                                     <p className='text-xs'>Scarica su </p>
                                     <p className="text-sm md:text-base"> Google Play Store </p>
                                 </div>
                             </div>
-                            <div onClick={() => alert("premuto Apple Store")} className="flex cursor-pointer items-center border border-[#29303d] w-auto rounded-lg px-4 py-2 mx-2">
+                            <div onClick={() => alert("premuto Apple Store")} className="mb-4 sm:mb-0 flex cursor-pointer items-center border border-[#29303d] w-auto rounded-lg px-4 py-2 mx-2">
                                 <img src="https://cdn-icons-png.flaticon.com/512/888/888841.png" className="w-7 md:w-8" />
                                 <div className="text-left ml-3">
                                     <p className='text-xs'>Scarica su </p>

@@ -44,7 +44,7 @@ const Sidebar = (props: SidebarProps) => {
                 <ul className="flex flex-col py-4 space-y-1">
                     <li className="px-5 hidden md:block">
                         <div className="flex flex-row items-center h-8">
-                            <div className="text-sm tracking-wide text-blue-800 font-bold uppercase">My Dashboard</div>
+                            <div className="text-sm tracking-wide text-[#6366f1] font-bold uppercase">My Dashboard</div>
                         </div>
                     </li>
                     <li>
@@ -82,7 +82,7 @@ const Sidebar = (props: SidebarProps) => {
                     </li>
                     <li className="px-5 hidden md:block">
                         <div className="flex flex-row items-center mt-5 h-8">
-                            <div className="text-sm tracking-wide text-blue-800 font-bold uppercase">Impostazioni</div>
+                            <div className="text-sm tracking-wide text-[#6366f1] font-bold uppercase">Impostazioni</div>
                         </div>
                     </li>
                     <li>
