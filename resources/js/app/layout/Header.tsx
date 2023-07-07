@@ -36,7 +36,7 @@ const Header = () => {
       <nav className="p-6">
         <div className="flex justify-between items-center">
           <Link to={'/'}>
-            <h1 className="pr-6 text-2xl font-bold text-blue-800">BoolBnB</h1>
+            <h1 className="pr-6 text-2xl font-bold text-[#6366f1]">BoolBnB</h1>
           </Link>
           <div className="flex justify-end flex-grow">
             <div className="flex space-x-6">
@@ -45,7 +45,7 @@ const Header = () => {
                   <>
                     <Menu as="div" className="relative inline-block text-left">
                       <div>
-                        <Menu.Button className="font-bold inline-flex w-full justify-center rounded-md border border-[rgba(0,0,0,0)] bg-black px-4 py-2 text-sm text-blue-800 shadow-sm hover:border-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-800 focus:ring-offset-2 focus:ring-offset-blue-800">
+                        <Menu.Button className="font-bold inline-flex w-full justify-center rounded-md border border-[rgba(0,0,0,0)] bg-[#29303d] px-4 py-2 text-sm text-[#9ca3af] shadow-sm hover:border-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#9ca3af] focus:ring-offset-2 focus:ring-offset-[#9ca3af]">
                           Menu
                           <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
                         </Menu.Button>
@@ -60,14 +60,14 @@ const Header = () => {
                         leaveFrom="transform opacity-100 scale-100"
                         leaveTo="transform opacity-0 scale-95"
                       >
-                        <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-black shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-[#29303d] shadow-lg ring-1 ring-[#29303d] ring-opacity-5 focus:outline-none">
                           <div className="py-1">
                             <Menu.Item>
                               {({ active }) => (
                                 <Link
                                   to={"/dashboard"}
                                   className={classNames(
-                                    active ? 'bg-blue-800 text-white' : 'text-blue-800',
+                                    active ? 'bg-[#6366f1] text-white' : 'text-[#9ca3af]',
                                     'block px-4 py-2 text-sm'
                                   )}
                                 >
@@ -75,7 +75,7 @@ const Header = () => {
                                 </Link>
                               )}
                             </Menu.Item>
-                            <Menu.Item>
+                            {/* <Menu.Item>
                               {({ active }) => (
                                 <a
                                   href="#"
@@ -87,14 +87,14 @@ const Header = () => {
                                   Support
                                 </a>
                               )}
-                            </Menu.Item>
+                            </Menu.Item> */}
                             <form method="POST" onSubmit={(e) => setLogout(e)}>
                               <Menu.Item>
                                 {({ active }) => (
                                   <button
                                     type="submit"
                                     className={classNames(
-                                      active ? 'bg-blue-800 text-white' : 'text-blue-800',
+                                      active ? 'bg-[#6366f1] text-white' : 'text-[#9ca3af]',
                                       'block w-full px-4 py-2 text-left text-sm'
                                     )}
                                   >

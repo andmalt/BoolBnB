@@ -231,7 +231,7 @@ const Settings = (props: SettingsProps) => {
                                     <input type="file" name="image" id="image" className='hidden' onChange={handleFileChange} />
                                     <img className='rounded-lg h-36 w-36 cursor-pointer' src={!photo ? "./default-user/user.png" : photo.replace('public/user/image/', 'storage/user/image/')} alt="#" />
                                 </label>
-                                <button className='rounded-lg py-2 px-4 my-1 bg-[rgb(41,48,61)] hover:bg-[rgb(51,58,71)]'>
+                                <button type="submit" className='rounded-lg py-2 px-4 my-1 bg-[rgb(41,48,61)] hover:bg-[rgb(51,58,71)]'>
                                     Salva immagine
                                 </button>
                             </span>
