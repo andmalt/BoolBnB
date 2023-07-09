@@ -221,7 +221,8 @@ const Settings = (props: SettingsProps) => {
             <div className='flex flex-row flex-wrap border-b-2 border-[rgb(41,48,61)] py-16'>
                 <div className='flex flex-col p-4 md:w-1/3'>
                     <h4 className='font-bold text-xl mb-2'>Informazioni Personali</h4>
-                    <p className='text-[#9ca3af]'>Usa un indirizzo valido dove poter ricevere le email.</p>
+                    <p className='text-[#9ca3af]'>Usa un indirizzo valido dove poter ricevere le email.</p >
+                    <p className='text-[#9ca3af]'>Per sostituire la foto premi su di essa e poi premi "Salva immagine".</p >
                 </div>
                 <div className='md:px-4 flex flex-col md:w-2/3'>
                     <div className='flex flex-col mb-6'>

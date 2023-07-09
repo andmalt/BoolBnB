@@ -93,7 +93,7 @@ const MyHomes = () => {
     return (
         <div>
             <div className='p-3'>
-                <button className='bg-blue-700 rounded-md hover:bg-blue-800 px-4 py-2' onClick={() => createHome()}>Inserisci una casa</button>
+                <button className='bg-[#6366f1] hover:bg-[#6365f1b3] rounded-md text-white px-6 py-2' onClick={() => createHome()}>Crea una casa</button>
             </div>
             <Table houses={myHouses} paginate={paginate} deleteHome={deleteHome} isStatistics={false} />
         </div>

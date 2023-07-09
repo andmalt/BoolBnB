@@ -43,7 +43,7 @@ const MessagesTable = (props: MessageTableProps) => {
                                         }
 
                                         return (
-                                            <tr key={`${message.id}-${i}`} className={" hover:bg-[#1d2432] hover:text-white text-gray-700 " + isRead(message.is_read)}>
+                                            <tr key={`${message.id}-${i}`} className={" hover:bg-[#1d243240] hover:text-white text-gray-700 " + isRead(message.is_read)}>
                                                 <td onClick={!messagesSelector.isTrashedMessages ? () => getMyMessage(message.id) : () => { }} className="px-4 py-3 cursor-pointer ">
                                                     <div className="flex items-center text-sm overflow-hidden">
                                                         <div>
@@ -91,7 +91,7 @@ const MessagesTable = (props: MessageTableProps) => {
                                         )
                                     })
                                     :
-                                    <tr className="bg-[#29303d] text-white hover:bg-gray-100">
+                                    <tr className="bg-[#29303d] text-white">
                                         <td className="px-4 py-3">
                                             <div className="flex items-center text-sm">
                                                 <div>

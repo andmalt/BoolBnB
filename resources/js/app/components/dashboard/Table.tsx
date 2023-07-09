@@ -34,7 +34,7 @@ const Table = (props: TableProps) => {
                 <div className="w-full overflow-x-auto">
                     <table className="w-full">
                         <thead>
-                            <tr className="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                            <tr className="text-xs font-semibold tracking-wide text-left text-white uppercase border-b bg-[#29303d]">
                                 <th className="px-4 py-3">Casa</th>
                                 {
                                     !isStatistics ?
@@ -53,7 +53,7 @@ const Table = (props: TableProps) => {
                                 }
                             </tr>
                         </thead>
-                        <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                        <tbody className="bg-[#9ca3af]">
                             {
                                 houses?.data.length != 0 && houses?.data != undefined ?
                                     houses?.data.map((house, i) => {
@@ -68,7 +68,7 @@ const Table = (props: TableProps) => {
                                             }
                                         })
                                         return (
-                                            <tr key={`${house.title}-${i}`} className="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
+                                            <tr key={`${house.title}-${i}`} className="hover:bg-[#1d243240] hover:text-white text-gray-700 bg-[#a9b0bc] ">
                                                 <td className="px-4 py-3">
                                                     {
                                                         !isStatistics ?
@@ -81,7 +81,7 @@ const Table = (props: TableProps) => {
                                                                     </div>
                                                                     <div >
                                                                         <p className="font-semibold ">{house.title}</p>
-                                                                        <p className="text-xs text-gray-600 dark:text-gray-400">{house.city}</p>
+                                                                        <p className="text-x">{house.city}</p>
                                                                     </div>
                                                                 </div>
                                                             </>
@@ -94,7 +94,7 @@ const Table = (props: TableProps) => {
                                                                 </div>
                                                                 <div >
                                                                     <p className="font-semibold">{house.title}</p>
-                                                                    <p className="text-xs text-gray-600 dark:text-gray-400 ">{house.city}</p>
+                                                                    <p className="text-x">{house.city}</p>
                                                                 </div>
                                                             </div>
                                                     }
@@ -125,7 +125,7 @@ const Table = (props: TableProps) => {
                                         )
                                     })
                                     :
-                                    <tr className="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
+                                    <tr className="bg-[#29303d] text-white ">
                                         <td className="px-4 py-3">
                                             <div className="flex items-center text-sm">
                                                 <div>
@@ -141,7 +141,7 @@ const Table = (props: TableProps) => {
                         </tbody>
                     </table>
                 </div>
-                <div className="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
+                <div className="grid px-4 py-3 text-xs font-semibold tracking-wide uppercase border-t  bg-[#29303d] text-white sm:grid-cols-9">
                     <span className="flex items-center col-span-3"> Pagina {houses ? houses?.current_page : "0"} di {houses ? houses?.last_page : "0"}</span>
                     <span className="col-span-2"></span>
                     {/* <!-- Pagination --> */}
