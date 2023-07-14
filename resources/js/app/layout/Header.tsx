@@ -110,11 +110,11 @@ const Header = () => {
                   </>
                   :
                   <>
-                    <Link to="/register" className="text-blue-800 hover:text-blue-600 
+                    <Link to="/register" className="text-[#6366f1] hover:text-[#6365f1f1]
                       transition ease-in-out delay-150 hover:-translate-y-1 font-bold">
                       Registrati
                     </Link>
-                    <Link to="/login" className="text-blue-800 hover:text-blue-600 
+                    <Link to="/login" className="text-[#6366f1] hover:text-[#6366f1f1] 
                       transition ease-in-out delay-150 hover:-translate-y-1 font-bold">
                       Accedi
                     </Link>

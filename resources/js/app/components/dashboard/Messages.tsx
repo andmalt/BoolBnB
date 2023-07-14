@@ -53,7 +53,9 @@ const Messages = () => {
 
     const closeModal = async () => {
         await getMyMessages()
+        await getMyMessagesCount()
         setModalIsOpen(false)
+
     }
 
     const getMyMessage = async (id: number) => {

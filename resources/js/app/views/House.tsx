@@ -9,12 +9,7 @@ import "../../../css/houseMap.css"
 import tt from '@tomtom-international/web-sdk-maps';
 import { House, Photos } from '../services/interfaces';
 
-interface HouseProps {
-
-}
-
-const HouseView = (props: HouseProps) => {
-    const { } = props;
+const HouseView = () => {
     const params = useParams();
     const houseId = params.houseId;
     const [home, setHome] = useState<House | null>(null);
@@ -115,16 +110,16 @@ const HouseView = (props: HouseProps) => {
         <div className='h-full w-full flex flex-col flex-wrap items-center sm:px-10 py-10'>
             <div className='w-full py-3'>
                 <Link to={"/homes"}>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-blue-800 font-bold">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-8 h-8 text-[#6366f1] hover:text-[#6365f1d1] font-bold">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
                     </svg>
                 </Link>
             </div>
-            <div className='bg-gradient-to-br from-blue-800 to-[rgb(20,20,20)] rounded-lg p-3 mb-20'>
+            <div className='bg-[#6366f1] rounded-lg py-6 px-12 mb-20'>
                 <h1 className="text-white font-bold text-lg md:text-4xl">{home?.title}</h1>
             </div>
             <div className='flex flex-row flex-wrap justify-center items-start mb-10'>
-                <div className="h-[250px] w-[350px] md:h-[400px] md:w-[500px] p-5 bg-gradient-to-br from-blue-800 to-[rgb(20,20,20)] rounded-lg mb-5 lg:mb-0">
+                <div className="h-[250px] w-[350px] md:h-[400px] md:w-[500px] lg:h-[500px] lg:w-[600px] p-2 bg-[#6366f1] rounded-lg mb-5 lg:mb-0">
                     <div className="overflow-hidden relative h-full">
                         {/* Item */}
                         {/* fixed photos */}
@@ -152,13 +147,13 @@ const HouseView = (props: HouseProps) => {
                                 <span className="hidden">Next</span>
                             </span>
                         </button>
-                        <div className="absolute right-0 bottom-0 md:bottom-2 w-14 h-7 bg-slate-600 flex justify-center items-center">
+                        <div className="absolute right-0 bottom-0 md:bottom-2 lg:bottom-4 w-14 h-7 bg-slate-600 flex justify-center items-center">
                             <p className="text-white">{numberPhoto}/{lengthPhotos}</p>
                         </div>
                     </div>
                 </div>
                 <div className='flex flex-col'>
-                    <div className='bg-gradient-to-br from-blue-800 to-[rgb(20,20,20)] rounded-lg p-3 sm:ml-5 text-white ml-0 mb-5'>
+                    <div className='bg-[#6366f1] rounded-lg p-6 sm:ml-5 text-white ml-0 mb-5'>
                         <h5 className='font-bold mb-3 uppercase'>Caratteristiche Immobile</h5>
                         <ul>
                             <li>Metri quadri: {home?.square}</li>
@@ -167,18 +162,18 @@ const HouseView = (props: HouseProps) => {
                             <li>Letto/i: {home?.beds}</li>
                         </ul>
                     </div>
-                    <div className='bg-gradient-to-br from-blue-800 to-[rgb(20,20,20)] rounded-lg p-3 sm:ml-5 text-white ml-0 flex flex-row justify-start items-center'>
+                    <div className='bg-[#6366f1] rounded-lg px-6 py-3 sm:ml-5 text-white ml-0 flex flex-row justify-start items-center'>
                         <h4 className='font-bold uppercase align-middle'>Prezzo &euro;{home?.price} <span className='normal-case italic'>per notte</span></h4>
                     </div>
                 </div>
             </div>
             <div className='flex flex-col flex-wrap w-full items-center'>
-                <div className='bg-gradient-to-br from-blue-800 to-[rgb(20,20,20)] rounded-lg p-3 w-[80%] text-white mb-4'>
+                <div className='bg-[#6366f1] rounded-lg p-6 w-[80%] text-white mb-4'>
                     <h3 className='mb-3 font-bold uppercase'>{home?.city}</h3>
                     <h4 className='italic'>{home?.region}</h4>
                     <h4 className='italic'>{home?.address}</h4>
                 </div>
-                <div className='bg-gradient-to-br from-blue-800 to-[rgb(20,20,20)] rounded-lg p-3 w-[80%] text-white'>
+                <div className='bg-[#6366f1] rounded-lg p-6 w-[80%] text-white'>
                     <p>{home?.description}</p>
                 </div>
             </div>

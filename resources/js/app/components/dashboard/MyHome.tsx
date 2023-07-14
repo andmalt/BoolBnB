@@ -103,12 +103,12 @@ const MyHome = () => {
 
 
     return (
-        <div>
-            <div className='bg-gradient-to-br from-blue-800 to-[rgb(20,20,20)] rounded-lg p-3 mb-20'>
+        <div className='flex flex-col flex-wrap items-center'>
+            <div className='bg-[#6366f1] rounded-lg py-6 px-12 mb-20'>
                 <h1 className="text-white font-bold text-lg md:text-4xl">{home?.title}</h1>
             </div>
             <div className='flex flex-row flex-wrap justify-center items-start mb-10'>
-                <div className="h-[250px] w-[350px] md:h-[400px] md:w-[500px] p-5 bg-gradient-to-br from-blue-800 to-[rgb(20,20,20)] rounded-lg mb-5 lg:mb-0">
+                <div className="h-[250px] w-[350px] md:h-[400px] md:w-[500px] lg:h-[500px] lg:w-[600px] p-2 bg-[#6366f1] rounded-lg mb-5 lg:mb-0">
                     <div className="overflow-hidden relative h-full">
                         {/* Item */}
                         {/* fixed photos */}
@@ -142,7 +142,7 @@ const MyHome = () => {
                     </div>
                 </div>
                 <div className='flex flex-col'>
-                    <div className='bg-gradient-to-br from-blue-800 to-[rgb(20,20,20)] rounded-lg p-3 sm:ml-5 text-white ml-0 mb-5'>
+                    <div className='bg-[#6366f1] rounded-lg p-6 sm:ml-5 text-white ml-0 mb-5'>
                         <h5 className='font-bold mb-3 uppercase'>Caratteristiche Immobile</h5>
                         <ul>
                             <li>Metri quadri: {home?.square}</li>
@@ -151,22 +151,24 @@ const MyHome = () => {
                             <li>Letto/i: {home?.beds}</li>
                         </ul>
                     </div>
-                    <div className='bg-gradient-to-br from-blue-800 to-[rgb(20,20,20)] rounded-lg p-3 sm:ml-5 text-white ml-0 flex flex-row justify-start items-center'>
+                    <div className='bg-[#6366f1] rounded-lg px-6 py-3 sm:ml-5 text-white ml-0 flex flex-row justify-start items-center'>
                         <h4 className='font-bold uppercase align-middle'>Prezzo &euro;{home?.price} <span className='normal-case italic'>per notte</span></h4>
                     </div>
                 </div>
             </div>
             <div className='flex flex-col flex-wrap w-full items-center'>
-                <div className='bg-gradient-to-br from-blue-800 to-[rgb(20,20,20)] rounded-lg p-3 w-[80%] text-white mb-4'>
+                <div className='bg-[#6366f1] rounded-lg p-6 w-[80%] text-white mb-4'>
                     <h3 className='mb-3 font-bold uppercase'>{home?.city}</h3>
                     <h4 className='italic'>{home?.region}</h4>
                     <h4 className='italic'>{home?.address}</h4>
                 </div>
-                <div className='bg-gradient-to-br from-blue-800 to-[rgb(20,20,20)] rounded-lg p-3 w-[80%] text-white'>
+                <div className='bg-[#6366f1] rounded-lg p-6 w-[80%] text-white'>
                     <p>{home?.description}</p>
                 </div>
                 {/* map component */}
-                <div ref={mapElement} className="mapDiv"></div>
+                <div className='my-16'>
+                    <div ref={mapElement} className="mapDiv"></div>
+                </div>
             </div>
         </div>
     )

@@ -3,6 +3,7 @@ import api from '../../services/connection_manager';
 import { clear, error, loading } from '../../store/authSlice';
 import { useAppDispatch } from '../../store/hooks';
 import DialogModal from '../DialogModal'
+import { toast } from 'react-toastify';
 
 interface FormProps {
     houseId?: number,
@@ -29,33 +30,42 @@ const Form = (props: FormProps) => {
         try {
             const response = await api.guestSendEmail(name, surname, email, message, houseId);
             if (response.data.success) {
-                console.log("message send");
+                toast.success("Il messaggio è stato inviato con successo!", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 3000,
+                });
                 setName("")
                 setSurname("")
                 setEmail("")
                 setMessage("")
-                dispatch(clear())
             } else {
+                toast.error("Il messaggio non è stato inviato!", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 3000,
+                });
                 setErrors(response.data.error.message.response.data.errors.message_content)
                 setIsOpenModal(true)
-                console.log("message not send", response);
-                dispatch(clear())
+                // console.log("message not send", response);
             }
+            dispatch(clear())
         } catch (e) {
             console.log("error email send:", e);
-            // dispatch(error())
+            toast.error("Il messaggio non è stato inviato!", {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 3000,
+            });
+            dispatch(error())
             setIsOpenModal(true)
-            dispatch(clear())
+            // dispatch(clear())
         }
-        // remeber to added here popup for send message
     }
 
     return (
         <div className="mt-8 mx-4">
             <div className="grid grid-cols-1 md:grid-cols-2">
                 <DialogModal errors={errors} setOpenModal={() => setIsOpenModal(false)} openModal={isOpenModal} type={type} />
-                <div className="p-6 mr-2 bg-gradient-to-br from-blue-800 to-[rgb(20,20,20)] sm:rounded-lg">
-                    <h1 className="text-4xl sm:text-5xl text-white font-extrabold tracking-tight">Contattaci</h1>
+                <div className="p-10 mr-2 bg-[#6366f1] sm:rounded-lg">
+                    <h1 className="text-4xl sm:text-5xl text-white font-extrabold tracking-tight mb-8">Contattaci</h1>
                     <p className="text-normal text-lg sm:text-2xl font-medium text-white mt-2">Compila il form per sottoporre qualsiasi richiesta {houseId ? "al proprietario della casa." : null}</p>
                     {
                         houseId !== undefined ?
@@ -87,28 +97,28 @@ const Form = (props: FormProps) => {
                     }
 
                 </div>
-                <form className="p-6 flex flex-col justify-center" onSubmit={sendMessage}>
+                <form className="p-6 flex flex-col justify-center placeholder:text-[#9ca3af]" onSubmit={sendMessage}>
                     <div className="flex flex-col">
                         <label htmlFor='name' className="hidden">Name</label>
-                        <input type="text" value={name} onChange={(e) => setName(e.target.value)} id="name" placeholder="Nome" className="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 dark:text-gray-50 font-semibold focus:border-blue-500 focus:outline-none" />
+                        <input type="text" value={name} onChange={(e) => setName(e.target.value)} id="name" placeholder="Nome" className="w-100 mt-2 py-3 px-3 rounded-lg bg-[#1d2432]  border border-gray-400 text-white  font-semibold focus:border-[#6366f1] focus:outline-none" />
                     </div>
 
                     <div className="flex flex-col mt-2">
                         <label htmlFor='surname' className="hidden">Surname</label>
-                        <input type="text" value={surname} onChange={(e) => setSurname(e.target.value)} id="surname" placeholder="Cognome" className="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 dark:text-gray-50 font-semibold focus:border-blue-500 focus:outline-none" />
+                        <input type="text" value={surname} onChange={(e) => setSurname(e.target.value)} id="surname" placeholder="Cognome" className="w-100 mt-2 py-3 px-3 rounded-lg bg-[#1d2432]  border border-gray-400  text-white  font-semibold focus:border-[#6366f1] focus:outline-none" />
                     </div>
 
                     <div className="flex flex-col mt-2">
                         <label htmlFor="email" className="hidden">Email</label>
-                        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} id="email" placeholder="Email" className="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 dark:text-gray-50 font-semibold focus:border-blue-500 focus:outline-none" />
+                        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} id="email" placeholder="Email" className="w-100 mt-2 py-3 px-3 rounded-lg bg-[#1d2432]  border border-gray-400  text-white  font-semibold focus:border-[#6366f1] focus:outline-none" />
                     </div>
 
                     <div className="flex flex-col mt-2">
                         <label htmlFor="message" className="hidden">Message</label>
-                        <textarea value={message} onChange={(e) => setMessage(e.target.value)} id="message" placeholder="Messaggio" className="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 dark:text-gray-50 font-semibold focus:border-blue-500 focus:outline-none" />
+                        <textarea value={message} onChange={(e) => setMessage(e.target.value)} id="message" placeholder="Messaggio" className="w-100 mt-2 py-3 px-3 rounded-lg bg-[#1d2432] border border-gray-400 text-white  font-semibold focus:border-[#6366f1] focus:outline-none" />
                     </div>
 
-                    <button type="submit" className="md:w-32 bg-blue-600 dark:bg-gray-100 text-white dark:text-gray-800 font-bold py-3 px-6 rounded-lg mt-4 hover:bg-blue-500 dark:hover:bg-gray-200 transition ease-in-out duration-300">Submit</button>
+                    <button type="submit" className="md:w-32 bg-[#6366f1]  text-white font-bold py-3 px-6 rounded-lg mt-4 hover:bg-[#6365f1d4] transition ease-in-out duration-300">Invia</button>
                 </form>
             </div>
         </div>

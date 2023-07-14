@@ -249,9 +249,15 @@ const Statistics = () => {
 
                 <div className='grid grid-cols-1 p-4 gap-4 my-6'>
                     {/* Chart */}
-                    <Line options={options} data={data} />
-                    <Line options={options} data={data2} />
-                    <Line options={options} data={data3} />
+                    <div className='bg-[#1d2432] p-6'>
+                        <Line options={options} data={data} />
+                    </div>
+                    <div className='bg-[#1d2432] p-6'>
+                        <Line options={options} data={data2} />
+                    </div>
+                    <div className='bg-[#1d2432] p-6'>
+                        <Line options={options} data={data3} />
+                    </div>
                 </div>
             </div>
         </div>

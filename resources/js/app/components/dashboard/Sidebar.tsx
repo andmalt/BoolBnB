@@ -34,7 +34,7 @@ const Sidebar = (props: SidebarProps) => {
     }
 
     return (
-        <div className="flex flex-col left-0 md:top-0 w-14 hover:w-52 md:w-48 bg-[#0a121e] border-[#29303d] text-white transition-all duration-300 rounded-r-md h-[100vh] fixed z-20">
+        <div className="flex flex-col left-0 md:top-0 w-14 hover:w-40 hover:md:w-52 md:w-48 xl:w-60 xl:hover:w-[282px] 2xl:w-80 2xl:hover:w-96 bg-[#0a121e] border-[#29303d] text-white transition-all duration-300 rounded-r-md h-[100vh] fixed z-20">
             <div className='overflow-hidden md:block hidden py-10 px-6'>
                 <Link to={'/'}>
                     <h1 className="pr-6 text-2xl font-bold text-[#6366f1]">BoolBnB</h1>

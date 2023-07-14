@@ -20,7 +20,7 @@ const Main = () => {
                             ovunque.
                         </h1>
                         <p className="text-lg inline-block sm:block text-[#9ca3af]">Cerca casa selezionando la città o la regione di cui sei interessato.</p>
-                        <button onClick={() => goToHomes()} className="transition ease-out delay-150 hover:-translate-y-2 mt-8 px-10 py-2 bg-[#29303d] text-white active:bg-[#6366f1]">Cerca casa</button>
+                        <button onClick={() => goToHomes()} className="transition ease-out delay-150 hover:-translate-y-2 mt-8 px-10 py-2 bg-[#29303d] hover:bg-[#29303dd4] text-white active:bg-[#6366f1]">Cerca casa</button>
                     </div>
                 </div>
             </div>

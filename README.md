@@ -4,4 +4,4 @@
     </h1>
 </p>
 
-Boolbnb is my final course project modification of [boolean.careers](https://boolean.careers/), using a frontend exclusively with TypeScript [React](https://react.dev/) with [Tailwind CSS](https://tailwindcss.com/) and a backend with [Laravel](https://laravel.com/) 8.
+Boolbnb is my modification in the final project of the [boolean.careers](https://boolean.careers/) course, using a frontend exclusively with TypeScript [React](https://react.dev/), [Tailwind CSS](https://tailwindcss.com/) and a backend with [Laravel](https://laravel.com/) 8.
