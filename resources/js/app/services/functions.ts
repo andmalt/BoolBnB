@@ -1,5 +1,6 @@
 import { AxiosResponse } from "axios"
 import { User } from "./interfaces"
+import { useState, useEffect } from "react";
 
 
 export const setLocalStorage = (response: AxiosResponse<any>) => {
@@ -133,4 +134,22 @@ export const getEmailVerification = () => {
 
 export const classNames = (...className: any) => {
     return className.filter(Boolean).join(' ');
-} 
+}
+
+export default function useDarkSide() {
+    const [theme, setTheme] = useState<any>(localStorage.theme);
+    const colorTheme = theme === "dark" ? "light" : "dark";
+
+    const changeTheme = (theme: string) => {
+        setTheme(theme)
+    }
+
+    useEffect(() => {
+        let root = window.document.documentElement;
+        root.classList.remove(colorTheme);
+        root.classList.add(theme);
+        localStorage.setItem('theme', theme);
+    }, [theme, colorTheme]);
+
+    return { colorTheme, changeTheme }
+}

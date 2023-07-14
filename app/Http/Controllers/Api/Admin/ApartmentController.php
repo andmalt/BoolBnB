@@ -228,8 +228,6 @@ class ApartmentController extends Controller
         $call = Http::get('https://api.tomtom.com/search/2/geocode/' . $data['region'] . '-' . $data['city'] . '-' . $address . '.JSON?key=CskONgb89uswo1PwlNDOtG4txMKrp1yQ');
 
         $response = json_decode($call);
-        // write condition here... if there isn't apartment
-
 
         // inserted in data the results lat,lon in the response 
         $data['lat'] = $response->results[0]->position->lat;

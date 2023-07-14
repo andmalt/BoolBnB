@@ -25,6 +25,7 @@ import Sponsorships from "./dashboard/Sponsorships"
 import SponsorshipCard from "./dashboard/SponsorshipCard"
 import Braintree from "./Braintree"
 import Xmark from "./dashboard/icons/Xmark"
+import Switcher from "./dashboard/Switcher"
 
 /**
  * application component
@@ -57,4 +58,5 @@ export {
     SponsorshipCard,
     Braintree,
     Xmark,
+    Switcher,
 }

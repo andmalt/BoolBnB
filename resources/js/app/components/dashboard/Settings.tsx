@@ -6,6 +6,7 @@ import api from '../../services/connection_manager';
 import { convertInputForm, deleteLocalStorage } from '../../services/functions';
 import { setIsEmailVerification } from '../../store/emailVerificationSlice';
 import { useNavigate } from 'react-router-dom';
+import { Switcher } from '..';
 
 interface SettingsProps {
 
@@ -216,7 +217,20 @@ const Settings = (props: SettingsProps) => {
     }, [])
 
     return (
-        <div className='text-white flex flex-col'>
+        <div className='text-white dark:text-black flex flex-col'>
+            <div className='px-10 py-6 flex flex-row justify-end'>
+                <div className='flex flex-col justify-center'>
+                    <div className='flex flex-row justify-between items-center py-4'>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+                        </svg>
+                    </div>
+                    <Switcher />
+                </div>
+            </div>
             {/* start Personal information */}
             <div className='flex flex-row flex-wrap border-b-2 border-[rgb(41,48,61)] py-16'>
                 <div className='flex flex-col p-4 md:w-1/3'>
@@ -232,7 +246,7 @@ const Settings = (props: SettingsProps) => {
                                     <input type="file" name="image" id="image" className='hidden' onChange={handleFileChange} />
                                     <img className='rounded-lg h-36 w-36 cursor-pointer' src={!photo ? "./default-user/user.png" : photo.replace('public/user/image/', 'storage/user/image/')} alt="#" />
                                 </label>
-                                <button type="submit" className='rounded-lg py-2 px-4 my-1 bg-[rgb(41,48,61)] hover:bg-[rgb(51,58,71)]'>
+                                <button type="submit" className='rounded-lg py-2 px-4 my-1 dark:bg-[rgba(41,48,61,0.66)] bg-[rgb(41,48,61)] hover:bg-[rgb(51,58,71)]'>
                                     Salva immagine
                                 </button>
                             </span>
