@@ -13,8 +13,8 @@ const Error = () => {
     }
 
     return (
-        <main id="error" className="h-screen w-full flex flex-col justify-center items-center bg-[#111827] absolute z-[11]">
-            <h1 className="text-9xl font-extrabold text-white tracking-widest">500</h1>
+        <main id="error" className="h-screen w-full flex flex-col justify-center items-center bg-slate-100 dark:bg-[#111827] absolute z-[11]">
+            <h1 className="text-9xl font-extrabold dark:text-white text-black tracking-widest">500</h1>
             <div className="bg-[#FF6A3D] px-2 text-sm rounded rotate-12 absolute">
                 Internal Server Error
             </div>

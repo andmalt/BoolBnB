@@ -9,6 +9,7 @@ import {
     error,
 } from '../store/authSlice';
 import { toast } from 'react-toastify';
+import { getRememberEmail, setRememberEmail } from '../services/functions';
 
 type Form = {
     email: string[],
@@ -16,10 +17,10 @@ type Form = {
 }
 
 const Login = () => {
-    const [isMounted, setIsMounted] = useState<boolean>(true);
     const [show, setShow] = useState<boolean>(true);
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const [isRemember, setIsRemember] = useState<boolean>(false);
     const [isError, setIsError] = useState<boolean>();
     const [errors, setErrors] = useState<Form>();
     const navigate = useNavigate();
@@ -28,6 +29,9 @@ const Login = () => {
     const setLogin = async (e: any) => {
         e.preventDefault()
         dispatch(loading());
+        if (isRemember) {
+            setRememberEmail(email)
+        }
         try {
             const response = await api.login(email, password);
             if (response.data.success) {
@@ -53,11 +57,19 @@ const Login = () => {
         }
     }
 
+    const handleOnChange = () => {
+        setIsRemember(!isRemember);
+    };
+
     useEffect(() => {
-        if (isMounted) {
-            // 
+        let isMount = true
+        if (isMount) {
+            const email = getRememberEmail()
+            if (email) {
+                setEmail(email)
+            }
         }
-        return () => setIsMounted(false);
+        return () => { isMount = false }
     }, []);
 
     return (
@@ -108,7 +120,7 @@ const Login = () => {
                                         </div>
                                         <div className="flex justify-between">
                                             <label className="block font-bold my-4">
-                                                <input type="checkbox" className="leading-loose text-[#6366f1]" />
+                                                <input type="checkbox" value={"remember"} checked={isRemember} onChange={handleOnChange} className="leading-loose text-[#6366f1]" />
                                                 <span className="py-2 text-sm text-gray-500 dark:text-[#9ca3afbd] leading-snug ml-3">
                                                     Ricordati
                                                 </span>

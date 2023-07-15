@@ -9,7 +9,7 @@ const token: string | null = data.token;
 const user: User | null = data.user;
 
 interface AuthState {
-    user:User | null
+    user: User | null
     token: string | null,
     isLoading: boolean,
     isError: boolean,
@@ -17,7 +17,7 @@ interface AuthState {
 }
 const initialState: AuthState = {
     user,
-    token: token,
+    token,
     isLoading: false,
     isError: false,
     isSuccess: false

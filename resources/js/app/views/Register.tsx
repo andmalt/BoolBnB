@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import api from '../services/connection_manager';
 import { authenticated, clear, error, loading } from '../store/authSlice';
 import { useAppDispatch } from '../store/hooks';
 import { toast } from 'react-toastify';
+import { getRememberEmail, setRememberEmail } from '../services/functions';
 
 type Form = {
     name: string[],
@@ -23,9 +24,15 @@ const Register = () => {
     const [show2, setShow2] = useState<boolean>(true);
     const [errors, setErrors] = useState<Form>();
     const [isError, setIsError] = useState<boolean>();
+    const [isRemember, setIsRemember] = useState<boolean>(false);
     const [noRegister, setNoRegister] = useState<boolean>(false);
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+
+
+    const handleOnChange = () => {
+        setIsRemember(!isRemember);
+    };
 
     const register = async (e: any) => {
         e.preventDefault()
@@ -35,6 +42,9 @@ const Register = () => {
             setNoRegister(true)
             dispatch(clear())
             return console.log("password errata");
+        }
+        if (isRemember) {
+            setRememberEmail(email)
         }
         setNoRegister(false)
         try {
@@ -152,7 +162,7 @@ const Register = () => {
                                         </div>
                                         <div className="flex justify-between">
                                             <label className="block font-bold my-4">
-                                                <input type="checkbox" className="leading-loose text-[#6366f1]" />
+                                                <input type="checkbox" value={"remember"} checked={isRemember} onChange={handleOnChange} className="leading-loose text-[#6366f1]" />
                                                 <span className="py-2 text-sm text-gray-500 dark:text-[#9ca3afbd] leading-snug ml-3">
                                                     Ricordati
                                                 </span>

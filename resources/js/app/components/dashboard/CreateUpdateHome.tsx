@@ -242,7 +242,7 @@ const CreateUpdateHome = () => {
                 </label>
 
                 <div className="block mt-5">
-                    <span className=" block text-sm font-bold]">
+                    <span className=" block text-sm after:content-['*'] after:ml-0.5 after:text-red-500">
                         Servizi
                     </span>
                     <div className="flex flex-row flex-auto flex-wrap">

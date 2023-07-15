@@ -2,12 +2,20 @@ import { AxiosResponse } from "axios"
 import { User } from "./interfaces"
 import { useState, useEffect } from "react";
 
+export const setRememberEmail = (response: string) => {
+    localStorage.setItem("email", response);
+}
+
+export const getRememberEmail = () => {
+    const response = localStorage.getItem("email");
+    return response;
+}
 
 export const setLocalStorage = (response: AxiosResponse<any>) => {
     if (response.data.token) {
         localStorage.setItem("token", response.data.token)
     }
-    localStorage.setItem("user", JSON.stringify(response.data.user))
+    // localStorage.setItem("user", JSON.stringify(response.data.user))
 }
 
 export const getLocalStorage = () => {

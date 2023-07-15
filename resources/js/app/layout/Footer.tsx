@@ -1,5 +1,6 @@
 import React from 'react'
 import "../../../css/footer.css"
+import { Switcher } from '../components';
 
 const Footer = () => {
     return (
@@ -25,9 +26,17 @@ const Footer = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="mt-20 flex flex-col md:flex-row md:justify-between items-center text-sm dark:text-[#9ca3af] text-black">
-                        <p className="order-2 md:order-1 mt-8 md:mt-0 "> &copy; Maltempi Andrea , 2022. </p>
-                        <div className="order-1 md:order-2">
+                    <div className="mt-6 flex flex-col md:flex-row md:justify-between items-center text-sm dark:text-[#9ca3af] text-black">
+                        <p className="order-3 md:order-1 mt-8 md:mt-0 "> &copy; Maltempi Andrea , 2022. </p>
+                        <div className='px-10 py-4 flex flex-row justify-end order-2'>
+                            <div className='flex flex-col justify-center'>
+                                <div className='flex flex-row justify-between items-center py-3'>
+                                    <p>Cambia tema</p>
+                                </div>
+                                <Switcher />
+                            </div>
+                        </div>
+                        <div className="order-1 md:order-3">
                             <span className="px-2">Chi siamo</span>
                             <span className="px-2 border-l">Contattaci</span>
                             <span className="px-2 border-l">Privacy</span>

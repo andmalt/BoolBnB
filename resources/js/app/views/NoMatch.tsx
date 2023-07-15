@@ -14,8 +14,8 @@ const NoMatch = () => {
     }
 
     return (
-        <main id="error" className="h-screen w-full flex flex-col justify-center items-center bg-[#1A2238]">
-            <h1 className="text-9xl font-extrabold text-white tracking-widest">404</h1>
+        <main id="error" className="h-screen w-full flex flex-col justify-center items-center bg-slate-100 dark:bg-[#111827]">
+            <h1 className="text-9xl font-extrabold dark:text-white text-black tracking-widest">404</h1>
             <div className="bg-[#FF6A3D] px-2 text-sm rounded rotate-12 absolute">
                 Page Not Found
             </div>
@@ -33,7 +33,7 @@ const NoMatch = () => {
                 </a>
             </button>
         </main>
-  )
+    )
 }
 
 export default NoMatch;
