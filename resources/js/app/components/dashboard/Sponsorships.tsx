@@ -97,22 +97,22 @@ const Sponsorships = () => {
 
     return (
         <div>
-            <div className='flex flex-col justify-center items-center mb-20'>
-                <h1 className='text-white uppercase text-2xl'>{home?.title}</h1>
+            <div className='flex flex-col justify-center items-center mb-20 dark:text-white text-black'>
+                <h1 className='uppercase text-2xl'>{home?.title}</h1>
                 <div className='flex'>
-                    <p className='text-white mr-1'>{home?.city},</p>
-                    <p className='text-white'>{home?.address}</p>
+                    <p className='mr-1'>{home?.city},</p>
+                    <p>{home?.address}</p>
                 </div>
             </div>
             <div>
                 {
                     sponsorship ?
                         <div>
-                            <p className='text-white'>La casa <span className='uppercase'>{home?.title}</span> è sponsorizzata con il livello <span className='uppercase'>{sponsorship.name}</span> e scadrà il {moment(sponsorship.pivot.end_date).format("DD/MM/YYYY HH:mm")} .</p>
+                            <p className='dark:text-white text-black'>La casa <span className='uppercase'>{home?.title}</span> è sponsorizzata con il livello <span className='uppercase'>{sponsorship.name}</span> e scadrà il {moment(sponsorship.pivot.end_date).format("DD/MM/YYYY HH:mm")} .</p>
                         </div>
                         :
                         <div className='flex flex-col justify-center items-center'>
-                            <h3 className='mb-10 text-white'>Scegli il tipo di sponsorizzazione per la tua casa</h3>
+                            <h3 className='mb-10 dark:text-white text-black'>Scegli il tipo di sponsorizzazione per la tua casa</h3>
                             <div className='flex flex-wrap flex-row justify-center items-center w-full'>
                                 {
                                     sponsorships?.map((sp, i) => {

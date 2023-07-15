@@ -23,7 +23,7 @@ const SponsorshipCard = (props: SponsorshipCardProps) => {
             <p className="font-normal text-gray-600 mb-3">
                 costo <span className=' font-bold'>{price}&euro;</span>
             </p>
-            <button className='bg-blue-600 w-full flex justify-center items-center flex-wrap mb-2 rounded-md p-2 hover:bg-blue-500 active:bg-green-600' onClick={generateToken}>
+            <button className='bg-blue-600 text-white w-full flex justify-center items-center flex-wrap mb-2 rounded-md p-2 hover:bg-blue-500 active:bg-green-600' onClick={generateToken}>
                 Paga
                 <svg
                     className="ml-2 -mr-1 h-4 w-4"

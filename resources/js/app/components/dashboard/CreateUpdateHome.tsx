@@ -28,6 +28,7 @@ const CreateUpdateHome = () => {
     const [title, setTitle] = useState<string | undefined>();
     const authSelector = useAppSelector(state => state.auth)
     const dashSelector = useAppSelector(state => state.dashboard)
+    const page = document.getElementById("body-container");
     const dispatch = useAppDispatch()
 
     const getMyHouse = async () => {
@@ -76,7 +77,6 @@ const CreateUpdateHome = () => {
         if (!confirm) {
             return;
         }
-        const page = document.getElementById("body-container");
         page?.scrollIntoView();
         dispatch(loading())
         const data = {
@@ -195,54 +195,54 @@ const CreateUpdateHome = () => {
                 !dashSelector.isCreate ?
                     <div className='flex flex-col items-end justify-center'>
                         <div className='w-[100%] text-center'>
-                            <h2 className='text-white text-2xl font-bold'>Modifica casa</h2>
+                            <h2 className='dark:text-white text-black text-2xl font-bold'>Modifica casa</h2>
                         </div>
                         <button onClick={photoPage} className='bg-[#6366f1] hover:bg-[#6365f1d8] text-white rounded-xl py-2 px-4 m-5'>Inserisci e cambia foto</button>
                     </div>
                     :
                     <div className='w-[100%] text-center'>
-                        <h2 className='text-white text-2xl font-bold'>Crea una casa</h2>
+                        <h2 className='dark:text-white text-black text-2xl font-bold'>Crea una casa</h2>
                     </div>
             }
-            <form id="update-apartment" onSubmit={(e) => updateMyHome(e)} >
+            <form id="update-apartment" className='text-black dark:text-[#9ca3af]' onSubmit={(e) => updateMyHome(e)} >
                 {
                     dashSelector.isCreate ?
                         <label className="block mt-3">
-                            <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-[#9ca3af]">
+                            <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium ">
                                 Titolo
                             </span>
-                            <input type={"text"} name="title" className="mt-1 px-3 py-2 bg-[#1d2432] text-white border shadow-sm border-slate-300 placeholder-[#9ca3af] focus:outline-none focus:border-[#6366f1] w-2/3 focus:ring-[#6366f1] block rounded-md sm:text-sm focus:ring-1" placeholder="Titolo di identificazione della casa" value={title} onChange={(e) => setTitle(e.target.value)} />
+                            <input type={"text"} name="title" className="mt-1 px-3 py-2 dark:bg-[#1d2432] bg-gray-50 dark:text-white text-black border shadow-sm border-slate-300 dark:border-[#0f1623] placeholder-[#9ca3af] focus:outline-none focus:border-[#6366f1] w-2/3 focus:ring-[#6366f1] block rounded-md sm:text-sm focus:ring-1" placeholder="Titolo di identificazione della casa" value={title} onChange={(e) => setTitle(e.target.value)} />
                         </label>
                         :
                         null
                 }
                 <label className="block mt-3">
-                    <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-[#9ca3af]">
+                    <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium ">
                         Camere
                     </span>
-                    <input type={"text"} name="rooms" className="mt-1 px-3 py-2 bg-[#1d2432] text-white border shadow-sm border-slate-300 placeholder-[#9ca3af] focus:outline-none focus:border-[#6366f1] w-2/3 focus:ring-[#6366f1] block rounded-md sm:text-sm focus:ring-1" placeholder="numero di camere" value={rooms} onChange={(e) => setRooms(e.target.value)} />
+                    <input type={"text"} name="rooms" className="mt-1 px-3 py-2 dark:bg-[#1d2432] bg-gray-50 dark:text-white text-black border shadow-sm border-slate-300 dark:border-[#0f1623] placeholder-[#9ca3af] focus:outline-none focus:border-[#6366f1] w-2/3 focus:ring-[#6366f1] block rounded-md sm:text-sm focus:ring-1" placeholder="numero di camere" value={rooms} onChange={(e) => setRooms(e.target.value)} />
                 </label>
                 <label className="block mt-3">
-                    <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-[#9ca3af]">
+                    <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium">
                         Posti letto
                     </span>
-                    <input type={"text"} name="beds" className="mt-1 px-3 py-2 bg-[#1d2432] text-white border shadow-sm border-slate-300 placeholder-[#9ca3af] focus:outline-none focus:border-[#6366f1] w-2/3 focus:ring-[#6366f1] block rounded-md sm:text-sm focus:ring-1" placeholder="numero massimo di posti letto" value={beds} onChange={(e) => setBeds(e.target.value)} />
+                    <input type={"text"} name="beds" className="mt-1 px-3 py-2 dark:bg-[#1d2432] bg-gray-50 dark:text-white text-black border shadow-sm border-slate-300 dark:border-[#0f1623] placeholder-[#9ca3af] focus:outline-none focus:border-[#6366f1] w-2/3 focus:ring-[#6366f1] block rounded-md sm:text-sm focus:ring-1" placeholder="numero massimo di posti letto" value={beds} onChange={(e) => setBeds(e.target.value)} />
                 </label>
                 <label className="block mt-3">
-                    <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-[#9ca3af]">
+                    <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium">
                         Bagni
                     </span>
-                    <input type={"text"} name="bathrooms" className="mt-1 px-3 py-2 bg-[#1d2432] text-white border shadow-sm border-slate-300 placeholder-[#9ca3af] focus:outline-none focus:border-[#6366f1] w-2/3 focus:ring-[#6366f1] block rounded-md sm:text-sm focus:ring-1" placeholder="numero di bagni" value={bathrooms} onChange={(e) => setBathrooms(e.target.value)} />
+                    <input type={"text"} name="bathrooms" className="mt-1 px-3 py-2 dark:bg-[#1d2432] bg-gray-50 dark:text-white text-black border shadow-sm border-slate-300 dark:border-[#0f1623] placeholder-[#9ca3af] focus:outline-none focus:border-[#6366f1] w-2/3 focus:ring-[#6366f1] block rounded-md sm:text-sm focus:ring-1" placeholder="numero di bagni" value={bathrooms} onChange={(e) => setBathrooms(e.target.value)} />
                 </label>
                 <label className="block mt-3">
-                    <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-[#9ca3af]">
+                    <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium">
                         Metri quadri
                     </span>
-                    <input type="text" name="square" className="mt-1 px-3 py-2 bg-[#1d2432] text-white border shadow-sm border-slate-300 placeholder-[#9ca3af] focus:outline-none focus:border-[#6366f1] w-2/3 focus:ring-[#6366f1] block rounded-md sm:text-sm focus:ring-1" placeholder="numero di metri quadri" value={square} onChange={(e) => setSquare(e.target.value)} />
+                    <input type="text" name="square" className="mt-1 px-3 py-2 dark:bg-[#1d2432] bg-gray-50 dark:text-white text-black border shadow-sm border-slate-300 dark:border-[#0f1623] placeholder-[#9ca3af] focus:outline-none focus:border-[#6366f1] w-2/3 focus:ring-[#6366f1] block rounded-md sm:text-sm focus:ring-1" placeholder="numero di metri quadri" value={square} onChange={(e) => setSquare(e.target.value)} />
                 </label>
 
                 <div className="block mt-5">
-                    <span className=" block text-sm font-bold text-[#9ca3af]">
+                    <span className=" block text-sm font-bold]">
                         Servizi
                     </span>
                     <div className="flex flex-row flex-auto flex-wrap">
@@ -250,10 +250,10 @@ const CreateUpdateHome = () => {
                             facilities?.map((facility, i) => {
                                 return (
                                     <div key={i} className="mt-1 px-3 py-2 flex flex-col justify-center items-center">
-                                        <label htmlFor={`facility-${facility.id}`} className="block text-sm font-medium text-[#9ca3af]">
+                                        <label htmlFor={`facility-${facility.id}`} className="block text-sm font-medium ">
                                             {facility.name}
                                         </label>
-                                        <input type="checkbox" id={`facility-${facility.id}`} name={facility.name} checked={checkedState[i]} value={facility.id} onChange={() => handleInputChange(i)} className="mt-1 px-2 py-2 bg-[#1d2432] border shadow-sm border-slate-300 placeholder-[#9ca3af] focus:outline-none focus:border-[#6366f1] focus:ring-[#6366f1] block rounded-md sm:text-sm focus:ring-1" />
+                                        <input type="checkbox" id={`facility-${facility.id}`} name={facility.name} checked={checkedState[i]} value={facility.id} onChange={() => handleInputChange(i)} className="mt-1 px-2 py-2 dark:bg-[#1d2432] bg-gray-50 border shadow-sm border-slate-300 dark:border-[#0f1623] placeholder-[#9ca3af] focus:outline-none focus:border-[#6366f1] focus:ring-[#6366f1] block rounded-md sm:text-sm focus:ring-1" />
                                     </div>
                                 )
                             })
@@ -262,10 +262,10 @@ const CreateUpdateHome = () => {
                 </div>
 
                 <label className="block mt-3">
-                    <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-[#9ca3af]">
+                    <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium">
                         Regione
                     </span>
-                    <select value={region} onChange={e => setRegion(e.target.value)} name="region" id="region" className="mt-1 px-3 py-2 bg-[#1d2432] text-white border shadow-sm border-slate-300 placeholder-[#9ca3af] focus:outline-none focus:border-[#6366f1] w-2/3 focus:ring-[#6366f1] block rounded-md sm:text-sm focus:ring-1">
+                    <select value={region} onChange={e => setRegion(e.target.value)} name="region" id="region" className="mt-1 px-3 py-2 dark:bg-[#1d2432] bg-gray-50 dark:text-white text-black border shadow-sm border-slate-300 dark:border-[#0f1623] placeholder-[#9ca3af] focus:outline-none focus:border-[#6366f1] w-2/3 focus:ring-[#6366f1] block rounded-md sm:text-sm focus:ring-1">
                         <option className='hidden' value={region}>
                             {region}
                         </option>
@@ -282,28 +282,28 @@ const CreateUpdateHome = () => {
                 </label>
 
                 <label className="block mt-3">
-                    <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-[#9ca3af]">
+                    <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium ">
                         Città
                     </span>
-                    <input type="text" name="city" className="mt-1 px-3 py-2 bg-[#1d2432] text-white border shadow-sm border-slate-300 placeholder-[#9ca3af] focus:outline-none focus:border-[#6366f1] w-2/3 focus:ring-[#6366f1] block rounded-md sm:text-sm focus:ring-1" placeholder="in quale città si trova" value={city} onChange={(e) => setCity(e.target.value)} />
+                    <input type="text" name="city" className="mt-1 px-3 py-2 dark:bg-[#1d2432] bg-gray-50 dark:text-white text-black border shadow-sm border-slate-300 dark:border-[#0f1623] placeholder-[#9ca3af] focus:outline-none focus:border-[#6366f1] w-2/3 focus:ring-[#6366f1] block rounded-md sm:text-sm focus:ring-1" placeholder="in quale città si trova" value={city} onChange={(e) => setCity(e.target.value)} />
                 </label>
                 <label className="block mt-3">
-                    <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-[#9ca3af]">
+                    <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium ">
                         Indirizzo
                     </span>
-                    <input type="text" name="address" className="mt-1 px-3 py-2 bg-[#1d2432] text-white border shadow-sm border-slate-300 placeholder-[#9ca3af] focus:outline-none focus:border-[#6366f1] w-2/3 focus:ring-[#6366f1] block rounded-md sm:text-sm focus:ring-1" placeholder="indirizzo della casa" value={address} onChange={(e) => setAddress(e.target.value)} />
+                    <input type="text" name="address" className="mt-1 px-3 py-2 dark:bg-[#1d2432] bg-gray-50 dark:text-white text-black border shadow-sm border-slate-300 dark:border-[#0f1623] placeholder-[#9ca3af] focus:outline-none focus:border-[#6366f1] w-2/3 focus:ring-[#6366f1] block rounded-md sm:text-sm focus:ring-1" placeholder="indirizzo della casa" value={address} onChange={(e) => setAddress(e.target.value)} />
                 </label>
                 <label className="block mt-3">
-                    <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-[#9ca3af]">
+                    <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium">
                         Descrivi la casa
                     </span>
-                    <textarea cols={20} rows={5} name="description" className="mt-1 px-3 py-2 bg-[#1d2432] text-white border shadow-sm border-slate-300 placeholder-[#9ca3af] focus:outline-none focus:border-[#6366f1] w-2/3 focus:ring-[#6366f1] block rounded-md sm:text-sm focus:ring-1" placeholder="una breve descrizione dell'abitazione" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+                    <textarea cols={20} rows={5} name="description" className="mt-1 px-3 py-2 dark:bg-[#1d2432] bg-gray-50 dark:text-white text-black border shadow-sm border-slate-300 dark:border-[#0f1623] placeholder-[#9ca3af] focus:outline-none focus:border-[#6366f1] w-2/3 focus:ring-[#6366f1] block rounded-md sm:text-sm focus:ring-1" placeholder="una breve descrizione dell'abitazione" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
                 </label>
                 <label className="block mt-3">
-                    <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-[#9ca3af]">
+                    <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium ">
                         Prezzo
                     </span>
-                    <input type="text" name="price" className="mt-1 px-3 py-2 bg-[#1d2432] text-white border shadow-sm border-slate-300 placeholder-[#9ca3af] focus:outline-none focus:border-[#6366f1] w-2/3 focus:ring-[#6366f1] block rounded-md sm:text-sm focus:ring-1" placeholder="prezzo in euro per notte" value={price} onChange={(e) => setPrice(e.target.value)} />
+                    <input type="text" name="price" className="mt-1 px-3 py-2 dark:bg-[#1d2432] bg-gray-50 dark:text-white text-black border shadow-sm border-slate-300 dark:border-[#0f1623] placeholder-[#9ca3af] focus:outline-none focus:border-[#6366f1] w-2/3 focus:ring-[#6366f1] block rounded-md sm:text-sm focus:ring-1" placeholder="prezzo in euro per notte" value={price} onChange={(e) => setPrice(e.target.value)} />
                 </label>
                 <button className="bg-[#6366f1] hover:bg-[#6365f1d5] text-white rounded-xl py-2 px-6 m-5" type="submit">Salva</button>
                 <button className="bg-[#29303d] hover:bg-[#29303dcd] text-white rounded-xl py-2 px-4 m-5" onClick={exitPage}>Torna indietro</button>

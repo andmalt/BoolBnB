@@ -6,6 +6,7 @@ import { variablesDashboard } from '../../services/variables';
 import { clear, error, loading } from '../../store/authSlice';
 import { setDashboard } from '../../store/dashboardSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { toast } from 'react-toastify';
 
 const PhotoModify = () => {
   const [fileList, setFileList] = useState<FileList | null>(null);
@@ -54,7 +55,16 @@ const PhotoModify = () => {
     // console.log("data=", data);
     const response = await api.updatePhotos(authSelector.token, dashSelector.id, data);
     if (response.data.success) {
+      toast.success("Le foto sono state salvate con successo!", {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 3000,
+      });
       getMyPhotos()
+    } else {
+      toast.error("Le foto non sono state salvate per un errore!", {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 3000,
+      });
     }
     // console.log("response=", response);
     dispatch(clear())
@@ -93,7 +103,7 @@ const PhotoModify = () => {
   return (
     <div>
       <div className='mb-12'>
-        <button onClick={updatePage} className=' bg-gray-600 hover:bg-blue-600 rounded-xl py-2 px-8 m-5' type="submit">Indietro</button>
+        <button onClick={updatePage} className='bg-[#29303d] hover:bg-[#29303dc8] rounded-xl py-2 px-8 m-5 text-white' type="submit">Indietro</button>
       </div>
       <div id='container-photos' className='flex flex-row flex-wrap justify-start items-center'>
         {
@@ -124,7 +134,7 @@ const PhotoModify = () => {
         </span>
         <div className='flex flex-row items-center my-6'>
           <label className="mt-3 block">
-            <span className='rounded-lg py-2 px-4  bg-[rgb(41,48,61)] hover:bg-[rgb(51,58,71)] text-white'>
+            <span className='rounded-lg py-2 px-4  bg-[rgb(41,48,61)] hover:bg-[rgb(57,64,77)] text-white'>
               Inserisci foto
               <input type={"file"} name="images" className="hidden" onChange={handleFileChange} multiple />
             </span>
@@ -138,7 +148,7 @@ const PhotoModify = () => {
             }
           </span>
         </div>
-        <button className='bg-green-500 hover:bg-blue-600 rounded-xl py-2 px-4 m-5' type="submit">Salva</button>
+        <button className='bg-[#6366f1] hover:bg-[#6365f1d7] text-white rounded-xl py-2 px-8 m-5' type="submit">Salva</button>
       </form>
     </div>
   )

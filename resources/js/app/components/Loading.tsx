@@ -19,7 +19,7 @@ const Loading = (props: LoadingProp) => {
     }, []);
 
     return (
-        <div id='container'>
+        <div id='container' className=' bg-slate-100 dark:bg-[#111827]'>
             <div id="text">
                 <p id='paragraph' className='text-[#6366f1]'>caricamento.....</p>
             </div>

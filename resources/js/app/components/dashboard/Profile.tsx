@@ -100,8 +100,8 @@ const Profile = (props: ProfileProps) => {
     return (
         <div className='flex flex-col justify-start items-center'>
             <div className='mb-6 md:w-[90%] lg:w-[75%]'>
-                <div className=" bg-[#29303d] p-3 shadow-sm rounded-sm">
-                    <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
+                <div className=" dark:bg-[#29303d] bg-slate-50 p-3 shadow-sm rounded-sm">
+                    <div className="flex items-center space-x-2 font-semibold leading-8">
                         <span className="text-green-500">
                             <svg className="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
@@ -109,9 +109,9 @@ const Profile = (props: ProfileProps) => {
                                     d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                             </svg>
                         </span>
-                        <span className="tracking-wide text-white">Profilo</span>
+                        <span className="tracking-wide dark:text-white text-black">Profilo</span>
                     </div>
-                    <div className=" text-white">
+                    <div className=" dark:text-white text-black">
                         <div className="flex flex-col justify-start items-start text-sm">
                             <div className="text-center my-4 flex md:ml-[15%]">
                                 <img className="h-40 w-40 rounded-full border-4 border-white mx-auto my-2" src={!photo ? "./default-user/user.png" : photo.replace('public/user/image/', 'storage/user/image/')} alt="my photo" />
@@ -133,7 +133,7 @@ const Profile = (props: ProfileProps) => {
                             </div>
                         </div>
                         <ul
-                            className="bg-[#1d2432] text-white py-2 px-3 mt-3 divide-y rounded shadow-sm">
+                            className="dark:bg-[#1d2432] dark:text-white bg-slate-100 text-black py-2 px-3 mt-3 divide-y rounded shadow-sm">
                             <li className="flex items-center py-3">
                                 <span>Stato</span>
                                 <span className="ml-auto"><span
@@ -148,7 +148,7 @@ const Profile = (props: ProfileProps) => {
                 </div>
                 {
                     !emailVerificationSelector.emailVerification ?
-                        <h4 className='text-white p-1 my-6'>Per attivare il tuo account devi verificare l'email che ti è stata spedita.</h4>
+                        <h4 className='dark:text-white text-black p-1 my-6'>Per attivare il tuo account devi verificare l'email che ti è stata spedita.</h4>
                         :
                         null
                 }

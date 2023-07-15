@@ -66,7 +66,7 @@ const Dashboard = () => {
         return () => { isMount = false; }
     }, []);
     return (
-        <div id='dashboard' className="flex flex-row flex-auto flex-shrink-0 antialiased">
+        <div id='dashboard' className="flex flex-row flex-auto flex-shrink-0 antialiased dark:bg-[#111827] bg-slate-100">
             <div className='w-1/4 lg:w-1/5 h-full'>
                 {/* <!-- Sidebar --> */}
                 <Sidebar emailVerification={emailVerificationSelector.emailVerification} />

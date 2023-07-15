@@ -30,11 +30,11 @@ const Table = (props: TableProps) => {
 
     return (
         <div className="mt-4 mx-4">
-            <div className="w-full overflow-hidden rounded-lg shadow-xs">
+            <div className="w-full overflow-hidden rounded-lg shadow-md">
                 <div className="w-full overflow-x-auto">
                     <table className="w-full">
                         <thead>
-                            <tr className="text-xs font-semibold tracking-wide text-left text-white uppercase border-b bg-[#29303d]">
+                            <tr className="text-xs font-semibold tracking-wide text-left dark:text-white uppercase border-b dark:bg-[#29303d] text-black bg-slate-300">
                                 <th className="px-4 py-3">Casa</th>
                                 {
                                     !isStatistics ?
@@ -68,7 +68,7 @@ const Table = (props: TableProps) => {
                                             }
                                         })
                                         return (
-                                            <tr key={`${house.title}-${i}`} className="hover:bg-[#1d243240] hover:text-white text-gray-700 bg-[#a9b0bc] ">
+                                            <tr key={`${house.title}-${i}`} className="dark:hover:bg-[#1d243240] dark:hover:text-white text-gray-700 dark:bg-[#a9b0bc] bg-slate-50 hover:text-black hover:bg-gray-300">
                                                 <td className="px-4 py-3">
                                                     {
                                                         !isStatistics ?
@@ -125,7 +125,7 @@ const Table = (props: TableProps) => {
                                         )
                                     })
                                     :
-                                    <tr className="bg-[#29303d] text-white ">
+                                    <tr className="dark:hover:bg-[#1d243240] dark:hover:text-white text-gray-700 dark:bg-[#a9b0bc] bg-slate-50 hover:text-black hover:bg-gray-300">
                                         <td className="px-4 py-3">
                                             <div className="flex items-center text-sm">
                                                 <div>
@@ -141,7 +141,7 @@ const Table = (props: TableProps) => {
                         </tbody>
                     </table>
                 </div>
-                <div className="grid px-4 py-3 text-xs font-semibold tracking-wide uppercase border-t  bg-[#29303d] text-white sm:grid-cols-9">
+                <div className="grid px-4 py-3 text-xs font-semibold tracking-wide uppercase border-t dark:bg-[#29303d] dark:text-white text-black bg-slate-300 sm:grid-cols-9">
                     <span className="flex items-center col-span-3"> Pagina {houses ? houses?.current_page : "0"} di {houses ? houses?.last_page : "0"}</span>
                     <span className="col-span-2"></span>
                     {/* <!-- Pagination --> */}

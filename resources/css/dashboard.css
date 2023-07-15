@@ -1,6 +1,5 @@
 #dashboard{
     min-height: calc(100vh - 130px);
-    background-color: rgb(17, 24, 39);
 }
 
 #stroke-title{

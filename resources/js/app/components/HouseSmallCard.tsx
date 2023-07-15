@@ -50,7 +50,7 @@ const HouseSmallCard = (props: HouseCard) => {
     }, [count])
 
     return (
-        <div className="flex flex-row flex-wrap space-x-6 bg-[#0a121e] shadow-xl rounded-2xl">
+        <div className="flex flex-row flex-wrap space-x-6 dark:bg-[#0a121e] bg-slate-200 shadow-xl rounded-2xl">
             <div className="max-w-2xl mx-auto">
                 <div id="default-carousel" className="relative">
                     { /* Carousel wrapper  */}
@@ -87,7 +87,7 @@ const HouseSmallCard = (props: HouseCard) => {
             <div onClick={() => getHome(id)} className="sm:w-7/12 pl-0 p-5 text-[#9ca3af] overflow-auto cursor-pointer">
                 <div className="space-y-2">
                     <div className="space-y-4">
-                        <h4 className="text-2xl font-semibold text-white text-left">{title}</h4>
+                        <h4 className="text-2xl font-semibold dark:text-white text-black text-left">{title}</h4>
 
 
                         <p className="text-left font-bold">{city}</p>

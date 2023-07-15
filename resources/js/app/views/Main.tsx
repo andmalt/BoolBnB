@@ -12,7 +12,7 @@ const Main = () => {
 
     return (
         <>
-            <div id='house-container' className='xl:py-28 py-16'>
+            <div id='house-container' className='xl:py-28 py-16 bg-slate-100 dark:bg-[#111827]'>
                 <div id='small-container' className="container lg:max-w-4xl xl:max-w-5xl 2xl:max-w-6xl mx-auto h-96 rounded-md flex items-center">
                     <div className="sm:ml-20 text-center sm:text-left  font-sans">
                         <h1 className="text-5xl font-bold mb-4 text-white">
@@ -24,7 +24,6 @@ const Main = () => {
                     </div>
                 </div>
             </div>
-            <div id='black-space'></div>
         </>
     )
 }
