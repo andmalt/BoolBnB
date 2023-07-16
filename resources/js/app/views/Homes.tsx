@@ -147,8 +147,8 @@ const Homes = () => {
 
                                     }
                                 </select>
-                                <input type="text" value={city} onChange={(e) => setCity(e.target.value)} id="search-city" className="p-2.5 w-full text-sm text-white placeholder:text-[#9ca3af] dark:bg-[#0a121e] bg-slate-50 border-l-2 border focus:ring-[#6366f1] focus:border-[#6366f1]" placeholder="città..." />
-                                <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} id="search-address" className="p-2.5 w-full text-sm text-white placeholder:text-[#9ca3af] dark:bg-[#0a121e] bg-slate-50 rounded-r-lg border-l-2 border focus:ring-[#6366f1] focus:border-[#6366f1] " placeholder="indirizzo..." />
+                                <input type="text" value={city} onChange={(e) => setCity(e.target.value)} id="search-city" className="p-2.5 w-full text-sm text-black dark:text-white placeholder:text-[#9ca3af] dark:bg-[#0a121e] bg-slate-50 border-l-2 border focus:ring-[#6366f1] focus:border-[#6366f1]" placeholder="città..." />
+                                <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} id="search-address" className="p-2.5 w-full text-sm text-black dark:text-white placeholder:text-[#9ca3af] dark:bg-[#0a121e] bg-slate-50 rounded-r-lg border-l-2 border focus:ring-[#6366f1] focus:border-[#6366f1] " placeholder="indirizzo..." />
                                 <button type="submit" className="p-2.5 ml-2 text-sm font-medium text-white bg-[#6366f1] rounded-lg border border-black hover:bg-[#6365f1c8] focus:ring-4 focus:outline-none focus:ring-blue-300">
                                     <svg aria-hidden="true" className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                                     <span className="sr-only">Cerca</span>
