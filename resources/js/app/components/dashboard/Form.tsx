@@ -100,22 +100,22 @@ const Form = (props: FormProps) => {
                 <form className="p-6 flex flex-col justify-center placeholder:text-[#9ca3af]" onSubmit={sendMessage}>
                     <div className="flex flex-col">
                         <label htmlFor='name' className="hidden">Name</label>
-                        <input type="text" value={name} onChange={(e) => setName(e.target.value)} id="name" placeholder="Nome" className="w-100 mt-2 py-3 px-3 rounded-lg dark:bg-[#1d2432] bg-gray-50 dark:text-white text-black border shadow-sm border-slate-300 dark:border-[#0f1623] font-semibold focus:border-[#6366f1] focus:outline-none" />
+                        <input type="text" value={name} onChange={(e) => setName(e.target.value)} id="name" placeholder="Il tuo nome" className="w-100 mt-2 py-3 px-3 rounded-lg dark:bg-[#1d2432] bg-gray-50 dark:text-white text-black border shadow-sm border-slate-300 dark:border-[#0f1623] font-semibold focus:border-[#6366f1] focus:outline-none" />
                     </div>
 
                     <div className="flex flex-col mt-2">
                         <label htmlFor='surname' className="hidden">Surname</label>
-                        <input type="text" value={surname} onChange={(e) => setSurname(e.target.value)} id="surname" placeholder="Cognome" className="w-100 mt-2 py-3 px-3 rounded-lg dark:bg-[#1d2432] bg-gray-50 dark:text-white text-black border shadow-sm border-slate-300 dark:border-[#0f1623]  font-semibold focus:border-[#6366f1] focus:outline-none" />
+                        <input type="text" value={surname} onChange={(e) => setSurname(e.target.value)} id="surname" placeholder="Il tuo cognome" className="w-100 mt-2 py-3 px-3 rounded-lg dark:bg-[#1d2432] bg-gray-50 dark:text-white text-black border shadow-sm border-slate-300 dark:border-[#0f1623]  font-semibold focus:border-[#6366f1] focus:outline-none" />
                     </div>
 
                     <div className="flex flex-col mt-2">
                         <label htmlFor="email" className="hidden">Email</label>
-                        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} id="email" placeholder="Email" className="w-100 mt-2 py-3 px-3 rounded-lg dark:bg-[#1d2432] bg-gray-50 dark:text-white text-black border shadow-sm border-slate-300 dark:border-[#0f1623]  font-semibold focus:border-[#6366f1] focus:outline-none" />
+                        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} id="email" placeholder="La tua email" className="w-100 mt-2 py-3 px-3 rounded-lg dark:bg-[#1d2432] bg-gray-50 dark:text-white text-black border shadow-sm border-slate-300 dark:border-[#0f1623]  font-semibold focus:border-[#6366f1] focus:outline-none" />
                     </div>
 
                     <div className="flex flex-col mt-2">
                         <label htmlFor="message" className="hidden">Message</label>
-                        <textarea value={message} onChange={(e) => setMessage(e.target.value)} id="message" placeholder="Messaggio" className="w-100 mt-2 py-3 px-3 rounded-lg dark:bg-[#1d2432] bg-gray-50 dark:text-white text-black border shadow-sm border-slate-300 dark:border-[#0f1623] font-semibold focus:border-[#6366f1] focus:outline-none" />
+                        <textarea value={message} onChange={(e) => setMessage(e.target.value)} id="message" placeholder="Inserisci un messaggio" className="w-100 mt-2 py-3 px-3 rounded-lg dark:bg-[#1d2432] bg-gray-50 dark:text-white text-black border shadow-sm border-slate-300 dark:border-[#0f1623] font-semibold focus:border-[#6366f1] focus:outline-none" />
                     </div>
 
                     <button type="submit" className="md:w-32 bg-[#6366f1]  text-white font-bold py-3 px-6 rounded-lg mt-4 hover:bg-[#6365f1d4] transition ease-in-out duration-300">Invia</button>

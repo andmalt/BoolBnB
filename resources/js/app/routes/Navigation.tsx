@@ -42,7 +42,7 @@ const Navigation = (props: NavigationProps) => {
                     null
             }
             <Header />
-            <div id='main-container'>
+            <div id='main-container' className='bg-slate-100 dark:bg-[#111827] flex justify-center items-center'>
                 <ToastContainer />
                 <Routes>
                     <Route path='/' element={<Main />} />
