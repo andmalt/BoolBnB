@@ -1033,6 +1033,9 @@ select {
 .h-screen {
   height: 100vh;
 }
+.h-\[300px\] {
+  height: 300px;
+}
 .min-h-full {
   min-height: 100%;
 }
@@ -1056,9 +1059,6 @@ select {
 }
 .w-2\/3 {
   width: 66.666667%;
-}
-.w-2\/5 {
-  width: 40%;
 }
 .w-20 {
   width: 5rem;
@@ -1125,6 +1125,9 @@ select {
 }
 .w-screen {
   width: 100vw;
+}
+.w-2\/5 {
+  width: 40%;
 }
 .min-w-0 {
   min-width: 0px;
@@ -1336,12 +1339,6 @@ select {
   --tw-divide-y-reverse: 0;
   border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
   border-bottom-width: calc(1px * var(--tw-divide-y-reverse));
-}
-.self-end {
-  align-self: flex-end;
-}
-.self-center {
-  align-self: center;
 }
 .overflow-auto {
   overflow: auto;
@@ -3265,6 +3262,10 @@ select {
 
   .lg\:w-\[75\%\] {
     width: 75%;
+  }
+
+  .lg\:w-2\/5 {
+    width: 40%;
   }
 
   .lg\:max-w-4xl {
