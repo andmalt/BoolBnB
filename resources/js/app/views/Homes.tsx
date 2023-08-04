@@ -48,50 +48,21 @@ const Homes = () => {
 
     const searchHomes = (e: any) => {
         e.preventDefault();
-        let filtered = houses.filter(el => {
-            if (city && address && region) {
-                if (el.city.trim().toLowerCase().slice(0, city.length).includes(city.trim().toLowerCase()) &&
-                    el.address.trim().toLowerCase().slice(0, address.length).includes(address.trim().toLowerCase()) &&
-                    el.region.trim().toLowerCase().slice(0, region.length).includes(region.trim().toLowerCase())) {
-                    return el;
-                }
-            } else if (city && !address && region) {
-                if (el.city.trim().toLowerCase().slice(0, city.length).includes(city.trim().toLowerCase()) &&
-                    el.region.trim().toLowerCase().slice(0, region.length).includes(region.trim().toLowerCase())) {
-                    return el;
-                }
-            } else if (city && address && !region) {
-                if (el.city.trim().toLowerCase().slice(0, city.length).includes(city.trim().toLowerCase()) &&
-                    el.address.trim().toLowerCase().slice(0, address.length).includes(address.trim().toLowerCase())) {
-                    return el;
-                }
-            } else if (!city && address && region) {
-                if (el.address.trim().toLowerCase().slice(0, address.length).includes(address.trim().toLowerCase()) &&
-                    el.region.trim().toLowerCase().slice(0, region.length).includes(region.trim().toLowerCase())) {
-                    return el;
-                }
-            } else if (region && !city && !address) {
-                if (el.region.trim().toLowerCase().slice(0, region.length).includes(region.trim().toLowerCase())) {
-                    return el;
-                }
-            } else if (!region && city && !address) {
-                if (el.city.trim().toLowerCase().slice(0, city.length).includes(city.trim().toLowerCase())) {
-                    return el;
-                }
-            } else if (!region && !city && address) {
-                if (el.address.trim().toLowerCase().slice(0, address.length).includes(address.trim().toLowerCase())) {
-                    return el;
-                }
-            } else {
-                return el;
-            }
-        })
+
+        // searchbar filter
+        const filtered = houses.filter(el => {
+            const cityMatch = !city || el.city.trim().toLowerCase().includes(city.trim().toLowerCase());
+            const addressMatch = !address || el.address.trim().toLowerCase().includes(address.trim().toLowerCase());
+            const regionMatch = !region || el.region.trim().toLowerCase().includes(region.trim().toLowerCase());
+
+            return cityMatch && addressMatch && regionMatch;
+        });
+
+        // Sort the filtered array based on the "visible" property
+        filtered.sort((a, b) => (a.visible === b.visible ? 0 : a.visible ? -1 : 1));
+
         // set the housesFiltered array
         setHousesFiltered(filtered)
-
-        // console.log("city", city);
-        // console.log("address", address);
-        // console.log("region", region);
 
         setCity("")
         setAddress("")

@@ -32,7 +32,7 @@ const HouseView = () => {
         try {
             const response = await api.getHome(houseId)
             if (response.data.success) {
-                console.log(response);
+                // console.log(response);
                 setMapLongitude(response.data.apartment.lon)
                 setMapLatitude(response.data.apartment.lat)
                 setHome(response.data.apartment)
