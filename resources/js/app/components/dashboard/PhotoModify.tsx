@@ -45,6 +45,10 @@ const PhotoModify = () => {
       return;
     }
     if (!fileList) {
+      toast.error("Inserisci almeno una foto!", {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 3000,
+      });
       return;
     }
     dispatch(loading())
@@ -67,6 +71,7 @@ const PhotoModify = () => {
       });
     }
     // console.log("response=", response);
+    setFileList(null)
     dispatch(clear())
   }
 
@@ -139,7 +144,7 @@ const PhotoModify = () => {
               <input type={"file"} name="images" className="hidden" onChange={handleFileChange} multiple />
             </span>
           </label>
-          <span className='text-white ml-2'>
+          <span className='dark:text-white text-black ml-2'>
             {
               fileList?.length! > 0 && fileList?.length != undefined ?
                 <p>Hai inserito {fileList?.length} foto</p>

@@ -740,33 +740,6 @@ select {
 .top-3 {
   top: 0.75rem;
 }
-.right-\[100px\] {
-  right: 100px;
-}
-.right-\[-100px\] {
-  right: -100px;
-}
-.right-\[-1000px\] {
-  right: -1000px;
-}
-.right-\[-600px\] {
-  right: -600px;
-}
-.right-\[600px\] {
-  right: 600px;
-}
-.right-full {
-  right: 100%;
-}
-.left-full {
-  left: 100%;
-}
-.right-1\/2 {
-  right: 50%;
-}
-.bottom-1\/2 {
-  bottom: 50%;
-}
 .z-0 {
   z-index: 0;
 }

@@ -50,29 +50,6 @@ class ApartmentController extends Controller
             return response()->json($response);
         }
 
-        $sponsorshipD = '0000-00-00';
-
-        foreach ($apartment->sponsorships as $sponsorship) {
-            $sponsorshipD = $sponsorship->pivot->end_date;
-        }
-
-        /* example time "2022-01-08" */
-        $timeNow = Carbon::now();
-
-        if ($sponsorshipD !== '0000-00-00') {
-            $tn = str_replace('-', '', $timeNow);
-            $sn = str_replace('-', '', $sponsorshipD);
-
-            if ($tn > $sn) {
-                $apartment->sponsorships()->detach();
-                $apartment->visible = false;
-                $apartment->save();
-            }
-        } else {
-            $apartment->visible = false;
-            $apartment->save();
-        }
-
         $stat = new Stat();
         $stat->apartment_id = $apartment->id;
         $stat->ip = $request->ip();

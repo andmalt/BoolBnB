@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\Models\Apartment;
+use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -16,6 +18,25 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->call(function () {
+            $timeNow = Carbon::now();
+
+            $apartments = Apartment::with('sponsorships')->get();
+
+            foreach ($apartments as $apartment) {
+                $sponsorshipD = $apartment->sponsorships->pluck('pivot.end_date')->max();
+
+                if ($sponsorshipD !== null && $timeNow->gt($sponsorshipD)) {
+                    $apartment->sponsorships()->detach();
+                    $apartment['visible'] = false;
+                    $apartment->save();
+                } elseif ($sponsorshipD === null) {
+                    $apartment['visible'] = false;
+                    $apartment->save();
+                }
+            }
+        })->hourly()->runInBackground();; // Do this activity every hour
+        // The command in the terminal is "php artisan schedule:work" for local execution
     }
 
     /**
@@ -25,7 +46,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
