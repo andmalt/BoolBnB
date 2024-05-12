@@ -7,7 +7,6 @@ use App\Models\Apartment;
 use App\Models\Stat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
 
 class ApartmentController extends Controller
 {
@@ -20,6 +19,21 @@ class ApartmentController extends Controller
         $response = [
             "apartments" => $apartments,
             "photos" => $photos,
+            "success" => true
+        ];
+
+        return response()->json($response);
+    }
+
+    public function indexMobile()
+    {
+        $apartments = Apartment::with('photos')
+            ->orderByDesc('visible')
+            ->paginate(50);
+
+
+        $response = [
+            "apartments" => $apartments,
             "success" => true
         ];
 

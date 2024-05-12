@@ -3221,6 +3221,11 @@ select {
     margin: 1.5rem;
   }
 
+  .lg\:my-2 {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
   .lg\:mb-0 {
     margin-bottom: 0px;
   }
@@ -3289,6 +3294,11 @@ select {
   }
 }
 @media (min-width: 1280px) {
+
+  .xl\:my-3 {
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
 
   .xl\:h-72 {
     height: 18rem;

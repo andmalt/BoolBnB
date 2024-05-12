@@ -1,3 +1,5 @@
+export const MAIN_URL = "http://localhost:8000/"
+
 export interface House {
     id: number,
     user_id: number,
@@ -41,7 +43,7 @@ export interface PaginateHouses {
     next_page_url: string,
     path: string,
     per_page: number,
-    prev_page_url: string|null,
+    prev_page_url: string | null,
     to: number,
     total: number,
 }
@@ -57,7 +59,7 @@ export interface PaginateMessages {
     next_page_url: string,
     path: string,
     per_page: number,
-    prev_page_url: string|null,
+    prev_page_url: string | null,
     to: number,
     total: number,
 }
@@ -78,7 +80,7 @@ export interface Regions {
     name: string,
 }
 
-export interface Messages{
+export interface Messages {
     id: number,
     apartment_id: number,
     email: string,
@@ -90,7 +92,7 @@ export interface Messages{
     is_read: boolean,
 }
 
-export interface Sponsorship{
+export interface Sponsorship {
     id: number;
     name: string;
     price: number;
@@ -103,9 +105,9 @@ export interface Sponsorship{
 
 export type User = {
     id: number;
-    name: string ;
-    surname: string ;
-    email: string ;
+    name: string;
+    surname: string;
+    email: string;
     image: string | null;
     created_at: Date;
     email_verified_at: Date | null;

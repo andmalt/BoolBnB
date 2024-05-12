@@ -247,16 +247,16 @@ const Statistics = () => {
                     </div>
                 </div>
 
-                <div className='grid grid-cols-1 p-4 gap-4 my-6'>
+                <div className='my-6'>
                     {/* Chart */}
-                    <div className='dark:bg-[#1d2432] bg-slate-50 shadow-md p-6'>
-                        <Line options={options} data={data} />
+                    <div className='dark:bg-[#1d2432] bg-slate-50 shadow-md p-6 my-1 lg:my-2 xl:my-3'>
+                        <Line options={options} data={data} style={{ height: "100%", width: "100%" }} />
                     </div>
-                    <div className='dark:bg-[#1d2432] bg-slate-50 shadow-md p-6'>
-                        <Line options={options} data={data2} />
+                    <div className='dark:bg-[#1d2432] bg-slate-50 shadow-md p-6 my-1 lg:my-2 xl:my-3'>
+                        <Line options={options} data={data2} style={{ height: "100%", width: "100%" }} />
                     </div>
-                    <div className='dark:bg-[#1d2432] bg-slate-50 shadow-md p-6'>
-                        <Line options={options} data={data3} />
+                    <div className='dark:bg-[#1d2432] bg-slate-50 shadow-md p-6 my-1 lg:my-2 xl:my-3'>
+                        <Line options={options} data={data3} style={{ height: "100%", width: "100%" }} />
                     </div>
                 </div>
             </div>

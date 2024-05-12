@@ -9,23 +9,23 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 const CreateUpdateHome = () => {
     const [home, setHome] = useState<House | null>(null);
-    const [homeFacilities, setHomeFacilities] = useState<Facilities[]>()
-    const [facilities, setFacilities] = useState<Facilities[]>();
-    const [regions, setRegions] = useState<Regions[]>();
+    const [homeFacilities, setHomeFacilities] = useState<Facilities[]>([])
+    const [facilities, setFacilities] = useState<Facilities[]>([]);
+    const [regions, setRegions] = useState<Regions[]>([]);
     // 
-    const [address, setAddress] = useState<string | undefined>();
-    const [bathrooms, setBathrooms] = useState<any | undefined>();
-    const [beds, setBeds] = useState<any | undefined>();
-    const [city, setCity] = useState<string | undefined>();
-    const [description, setDescription] = useState<string | undefined>();
-    const [price, setPrice] = useState<string | undefined>();
-    const [rooms, setRooms] = useState<any | undefined>();
-    const [square, setSquare] = useState<any | undefined>();
-    const [region, setRegion] = useState<string | undefined>();
+    const [address, setAddress] = useState<string>("");
+    const [bathrooms, setBathrooms] = useState<any>();
+    const [beds, setBeds] = useState<any>();
+    const [city, setCity] = useState<string>("");
+    const [description, setDescription] = useState<string>("");
+    const [price, setPrice] = useState<string>("");
+    const [rooms, setRooms] = useState<any>("");
+    const [square, setSquare] = useState<any>("");
+    const [region, setRegion] = useState<string>("");
     const [checkedState, setCheckedState] = useState(new Array(facilities?.length).fill(false));
-    const [facilityChecked, setFacilityChecked] = useState<number[]>();
-    const [facChecked, setFacChecked] = useState<Facilities[]>();
-    const [title, setTitle] = useState<string | undefined>();
+    const [facilityChecked, setFacilityChecked] = useState<number[]>([]);
+    const [facChecked, setFacChecked] = useState<Facilities[]>([]);
+    const [title, setTitle] = useState<string>("");
     const authSelector = useAppSelector(state => state.auth)
     const dashSelector = useAppSelector(state => state.dashboard)
     const page = document.getElementById("body-container");

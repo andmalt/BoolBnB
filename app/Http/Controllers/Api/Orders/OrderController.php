@@ -11,7 +11,7 @@ use Braintree\Gateway;
 class OrderController extends Controller
 {
     /**
-     * generate the token for make a payment
+     * generate the token to make a payment
      */
     public function generate(Request $request, Gateway $gateway)
     {

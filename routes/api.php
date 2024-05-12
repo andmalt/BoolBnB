@@ -31,6 +31,7 @@ use Illuminate\Support\Facades\Route;
  */
 Route::middleware('guest')->group(function () {
     Route::get('homes', [GuestApartmentController::class, 'index']);
+    Route::get('homes-mobile', [GuestApartmentController::class, 'indexMobile']);
     Route::post('house/{id}', [GuestApartmentController::class, 'show']);
     Route::post('message/send', [MessageController::class, 'sendEmail']);
 });

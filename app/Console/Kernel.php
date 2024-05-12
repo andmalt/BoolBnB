@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        // Do this activity every hour
         // $schedule->command('inspire')->hourly();
         $schedule->call(function () {
             $timeNow = Carbon::now();
@@ -35,7 +36,7 @@ class Kernel extends ConsoleKernel
                     $apartment->save();
                 }
             }
-        })->hourly()->runInBackground();; // Do this activity every hour
+        })->everyMinute()->runInBackground();; // Do this activity every minute
         // The command in the terminal is "php artisan schedule:work" for local execution
     }
 
