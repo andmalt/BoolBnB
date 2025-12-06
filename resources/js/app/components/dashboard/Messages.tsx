@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../services/connection_manager';
 import { deleteLocalStorage, setLengthMessagesRead, setTrashed } from '../../services/functions';
-import { PaginateMessages, Messages } from '../../services/interfaces';
+import { PaginateMessages, Messages as MessageType } from '../../services/interfaces';
 import { clear, error, loading, logout } from '../../store/authSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { TopBarMessages, MessagesTable, MessageModal } from '..';
@@ -10,7 +10,7 @@ import { setIsTrashMessages, setMessagesNotRead } from '../../store/messageSlice
 
 const Messages = () => {
     const [myMessages, setMyMessages] = useState<PaginateMessages>();
-    const [myMessage, setMyMessage] = useState<Messages>();
+    const [myMessage, setMyMessage] = useState<MessageType>();
     const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
     const authSelector = useAppSelector(state => state.auth);
     const messagesSelector = useAppSelector(state => state.messages);
