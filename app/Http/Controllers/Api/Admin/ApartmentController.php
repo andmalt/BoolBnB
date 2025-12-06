@@ -134,7 +134,7 @@ class ApartmentController extends Controller
      */
     public function show(int $id, Request $request)
     {
-        $apartment = Apartment::where('id', $id)
+        $apartment = Apartment::where('id','=', $id)
             ->with('photos', 'messages', 'facilities', 'sponsorships')
             ->first();
 

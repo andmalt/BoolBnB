@@ -10,13 +10,13 @@ use Illuminate\Queue\SerializesModels;
 class SendNewMailHost extends Mailable
 {
     use Queueable, SerializesModels;
-    
+
     /**
      * the message
      *
-     * @var mixed
+     * @var \App\Models\Message
      */
-    public $message;
+    public Message $message;
 
     /**
      * Create a new message instance.
