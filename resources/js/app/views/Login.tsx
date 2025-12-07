@@ -40,14 +40,14 @@ const Login = () => {
                 setPassword("")
                 dispatch(clear())
                 toast.success("Hai effettuato il login!", {
-                    position: toast.POSITION.TOP_RIGHT,
+                    position: 'top-right',
                     autoClose: 3000,
                 });
                 // console.log("store token: ", response.data.token);
                 return navigate("/dashboard");
             }
             toast.error("Le credenziali sono errate!", {
-                position: toast.POSITION.TOP_RIGHT,
+                position: 'top-right',
                 autoClose: 3000,
             });
             dispatch(clear())

@@ -16,13 +16,13 @@ const ForgetPassword = () => {
             const response = await api.passwordResetLink(data)
             if (response.data.success) {
                 toast.success("Reset link della password creato correttamente, controlla la tua email!", {
-                    position: toast.POSITION.TOP_RIGHT,
+                    position: 'top-right',
                     autoClose: 3000,
                 });
                 navigate('/')
             } else {
                 toast.error("Reset link della password non creato, controlla che l'email sia giusta!", {
-                    position: toast.POSITION.TOP_RIGHT,
+                    position: 'top-right',
                     autoClose: 3000,
                 });
             }

@@ -23,20 +23,20 @@ const ResetPassword = () => {
             const response = await api.resetPassword(data)
             if (response.data.success) {
                 toast.success("Hai resettato la password con successo!", {
-                    position: toast.POSITION.TOP_RIGHT,
+                    position: 'top-right',
                     autoClose: 3000,
                 });
                 navigate('/login')
             } else {
                 toast.error("La password non è stata resettata controlla che non è scaduto il tempo dell'email!", {
-                    position: toast.POSITION.TOP_RIGHT,
+                    position: 'top-right',
                     autoClose: 3000,
                 });
             }
         } catch (e) {
             console.log("Error reset password:", e);
             toast.error("Errore per resettare la password!!", {
-                position: toast.POSITION.TOP_RIGHT,
+                position: 'top-right',
                 autoClose: 3000,
             });
         }
