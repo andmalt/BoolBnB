@@ -76,7 +76,7 @@ const Settings = (props: SettingsProps) => {
             const response = await api.setUser(authSelector.token, data)
             if (response.data.success) {
                 toast.success("Le tue info sono state cambiate con successo!", {
-                    position: toast.POSITION.TOP_RIGHT,
+                    position: 'top-right',
                     autoClose: 3000,
                 });
                 getUserDetails()
@@ -102,7 +102,7 @@ const Settings = (props: SettingsProps) => {
                 const response = await api.changeUserPassword(authSelector.token, data)
                 if (response.data.success) {
                     toast.success("La tua password è stata sostituita con successo!", {
-                        position: toast.POSITION.TOP_RIGHT,
+                        position: 'top-right',
                         autoClose: 3000,
                     });
                     setCurrentPassword("")
@@ -111,7 +111,7 @@ const Settings = (props: SettingsProps) => {
                 }
             } else {
                 toast.error("La tue nuove password non corrispondono", {
-                    position: toast.POSITION.TOP_RIGHT,
+                    position: 'top-right',
                     autoClose: 3000,
                 })
             }
@@ -126,7 +126,7 @@ const Settings = (props: SettingsProps) => {
         // console.log("fileList=", e.target.files);
         setFile(e.target.files[0]);
         toast.info("Hai inserito una foto adesso puoi salvarla!", {
-            position: toast.POSITION.TOP_RIGHT,
+            position: 'top-right',
             autoClose: 3000,
         });
     };
@@ -149,12 +149,12 @@ const Settings = (props: SettingsProps) => {
             if (response.data.success) {
                 getUserDetails()
                 toast.success("La foto è stata salvata con successo!", {
-                    position: toast.POSITION.TOP_RIGHT,
+                    position: 'top-right',
                     autoClose: 3000,
                 });
             } else {
                 toast.warning("La foto non è stata salvata!", {
-                    position: toast.POSITION.TOP_RIGHT,
+                    position: 'top-right',
                     autoClose: 3000,
                 });
             }
@@ -192,7 +192,7 @@ const Settings = (props: SettingsProps) => {
             const response = await api.deleteAccount(authSelector.token)
             if (response.status === 200) {
                 toast.warning("Il tuo account è stato cancellato correttamente!", {
-                    position: toast.POSITION.TOP_RIGHT,
+                    position: 'top-right',
                     autoClose: 5000,
                 });
                 dispatch(logout())

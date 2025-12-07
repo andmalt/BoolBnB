@@ -21,7 +21,6 @@ const Homes = () => {
     const [mapZoom, setMapZoom] = useState<number>(4);
     const [map, setMap] = useState<tt.Map>();
     const [housesFiltered, setHousesFiltered] = useState<House[]>();
-    // const mapElement = React.useRef() as React.MutableRefObject<HTMLInputElement>;
     const mapElement = React.useRef<HTMLDivElement>(null);
     const dispatch = useAppDispatch();
     const authSelector = useAppSelector(state => state.auth);

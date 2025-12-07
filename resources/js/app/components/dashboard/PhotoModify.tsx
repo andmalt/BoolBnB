@@ -46,7 +46,7 @@ const PhotoModify = () => {
     }
     if (!fileList) {
       toast.error("Inserisci almeno una foto!", {
-        position: toast.POSITION.TOP_RIGHT,
+        position: 'top-right',
         autoClose: 3000,
       });
       return;
@@ -60,13 +60,13 @@ const PhotoModify = () => {
     const response = await api.updatePhotos(authSelector.token, dashSelector.id, data);
     if (response.data.success) {
       toast.success("Le foto sono state salvate con successo!", {
-        position: toast.POSITION.TOP_RIGHT,
+        position: 'top-right',
         autoClose: 3000,
       });
       getMyPhotos()
     } else {
       toast.error("Le foto non sono state salvate per un errore!", {
-        position: toast.POSITION.TOP_RIGHT,
+        position: 'top-right',
         autoClose: 3000,
       });
     }
