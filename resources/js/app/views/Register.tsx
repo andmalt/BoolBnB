@@ -59,7 +59,7 @@ const Register = () => {
                 dispatch(clear())
                 // console.log("store token: " + authSelector.token);
                 toast.success("Ti sei registrato correttamente!", {
-                    position: toast.POSITION.TOP_RIGHT,
+                    position: 'top-right',
                     autoClose: 3000,
                 });
                 return navigate("/dashboard");
@@ -70,7 +70,7 @@ const Register = () => {
             console.log("register failed");
             dispatch(clear())
             toast.error("La registrazione non è andata a buon fine!", {
-                position: toast.POSITION.TOP_RIGHT,
+                position: 'top-right',
                 autoClose: 3000,
             });
         } catch (e) {

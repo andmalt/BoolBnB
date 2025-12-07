@@ -1,10 +1,13 @@
 import axios from "axios"
 import { convertInputForm, deleteLocalStorage, setLocalStorage } from "./functions";
 
-const BASE_URL: string = `http://localhost:8000`;
+// Base URL for API requests
+const BASE_URL: string = window.location.origin;
 
+// Get CSRF token from meta tag in HTML head
 const csrf = document.head.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
 
+// API service object containing various methods for making HTTP requests
 const api = {
     login: async function (email: string, password: string) {
         try {
