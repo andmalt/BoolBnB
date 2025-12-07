@@ -22,7 +22,7 @@ const HouseView = () => {
     const [mapLatitude, setMapLatitude] = useState<number>(0);
     const [mapZoom, setMapZoom] = useState<number>(5);
     const [map, setMap] = useState<tt.Map>();
-    const mapElement = React.useRef() as React.MutableRefObject<HTMLInputElement>;
+    const mapElement = React.useRef<HTMLDivElement>(null);
     const dispatch = useAppDispatch();
 
     const getHome = async () => {
@@ -82,6 +82,8 @@ const HouseView = () => {
     }, [count])
 
     useEffect(() => {
+        if (!mapElement.current) return;
+
         let map = tt.map({
             key: "CskONgb89uswo1PwlNDOtG4txMKrp1yQ",
             container: mapElement.current,

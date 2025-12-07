@@ -21,7 +21,8 @@ const Homes = () => {
     const [mapZoom, setMapZoom] = useState<number>(4);
     const [map, setMap] = useState<tt.Map>();
     const [housesFiltered, setHousesFiltered] = useState<House[]>();
-    const mapElement = React.useRef() as React.MutableRefObject<HTMLInputElement>;
+    // const mapElement = React.useRef() as React.MutableRefObject<HTMLInputElement>;
+    const mapElement = React.useRef<HTMLDivElement>(null);
     const dispatch = useAppDispatch();
     const authSelector = useAppSelector(state => state.auth);
 
@@ -72,6 +73,8 @@ const Homes = () => {
      * make map with markers
      */
     useEffect(() => {
+        if (!mapElement.current) return;
+
         let map = tt.map({
             key: "CskONgb89uswo1PwlNDOtG4txMKrp1yQ",
             container: mapElement.current,
