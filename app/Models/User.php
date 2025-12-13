@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -25,6 +26,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
     ];
+
+    protected $appends = ['avatar_url'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -55,5 +58,23 @@ class User extends Authenticatable implements MustVerifyEmail
     public function apartments()
     {
         return $this->hasMany(Apartment::class);
+    }
+
+    public function getAvatarUrlAttribute()
+    {
+        if (!$this->image) {
+            return null;
+        }
+
+        if (str_starts_with($this->image, 'http')) {
+            return $this->image;
+        }
+
+        try {
+            return Storage::disk('s3')->url($this->image);
+        } catch (\Throwable $e) {
+            // fallback: return null if any error occurs
+            return null;
+        }
     }
 }

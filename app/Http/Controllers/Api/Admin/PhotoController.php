@@ -45,9 +45,19 @@ class PhotoController extends Controller
 
             return response()->json($response, 400);
         }
+        $file = $request->file('image');
 
-        Storage::delete($user->image);
-        $user->image =  Storage::put('public/user/image', $request->file('image'));
+        // Remove old image from MinIO
+        if ($user->image) {
+            Storage::disk('s3')->delete($user->image);
+        }
+        // Create unique path for the new image
+        $path = 'users/' . $user->id . '/avatar_' . time() . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
+
+        // Upload to MinIO
+        Storage::disk('s3')->put($path, file_get_contents($file));
+
+        $user->image = $path;
         $user->save();
 
 
@@ -67,26 +77,24 @@ class PhotoController extends Controller
     public function destroyMyImage(Request $request)
     {
         $user = $request->user();
-        $response = [];
 
         if (!$user) {
-            $response['success'] = false;
-            $response['message'] = "You are not authenticated";
-
-            return response()->json($response, 401);
+            return response()->json([
+                'success' => false,
+                'message' => "You are not authenticated",
+            ], 401);
         }
 
-        $deleted = Storage::delete($user->image);
-
-        if ($deleted) {
+        if ($user->image) {
+            Storage::disk('s3')->delete($user->image);
             $user->image = null;
             $user->save();
         }
 
-        $response['success'] = true;
-        $response['message'] = "You destroyed the photo!";
-
-        return response()->json($response);
+        return response()->json([
+            'success' => true,
+            'message' => "You destroyed the photo!",
+        ]);
     }
 
 
@@ -102,12 +110,10 @@ class PhotoController extends Controller
         $apartment = Apartment::find($id);
 
         if (!$apartment || $apartment->user_id !== $request->user()->id) {
-            $response = [
+            return response()->json([
                 'success' => false,
-                'message' => "there isn't any apartment or you aren't the user"
-            ];
-
-            return response()->json($response, 404);
+                'message' => "there isn't any apartment or you aren't the user",
+            ], 404);
         }
 
         $validator = Validator::make($request->all(), [
@@ -116,31 +122,40 @@ class PhotoController extends Controller
         ]);
 
         if ($validator->fails()) {
-
-            $response = [
+            return response()->json([
                 'success' => false,
                 'message' => $validator->errors(),
-            ];
-
-            return response()->json($response, 400);
+            ], 400);
         }
 
-        if ($request->hasFile('image-1')) {
-            foreach ($request->all() as $image) {
-                $photo = new Photo();
-                $url = time() . Str::random(20) . '.' . $image->extension();
-                $image->move(storage_path('app/public/apartments/images/'), $url);
-                $photo->apartment_id = $apartment->id;
-                $photo->image_url = $url;
-                $photo->save();
+        // I get all images in the request (image-1, image-2, ecc)
+        $files = $request->allFiles();
+        // $files = $request->file();
+
+        foreach ($files as $file) {
+            if (!$file) {
+                continue;
             }
+
+            $filename = time() . Str::random(20) . '.' . $file->getClientOriginalExtension();
+
+            // Logic path to bucket MinIO
+            $path = 'apartments/' . $apartment->id . '/' . $filename;
+
+            // Upload to MinIO
+            Storage::disk('s3')->put($path, file_get_contents($file));
+
+            // Save in DB
+            $photo = new Photo();
+            $photo->apartment_id = $apartment->id;
+            $photo->image_url = $path;
+            $photo->save();
         }
 
-        $response = [
+        return response()->json([
             'success' => true,
             'message' => 'image or images uploaded',
-        ];
-        return response()->json($response, 201);
+        ], 201);
     }
 
     /**
@@ -153,21 +168,30 @@ class PhotoController extends Controller
     public function deleteImage(int $id, Request $request)
     {
         $photo = Photo::find($id);
-        if ($photo->apartment->user->id == $request->user()->id) {
-            Storage::disk('public')->delete('apartments/images/' . $photo->image_url);
-            $photo->delete();
 
-            $response = [
-                'success' => true,
-                'message' => 'image is deleted',
-            ];
-            return response()->json($response);
-        } else {
-            $response = [
+        if (!$photo) {
+            return response()->json([
+                'success' => false,
+                'message' => 'image not found',
+            ], 404);
+        }
+
+        if ($photo->apartment->user->id != $request->user()->id) {
+            return response()->json([
                 'success' => false,
                 'message' => 'image is not deleted',
-            ];
-            return response()->json($response, 401);
+            ], 401);
         }
+
+        // Delete from MinIO
+        Storage::disk('s3')->delete($photo->image_url);
+
+        // Delete from DB
+        $photo->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'image is deleted',
+        ]);
     }
 }
