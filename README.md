@@ -45,9 +45,11 @@ To start the project, follow these steps:
    php artisan key:generate
 ```
 
-7. Run database migrations:
+7. Run database migrations and seeders(fake data if needed):
 ```bash
    php artisan migrate
+
+   php artisan db:seed
 ```
 
 8. Start the Laravel development server:

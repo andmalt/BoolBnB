@@ -50,11 +50,12 @@ const Settings = (props: SettingsProps) => {
         try {
             const response = await api.getUser(authSelector.token)
             if (response.data.success) {
-                setName(response.data.user.name)
-                setSurname(response.data.user.surname)
-                setEmail(response.data.user.email)
-                setPhoto(response.data.user.image)
-                emailVerification()
+                const user = response.data.user;
+                setName(user.name);
+                setSurname(user.surname);
+                setEmail(user.email);
+                setPhoto(user.avatar_url || "");
+                emailVerification();
             }
             dispatch(clear())
         } catch (e) {
@@ -231,9 +232,9 @@ const Settings = (props: SettingsProps) => {
                             <span className='block'>
                                 <label className='flex flex-col flex-wrap items-start h-36 w-36'>
                                     <input type="file" name="image" id="image" className='hidden' onChange={handleFileChange} />
-                                    <img className='rounded-lg h-36 w-36 cursor-pointer' src={!photo ? "./default-user/user.png" : photo.replace('public/user/image/', 'storage/user/image/')} alt="#" />
                                 </label>
                                 <button type="submit" className='text-white rounded-lg py-2 px-4 my-1 bg-[#4e5a6f] hover:bg-[rgb(88,100,121)] dark:bg-[rgb(41,48,61)] dark:hover:bg-[rgb(51,58,71)]'>
+                                    <img className='rounded-lg h-36 w-36 cursor-pointer' src={!photo ? "./default-user/user.png" : photo} alt="Avatar" />
                                     Salva immagine
                                 </button>
                             </span>

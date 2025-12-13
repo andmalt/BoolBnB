@@ -28,11 +28,12 @@ const Profile = (props: ProfileProps) => {
         try {
             const response = await api.getUser(authSelector.token)
             if (response.data.success) {
-                setName(response.data.user.name)
-                setSurname(response.data.user.surname)
-                setEmail(response.data.user.email)
-                setPhoto(response.data.user.image)
-                setRegisteredSince(response.data.user.created_at)
+                const user = response.data.user;
+                setName(user.name);
+                setSurname(user.surname);
+                setEmail(user.email);
+                setPhoto(user.avatar_url || "");
+                setRegisteredSince(user.created_at)
                 emailVerification()
             }
             dispatch(clear())
@@ -114,7 +115,7 @@ const Profile = (props: ProfileProps) => {
                     <div className=" dark:text-white text-black">
                         <div className="flex flex-col justify-start items-start text-sm">
                             <div className="text-center my-4 flex md:ml-[15%]">
-                                <img className="h-40 w-40 rounded-full border-4 border-white mx-auto my-2" src={!photo ? "./default-user/user.png" : photo.replace('public/user/image/', 'storage/user/image/')} alt="my photo" />
+                                <img className="h-40 w-40 rounded-full border-4 border-white mx-auto my-2" src={!photo ? "./default-user/user.png" : photo} alt="my photo" />
                             </div>
                             <div className="grid grid-cols-2">
                                 <div className="px-4 py-2 font-bold">Nome</div>
