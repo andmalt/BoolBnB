@@ -14,18 +14,15 @@ return new class extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('apartment_id');
-            $table->foreignId('sponsorship_id');
-            $table->dateTime('start_date');
-            $table->dateTime('end_date');
+            $table->string('email', 100);
+            $table->text('message_content');
+            $table->string('name');
+            $table->string('surname');
             $table->timestamps();
 
             $table->foreign('apartment_id')
                 ->references('id')
                 ->on('apartments')
-                ->onDelete('cascade');
-            $table->foreign('sponsorship_id')
-                ->references('id')
-                ->on('sponsorships')
                 ->onDelete('cascade');
         });
     }
@@ -37,7 +34,6 @@ return new class extends Migration
     {
         Schema::table('messages', function (Blueprint $table) {
             $table->dropForeign('messages_apartment_id_foreign');
-            $table->dropForeign('messages_sponsorship_id_foreign');
         });
         Schema::dropIfExists('messages');
     }
