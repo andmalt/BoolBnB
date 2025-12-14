@@ -8,20 +8,16 @@ interface SwitcherProps {
 
 const Switcher = (props: SwitcherProps) => {
     const { className } = props;
-    const { colorTheme, changeTheme } = useDarkSide();
-    const [darkSide, setDarkSide] = useState(
-        colorTheme === "dark" ? false : true
-    );
+    const { theme, setTheme } = useDarkSide();
+    const isDark = theme === "dark";
 
-    const toggleDarkMode = (checked: any) => {
-        let mode = checked ? "dark" : "light"
-        changeTheme(mode);
-        setDarkSide(checked);
+    const toggleDarkMode = (checked: boolean) => {
+        setTheme(checked ? "dark" : "light");
     };
 
     return (
         <>
-            <Switch checked={darkSide} onChange={toggleDarkMode} className={classNames(className, darkSide ? 'bg-[#6366f1]' : 'bg-slate-300', 'relative inline-flex h-[38px] w-[74px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75')}>
+            <Switch checked={isDark} onChange={toggleDarkMode} className={classNames(className, isDark ? 'bg-[#6366f1]' : 'bg-slate-300', 'relative inline-flex h-[38px] w-[74px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75')}>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 absolute z-[2] left-1 bottom-[6px]">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
                 </svg>
@@ -31,8 +27,7 @@ const Switcher = (props: SwitcherProps) => {
                 <span className="sr-only">Use setting</span>
                 <span
                     aria-hidden="true"
-                    className={`${darkSide ? 'translate-x-9' : 'translate-x-0'}
-            pointer-events-none inline-block h-[34px] w-[34px] transform rounded-full bg-white z-10 shadow-lg ring-0 transition duration-200 ease-in-out`}
+                    className={`dark:translate-x-9 translate-x-0 pointer-events-none inline-block h-[34px] w-[34px] transform rounded-full bg-white z-10 shadow-lg ring-0 transition duration-200 ease-in-out`}
                 />
             </Switch>
         </>

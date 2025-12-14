@@ -145,19 +145,13 @@ export const classNames = (...className: any) => {
 }
 
 export default function useDarkSide() {
-    const [theme, setTheme] = useState<any>(localStorage.theme);
-    const colorTheme = theme === "dark" ? "light" : "dark";
+  const [theme, setTheme] = useState<string>(() => localStorage.getItem("theme") ?? "light");
 
-    const changeTheme = (theme: string) => {
-        setTheme(theme)
-    }
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.toggle("dark", theme === "dark");
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
-    useEffect(() => {
-        let root = window.document.documentElement;
-        root.classList.remove(colorTheme);
-        root.classList.add(theme);
-        localStorage.setItem('theme', theme);
-    }, [theme, colorTheme]);
-
-    return { colorTheme, changeTheme }
+  return { theme, setTheme };
 }
