@@ -17,17 +17,14 @@ class Photo extends Model
 
     public function getUrlAttribute()
     {
-        // 1. If it's an external URL
+        if (!$this->image_url) {
+            return null;
+        }
+
         if (str_starts_with($this->image_url, 'http')) {
             return $this->image_url;
         }
 
-        // 2. If it still exists as an old image on local disk
-        if (Storage::disk('public')->exists('apartments/images/' . $this->image_url)) {
-            return asset('storage/apartments/images/' . $this->image_url);
-        }
-
-        // 3. New case: key on MinIO (s3)
         try {
             return Storage::disk('s3')->url($this->image_url);
         } catch (\Throwable $e) {

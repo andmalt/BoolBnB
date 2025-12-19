@@ -60,7 +60,8 @@ const Table = (props: TableProps) => {
                                         let photo: Photos = {
                                             id: 0,
                                             image_url: "https://via.placeholder.com/640x480.png/#C0C0C0?text=",
-                                            apartment_id: 0
+                                            apartment_id: 0,
+                                            url: "https://via.placeholder.com/640x480.png/#C0C0C0?text="
                                         }
                                         house.photos?.forEach((el, i) => {
                                             if (i == 0) {
@@ -75,8 +76,7 @@ const Table = (props: TableProps) => {
                                                             <>
                                                                 <div onClick={() => changePage(variablesDashboard.HOME, house.id)} className="flex items-center text-sm cursor-pointer">
                                                                     <div className="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                                                                        <img className="object-cover w-full h-full rounded-full" src={photo?.image_url.includes("https://") ||
-                                                                            photo?.image_url.includes("http://") ? photo?.image_url : `/storage/apartments/images/${photo?.image_url}`} alt="" loading="lazy" />
+                                                                        <img className="object-cover w-full h-full rounded-full" src={photo?.url ?? photo?.image_url} alt="" loading="lazy" />
                                                                         <div className="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
                                                                     </div>
                                                                     <div >
@@ -88,8 +88,7 @@ const Table = (props: TableProps) => {
                                                             :
                                                             <div onClick={getStatistics ? () => getStatistics(house.id) : () => { }} className="flex items-center text-sm cursor-pointer">
                                                                 <div className="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                                                                    <img className="object-cover w-full h-full rounded-full" src={photo?.image_url.includes("https://") ||
-                                                                        photo?.image_url.includes("http://") ? photo?.image_url : `/storage/apartments/images/${photo?.image_url}`} alt="" loading="lazy" />
+                                                                    <img className="object-cover w-full h-full rounded-full" src={photo?.url ?? photo?.image_url} alt="" loading="lazy" />
                                                                     <div className="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
                                                                 </div>
                                                                 <div >
