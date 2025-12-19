@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Http\Client\ConnectionException;
 use Carbon\Carbon;
 
 class ApartmentController extends Controller
@@ -99,16 +101,13 @@ class ApartmentController extends Controller
         $data = $validated;
         $data['user_id'] = $request->user()->id;
 
-        // call api to TomTom and response decoding
-        $address = str_replace(' ', '-', $data['address']);
+        // $address = str_replace(' ', '_', $data['address']);
 
-        $call = Http::get('https://api.tomtom.com/search/2/geocode/' . $data['region'] . '-' . $data['city'] . '-' . $address . '.JSON?key=CskONgb89uswo1PwlNDOtG4txMKrp1yQ');
-
-        $response = json_decode($call);
+        $coords = $this->geocodeWithPhoton($data['address'], $data['city'], $data['region']);
 
         // inserted in data the results lat,lon in the response 
-        $data['lat'] = $response->results[0]->position->lat;
-        $data['lon'] = $response->results[0]->position->lon;
+        $data['lat'] = $coords['lat'];
+        $data['lon'] = $coords['lon'];
 
         $apartment = new Apartment();
         $apartment->fill($data);
@@ -197,15 +196,13 @@ class ApartmentController extends Controller
             'price' => 'required|numeric|min:1.00|max:9999.00',
         ]);
 
-        // call api to TomTom and response decoding
-        $address = str_replace(' ', '-', $data['address']);
-        $call = Http::get('https://api.tomtom.com/search/2/geocode/' . $data['region'] . '-' . $data['city'] . '-' . $address . '.JSON?key=CskONgb89uswo1PwlNDOtG4txMKrp1yQ');
+        // $address = str_replace(' ', '_', $data['address']);
 
-        $response = json_decode($call);
+        $coords = $this->geocodeWithPhoton($data['address'], $data['city'], $data['region']);
 
         // inserted in data the results lat,lon in the response 
-        $data['lat'] = $response->results[0]->position->lat;
-        $data['lon'] = $response->results[0]->position->lon;
+        $data['lat'] = $coords['lat'];
+        $data['lon'] = $coords['lon'];
 
         if ($apartment) {
             $apartment->update($data);
@@ -247,8 +244,7 @@ class ApartmentController extends Controller
                 $apartment->facilities()->detach();
 
             foreach ($apartment->photos as $photo) {
-                $path = $photo->image_url;
-                Storage::disk('public')->delete('apartments/images/' . $path);
+                Storage::disk('s3')->delete($photo->image_url);
             }
 
             $response = [
@@ -266,5 +262,49 @@ class ApartmentController extends Controller
 
             return response()->json($response, 401);
         }
+    }
+
+    /**     * Geocode address using Photon API
+     *
+     * @param  string  $address
+     * @param  string  $city
+     * @param  string  $region
+     * @return array
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    private function geocodeWithPhoton(string $address, string $city, string $region): array
+    {
+        $q = trim("{$address}, {$city}, {$region}, Italy");
+
+        try {
+            $resp = Http::withoutVerifying()
+                ->timeout(10)
+                ->get('https://photon.komoot.io/api/', [
+                    'q' => $q,
+                    'limit' => 1,
+                ]);
+        } catch (ConnectionException $e) {
+            throw ValidationException::withMessages([
+                'address' => 'Photon error: ' . $e->getMessage(),
+            ]);
+        }
+
+        if (!$resp->successful()) {               
+            throw ValidationException::withMessages([
+                'address' => 'Geocoding failed (Photon). HTTP ' . $resp->status(),
+            ]);
+        }
+
+        $geojson = $resp->json();                 
+        $coords = data_get($geojson, 'features.0.geometry.coordinates');
+
+        if (!is_array($coords) || count($coords) < 2) {
+            throw ValidationException::withMessages([
+                'address' => 'Address not found (geocoding).',
+            ]);
+        }
+
+        return ['lon' => (float)$coords[0], 'lat' => (float)$coords[1]];
     }
 }
