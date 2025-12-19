@@ -1,4 +1,4 @@
-import tt from '@tomtom-international/web-sdk-maps';
+import maplibregl from 'maplibre-gl';
 import React, { useEffect, useState } from 'react'
 import { HouseSmallCard } from '../components';
 import api from '../services/connection_manager';
@@ -6,7 +6,7 @@ import { House, Photos } from '../services/interfaces';
 import { clear, error, loading } from '../store/authSlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { REGIONS } from "../services/variables"
-import '@tomtom-international/web-sdk-maps/dist/maps.css'
+import 'maplibre-gl/dist/maplibre-gl.css';
 import "../../../css/homesMap.css"
 
 const Homes = () => {
@@ -19,7 +19,7 @@ const Homes = () => {
     const [mapLongitude, setMapLongitude] = useState<number>(12.92935);
     const [mapLatitude, setMapLatitude] = useState<number>(42.37644);
     const [mapZoom, setMapZoom] = useState<number>(4);
-    const [map, setMap] = useState<tt.Map>();
+    const [map, setMap] = useState<maplibregl.Map>();
     const [housesFiltered, setHousesFiltered] = useState<House[]>();
     const mapElement = React.useRef<HTMLDivElement>(null);
     const dispatch = useAppDispatch();
@@ -74,15 +74,15 @@ const Homes = () => {
     useEffect(() => {
         if (!mapElement.current) return;
 
-        let map = tt.map({
-            key: "CskONgb89uswo1PwlNDOtG4txMKrp1yQ",
+        let map = new maplibregl.Map({
             container: mapElement.current,
+            style: 'https://tiles.openfreemap.org/styles/bright',
             center: [mapLongitude, mapLatitude],
             zoom: mapZoom
         });
         const createMarkers = () => {
             housesFiltered?.forEach(el => {
-                new tt.Marker().setLngLat([parseFloat(el.lon), parseFloat(el.lat)]).addTo(map);
+                new maplibregl.Marker().setLngLat([parseFloat(el.lon), parseFloat(el.lat)]).addTo(map);
             })
             setMap(map);
         }

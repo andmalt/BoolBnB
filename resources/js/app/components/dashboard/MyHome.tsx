@@ -3,8 +3,8 @@ import api from '../../services/connection_manager';
 import { House, Photos } from '../../services/interfaces';
 import { clear, error, loading } from '../../store/authSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import '@tomtom-international/web-sdk-maps/dist/maps.css'
-import tt from '@tomtom-international/web-sdk-maps';
+import 'maplibre-gl/dist/maplibre-gl.css';
+import maplibregl from 'maplibre-gl';
 
 const MyHome = () => {
     const [home, setHome] = useState<House | null>(null);
@@ -18,7 +18,7 @@ const MyHome = () => {
     const [mapLongitude, setMapLongitude] = useState<number>(0);
     const [mapLatitude, setMapLatitude] = useState<number>(0);
     const [mapZoom, setMapZoom] = useState<number>(5);
-    const [map, setMap] = useState<tt.Map>();
+    const [map, setMap] = useState<maplibregl.Map | null>(null);
     const mapElement = React.useRef<HTMLDivElement>(null);
     const dispatch = useAppDispatch();
 
@@ -48,8 +48,8 @@ const MyHome = () => {
             const response = await api.getMyHome(authSelector.token, dashSelector.id);
             if (response.data.success) {
                 // console.log("apartment", response.data.apartment);
-                setMapLongitude(response.data.apartment.lon)
-                setMapLatitude(response.data.apartment.lat)
+                setMapLongitude(parseFloat(response.data.apartment.lon))
+                setMapLatitude(parseFloat(response.data.apartment.lat))
                 setHome(response.data.apartment)
                 setPhotos(response.data.apartment.photos)
                 setPhoto(response.data.apartment.photos[0])
@@ -74,14 +74,13 @@ const MyHome = () => {
 
     useEffect(() => {
         if (!mapElement.current) return;
-        let map = tt.map({
-            key: "CskONgb89uswo1PwlNDOtG4txMKrp1yQ",
+        let map = new maplibregl.Map({
             container: mapElement.current,
+            style: 'https://tiles.openfreemap.org/styles/bright',
             center: [mapLongitude, mapLatitude],
             zoom: mapZoom
         });
-        new tt.Marker().setLngLat([mapLongitude, mapLatitude]).addTo(map);
-
+        new maplibregl.Marker().setLngLat([mapLongitude, mapLatitude]).addTo(map);
         setMap(map);
 
         return () => map.remove();
@@ -116,8 +115,7 @@ const MyHome = () => {
                         {
                             photos?.length != 0 && photos != undefined ?
                                 <div className="duration-700 ease-in-out">
-                                    <img src={photo?.image_url.includes("https://") ||
-                                        photo?.image_url.includes("http://") ? photo?.image_url : `/storage/apartments/images/${photo?.image_url}`} className="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt={`image ${photo?.id}`} />
+                                    <img src={photo?.url ?? photo?.image_url} className="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt={`image ${photo?.id}`} />
                                 </div>
                                 :
                                 <div className="duration-700 ease-in-out">
