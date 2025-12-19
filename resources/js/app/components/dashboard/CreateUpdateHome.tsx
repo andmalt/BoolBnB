@@ -73,7 +73,7 @@ const CreateUpdateHome = () => {
 
     const updateMyHome = async (e: any) => {
         e.preventDefault();
-        const confirm = window.confirm('Sei sicuro di voler modificare la casa?');
+        const confirm = window.confirm(dashSelector.isCreate ? 'Sei sicuro di voler creare la casa?' : 'Sei sicuro di voler modificare la casa?');
         if (!confirm) {
             return;
         }
@@ -94,9 +94,9 @@ const CreateUpdateHome = () => {
         }
         try {
             if (dashSelector.isCreate == false) {
-                const response = api.updateMyHome(authSelector.token, dashSelector.id, data);
+                const response = await api.updateMyHome(authSelector.token, dashSelector.id, data);
                 // console.log("resp=",(await response).data);
-                if ((await response).data.success) {
+                if (response.data.success) {
                     setDashboardComponents(variablesDashboard.HOUSES);
                     dispatch(setDashboard(variablesDashboard.HOUSES));
                     setIsCreate(false)
@@ -106,16 +106,16 @@ const CreateUpdateHome = () => {
                 } else {
                     // console.log("error=",(await response).data.error.message.response.data.errors);
                     let array = []
-                    for (const key in (await response).data.error.message.response.data.errors) {
-                        array.push((await response).data.error.message.response.data.errors[key]);
+                    for (const key in response.data.error.message.response.data.errors) {
+                        array.push(response.data.error.message.response.data.errors[key]);
                     }
                     // change alert with modal
                     alert(array.length >= 1 ? array : "Non esiste il luogo selezionato")
                 }
             } else {
-                const response = api.createMyHome(authSelector.token, data);
+                const response = await api.createMyHome(authSelector.token, data);
                 // console.log("resp=",(await response).data);
-                if ((await response).data.success) {
+                if (response.data.success) {
                     setDashboardComponents(variablesDashboard.HOUSES);
                     dispatch(setDashboard(variablesDashboard.HOUSES));
                     setIsCreate(false)
@@ -125,8 +125,8 @@ const CreateUpdateHome = () => {
                 } else {
                     // console.log("error=",(await response).data.error.message.response.data.errors);
                     let array = []
-                    for (const key in (await response).data.error.message.response.data.errors) {
-                        array.push((await response).data.error.message.response.data.errors[key]);
+                    for (const key in response.data.error.message.response.data.errors) {
+                        array.push(response.data.error.message.response.data.errors[key]);
                     }
                     // change alert with modal
                     alert(array.length >= 1 ? array : "Non esiste il luogo selezionato")
@@ -204,7 +204,7 @@ const CreateUpdateHome = () => {
                         <h2 className='dark:text-white text-black text-2xl font-bold'>Crea una casa</h2>
                     </div>
             }
-            <form id="update-apartment" className='text-black dark:text-[#9ca3af]' onSubmit={(e) => updateMyHome(e)} >
+            <form id="update-apartment" className='text-black dark:text-[#9ca3af]' onSubmit={async (e) => await updateMyHome(e)} >
                 {
                     dashSelector.isCreate ?
                         <label className="block mt-3">

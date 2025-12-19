@@ -86,8 +86,8 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('my/apartments/recfac', [ApartmentController::class, 'myFacReg']);
     Route::post('my/apartments', [ApartmentController::class, 'index']);
-    Route::post('my/apartment/{id}', [ApartmentController::class, 'show']);
     Route::post('my/apartment/create', [ApartmentController::class, 'store']);
+    Route::post('my/apartment/{id}', [ApartmentController::class, 'show'])->whereNumber('id');
     Route::patch('my/apartment/{id}/update', [ApartmentController::class, 'update']);
     Route::delete('my/apartment/{id}/delete', [ApartmentController::class, 'destroy']);
     Route::post('user/image/upload', [PhotoController::class, 'uploadMyImage']);

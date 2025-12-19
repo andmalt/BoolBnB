@@ -17,7 +17,7 @@ const MyHome = () => {
     const dashSelector = useAppSelector(store => store.dashboard);
     const [mapLongitude, setMapLongitude] = useState<number>(0);
     const [mapLatitude, setMapLatitude] = useState<number>(0);
-    const [mapZoom, setMapZoom] = useState<number>(5);
+    const [mapZoom, setMapZoom] = useState<number>(11);
     const [map, setMap] = useState<maplibregl.Map | null>(null);
     const mapElement = React.useRef<HTMLDivElement>(null);
     const dispatch = useAppDispatch();
