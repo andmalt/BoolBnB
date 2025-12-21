@@ -21,10 +21,6 @@ class Photo extends Model
             return null;
         }
 
-        if (str_starts_with($this->image_url, 'http')) {
-            return $this->image_url;
-        }
-
         try {
             return Storage::disk('s3')->url($this->image_url);
         } catch (\Throwable $e) {

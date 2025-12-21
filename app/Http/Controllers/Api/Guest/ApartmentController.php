@@ -7,6 +7,7 @@ use App\Models\Apartment;
 use App\Models\Stat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Photo;
 
 class ApartmentController extends Controller
 {
@@ -14,7 +15,9 @@ class ApartmentController extends Controller
     {
         $apartments = DB::table('apartments')
             ->orderByDesc('visible')->get();
-        $photos = DB::table('photos')->get();
+        $photos = Photo::query()
+            ->get()
+            ->makeHidden(['image_url']);
 
         $response = [
             "apartments" => $apartments,

@@ -40,7 +40,7 @@ SVG;
 
         return [
             'apartment_id' => $apartment_id,
-            'image_url' => Storage::disk('s3')->url($path), // "/storage/photos/....svg"
+            'image_url' => $path, // "/apartments/1/....svg"
         ];
     }
 }
