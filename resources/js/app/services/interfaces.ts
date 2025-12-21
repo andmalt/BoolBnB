@@ -26,7 +26,6 @@ export interface House {
 export interface Photos {
     id: number,
     apartment_id: number,
-    image_url: string,
     url: string,
 }
 

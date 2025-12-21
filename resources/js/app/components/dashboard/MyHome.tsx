@@ -115,7 +115,7 @@ const MyHome = () => {
                         {
                             photos?.length != 0 && photos != undefined ?
                                 <div className="duration-700 ease-in-out">
-                                    <img src={photo?.url ?? photo?.image_url} className="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt={`image ${photo?.id}`} />
+                                    <img src={photo?.url} className="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt={`image ${photo?.id}`} />
                                 </div>
                                 :
                                 <div className="duration-700 ease-in-out">
