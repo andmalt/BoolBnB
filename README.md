@@ -58,3 +58,14 @@ To start the project, follow these steps:
 ```
 
 Now you can access the application at `http://127.0.0.1:8000`.
+
+### Requirements
+- PHP >= 8.4
+- Composer
+- Node.js >= 22.x
+- MySQL or any other database supported by Laravel
+- Minio (for local S3-compatible storage)
+
+- MINIO CLI (for managing S3 buckets) important to set the bucket and **`policies`**
+### Note
+Make sure to configure your database and other environment variables, principally AWS credentials, in the `.env` file before running migrations and seeders.
