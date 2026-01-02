@@ -57,6 +57,11 @@ To start the project, follow these steps:
    php artisan serve
 ```
 
+9. Start the Scheduler (to run scheduled tasks):
+```bash
+   php artisan schedule:work
+```
+
 Now you can access the application at `http://127.0.0.1:8000`.
 
 ### Requirements

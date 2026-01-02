@@ -11,25 +11,24 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 
-// Schedule::call(function () {
-//     $timeNow = Carbon::now();
+Schedule::call(function () {
+    $timeNow = Carbon::now();
 
-//     $apartments = Apartment::with('sponsorships')->get();
+    $apartments = Apartment::with('sponsorships')->get();
 
-//     foreach ($apartments as $apartment) {
-//         $sponsorshipD = $apartment->sponsorships->pluck('pivot.end_date')->max();
+    foreach ($apartments as $apartment) {
+        $sponsorshipD = $apartment->sponsorships->pluck('pivot.end_date')->max();
 
-//         if ($sponsorshipD !== null && $timeNow->gt($sponsorshipD)) {
-//             $apartment->sponsorships()->detach();
-//             $apartment->visible = false;
-//             $apartment->save();
-//         } elseif ($sponsorshipD === null) {
-//             $apartment->visible = false;
-//             $apartment->save();
-//         }
-//     }
-// })
-// ->everyMinute()
-// ->runInBackground();
+        if ($sponsorshipD !== null && $timeNow->gt($sponsorshipD)) {
+            $apartment->sponsorships()->detach();
+            $apartment->visible = false;
+            $apartment->save();
+        } elseif ($sponsorshipD === null) {
+            $apartment->visible = false;
+            $apartment->save();
+        }
+    }
+})
+->everyMinute();
 
 // To run the scheduled tasks, use the command: php artisan schedule:work 
