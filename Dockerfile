@@ -37,6 +37,9 @@ COPY docker/nginx/app.conf /etc/nginx/conf.d/default.conf
 # Public folder (index.php, images, etc.)
 COPY public /var/www/html/public
 
+# Vite build output (public/build)
+COPY --from=node_build /app/public/build /var/www/html/public/build
+
 # ---------- Runtime (php-fpm only) ----------
 FROM php_base AS runtime
 COPY . .
@@ -47,6 +50,9 @@ COPY --from=node_build /app/public/build /var/www/html/public/build
 COPY docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh \
     && chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+
+  # Make php-fpm reachable from other containers (nginx)
+RUN sed -i 's|^listen = .*|listen = 0.0.0.0:9000|' /usr/local/etc/php-fpm.d/www.conf
 
 EXPOSE 9000
 ENTRYPOINT ["/entrypoint.sh"]
