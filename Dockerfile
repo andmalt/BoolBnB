@@ -15,7 +15,8 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 # ---------- Composer deps ----------
 FROM php_base AS vendor
-COPY composer.json composer.lock ./
+# composer.lock is gitignored: the glob makes it optional, composer resolves from composer.json when absent
+COPY composer.json composer.loc[k] ./
 RUN composer install \
     --prefer-dist \
     --no-interaction \

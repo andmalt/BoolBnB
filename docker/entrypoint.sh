@@ -3,7 +3,6 @@ set -e
 
 # Persist APP_KEY on a volume so it survives restarts
 KEY_FILE="/var/www/html/storage/app/.app_key"
-SEEDED_FLAG="/var/www/html/storage/app/.seeded"
 
 # Ensure Laravel writable dirs exist (volumes are empty on first run)
 mkdir -p /var/www/html/storage/app
@@ -46,10 +45,27 @@ if [ "${RUN_MIGRATIONS:-true}" = "true" ]; then
   echo "Running migrations..."
   php artisan migrate --force
 
-  if [ "${SEED_ON_START:-true}" = "true" ] && [ ! -f "$SEEDED_FLAG" ]; then
-    echo "Seeding database (first run only)..."
-    php artisan db:seed --force
-    touch "$SEEDED_FLAG"
+  if [ "${SEED_ON_START:-true}" = "true" ]; then
+    # Seed only when the database is actually empty: a flag file on the storage
+    # volume can get out of sync with the db volume and re-run the seeder on
+    # already-seeded data, crashing on unique constraints.
+    NEEDS_SEED=$(php -r '
+      $host=getenv("DB_HOST") ?: "db";
+      $port=getenv("DB_PORT") ?: "3306";
+      $db=getenv("DB_DATABASE") ?: "boolbnb";
+      $user=getenv("DB_USERNAME") ?: "boolbnb";
+      $pass=getenv("DB_PASSWORD") ?: "boolbnb";
+      try {
+        $pdo = new PDO("mysql:host=$host;port=$port;dbname=$db", $user, $pass);
+        echo $pdo->query("select count(*) from users")->fetchColumn() > 0 ? "no" : "yes";
+      } catch (Exception $e) { echo "yes"; }
+    ')
+    if [ "$NEEDS_SEED" = "yes" ]; then
+      echo "Seeding database (empty database detected)..."
+      php artisan db:seed --force
+    else
+      echo "Database already seeded, skipping."
+    fi
   fi
 fi
 

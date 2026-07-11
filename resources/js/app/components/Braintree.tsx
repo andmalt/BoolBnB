@@ -95,7 +95,7 @@ const Braintree = (props: BraintreeProps) => {
                         {
                             braintreeInstance && (
                                 <div className='w-full flex justify-center items-center'>
-                                    <button className='bg-white hover:bg-slate-200 text-black p-3 mb-4 rounded-lg' disabled={!braintreeInstance} onClick={requestPaymentMethod}>
+                                    <button className='btn btn-primary mb-4 w-full !py-3' disabled={!braintreeInstance} onClick={requestPaymentMethod}>
                                         Paga {sponsorship?.price}&euro;
                                     </button>
                                 </div>

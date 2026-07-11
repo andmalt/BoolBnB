@@ -35,7 +35,7 @@ const DialogModal = (props: ModalProps) => {
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                 >
-                    <div className="fixed inset-0 bg-black bg-opacity-25" />
+                    <div className="fixed inset-0 bg-ink-950/50 backdrop-blur-sm" />
                 </Transition.Child>
 
                 <div className="fixed inset-0 overflow-y-auto">
@@ -49,18 +49,21 @@ const DialogModal = (props: ModalProps) => {
                             leaveFrom="opacity-100 scale-100"
                             leaveTo="opacity-0 scale-95"
                         >
-                            <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                            <Dialog.Panel className="card w-full max-w-md transform overflow-hidden p-6 text-left align-middle shadow-xl transition-all">
                                 <Dialog.Title
                                     as="h3"
-                                    className="text-lg font-medium leading-6 text-gray-900"
+                                    className="flex items-center gap-2 text-lg font-semibold leading-6 text-heading"
                                 >
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="h-5 w-5 text-red-500">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                                    </svg>
                                     {type === "guest" ? "Errore Inserimento dati" : "Errori"}
                                 </Dialog.Title>
-                                <div className="mt-2">
+                                <div className="mt-3">
                                     {
                                         errors?.map((error, i) => {
                                             return (
-                                                <p key={`err${i}`} className="text-sm text-gray-500">
+                                                <p key={`err${i}`} className="text-sm text-muted">
                                                     {error}
                                                 </p>
                                             )
@@ -68,9 +71,9 @@ const DialogModal = (props: ModalProps) => {
                                     }
                                 </div>
 
-                                <div className="mt-4 flex flex-row justify-center">
+                                <div className="mt-6 flex flex-row justify-end">
                                     <button
-                                        className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                                        className="btn btn-primary"
                                         onClick={setOpenModal}
                                     >
                                         Va bene!

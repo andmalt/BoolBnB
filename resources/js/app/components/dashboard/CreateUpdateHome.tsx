@@ -190,59 +190,63 @@ const CreateUpdateHome = () => {
     }, [])
 
     return (
-        <div id='main'>
+        <div id='main' className='mx-4 my-4'>
             {
                 !dashSelector.isCreate ?
-                    <div className='flex flex-col items-end justify-center'>
-                        <div className='w-[100%] text-center'>
-                            <h2 className='dark:text-white text-black text-2xl font-bold'>Modifica casa</h2>
-                        </div>
-                        <button onClick={photoPage} className='bg-[#6366f1] hover:bg-[#6365f1d8] text-white rounded-xl py-2 px-4 m-5'>Inserisci e cambia foto</button>
+                    <div className='mb-6 flex flex-wrap items-center justify-between gap-3'>
+                        <h2 className='text-xl font-bold tracking-tight text-heading sm:text-2xl'>Modifica casa</h2>
+                        <button onClick={photoPage} className='btn btn-ghost'>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="h-4 w-4">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" />
+                            </svg>
+                            Inserisci e cambia foto
+                        </button>
                     </div>
                     :
-                    <div className='w-[100%] text-center'>
-                        <h2 className='dark:text-white text-black text-2xl font-bold'>Crea una casa</h2>
+                    <div className='mb-6'>
+                        <h2 className='text-xl font-bold tracking-tight text-heading sm:text-2xl'>Crea una casa</h2>
                     </div>
             }
-            <form id="update-apartment" className='text-black dark:text-[#9ca3af]' onSubmit={async (e) => await updateMyHome(e)} >
+            <form id="update-apartment" className='card p-6 text-black sm:p-8 dark:text-slate-300' onSubmit={async (e) => await updateMyHome(e)} >
                 {
                     dashSelector.isCreate ?
                         <label className="block mt-3">
-                            <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium ">
+                            <span className="field-label !mb-0 after:ml-0.5 after:text-red-500 after:content-['*']">
                                 Titolo
                             </span>
-                            <input type={"text"} name="title" className="mt-1 px-3 py-2 dark:bg-[#1d2432] bg-gray-50 dark:text-white text-black border shadow-sm border-slate-300 dark:border-[#0f1623] placeholder-[#9ca3af] focus:outline-none focus:border-[#6366f1] w-2/3 focus:ring-[#6366f1] block rounded-md sm:text-sm focus:ring-1" placeholder="Titolo di identificazione della casa" value={title} onChange={(e) => setTitle(e.target.value)} />
+                            <input type={"text"} name="title" className="field-input mt-1.5 w-full max-w-xl" placeholder="Titolo di identificazione della casa" value={title} onChange={(e) => setTitle(e.target.value)} />
                         </label>
                         :
                         null
                 }
                 <label className="block mt-3">
-                    <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium ">
+                    <span className="field-label !mb-0 after:ml-0.5 after:text-red-500 after:content-['*']">
                         Camere
                     </span>
-                    <input type={"text"} name="rooms" className="mt-1 px-3 py-2 dark:bg-[#1d2432] bg-gray-50 dark:text-white text-black border shadow-sm border-slate-300 dark:border-[#0f1623] placeholder-[#9ca3af] focus:outline-none focus:border-[#6366f1] w-2/3 focus:ring-[#6366f1] block rounded-md sm:text-sm focus:ring-1" placeholder="numero di camere" value={rooms} onChange={(e) => setRooms(e.target.value)} />
+                    <input type={"text"} name="rooms" className="field-input mt-1.5 w-full max-w-xl" placeholder="numero di camere" value={rooms} onChange={(e) => setRooms(e.target.value)} />
                 </label>
                 <label className="block mt-3">
-                    <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium">
+                    <span className="field-label !mb-0 after:ml-0.5 after:text-red-500 after:content-['*']">
                         Posti letto
                     </span>
-                    <input type={"text"} name="beds" className="mt-1 px-3 py-2 dark:bg-[#1d2432] bg-gray-50 dark:text-white text-black border shadow-sm border-slate-300 dark:border-[#0f1623] placeholder-[#9ca3af] focus:outline-none focus:border-[#6366f1] w-2/3 focus:ring-[#6366f1] block rounded-md sm:text-sm focus:ring-1" placeholder="numero massimo di posti letto" value={beds} onChange={(e) => setBeds(e.target.value)} />
+                    <input type={"text"} name="beds" className="field-input mt-1.5 w-full max-w-xl" placeholder="numero massimo di posti letto" value={beds} onChange={(e) => setBeds(e.target.value)} />
                 </label>
                 <label className="block mt-3">
-                    <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium">
+                    <span className="field-label !mb-0 after:ml-0.5 after:text-red-500 after:content-['*']">
                         Bagni
                     </span>
-                    <input type={"text"} name="bathrooms" className="mt-1 px-3 py-2 dark:bg-[#1d2432] bg-gray-50 dark:text-white text-black border shadow-sm border-slate-300 dark:border-[#0f1623] placeholder-[#9ca3af] focus:outline-none focus:border-[#6366f1] w-2/3 focus:ring-[#6366f1] block rounded-md sm:text-sm focus:ring-1" placeholder="numero di bagni" value={bathrooms} onChange={(e) => setBathrooms(e.target.value)} />
+                    <input type={"text"} name="bathrooms" className="field-input mt-1.5 w-full max-w-xl" placeholder="numero di bagni" value={bathrooms} onChange={(e) => setBathrooms(e.target.value)} />
                 </label>
                 <label className="block mt-3">
-                    <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium">
+                    <span className="field-label !mb-0 after:ml-0.5 after:text-red-500 after:content-['*']">
                         Metri quadri
                     </span>
-                    <input type="text" name="square" className="mt-1 px-3 py-2 dark:bg-[#1d2432] bg-gray-50 dark:text-white text-black border shadow-sm border-slate-300 dark:border-[#0f1623] placeholder-[#9ca3af] focus:outline-none focus:border-[#6366f1] w-2/3 focus:ring-[#6366f1] block rounded-md sm:text-sm focus:ring-1" placeholder="numero di metri quadri" value={square} onChange={(e) => setSquare(e.target.value)} />
+                    <input type="text" name="square" className="field-input mt-1.5 w-full max-w-xl" placeholder="numero di metri quadri" value={square} onChange={(e) => setSquare(e.target.value)} />
                 </label>
 
                 <div className="block mt-5">
-                    <span className=" block text-sm after:content-['*'] after:ml-0.5 after:text-red-500">
+                    <span className="field-label !mb-0 after:ml-0.5 after:text-red-500 after:content-['*']">
                         Servizi
                     </span>
                     <div className="flex flex-row flex-auto flex-wrap">
@@ -253,7 +257,7 @@ const CreateUpdateHome = () => {
                                         <label htmlFor={`facility-${facility.id}`} className="block text-sm font-medium ">
                                             {facility.name}
                                         </label>
-                                        <input type="checkbox" id={`facility-${facility.id}`} name={facility.name} checked={checkedState[i]} value={facility.id} onChange={() => handleInputChange(i)} className="mt-1 px-2 py-2 dark:bg-[#1d2432] bg-gray-50 border shadow-sm border-slate-300 dark:border-[#0f1623] placeholder-[#9ca3af] focus:outline-none focus:border-[#6366f1] focus:ring-[#6366f1] block rounded-md sm:text-sm focus:ring-1" />
+                                        <input type="checkbox" id={`facility-${facility.id}`} name={facility.name} checked={checkedState[i]} value={facility.id} onChange={() => handleInputChange(i)} className="mt-1.5 h-4 w-4 rounded border-slate-300 accent-brand-600" />
                                     </div>
                                 )
                             })
@@ -262,10 +266,10 @@ const CreateUpdateHome = () => {
                 </div>
 
                 <label className="block mt-3">
-                    <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium">
+                    <span className="field-label !mb-0 after:ml-0.5 after:text-red-500 after:content-['*']">
                         Regione
                     </span>
-                    <select value={region} onChange={e => setRegion(e.target.value)} name="region" id="region" className="mt-1 px-3 py-2 dark:bg-[#1d2432] bg-gray-50 dark:text-white text-black border shadow-sm border-slate-300 dark:border-[#0f1623] placeholder-[#9ca3af] focus:outline-none focus:border-[#6366f1] w-2/3 focus:ring-[#6366f1] block rounded-md sm:text-sm focus:ring-1">
+                    <select value={region} onChange={e => setRegion(e.target.value)} name="region" id="region" className="field-input mt-1.5 w-full max-w-xl">
                         <option className='hidden' value={region}>
                             {region}
                         </option>
@@ -282,31 +286,33 @@ const CreateUpdateHome = () => {
                 </label>
 
                 <label className="block mt-3">
-                    <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium ">
+                    <span className="field-label !mb-0 after:ml-0.5 after:text-red-500 after:content-['*']">
                         Città
                     </span>
-                    <input type="text" name="city" className="mt-1 px-3 py-2 dark:bg-[#1d2432] bg-gray-50 dark:text-white text-black border shadow-sm border-slate-300 dark:border-[#0f1623] placeholder-[#9ca3af] focus:outline-none focus:border-[#6366f1] w-2/3 focus:ring-[#6366f1] block rounded-md sm:text-sm focus:ring-1" placeholder="in quale città si trova" value={city} onChange={(e) => setCity(e.target.value)} />
+                    <input type="text" name="city" className="field-input mt-1.5 w-full max-w-xl" placeholder="in quale città si trova" value={city} onChange={(e) => setCity(e.target.value)} />
                 </label>
                 <label className="block mt-3">
-                    <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium ">
+                    <span className="field-label !mb-0 after:ml-0.5 after:text-red-500 after:content-['*']">
                         Indirizzo
                     </span>
-                    <input type="text" name="address" className="mt-1 px-3 py-2 dark:bg-[#1d2432] bg-gray-50 dark:text-white text-black border shadow-sm border-slate-300 dark:border-[#0f1623] placeholder-[#9ca3af] focus:outline-none focus:border-[#6366f1] w-2/3 focus:ring-[#6366f1] block rounded-md sm:text-sm focus:ring-1" placeholder="indirizzo della casa" value={address} onChange={(e) => setAddress(e.target.value)} />
+                    <input type="text" name="address" className="field-input mt-1.5 w-full max-w-xl" placeholder="indirizzo della casa" value={address} onChange={(e) => setAddress(e.target.value)} />
                 </label>
                 <label className="block mt-3">
-                    <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium">
+                    <span className="field-label !mb-0 after:ml-0.5 after:text-red-500 after:content-['*']">
                         Descrivi la casa
                     </span>
-                    <textarea cols={20} rows={5} name="description" className="mt-1 px-3 py-2 dark:bg-[#1d2432] bg-gray-50 dark:text-white text-black border shadow-sm border-slate-300 dark:border-[#0f1623] placeholder-[#9ca3af] focus:outline-none focus:border-[#6366f1] w-2/3 focus:ring-[#6366f1] block rounded-md sm:text-sm focus:ring-1" placeholder="una breve descrizione dell'abitazione" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+                    <textarea cols={20} rows={5} name="description" className="field-input mt-1.5 w-full max-w-xl" placeholder="una breve descrizione dell'abitazione" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
                 </label>
                 <label className="block mt-3">
-                    <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium ">
+                    <span className="field-label !mb-0 after:ml-0.5 after:text-red-500 after:content-['*']">
                         Prezzo
                     </span>
-                    <input type="text" name="price" className="mt-1 px-3 py-2 dark:bg-[#1d2432] bg-gray-50 dark:text-white text-black border shadow-sm border-slate-300 dark:border-[#0f1623] placeholder-[#9ca3af] focus:outline-none focus:border-[#6366f1] w-2/3 focus:ring-[#6366f1] block rounded-md sm:text-sm focus:ring-1" placeholder="prezzo in euro per notte" value={price} onChange={(e) => setPrice(e.target.value)} />
+                    <input type="text" name="price" className="field-input mt-1.5 w-full max-w-xl" placeholder="prezzo in euro per notte" value={price} onChange={(e) => setPrice(e.target.value)} />
                 </label>
-                <button className="bg-[#6366f1] hover:bg-[#6365f1d5] text-white rounded-xl py-2 px-6 m-5" type="submit">Salva</button>
-                <button className="bg-[#29303d] hover:bg-[#29303dcd] text-white rounded-xl py-2 px-4 m-5" onClick={exitPage}>Torna indietro</button>
+                <div className='mt-8 flex flex-wrap gap-3'>
+                    <button className="btn btn-primary !px-8" type="submit">Salva</button>
+                    <button className="btn btn-ghost" onClick={exitPage}>Torna indietro</button>
+                </div>
             </form>
         </div >
     )

@@ -19,7 +19,7 @@ const Table = (props: TableProps) => {
     const dispatch = useAppDispatch()
 
     /**
-     * 
+     *
      */
     const changePage = (varName: string, id: number) => {
         setDashboardComponents(varName);
@@ -30,11 +30,11 @@ const Table = (props: TableProps) => {
 
     return (
         <div className="mt-4 mx-4">
-            <div className="w-full overflow-hidden rounded-lg shadow-md">
+            <div className="card w-full overflow-hidden">
                 <div className="w-full overflow-x-auto">
                     <table className="w-full">
                         <thead>
-                            <tr className="text-xs font-semibold tracking-wide text-left dark:text-white uppercase border-b dark:bg-[#29303d] text-black bg-slate-300">
+                            <tr className="border-b border-slate-200/80 bg-slate-50 text-left text-xs font-semibold uppercase tracking-wider text-muted dark:border-white/10 dark:bg-ink-800">
                                 <th className="px-4 py-3">Casa</th>
                                 {
                                     !isStatistics ?
@@ -53,7 +53,7 @@ const Table = (props: TableProps) => {
                                 }
                             </tr>
                         </thead>
-                        <tbody className="bg-[#9ca3af]">
+                        <tbody className="divide-y divide-slate-100 dark:divide-white/5">
                             {
                                 houses?.data.length != 0 && houses?.data != undefined ?
                                     houses?.data.map((house, i) => {
@@ -68,31 +68,29 @@ const Table = (props: TableProps) => {
                                             }
                                         })
                                         return (
-                                            <tr key={`${house.title}-${i}`} className="dark:hover:bg-[#1d243240] dark:hover:text-white text-gray-700 dark:bg-[#a9b0bc] bg-slate-50 hover:text-black hover:bg-gray-300">
+                                            <tr key={`${house.title}-${i}`} className="text-slate-700 transition hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-white/5">
                                                 <td className="px-4 py-3">
                                                     {
                                                         !isStatistics ?
                                                             <>
-                                                                <div onClick={() => changePage(variablesDashboard.HOME, house.id)} className="flex items-center text-sm cursor-pointer">
-                                                                    <div className="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                                                                        <img className="object-cover w-full h-full rounded-full" src={photo?.url} alt="" loading="lazy" />
-                                                                        <div className="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                                                                <div onClick={() => changePage(variablesDashboard.HOME, house.id)} className="flex cursor-pointer items-center text-sm">
+                                                                    <div className="relative mr-3 hidden h-9 w-9 rounded-xl md:block">
+                                                                        <img className="h-full w-full rounded-xl object-cover" src={photo?.url} alt="" loading="lazy" />
                                                                     </div>
-                                                                    <div >
-                                                                        <p className="font-semibold ">{house.title}</p>
-                                                                        <p className="text-x">{house.city}</p>
+                                                                    <div>
+                                                                        <p className="font-semibold text-heading">{house.title}</p>
+                                                                        <p className="text-xs text-muted">{house.city}</p>
                                                                     </div>
                                                                 </div>
                                                             </>
                                                             :
-                                                            <div onClick={getStatistics ? () => getStatistics(house.id) : () => { }} className="flex items-center text-sm cursor-pointer">
-                                                                <div className="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                                                                    <img className="object-cover w-full h-full rounded-full" src={photo?.url} alt="" loading="lazy" />
-                                                                    <div className="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                                                            <div onClick={getStatistics ? () => getStatistics(house.id) : () => { }} className="flex cursor-pointer items-center text-sm">
+                                                                <div className="relative mr-3 hidden h-9 w-9 rounded-xl md:block">
+                                                                    <img className="h-full w-full rounded-xl object-cover" src={photo?.url} alt="" loading="lazy" />
                                                                 </div>
-                                                                <div >
-                                                                    <p className="font-semibold">{house.title}</p>
-                                                                    <p className="text-x">{house.city}</p>
+                                                                <div>
+                                                                    <p className="font-semibold text-heading">{house.title}</p>
+                                                                    <p className="text-xs text-muted">{house.city}</p>
                                                                 </div>
                                                             </div>
                                                     }
@@ -101,14 +99,14 @@ const Table = (props: TableProps) => {
                                                 {
                                                     !isStatistics ?
                                                         <>
-                                                            <td className="px-4 py-3 text-sm">{moment(house.created_at).format("DD/MM/YY HH:mm:ss")}</td>
-                                                            <td className="px-4 py-3 text-sm">{moment(house.updated_at).format("DD/MM/YY HH:mm:ss")}</td>
+                                                            <td className="px-4 py-3 text-sm text-muted">{moment(house.created_at).format("DD/MM/YY HH:mm:ss")}</td>
+                                                            <td className="px-4 py-3 text-sm text-muted">{moment(house.updated_at).format("DD/MM/YY HH:mm:ss")}</td>
                                                             {/* action row */}
                                                             <td className="px-4 py-3 text-sm">
-                                                                <div className="flex flex-row flex-wrap justify-between items-center">
-                                                                    <button onClick={() => changePage(variablesDashboard.SPONSORSHIPS, house.id)}>{<PaymentIcon className='stroke-black' />}</button>
-                                                                    <button onClick={() => changePage(variablesDashboard.CREATE_UPDATE, house.id)}>{<ModifyIcon className='stroke-blue-600' />}</button>
-                                                                    <button onClick={deleteHome ? (e) => deleteHome(e, house.id) : () => { }}>{<TrashIcon className='stroke-red-600' />}</button>
+                                                                <div className="flex flex-row flex-wrap items-center gap-1">
+                                                                    <button title='Sponsorizza' className='cursor-pointer rounded-lg p-2 transition hover:bg-slate-200/70 dark:hover:bg-white/10' onClick={() => changePage(variablesDashboard.SPONSORSHIPS, house.id)}>{<PaymentIcon className='stroke-slate-500 dark:stroke-slate-300' />}</button>
+                                                                    <button title='Modifica' className='cursor-pointer rounded-lg p-2 transition hover:bg-brand-500/10' onClick={() => changePage(variablesDashboard.CREATE_UPDATE, house.id)}>{<ModifyIcon className='stroke-brand-500' />}</button>
+                                                                    <button title='Elimina' className='cursor-pointer rounded-lg p-2 transition hover:bg-red-500/10' onClick={deleteHome ? (e) => deleteHome(e, house.id) : () => { }}>{<TrashIcon className='stroke-red-500' />}</button>
                                                                 </div>
                                                             </td>
                                                         </>
@@ -123,8 +121,8 @@ const Table = (props: TableProps) => {
                                         )
                                     })
                                     :
-                                    <tr className="dark:hover:bg-[#1d243240] dark:hover:text-white text-gray-700 dark:bg-[#a9b0bc] bg-slate-50 hover:text-black hover:bg-gray-300">
-                                        <td className="px-4 py-3">
+                                    <tr className="text-slate-700 dark:text-slate-300">
+                                        <td className="px-4 py-6">
                                             <div className="flex items-center text-sm">
                                                 <div>
                                                     <p className="font-semibold">Non c'é nessuna casa</p>
@@ -139,19 +137,19 @@ const Table = (props: TableProps) => {
                         </tbody>
                     </table>
                 </div>
-                <div className="grid px-4 py-3 text-xs font-semibold tracking-wide uppercase border-t dark:bg-[#29303d] dark:text-white text-black bg-slate-300 sm:grid-cols-9">
-                    <span className="flex items-center col-span-3"> Pagina {houses ? houses?.current_page : "0"} di {houses ? houses?.last_page : "0"}</span>
+                <div className="grid border-t border-slate-200/80 bg-slate-50 px-4 py-3 text-xs font-semibold uppercase tracking-wider text-muted sm:grid-cols-9 dark:border-white/10 dark:bg-ink-800">
+                    <span className="col-span-3 flex items-center"> Pagina {houses ? houses?.current_page : "0"} di {houses ? houses?.last_page : "0"}</span>
                     <span className="col-span-2"></span>
                     {/* <!-- Pagination --> */}
-                    <span className="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
+                    <span className="col-span-4 mt-2 flex sm:mt-auto sm:justify-end">
                         <nav aria-label="Table navigation">
-                            <ul className="inline-flex items-center">
+                            <ul className="inline-flex items-center gap-1">
                                 {
                                     houses?.last_page != 1 || undefined ?
                                         houses?.links.map((button, i) => {
                                             return (
                                                 <li key={i}>
-                                                    <button onClick={() => paginate(button.url)} className={"px-3 py-1 rounded-md focus:outline-none" + `${button.active ? " font-black text-lg" : null}`}>{button.label === "&laquo; Previous" ? <ChevronDoubleLeft /> : button.label === "Next &raquo;" ? <ChevronDoubleRight /> : button.label}</button>
+                                                    <button onClick={() => paginate(button.url)} className={"inline-flex h-8 min-w-8 cursor-pointer items-center justify-center rounded-lg px-2 transition focus:outline-none " + `${button.active ? "bg-brand-600 font-bold text-white" : "hover:bg-slate-200/70 dark:hover:bg-white/10"}`}>{button.label === "&laquo; Previous" ? <ChevronDoubleLeft /> : button.label === "Next &raquo;" ? <ChevronDoubleRight /> : button.label}</button>
                                                 </li>
                                             )
                                         })

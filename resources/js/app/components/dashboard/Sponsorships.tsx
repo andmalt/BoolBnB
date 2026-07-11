@@ -96,24 +96,32 @@ const Sponsorships = () => {
     }, [])
 
     return (
-        <div>
-            <div className='flex flex-col justify-center items-center mb-20 dark:text-white text-black'>
-                <h1 className='uppercase text-2xl'>{home?.title}</h1>
-                <div className='flex'>
-                    <p className='mr-1'>{home?.city},</p>
-                    <p>{home?.address}</p>
-                </div>
+        <div className='mx-4 my-4'>
+            <div className='mb-12 flex flex-col items-center justify-center text-center'>
+                <h1 className='text-2xl font-bold tracking-tight text-heading'>{home?.title}</h1>
+                <p className='mt-1 flex items-center gap-1.5 text-sm text-muted'>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="h-4 w-4 shrink-0 text-brand-500">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                    </svg>
+                    {home?.city}, {home?.address}
+                </p>
             </div>
             <div>
                 {
                     sponsorship ?
-                        <div>
-                            <p className='dark:text-white text-black'>La casa <span className='uppercase'>{home?.title}</span> è sponsorizzata con il livello <span className='uppercase'>{sponsorship.name}</span> e scadrà il {moment(sponsorship.pivot.end_date).format("DD/MM/YYYY HH:mm")} .</p>
+                        <div className='card mx-auto flex max-w-2xl items-center gap-4 border-green-500/30 p-6'>
+                            <span className='flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-green-500/10 text-green-600 dark:text-green-400'>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="h-6 w-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </span>
+                            <p className='text-sm leading-relaxed text-slate-700 dark:text-slate-300'>La casa <span className='font-semibold uppercase text-heading'>{home?.title}</span> è sponsorizzata con il livello <span className='font-semibold uppercase text-brand-600 dark:text-brand-400'>{sponsorship.name}</span> e scadrà il {moment(sponsorship.pivot.end_date).format("DD/MM/YYYY HH:mm")}.</p>
                         </div>
                         :
-                        <div className='flex flex-col justify-center items-center'>
-                            <h3 className='mb-10 dark:text-white text-black'>Scegli il tipo di sponsorizzazione per la tua casa</h3>
-                            <div className='flex flex-wrap flex-row justify-center items-center w-full'>
+                        <div className='flex flex-col items-center justify-center'>
+                            <h3 className='mb-10 text-lg font-semibold text-heading'>Scegli il tipo di sponsorizzazione per la tua casa</h3>
+                            <div className='flex w-full flex-row flex-wrap items-stretch justify-center gap-4'>
                                 {
                                     sponsorships?.map((sp, i) => {
                                         return (
@@ -130,7 +138,7 @@ const Sponsorships = () => {
                 {/* Drawer where is displayed the Braintree drop in */}
                 <div className={classNames(show ? "translate-x-0 " : "translate-x-full", 'fixed z-30 w-[100vw] h-[100vh] top-0 right-0 ease-in-out duration-100 bg-[rgba(0,0,0,0.5)]')}>
                     <div
-                        className={classNames('top-0 right-0 xl:w-[35vw] lg:w-[45vw] md:w-[75vw] w-[100vw] bg-blue-600  p-10 pl-20 text-white fixed h-full z-40 ease-in-out duration-300', show ? "translate-x-0 " : "translate-x-full")}
+                        className={classNames('fixed top-0 right-0 z-40 h-full w-[100vw] overflow-y-auto border-l border-slate-200/80 bg-white p-8 text-slate-900 shadow-2xl duration-300 ease-in-out md:w-[75vw] lg:w-[45vw] xl:w-[35vw] dark:border-white/10 dark:bg-ink-800 dark:text-white', show ? "translate-x-0 " : "translate-x-full")}
                     >
                         <div className='flex justify-end items-center w-full mb-6'>
                             <Xmark onClick={() => closeDrawer()} className=' cursor-pointer hover:scale-90' />

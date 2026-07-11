@@ -226,36 +226,36 @@ const Statistics = () => {
                         getStatistics={getStatistics} />
                 </div>
 
-                <div className='flex flex-wrap gap-2 justify-around items-center my-10'>
-                    <div className="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
-                        <div className="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12 mx-2">
-                            <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="stroke-current text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                <div className='mx-4 my-8 grid grid-cols-1 gap-4 sm:grid-cols-2'>
+                    <div className="card group flex items-center justify-start gap-2 p-5">
+                        <div className="mx-2 flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-500/10 transition-transform duration-300 group-hover:scale-110">
+                            <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="stroke-current text-brand-600 dark:text-brand-400"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                         </div>
                         <div className="text-right">
-                            <p className="text-2xl">{todayVisitors}</p>
-                            <p>Visitatori di oggi</p>
+                            <p className="text-2xl font-bold text-heading">{todayVisitors}</p>
+                            <p className='text-sm text-muted'>Visitatori di oggi</p>
                         </div>
                     </div>
-                    <div className="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
-                        <div className="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12 mx-2">
-                            <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="stroke-current text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    <div className="card group flex items-center justify-start gap-2 p-5">
+                        <div className="mx-2 flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-500/10 transition-transform duration-300 group-hover:scale-110">
+                            <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="stroke-current text-brand-600 dark:text-brand-400"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                         </div>
                         <div className="text-right">
-                            <p className="text-2xl">{totalVisitors}</p>
-                            <p>Visitatori totali</p>
+                            <p className="text-2xl font-bold text-heading">{totalVisitors}</p>
+                            <p className='text-sm text-muted'>Visitatori totali</p>
                         </div>
                     </div>
                 </div>
 
-                <div className='my-6'>
+                <div className='mx-4 my-6'>
                     {/* Chart */}
-                    <div className='dark:bg-[#1d2432] bg-slate-50 shadow-md p-6 my-1 lg:my-2 xl:my-3'>
+                    <div className='card my-4 p-6'>
                         <Line options={options} data={data} style={{ height: "100%", width: "100%" }} />
                     </div>
-                    <div className='dark:bg-[#1d2432] bg-slate-50 shadow-md p-6 my-1 lg:my-2 xl:my-3'>
+                    <div className='card my-4 p-6'>
                         <Line options={options} data={data2} style={{ height: "100%", width: "100%" }} />
                     </div>
-                    <div className='dark:bg-[#1d2432] bg-slate-50 shadow-md p-6 my-1 lg:my-2 xl:my-3'>
+                    <div className='card my-4 p-6'>
                         <Line options={options} data={data3} style={{ height: "100%", width: "100%" }} />
                     </div>
                 </div>
