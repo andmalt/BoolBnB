@@ -2,9 +2,11 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { clear } from '../store/authSlice';
 import { useAppDispatch } from '../store/hooks';
+import { useTranslation } from 'react-i18next';
 
 const NoMatch = () => {
 
+    const { t } = useTranslation();
     const dispatch = useAppDispatch();
     const navigate = useNavigate()
 
@@ -14,23 +16,14 @@ const NoMatch = () => {
     }
 
     return (
-        <main id="error" className="h-screen w-full flex flex-col justify-center items-center bg-slate-100 dark:bg-[#111827]">
-            <h1 className="text-9xl font-extrabold dark:text-white text-black tracking-widest">404</h1>
-            <div className="bg-[#FF6A3D] px-2 text-sm rounded rotate-12 absolute">
-                Page Not Found
-            </div>
-            <button className="mt-5">
-                <a
-                    className="relative inline-block text-sm font-medium text-[#FF6A3D] group active:text-orange-500 focus:outline-none focus:ring"
-                >
-                    <span
-                        className="absolute inset-0 transition-transform translate-x-0.5 translate-y-0.5 bg-[#FF6A3D] group-hover:translate-y-0 group-hover:translate-x-0"
-                    ></span>
-
-                    <span className="relative block px-8 py-3 bg-[#1A2238] border border-current">
-                        <button onClick={() => closeError()} >Vai alla pagina iniziale</button>
-                    </span>
-                </a>
+        <main id="error" className="page flex min-h-[70vh] w-full flex-col items-center justify-center px-4 py-20 text-center">
+            <p className="text-8xl font-extrabold tracking-tight text-brand-500/20 sm:text-9xl dark:text-brand-400/20">404</p>
+            <h1 className="mt-2 text-2xl font-bold text-heading sm:text-3xl">{t("errors.notFoundTitle")}</h1>
+            <p className="mt-3 max-w-md text-muted">
+                {t("errors.notFoundBody")}
+            </p>
+            <button onClick={() => closeError()} className="btn btn-primary mt-8">
+                {t("errors.backHome")}
             </button>
         </main>
     )

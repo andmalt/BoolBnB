@@ -1,32 +1,22 @@
-#house-container{
+#house-container {
     background-image: url("../images/main-background/mirror-house.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
 }
 
-#small-container{
-    background-color: rgba(0, 0, 0, 0.5);
-    box-shadow: 3px 9px 17px 3px #000000;
+@keyframes enter {
+    0% {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-  @keyframes enter {
-      0% {
-          transform: translateX(150%);
-      }
-
-      100% {
-          transform: translateX(0%);
-      }
-  }
-
-  .animate-enter {
-      animation: enter 2s;
-  }
-
-@media (max-width: 640px) {
-    #small-container {
-        background-color: rgba(0, 0, 0, 0.5);
-        box-shadow: 0px;
-    }
+.animate-enter {
+    animation: enter 0.8s ease-out both;
 }

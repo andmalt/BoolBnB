@@ -1,15 +1,19 @@
 import maplibregl from 'maplibre-gl';
-import React, { useEffect, useState } from 'react'
-import { HouseSmallCard } from '../components';
+import React, { useEffect, useRef, useState } from 'react'
+import { HouseSmallCard, Pagination } from '../components';
 import api from '../services/connection_manager';
 import { House, Photos } from '../services/interfaces';
 import { clear, error, loading } from '../store/authSlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { REGIONS } from "../services/variables"
+import { useTranslation } from 'react-i18next';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import "../../../css/homesMap.css"
 
+const HOUSES_PER_PAGE = 6;
+
 const Homes = () => {
+    const { t } = useTranslation();
     const [mounted, setMounted] = useState<boolean>(false);
     const [houses, setHouses] = useState<House[]>([]);
     const [photos, setPhotos] = useState<Photos[]>([]);
@@ -21,9 +25,17 @@ const Homes = () => {
     const [mapZoom, setMapZoom] = useState<number>(4);
     const [map, setMap] = useState<maplibregl.Map>();
     const [housesFiltered, setHousesFiltered] = useState<House[]>();
+    const [currentPage, setCurrentPage] = useState<number>(1);
     const mapElement = React.useRef<HTMLDivElement>(null);
+    const resultsElement = useRef<HTMLDivElement>(null);
     const dispatch = useAppDispatch();
     const authSelector = useAppSelector(state => state.auth);
+
+    const totalPages = Math.max(1, Math.ceil((housesFiltered?.length ?? 0) / HOUSES_PER_PAGE));
+    const paginatedHouses = housesFiltered?.slice(
+        (currentPage - 1) * HOUSES_PER_PAGE,
+        currentPage * HOUSES_PER_PAGE
+    );
 
     const allHouses = async () => {
         dispatch(loading())
@@ -63,9 +75,15 @@ const Homes = () => {
 
         // set the housesFiltered array
         setHousesFiltered(filtered)
+        setCurrentPage(1)
 
         setCity("")
         setAddress("")
+    }
+
+    const changePage = (page: number) => {
+        setCurrentPage(page)
+        resultsElement.current?.scrollIntoView({ behavior: "smooth", block: "start" })
     }
 
     /**
@@ -82,7 +100,7 @@ const Homes = () => {
         });
         const createMarkers = () => {
             housesFiltered?.forEach(el => {
-                new maplibregl.Marker().setLngLat([parseFloat(el.lon), parseFloat(el.lat)]).addTo(map);
+                new maplibregl.Marker({ color: "#4f46e5" }).setLngLat([parseFloat(el.lon), parseFloat(el.lat)]).addTo(map);
             })
             setMap(map);
         }
@@ -103,57 +121,103 @@ const Homes = () => {
     }, [])
 
     return (
-        <div id="main_container">
-            {/* <div className="py-16 bg-gradient-to-br from-blue-800 to-[rgb(20,20,20)]"> */}
-            <div className="py-16 dark:bg-[#1d2432] bg-slate-100">
-                <div className="container m-auto px-6  md:px-12 xl:px-6">
-                    <div className="mb-6 space-y-2 flex justify-center items-center">
-                        {/* search bar */}
-                        <form onSubmit={e => searchHomes(e)} method='POST'>
-                            <div className="flex flex-row justify-center items-center">
-                                <select name='regions' value={region} onChange={(e) => setRegion(e.target.value)} className='flex-shrink-0 inline-flex items-center py-2.5 px-7 text-sm font-medium text-center text-white bg-[#6366f1] border rounded-l-lg focus:ring-4 focus:outline-none focus:ring-[#29303d]'>
-                                    <option value={""} className="font-bold" >REGIONI</option>
+        <div id="main_container" className='w-full'>
+            <div className="page py-12">
+                <div className="mx-auto max-w-7xl px-4 sm:px-6">
+                    {/* page heading */}
+                    <div className='mb-8 text-center'>
+                        <h1 className='text-3xl font-bold tracking-tight text-heading sm:text-4xl'>{t("homes.title")}</h1>
+                        <p className='mt-2 text-muted'>{t("homes.subtitle")}</p>
+                    </div>
+
+                    {/* search bar */}
+                    <div className="mb-10">
+                        <form onSubmit={e => searchHomes(e)} method='POST' className='card mx-auto max-w-4xl p-4 sm:p-5'>
+                            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                                <select
+                                    name='regions'
+                                    value={region}
+                                    onChange={(e) => setRegion(e.target.value)}
+                                    className='field-input sm:w-48'
+                                >
+                                    <option value={""}>{t("homes.allRegions")}</option>
                                     {
                                         REGIONS.map(region => {
                                             return <option key={region} value={region}>{region}</option>
                                         })
-
                                     }
                                 </select>
-                                <input type="text" value={city} onChange={(e) => setCity(e.target.value)} id="search-city" className="p-2.5 w-full text-sm text-black dark:text-white placeholder:text-[#9ca3af] dark:bg-[#0a121e] bg-slate-50 border-l-2 border focus:ring-[#6366f1] focus:border-[#6366f1]" placeholder="città..." />
-                                <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} id="search-address" className="p-2.5 w-full text-sm text-black dark:text-white placeholder:text-[#9ca3af] dark:bg-[#0a121e] bg-slate-50 rounded-r-lg border-l-2 border focus:ring-[#6366f1] focus:border-[#6366f1] " placeholder="indirizzo..." />
-                                <button type="submit" className="p-2.5 ml-2 text-sm font-medium text-white bg-[#6366f1] rounded-lg border border-black hover:bg-[#6365f1c8] focus:ring-4 focus:outline-none focus:ring-blue-300">
-                                    <svg aria-hidden="true" className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                                    <span className="sr-only">Cerca</span>
+                                <input type="text" value={city} onChange={(e) => setCity(e.target.value)} id="search-city" className="field-input sm:flex-1" placeholder={t("homes.cityPlaceholder")} />
+                                <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} id="search-address" className="field-input sm:flex-1" placeholder={t("homes.addressPlaceholder")} />
+                                <button type="submit" className="btn btn-primary shrink-0">
+                                    <svg aria-hidden="true" className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                    {t("homes.search")}
                                 </button>
                             </div>
                         </form>
                     </div>
-                    <div className="mb-12 space-y-2 flex justify-center items-center">
-                        {/* map */}
-                        <div ref={mapElement} className="map"></div>
+
+                    {/* map */}
+                    <div className="mb-12">
+                        <div className='card overflow-hidden p-2'>
+                            <div ref={mapElement} className="map"></div>
+                        </div>
                     </div>
 
-                    <div className="grid gap-12 grid-cols-1">
+                    {/* results */}
+                    <div ref={resultsElement} className='scroll-mt-24'>
                         {
-                            !authSelector.isLoading ?
-                                housesFiltered?.map(house => {
-                                    const p = photos.filter(photo => {
-                                        return photo.apartment_id == house.id
-                                    });
+                            !authSelector.isLoading && mounted ?
+                                <p className='mb-6 text-sm font-medium text-muted'>
+                                    {t("homes.results", { count: housesFiltered?.length ?? 0 })}
+                                </p>
+                                :
+                                null
+                        }
+                        <div className="grid grid-cols-1 gap-6">
+                            {
+                                !authSelector.isLoading ?
+                                    paginatedHouses?.map(house => {
+                                        const p = photos.filter(photo => {
+                                            return photo.apartment_id == house.id
+                                        });
 
-                                    return (
-                                        <HouseSmallCard
-                                            id={house.id}
-                                            key={house.id}
-                                            photos={p}
-                                            house={house} />
-                                    )
-                                })
+                                        return (
+                                            <HouseSmallCard
+                                                id={house.id}
+                                                key={house.id}
+                                                photos={p}
+                                                house={house} />
+                                        )
+                                    })
+                                    :
+                                    null
+                            }
+                        </div>
+                        {
+                            !authSelector.isLoading && mounted && housesFiltered?.length === 0 ?
+                                <div className='card mx-auto max-w-md p-10 text-center'>
+                                    <p className='text-lg font-semibold text-heading'>{t("homes.noResults")}</p>
+                                    <p className='mt-2 text-sm text-muted'>{t("homes.noResultsHint")}</p>
+                                </div>
                                 :
                                 null
                         }
                     </div>
+
+                    {/* pagination */}
+                    {
+                        !authSelector.isLoading ?
+                            <div className='mt-10'>
+                                <Pagination
+                                    currentPage={currentPage}
+                                    totalPages={totalPages}
+                                    onPageChange={changePage}
+                                />
+                            </div>
+                            :
+                            null
+                    }
                 </div>
             </div>
         </div>

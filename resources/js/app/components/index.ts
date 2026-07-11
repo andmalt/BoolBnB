@@ -26,6 +26,8 @@ import SponsorshipCard from "./dashboard/SponsorshipCard"
 import Braintree from "./Braintree"
 import Xmark from "./dashboard/icons/Xmark"
 import Switcher from "./dashboard/Switcher"
+import Pagination from "./Pagination"
+import LanguageSwitcher from "./LanguageSwitcher"
 
 /**
  * application component
@@ -59,4 +61,6 @@ export {
     Braintree,
     Xmark,
     Switcher,
+    Pagination,
+    LanguageSwitcher,
 }

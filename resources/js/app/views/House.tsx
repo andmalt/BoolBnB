@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import { Form } from '../components';
 import api from '../services/connection_manager';
@@ -8,8 +8,10 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import "../../../css/houseMap.css"
 import maplibregl from 'maplibre-gl';
 import { House, Photos } from '../services/interfaces';
+import { useTranslation } from 'react-i18next';
 
 const HouseView = () => {
+    const { t } = useTranslation();
     const params = useParams();
     const houseId = params.houseId;
     const [home, setHome] = useState<House | null>(null);
@@ -90,7 +92,7 @@ const HouseView = () => {
             center: [mapLongitude, mapLatitude],
             zoom: mapZoom
         });
-        new maplibregl.Marker().setLngLat([mapLongitude, mapLatitude]).addTo(map);
+        new maplibregl.Marker({ color: "#4f46e5" }).setLngLat([mapLongitude, mapLatitude]).addTo(map);
         setMap(map);
 
         return () => map.remove();
@@ -108,80 +110,113 @@ const HouseView = () => {
     }, []);
 
     return (
-        <div className='h-full w-full flex flex-col flex-wrap items-center sm:px-10 py-10 bg-slate-100 dark:bg-[#111827]'>
-            <div className='w-full py-6 mb-4'>
-                <Link to={"/homes"}>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-8 h-8 text-[#6366f1] hover:text-[#6365f1d1] font-bold">
+        <div className='page w-full'>
+            <div className='mx-auto max-w-6xl px-4 py-10 sm:px-6'>
+                {/* back link */}
+                <Link to={"/homes"} className='inline-flex items-center gap-2 text-sm font-semibold text-brand-600 transition hover:gap-3 dark:text-brand-400'>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-4 w-4">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
                     </svg>
+                    {t("house.backToSearch")}
                 </Link>
-            </div>
-            <div className='dark:bg-[#6366f1] bg-slate-200 shadow-md rounded-lg py-6 px-12 mb-20'>
-                <h1 className="dark:text-white text-black  font-bold text-lg md:text-4xl">{home?.title}</h1>
-            </div>
-            <div className='flex flex-row flex-wrap justify-center items-start mb-10'>
-                <div className="h-[250px] w-[350px] md:h-[400px] md:w-[500px] lg:h-[500px] lg:w-[600px] p-2 dark:bg-[#6366f1] bg-slate-200 shadow-md rounded-lg mb-5 lg:mb-0">
-                    <div className="overflow-hidden relative h-full">
-                        {/* Item */}
-                        {/* fixed photos */}
+
+                {/* heading */}
+                <div className='mt-6 mb-8'>
+                    <h1 className="text-3xl font-bold tracking-tight text-heading sm:text-4xl">{home?.title}</h1>
+                    <p className='mt-2 flex items-center gap-1.5 text-muted'>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="h-4 w-4 shrink-0 text-brand-500">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                        </svg>
+                        {home?.address}, {home?.city} ({home?.region})
+                    </p>
+                </div>
+
+                <div className='grid grid-cols-1 gap-6 lg:grid-cols-3'>
+                    {/* gallery */}
+                    <div className="relative h-72 overflow-hidden rounded-2xl border border-slate-200/80 shadow-sm sm:h-96 lg:col-span-2 lg:h-[460px] dark:border-white/10">
                         {
                             photos?.length != 0 && photos != undefined ?
-                                <div className="duration-700 ease-in-out">
-                                    <img src={photo?.url} className="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt={`image ${photo?.id}`} />
-                                </div>
+                                <img src={photo?.url} className="absolute inset-0 h-full w-full object-cover" alt={`image ${photo?.id}`} />
                                 :
-                                <div className="duration-700 ease-in-out">
-                                    <img src="https://tailus.io/sources/blocks/twocards/preview/images/woman.jpg" className="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="..." />
+                                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-brand-100 to-slate-200 dark:from-ink-600 dark:to-ink-800">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-16 w-16 text-brand-400/70">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75" />
+                                    </svg>
                                 </div>
                         }
                         {/* Slider controls */}
-                        <button onClick={() => previousImage()} type="button" className="flex absolute top-0 left-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none">
-                            <span className="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-black/30  hover:bg-black/50 focus:ring-4 focus:ring-white focus:outline-none">
-                                <svg className="w-5 h-5 text-white sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg>
-                                <span className="hidden">Previous</span>
-                            </span>
-                        </button>
-                        <button onClick={() => nextImage()} type="button" className="flex absolute top-0 right-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none">
-                            <span className="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-black/30 hover:bg-black/50 focus:ring-4 focus:ring-white focus:outline-none">
-                                <svg className="w-5 h-5 text-white sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
-                                <span className="hidden">Next</span>
-                            </span>
-                        </button>
-                        <div className="absolute right-0 bottom-0 md:bottom-2 lg:bottom-4 w-14 h-7 bg-slate-600 flex justify-center items-center">
-                            <p className="text-white">{numberPhoto}/{lengthPhotos}</p>
+                        {
+                            lengthPhotos > 1 ?
+                                <>
+                                    <button onClick={() => previousImage()} type="button" aria-label={t("card.prevPhoto")} className="absolute left-3 top-1/2 z-10 -translate-y-1/2 cursor-pointer focus:outline-none">
+                                        <span className="flex h-10 w-10 items-center justify-center rounded-full bg-ink-950/50 backdrop-blur transition hover:bg-ink-950/70">
+                                            <svg className="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg>
+                                        </span>
+                                    </button>
+                                    <button onClick={() => nextImage()} type="button" aria-label={t("card.nextPhoto")} className="absolute right-3 top-1/2 z-10 -translate-y-1/2 cursor-pointer focus:outline-none">
+                                        <span className="flex h-10 w-10 items-center justify-center rounded-full bg-ink-950/50 backdrop-blur transition hover:bg-ink-950/70">
+                                            <svg className="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
+                                        </span>
+                                    </button>
+                                </>
+                                :
+                                null
+                        }
+                        <span className="absolute bottom-3 right-3 rounded-full bg-ink-950/60 px-3 py-1 text-xs font-medium text-white backdrop-blur">
+                            {numberPhoto}/{lengthPhotos}
+                        </span>
+                    </div>
+
+                    {/* side info */}
+                    <div className='flex flex-col gap-6'>
+                        <div className='card p-6'>
+                            <h5 className='mb-4 text-sm font-semibold uppercase tracking-wider text-muted'>{t("house.features")}</h5>
+                            <ul className='space-y-3 text-sm font-medium text-heading'>
+                                <li className='flex items-center justify-between border-b border-slate-100 pb-3 dark:border-white/5'>
+                                    <span className='text-muted'>{t("house.sqm")}</span>
+                                    <span>{home?.square} {t("card.sqm")}</span>
+                                </li>
+                                <li className='flex items-center justify-between border-b border-slate-100 pb-3 dark:border-white/5'>
+                                    <span className='text-muted'>{t("house.rooms")}</span>
+                                    <span>{home?.rooms}</span>
+                                </li>
+                                <li className='flex items-center justify-between border-b border-slate-100 pb-3 dark:border-white/5'>
+                                    <span className='text-muted'>{t("house.beds")}</span>
+                                    <span>{home?.beds}</span>
+                                </li>
+                                <li className='flex items-center justify-between'>
+                                    <span className='text-muted'>{t("house.bathrooms")}</span>
+                                    <span>{home?.bathrooms}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div className='card bg-gradient-to-br from-brand-600 to-brand-700 p-6 !text-white dark:border-brand-500/30'>
+                            <p className='text-sm font-medium text-brand-100'>{t("house.price")}</p>
+                            <p className='mt-1 text-3xl font-bold text-white'>&euro;{home?.price} <span className='text-base font-normal text-brand-100'>{t("house.perNight")}</span></p>
                         </div>
                     </div>
                 </div>
-                <div className='flex flex-col'>
-                    <div className='dark:bg-[#6366f1] bg-slate-200 shadow-md rounded-lg p-6 sm:ml-5 dark:text-white text-black ml-0 mb-5'>
-                        <h5 className='font-bold mb-3 uppercase'>Caratteristiche Immobile</h5>
-                        <ul>
-                            <li>Metri quadri: {home?.square}</li>
-                            <li>Bagno/i: {home?.bathrooms}</li>
-                            <li>Camera/e: {home?.rooms}</li>
-                            <li>Letto/i: {home?.beds}</li>
-                        </ul>
+
+                {/* description */}
+                <div className='card mt-6 p-6 sm:p-8'>
+                    <h5 className='mb-4 text-sm font-semibold uppercase tracking-wider text-muted'>{t("house.description")}</h5>
+                    <p className='leading-relaxed text-slate-700 dark:text-slate-300'>{home?.description}</p>
+                </div>
+
+                {/* map */}
+                <div className='card mt-6 p-2 sm:p-2'>
+                    <div className='px-4 pb-2 pt-4'>
+                        <h5 className='text-sm font-semibold uppercase tracking-wider text-muted'>{t("house.location")}</h5>
+                        <p className='mt-1 text-sm text-heading'>{home?.address}, {home?.city} ({home?.region})</p>
                     </div>
-                    <div className='dark:bg-[#6366f1] bg-slate-200 shadow-md rounded-lg px-6 py-3 sm:ml-5 dark:text-white text-black ml-0 flex flex-row justify-start items-center'>
-                        <h4 className='font-bold uppercase align-middle'>Prezzo &euro;{home?.price} <span className='normal-case italic'>per notte</span></h4>
-                    </div>
+                    <div ref={mapElement} className="mapDiv"></div>
                 </div>
-            </div>
-            <div className='flex flex-col flex-wrap w-full items-center'>
-                <div className='dark:bg-[#6366f1] bg-slate-200 shadow-md rounded-lg p-6 w-[80%] dark:text-white text-black mb-4'>
-                    <h3 className='mb-3 font-bold uppercase'>{home?.city}</h3>
-                    <h4 className='italic'>{home?.region}</h4>
-                    <h4 className='italic'>{home?.address}</h4>
+
+                {/* email message component */}
+                <div className='mt-6'>
+                    <Form houseId={home?.id} />
                 </div>
-                <div className='dark:bg-[#6366f1] bg-slate-200 shadow-md rounded-lg p-6 w-[80%] dark:text-white text-black'>
-                    <p>{home?.description}</p>
-                </div>
-            </div>
-            {/* map component */}
-            <div ref={mapElement} className="mapDiv"></div>
-            {/* email message component */}
-            <div className=''>
-                <Form houseId={home?.id} />
             </div>
         </div>
     )

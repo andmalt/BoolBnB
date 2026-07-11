@@ -10,4 +10,71 @@
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+
+    /* Brand — sober indigo accent */
+    --color-brand-50: #eef2ff;
+    --color-brand-100: #e0e7ff;
+    --color-brand-200: #c7d2fe;
+    --color-brand-300: #a5b4fc;
+    --color-brand-400: #818cf8;
+    --color-brand-500: #6366f1;
+    --color-brand-600: #4f46e5;
+    --color-brand-700: #4338ca;
+
+    /* Ink — dark mode surfaces */
+    --color-ink-950: #070c15;
+    --color-ink-900: #0a121e;
+    --color-ink-800: #111827;
+    --color-ink-700: #1d2432;
+    --color-ink-600: #29303d;
+    --color-ink-500: #3a4356;
+}
+
+@layer components {
+    /* Page background */
+    .page {
+        @apply bg-slate-100 dark:bg-ink-800;
+    }
+
+    /* Elevated surface */
+    .card {
+        @apply rounded-2xl border border-slate-200/80 bg-white shadow-sm dark:border-white/10 dark:bg-ink-700;
+    }
+
+    /* Buttons: use together with a color variant, e.g. class="btn btn-primary" */
+    .btn {
+        @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/60 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-ink-800 disabled:pointer-events-none disabled:opacity-50;
+    }
+
+    .btn-primary {
+        @apply bg-brand-600 text-white shadow-sm shadow-brand-600/25 hover:bg-brand-500 active:bg-brand-700;
+    }
+
+    .btn-ghost {
+        @apply border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 dark:border-white/15 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10;
+    }
+
+    /* Form fields */
+    .field-label {
+        @apply mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300;
+    }
+
+    .field-input {
+        @apply block w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 shadow-sm transition placeholder:text-slate-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 focus:outline-none dark:border-white/10 dark:bg-ink-900 dark:text-white dark:placeholder:text-slate-500;
+    }
+
+    /* Small info pill */
+    .chip {
+        @apply inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-600 dark:border-white/10 dark:bg-white/5 dark:text-slate-300;
+    }
+
+    /* Muted body text */
+    .text-muted {
+        @apply text-slate-500 dark:text-slate-400;
+    }
+
+    /* Primary heading text */
+    .text-heading {
+        @apply text-slate-900 dark:text-white;
+    }
 }
