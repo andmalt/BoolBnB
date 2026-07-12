@@ -6,7 +6,40 @@
 
 Boolbnb is my modification in the final project of the [boolean.careers](https://boolean.careers/) course, using a frontend exclusively with TypeScript [React](https://react.dev/), [Tailwind CSS](https://tailwindcss.com/) and a backend with [Laravel](https://laravel.com/) 12.
 
+## What is BoolBnB?
 
+BoolBnB is a full-stack web application for **short-term home rentals**, similar to Airbnb: guests can browse and search homes all over Italy, while owners can publish and manage their listings from a personal dashboard.
+
+### For guests (public area)
+
+- **Search homes** by region, city or address, with results shown as cards and as markers on an **interactive map** (MapLibre GL + OpenFreeMap), with client-side pagination.
+- **House detail page** with photo gallery, property features (square meters, rooms, beds, bathrooms), price per night, description and location map.
+- **Contact the owner** directly from the house page through a contact form: the message lands in the owner's dashboard inbox and is also sent via email.
+- **Sign up / log in** with email verification and password reset via email.
+
+### For owners (dashboard)
+
+- **Manage listings**: create, edit and delete homes, with facilities (wifi, pool, parking...), region, address and a multi-photo uploader backed by S3-compatible storage (MinIO).
+- **Inbox**: read the messages received for each home, with unread indicators, trash and restore.
+- **Statistics**: visit counters per home (today / total) and charts of visitors per year, month and week (Chart.js).
+- **Sponsorships**: boost a listing's visibility by purchasing a sponsorship tier (silver / gold / platinum) with a real payment flow powered by **Braintree** (sandbox); sponsored homes rank first in search results and expire automatically thanks to the Laravel scheduler.
+- **Profile & settings**: avatar upload, personal info, password change, account deletion.
+
+### Extra
+
+- **Bilingual UI (Italian / English)** with instant language switching (react-i18next), persisted across sessions.
+- **Light / dark theme** toggle, persisted across sessions.
+- Fully **responsive** layout with a consistent design system (Tailwind CSS 4 design tokens).
+- REST API backend (Laravel Sanctum token auth) consumed by a React SPA (Redux Toolkit for state management).
+
+## Tech stack
+
+| Layer     | Technologies |
+|-----------|--------------|
+| Frontend  | React 19, TypeScript, Tailwind CSS 4, Redux Toolkit, React Router, react-i18next, Chart.js, MapLibre GL, Headless UI, Vite |
+| Backend   | Laravel 12, PHP 8.4, Sanctum, Braintree SDK, Flysystem S3 |
+| Storage   | MySQL 8, MinIO (S3-compatible object storage) |
+| Infra     | Docker Compose (app, nginx, MySQL, MinIO, scheduler) |
 
 ## Quickly Start
 
@@ -123,10 +156,19 @@ docker compose up -d --build
 
 Now open:
 
-* App: [http://localhost:8080](http://localhost:8080)
+* App: [http://localhost:8082](http://localhost:8082)
 * MinIO Console: [http://localhost:9001](http://localhost:9001) (user/pass: minioadmin / minioadmin)
 * MinIO S3 endpoint: [http://localhost:9000](http://localhost:9000)
 
+On the first start (with an empty database) the app container automatically runs migrations and seeds the database with fake data, including a test user:
+
+```
+email:    test@test.com
+password: 12345678
+```
+
 ---
 
+## License
 
+This project is released under the [MIT License](LICENSE).
