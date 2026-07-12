@@ -7,9 +7,11 @@ import { variablesDashboard } from '../../services/variables';
 import { clear, error, loading, logout } from '../../store/authSlice';
 import { setDashboard, setIsCte, setNumber } from '../../store/dashboardSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { useTranslation } from 'react-i18next';
 import Table from './Table';
 
 const MyHomes = () => {
+    const { t } = useTranslation();
     const [myHouses, setMyHouses] = useState<PaginateHouses>();
     const authSelector = useAppSelector(state => state.auth);
     const navigate = useNavigate();
@@ -50,7 +52,7 @@ const MyHomes = () => {
 
     const deleteHome = async (e: any, id: number) => {
         e.preventDefault()
-        const confirm = window.confirm('Sicuro di voler cancellare la casa?');
+        const confirm = window.confirm(t("dash.confirmDeleteHouse"));
         if (!confirm) {
             return;
         }
@@ -93,12 +95,12 @@ const MyHomes = () => {
     return (
         <div>
             <div className='mx-4 mt-4 flex flex-wrap items-center justify-between gap-3'>
-                <h2 className='text-xl font-bold tracking-tight text-heading'>Le mie case</h2>
+                <h2 className='text-xl font-bold tracking-tight text-heading'>{t("dash.myHouses")}</h2>
                 <button className='btn btn-primary' onClick={() => createHome()}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-4 w-4">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
-                    Crea una casa
+                    {t("dash.createHouse")}
                 </button>
             </div>
             <Table houses={myHouses} paginate={paginate} deleteHome={deleteHome} isStatistics={false} />

@@ -5,6 +5,7 @@ import api from '../../services/connection_manager';
 import { setIsEmailVerification } from '../../store/emailVerificationSlice';
 import { classNames } from '../../services/functions';
 import moment from 'moment';
+import { useTranslation } from 'react-i18next';
 
 interface ProfileProps {
 
@@ -12,6 +13,7 @@ interface ProfileProps {
 
 const Profile = (props: ProfileProps) => {
     const { } = props;
+    const { t } = useTranslation();
     const [photo, setPhoto] = useState<string>("")
     const [name, setName] = useState<string>("")
     const [surname, setSurname] = useState<string>("")
@@ -115,26 +117,26 @@ const Profile = (props: ProfileProps) => {
 
                         <ul className='divide-y divide-slate-100 text-sm dark:divide-white/5'>
                             <li className="flex items-center justify-between py-3">
-                                <span className='font-medium text-muted'>Nome</span>
+                                <span className='font-medium text-muted'>{t("dash.profile.name")}</span>
                                 <span className='font-semibold text-heading'>{name}</span>
                             </li>
                             <li className="flex items-center justify-between py-3">
-                                <span className='font-medium text-muted'>Cognome</span>
+                                <span className='font-medium text-muted'>{t("dash.profile.surname")}</span>
                                 <span className='font-semibold text-heading'>{surname}</span>
                             </li>
                             <li className="flex items-center justify-between py-3">
-                                <span className='font-medium text-muted'>Email</span>
+                                <span className='font-medium text-muted'>{t("dash.profile.email")}</span>
                                 <span className='font-semibold text-brand-600 dark:text-brand-400'>{email}</span>
                             </li>
                             <li className="flex items-center justify-between py-3">
-                                <span className='font-medium text-muted'>Stato</span>
+                                <span className='font-medium text-muted'>{t("dash.profile.status")}</span>
                                 <span
                                     className={classNames("rounded-full px-3 py-1 text-xs font-semibold", emailVerificationSelector.emailVerification ? "bg-green-500/10 text-green-600 dark:text-green-400" : "bg-red-500/10 text-red-600 dark:text-red-400")}>
-                                    {emailVerificationSelector.emailVerification ? 'Attivo' : 'Non attivo'}
+                                    {emailVerificationSelector.emailVerification ? t("dash.profile.active") : t("dash.profile.inactive")}
                                 </span>
                             </li>
                             <li className="flex items-center justify-between py-3">
-                                <span className='font-medium text-muted'>Registrato dal</span>
+                                <span className='font-medium text-muted'>{t("dash.profile.registeredSince")}</span>
                                 <span className='font-semibold text-heading'>{moment(registeredSince).format("DD/MM/YY HH:mm")}</span>
                             </li>
                         </ul>
@@ -146,8 +148,8 @@ const Profile = (props: ProfileProps) => {
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="h-8 w-8 shrink-0 text-amber-500">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
                             </svg>
-                            <p className='flex-1 text-sm text-slate-700 dark:text-slate-300'>Per attivare il tuo account devi verificare l'email che ti è stata spedita.</p>
-                            <button className='btn btn-primary shrink-0' onClick={() => emailResend()}>Reinvia l'email</button>
+                            <p className='flex-1 text-sm text-slate-700 dark:text-slate-300'>{t("dash.profile.verifyEmailNotice")}</p>
+                            <button className='btn btn-primary shrink-0' onClick={() => emailResend()}>{t("dash.profile.resendEmail")}</button>
                         </div>
                         :
                         null

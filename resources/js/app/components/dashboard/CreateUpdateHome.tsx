@@ -6,8 +6,10 @@ import { variablesDashboard } from '../../services/variables';
 import { clear, error, loading } from '../../store/authSlice';
 import { setDashboard, setIsCte, setNumber } from '../../store/dashboardSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { useTranslation } from 'react-i18next';
 
 const CreateUpdateHome = () => {
+    const { t } = useTranslation();
     const [home, setHome] = useState<House | null>(null);
     const [homeFacilities, setHomeFacilities] = useState<Facilities[]>([])
     const [facilities, setFacilities] = useState<Facilities[]>([]);
@@ -73,7 +75,7 @@ const CreateUpdateHome = () => {
 
     const updateMyHome = async (e: any) => {
         e.preventDefault();
-        const confirm = window.confirm(dashSelector.isCreate ? 'Sei sicuro di voler creare la casa?' : 'Sei sicuro di voler modificare la casa?');
+        const confirm = window.confirm(dashSelector.isCreate ? t("dash.form.confirmCreate") : t("dash.form.confirmUpdate"));
         if (!confirm) {
             return;
         }
@@ -110,7 +112,7 @@ const CreateUpdateHome = () => {
                         array.push(response.data.error.message.response.data.errors[key]);
                     }
                     // change alert with modal
-                    alert(array.length >= 1 ? array : "Non esiste il luogo selezionato")
+                    alert(array.length >= 1 ? array : t("dash.form.placeNotFound"))
                 }
             } else {
                 const response = await api.createMyHome(authSelector.token, data);
@@ -129,7 +131,7 @@ const CreateUpdateHome = () => {
                         array.push(response.data.error.message.response.data.errors[key]);
                     }
                     // change alert with modal
-                    alert(array.length >= 1 ? array : "Non esiste il luogo selezionato")
+                    alert(array.length >= 1 ? array : t("dash.form.placeNotFound"))
                 }
             }
             dispatch(clear())
@@ -194,18 +196,18 @@ const CreateUpdateHome = () => {
             {
                 !dashSelector.isCreate ?
                     <div className='mb-6 flex flex-wrap items-center justify-between gap-3'>
-                        <h2 className='text-xl font-bold tracking-tight text-heading sm:text-2xl'>Modifica casa</h2>
+                        <h2 className='text-xl font-bold tracking-tight text-heading sm:text-2xl'>{t("dash.form.editTitle")}</h2>
                         <button onClick={photoPage} className='btn btn-ghost'>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="h-4 w-4">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" />
                             </svg>
-                            Inserisci e cambia foto
+                            {t("dash.form.managePhotos")}
                         </button>
                     </div>
                     :
                     <div className='mb-6'>
-                        <h2 className='text-xl font-bold tracking-tight text-heading sm:text-2xl'>Crea una casa</h2>
+                        <h2 className='text-xl font-bold tracking-tight text-heading sm:text-2xl'>{t("dash.form.createTitle")}</h2>
                     </div>
             }
             <form id="update-apartment" className='card p-6 text-black sm:p-8 dark:text-slate-300' onSubmit={async (e) => await updateMyHome(e)} >
@@ -213,41 +215,41 @@ const CreateUpdateHome = () => {
                     dashSelector.isCreate ?
                         <label className="block mt-3">
                             <span className="field-label !mb-0 after:ml-0.5 after:text-red-500 after:content-['*']">
-                                Titolo
+                                {t("dash.form.title")}
                             </span>
-                            <input type={"text"} name="title" className="field-input mt-1.5 w-full max-w-xl" placeholder="Titolo di identificazione della casa" value={title} onChange={(e) => setTitle(e.target.value)} />
+                            <input type={"text"} name="title" className="field-input mt-1.5 w-full max-w-xl" placeholder={t("dash.form.titlePlaceholder")} value={title} onChange={(e) => setTitle(e.target.value)} />
                         </label>
                         :
                         null
                 }
                 <label className="block mt-3">
                     <span className="field-label !mb-0 after:ml-0.5 after:text-red-500 after:content-['*']">
-                        Camere
+                        {t("dash.form.rooms")}
                     </span>
-                    <input type={"text"} name="rooms" className="field-input mt-1.5 w-full max-w-xl" placeholder="numero di camere" value={rooms} onChange={(e) => setRooms(e.target.value)} />
+                    <input type={"text"} name="rooms" className="field-input mt-1.5 w-full max-w-xl" placeholder={t("dash.form.roomsPlaceholder")} value={rooms} onChange={(e) => setRooms(e.target.value)} />
                 </label>
                 <label className="block mt-3">
                     <span className="field-label !mb-0 after:ml-0.5 after:text-red-500 after:content-['*']">
-                        Posti letto
+                        {t("dash.form.beds")}
                     </span>
-                    <input type={"text"} name="beds" className="field-input mt-1.5 w-full max-w-xl" placeholder="numero massimo di posti letto" value={beds} onChange={(e) => setBeds(e.target.value)} />
+                    <input type={"text"} name="beds" className="field-input mt-1.5 w-full max-w-xl" placeholder={t("dash.form.bedsPlaceholder")} value={beds} onChange={(e) => setBeds(e.target.value)} />
                 </label>
                 <label className="block mt-3">
                     <span className="field-label !mb-0 after:ml-0.5 after:text-red-500 after:content-['*']">
-                        Bagni
+                        {t("dash.form.bathrooms")}
                     </span>
-                    <input type={"text"} name="bathrooms" className="field-input mt-1.5 w-full max-w-xl" placeholder="numero di bagni" value={bathrooms} onChange={(e) => setBathrooms(e.target.value)} />
+                    <input type={"text"} name="bathrooms" className="field-input mt-1.5 w-full max-w-xl" placeholder={t("dash.form.bathroomsPlaceholder")} value={bathrooms} onChange={(e) => setBathrooms(e.target.value)} />
                 </label>
                 <label className="block mt-3">
                     <span className="field-label !mb-0 after:ml-0.5 after:text-red-500 after:content-['*']">
-                        Metri quadri
+                        {t("dash.form.square")}
                     </span>
-                    <input type="text" name="square" className="field-input mt-1.5 w-full max-w-xl" placeholder="numero di metri quadri" value={square} onChange={(e) => setSquare(e.target.value)} />
+                    <input type="text" name="square" className="field-input mt-1.5 w-full max-w-xl" placeholder={t("dash.form.squarePlaceholder")} value={square} onChange={(e) => setSquare(e.target.value)} />
                 </label>
 
                 <div className="block mt-5">
                     <span className="field-label !mb-0 after:ml-0.5 after:text-red-500 after:content-['*']">
-                        Servizi
+                        {t("dash.form.facilities")}
                     </span>
                     <div className="flex flex-row flex-auto flex-wrap">
                         {
@@ -267,7 +269,7 @@ const CreateUpdateHome = () => {
 
                 <label className="block mt-3">
                     <span className="field-label !mb-0 after:ml-0.5 after:text-red-500 after:content-['*']">
-                        Regione
+                        {t("dash.form.region")}
                     </span>
                     <select value={region} onChange={e => setRegion(e.target.value)} name="region" id="region" className="field-input mt-1.5 w-full max-w-xl">
                         <option className='hidden' value={region}>
@@ -287,31 +289,31 @@ const CreateUpdateHome = () => {
 
                 <label className="block mt-3">
                     <span className="field-label !mb-0 after:ml-0.5 after:text-red-500 after:content-['*']">
-                        Città
+                        {t("dash.form.city")}
                     </span>
-                    <input type="text" name="city" className="field-input mt-1.5 w-full max-w-xl" placeholder="in quale città si trova" value={city} onChange={(e) => setCity(e.target.value)} />
+                    <input type="text" name="city" className="field-input mt-1.5 w-full max-w-xl" placeholder={t("dash.form.cityPlaceholder")} value={city} onChange={(e) => setCity(e.target.value)} />
                 </label>
                 <label className="block mt-3">
                     <span className="field-label !mb-0 after:ml-0.5 after:text-red-500 after:content-['*']">
-                        Indirizzo
+                        {t("dash.form.address")}
                     </span>
-                    <input type="text" name="address" className="field-input mt-1.5 w-full max-w-xl" placeholder="indirizzo della casa" value={address} onChange={(e) => setAddress(e.target.value)} />
+                    <input type="text" name="address" className="field-input mt-1.5 w-full max-w-xl" placeholder={t("dash.form.addressPlaceholder")} value={address} onChange={(e) => setAddress(e.target.value)} />
                 </label>
                 <label className="block mt-3">
                     <span className="field-label !mb-0 after:ml-0.5 after:text-red-500 after:content-['*']">
-                        Descrivi la casa
+                        {t("dash.form.description")}
                     </span>
-                    <textarea cols={20} rows={5} name="description" className="field-input mt-1.5 w-full max-w-xl" placeholder="una breve descrizione dell'abitazione" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+                    <textarea cols={20} rows={5} name="description" className="field-input mt-1.5 w-full max-w-xl" placeholder={t("dash.form.descriptionPlaceholder")} value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
                 </label>
                 <label className="block mt-3">
                     <span className="field-label !mb-0 after:ml-0.5 after:text-red-500 after:content-['*']">
-                        Prezzo
+                        {t("dash.form.price")}
                     </span>
-                    <input type="text" name="price" className="field-input mt-1.5 w-full max-w-xl" placeholder="prezzo in euro per notte" value={price} onChange={(e) => setPrice(e.target.value)} />
+                    <input type="text" name="price" className="field-input mt-1.5 w-full max-w-xl" placeholder={t("dash.form.pricePlaceholder")} value={price} onChange={(e) => setPrice(e.target.value)} />
                 </label>
                 <div className='mt-8 flex flex-wrap gap-3'>
-                    <button className="btn btn-primary !px-8" type="submit">Salva</button>
-                    <button className="btn btn-ghost" onClick={exitPage}>Torna indietro</button>
+                    <button className="btn btn-primary !px-8" type="submit">{t("dash.form.save")}</button>
+                    <button className="btn btn-ghost" onClick={exitPage}>{t("dash.form.back")}</button>
                 </div>
             </form>
         </div >

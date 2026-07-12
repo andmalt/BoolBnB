@@ -1,6 +1,7 @@
 import React from 'react'
 import "../../../../css/dashboard.css"
 import { classNames } from '../../services/functions';
+import { useTranslation } from 'react-i18next';
 
 interface SponsorshipCardProps {
     name: string;
@@ -21,6 +22,7 @@ const tierStyle = (name: string) => {
 }
 
 const SponsorshipCard = (props: SponsorshipCardProps) => {
+    const { t } = useTranslation();
     const { name, price, duration, generateToken } = props;
     const style = tierStyle(name);
 
@@ -36,10 +38,10 @@ const SponsorshipCard = (props: SponsorshipCardProps) => {
                 {price}&euro;
             </p>
             <p className="mb-6 mt-1 text-sm text-muted">
-                sponsorizzazione per <span className='font-semibold text-heading'>{duration} ore</span>
+                {t("dash.sponsorships.durationFor")} <span className='font-semibold text-heading'>{duration} {t("dash.sponsorships.hours")}</span>
             </p>
             <button className='btn btn-primary mt-auto w-full' onClick={generateToken}>
-                Paga
+                {t("dash.sponsorships.pay")}
                 <svg
                     className="h-4 w-4"
                     fill="currentColor"

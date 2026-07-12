@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import dropin, { Dropin, PaymentMethodPayload } from 'braintree-web-drop-in'
 import { classNames } from '../services/functions';
+import { useTranslation } from 'react-i18next';
 import api from '../services/connection_manager';
 import { useAppSelector } from '../store/hooks';
 import { Sponsorship } from '../services/interfaces';
@@ -16,6 +17,7 @@ interface BraintreeProps {
 }
 
 const Braintree = (props: BraintreeProps) => {
+    const { t } = useTranslation();
     const { clientToken, show, className, id, getMyHouse, closeDrawer, sponsorship } = props;
     const [braintreeInstance, setBraintreeInstance] = useState<Dropin | undefined>();
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -96,7 +98,7 @@ const Braintree = (props: BraintreeProps) => {
                             braintreeInstance && (
                                 <div className='w-full flex justify-center items-center'>
                                     <button className='btn btn-primary mb-4 w-full !py-3' disabled={!braintreeInstance} onClick={requestPaymentMethod}>
-                                        Paga {sponsorship?.price}&euro;
+                                        {t("dash.sponsorships.pay")} {sponsorship?.price}&euro;
                                     </button>
                                 </div>
                             )

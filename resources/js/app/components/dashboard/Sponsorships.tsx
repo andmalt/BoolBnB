@@ -6,8 +6,10 @@ import api from '../../services/connection_manager';
 import moment from 'moment';
 import { Braintree, SponsorshipCard, Xmark } from '..';
 import { classNames } from '../../services/functions';
+import { useTranslation } from 'react-i18next';
 
 const Sponsorships = () => {
+    const { t } = useTranslation();
     const authSelector = useAppSelector(store => store.auth);
     const dashSelector = useAppSelector(store => store.dashboard);
     const [home, setHome] = useState<House | null>(null);
@@ -116,11 +118,11 @@ const Sponsorships = () => {
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                             </span>
-                            <p className='text-sm leading-relaxed text-slate-700 dark:text-slate-300'>La casa <span className='font-semibold uppercase text-heading'>{home?.title}</span> è sponsorizzata con il livello <span className='font-semibold uppercase text-brand-600 dark:text-brand-400'>{sponsorship.name}</span> e scadrà il {moment(sponsorship.pivot.end_date).format("DD/MM/YYYY HH:mm")}.</p>
+                            <p className='text-sm leading-relaxed text-slate-700 dark:text-slate-300'>{t("dash.sponsorships.sponsoredPre")} <span className='font-semibold uppercase text-heading'>{home?.title}</span> {t("dash.sponsorships.sponsoredMid")} <span className='font-semibold uppercase text-brand-600 dark:text-brand-400'>{sponsorship.name}</span> {t("dash.sponsorships.sponsoredEnd")} {moment(sponsorship.pivot.end_date).format("DD/MM/YYYY HH:mm")}.</p>
                         </div>
                         :
                         <div className='flex flex-col items-center justify-center'>
-                            <h3 className='mb-10 text-lg font-semibold text-heading'>Scegli il tipo di sponsorizzazione per la tua casa</h3>
+                            <h3 className='mb-10 text-lg font-semibold text-heading'>{t("dash.sponsorships.choose")}</h3>
                             <div className='flex w-full flex-row flex-wrap items-stretch justify-center gap-4'>
                                 {
                                     sponsorships?.map((sp, i) => {

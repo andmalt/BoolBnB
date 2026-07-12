@@ -7,8 +7,10 @@ import { clear, error, loading, logout } from '../../store/authSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { TopBarMessages, MessagesTable, MessageModal } from '..';
 import { setIsTrashMessages, setMessagesNotRead } from '../../store/messageSlice';
+import { useTranslation } from 'react-i18next';
 
 const Messages = () => {
+    const { t } = useTranslation();
     const [myMessages, setMyMessages] = useState<PaginateMessages>();
     const [myMessage, setMyMessage] = useState<MessageType>();
     const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
@@ -124,7 +126,7 @@ const Messages = () => {
 
     const restoreMessage = async (e: any, id: number) => {
         e.preventDefault()
-        const confirm = window.confirm('Sicuro di voler ripristinare questo messaggio nei ricevuti?');
+        const confirm = window.confirm(t("dash.messages.confirmRestore"));
         if (!confirm) {
             return;
         }
@@ -143,7 +145,7 @@ const Messages = () => {
 
     const deleteMessage = async (e: any, id: number) => {
         e.preventDefault()
-        const confirm = window.confirm('Sicuro di voler inviare il messaggio nel cestino?');
+        const confirm = window.confirm(t("dash.messages.confirmTrash"));
         if (!confirm) {
             return;
         }
@@ -161,7 +163,7 @@ const Messages = () => {
     }
     const destroyMessage = async (e: any, id: number) => {
         e.preventDefault()
-        const confirm = window.confirm('Sicuro di voler cancellare definitivamente il messaggio?');
+        const confirm = window.confirm(t("dash.messages.confirmDestroy"));
         if (!confirm) {
             return;
         }

@@ -52,7 +52,7 @@ const Form = (props: FormProps) => {
             dispatch(clear())
         } catch (e) {
             console.log("error email send:", e);
-            toast.error("Il messaggio non è stato inviato!", {
+            toast.error(t("contact.sendError"), {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: 3000,
             });

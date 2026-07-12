@@ -11,8 +11,6 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import {
-    WEEK,
-    MONTHS,
     DEFAULT_PROPERTIES_YEAR,
     YearStat,
     MonthStat,
@@ -24,12 +22,16 @@ import { clear, error, loading, logout } from '../../store/authSlice';
 import { PaginateHouses } from '../../services/interfaces';
 import { deleteLocalStorage } from '../../services/functions';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Table from './Table';
 
 /**
  * statistics card
  */
 const Statistics = () => {
+    const { t } = useTranslation();
+    const months = t("months", { returnObjects: true }) as string[];
+    const weekDays = t("weekDays", { returnObjects: true }) as string[];
     const [homes, setHomes] = useState<PaginateHouses>();
     const [todayVisitors, setTodayVisitors] = useState<number>(0);
     const [totalVisitors, setTotalVisitors] = useState<number>(0);
@@ -158,10 +160,10 @@ const Statistics = () => {
     };
 
     const data = {
-        labels: MONTHS.map(el => el),
+        labels: months.map(el => el),
         datasets: [
             {
-                label: 'Visitatori dell\'anno',
+                label: t("dash.stats.year"),
                 data: yearVisitors.map((el) => el.total),
                 borderColor: 'rgb(59, 130, 246)',
                 backgroundColor: 'rgba(59 ,130, 246, 0.5)',
@@ -172,7 +174,7 @@ const Statistics = () => {
         labels: monthVisitors.map(el => el.day),
         datasets: [
             {
-                label: `Visitatori nel mese di ${MONTHS[thisMonth - 1]}`,
+                label: t("dash.stats.month", { month: months[thisMonth - 1] }),
                 data: monthVisitors.map((el) => el.total),
                 borderColor: 'rgb(255, 99, 132)',
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
@@ -180,10 +182,10 @@ const Statistics = () => {
         ],
     };
     const data3 = {
-        labels: WEEK.map(el => el),
+        labels: weekDays.map(el => el),
         datasets: [
             {
-                label: `Visitatori dell'ultima settimana`,
+                label: t("dash.stats.week"),
                 data: weekVisitors.map((el) => el.total),
                 borderColor: 'rgb(50,205,50)',
                 backgroundColor: 'rgba(50,205,50, 0.5)',
@@ -233,7 +235,7 @@ const Statistics = () => {
                         </div>
                         <div className="text-right">
                             <p className="text-2xl font-bold text-heading">{todayVisitors}</p>
-                            <p className='text-sm text-muted'>Visitatori di oggi</p>
+                            <p className='text-sm text-muted'>{t("dash.stats.today")}</p>
                         </div>
                     </div>
                     <div className="card group flex items-center justify-start gap-2 p-5">
@@ -242,7 +244,7 @@ const Statistics = () => {
                         </div>
                         <div className="text-right">
                             <p className="text-2xl font-bold text-heading">{totalVisitors}</p>
-                            <p className='text-sm text-muted'>Visitatori totali</p>
+                            <p className='text-sm text-muted'>{t("dash.stats.total")}</p>
                         </div>
                     </div>
                 </div>

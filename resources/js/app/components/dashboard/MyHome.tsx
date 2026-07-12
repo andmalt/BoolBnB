@@ -5,8 +5,10 @@ import { clear, error, loading } from '../../store/authSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import maplibregl from 'maplibre-gl';
+import { useTranslation } from 'react-i18next';
 
 const MyHome = () => {
+    const { t } = useTranslation();
     const [home, setHome] = useState<House | null>(null);
     const [lengthPhotos, setLengthPhotos] = useState<number>(0);
     const [numberPhoto, setNumberPhoto] = useState<number>(1);
@@ -133,12 +135,12 @@ const MyHome = () => {
                     {
                         lengthPhotos > 1 ?
                             <>
-                                <button onClick={() => previousImage()} type="button" aria-label='Foto precedente' className="absolute left-3 top-1/2 z-10 -translate-y-1/2 cursor-pointer focus:outline-none">
+                                <button onClick={() => previousImage()} type="button" aria-label={t("card.prevPhoto")} className="absolute left-3 top-1/2 z-10 -translate-y-1/2 cursor-pointer focus:outline-none">
                                     <span className="flex h-10 w-10 items-center justify-center rounded-full bg-ink-950/50 backdrop-blur transition hover:bg-ink-950/70">
                                         <svg className="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg>
                                     </span>
                                 </button>
-                                <button onClick={() => nextImage()} type="button" aria-label='Foto successiva' className="absolute right-3 top-1/2 z-10 -translate-y-1/2 cursor-pointer focus:outline-none">
+                                <button onClick={() => nextImage()} type="button" aria-label={t("card.nextPhoto")} className="absolute right-3 top-1/2 z-10 -translate-y-1/2 cursor-pointer focus:outline-none">
                                     <span className="flex h-10 w-10 items-center justify-center rounded-full bg-ink-950/50 backdrop-blur transition hover:bg-ink-950/70">
                                         <svg className="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
                                     </span>
@@ -155,43 +157,43 @@ const MyHome = () => {
                 {/* side info */}
                 <div className='flex flex-col gap-6'>
                     <div className='card p-6'>
-                        <h5 className='mb-4 text-sm font-semibold uppercase tracking-wider text-muted'>Caratteristiche immobile</h5>
+                        <h5 className='mb-4 text-sm font-semibold uppercase tracking-wider text-muted'>{t("house.features")}</h5>
                         <ul className='space-y-3 text-sm font-medium text-heading'>
                             <li className='flex items-center justify-between border-b border-slate-100 pb-3 dark:border-white/5'>
-                                <span className='text-muted'>Metri quadri</span>
-                                <span>{home?.square} mq</span>
+                                <span className='text-muted'>{t("house.sqm")}</span>
+                                <span>{home?.square} {t("card.sqm")}</span>
                             </li>
                             <li className='flex items-center justify-between border-b border-slate-100 pb-3 dark:border-white/5'>
-                                <span className='text-muted'>Camere</span>
+                                <span className='text-muted'>{t("house.rooms")}</span>
                                 <span>{home?.rooms}</span>
                             </li>
                             <li className='flex items-center justify-between border-b border-slate-100 pb-3 dark:border-white/5'>
-                                <span className='text-muted'>Letti</span>
+                                <span className='text-muted'>{t("house.beds")}</span>
                                 <span>{home?.beds}</span>
                             </li>
                             <li className='flex items-center justify-between'>
-                                <span className='text-muted'>Bagni</span>
+                                <span className='text-muted'>{t("house.bathrooms")}</span>
                                 <span>{home?.bathrooms}</span>
                             </li>
                         </ul>
                     </div>
                     <div className='card bg-gradient-to-br from-brand-600 to-brand-700 p-6 !text-white dark:border-brand-500/30'>
-                        <p className='text-sm font-medium text-brand-100'>Prezzo</p>
-                        <p className='mt-1 text-3xl font-bold text-white'>&euro;{home?.price} <span className='text-base font-normal text-brand-100'>/ notte</span></p>
+                        <p className='text-sm font-medium text-brand-100'>{t("house.price")}</p>
+                        <p className='mt-1 text-3xl font-bold text-white'>&euro;{home?.price} <span className='text-base font-normal text-brand-100'>{t("house.perNight")}</span></p>
                     </div>
                 </div>
             </div>
 
             {/* description */}
             <div className='card mt-6 p-6'>
-                <h5 className='mb-4 text-sm font-semibold uppercase tracking-wider text-muted'>Descrizione</h5>
+                <h5 className='mb-4 text-sm font-semibold uppercase tracking-wider text-muted'>{t("house.description")}</h5>
                 <p className='leading-relaxed text-slate-700 dark:text-slate-300'>{home?.description}</p>
             </div>
 
             {/* map */}
             <div className='card mt-6 mb-4 p-2'>
                 <div className='px-4 pb-2 pt-4'>
-                    <h5 className='text-sm font-semibold uppercase tracking-wider text-muted'>Dove si trova</h5>
+                    <h5 className='text-sm font-semibold uppercase tracking-wider text-muted'>{t("house.location")}</h5>
                     <p className='mt-1 text-sm text-heading'>{home?.address}, {home?.city} ({home?.region})</p>
                 </div>
                 <div ref={mapElement} className="mapDiv"></div>
