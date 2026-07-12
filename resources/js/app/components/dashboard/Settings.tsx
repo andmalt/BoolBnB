@@ -23,6 +23,7 @@ const Settings = (props: SettingsProps) => {
     const [newPassword, setNewPassword] = useState<string>("")
     const [confirmNewPassword, setConfirmNewPassword] = useState<string>("")
     const [file, setFile] = useState<File | null>(null);
+    const [preview, setPreview] = useState<string>("");
     const dispatch = useAppDispatch();
     const navigate = useNavigate()
     const authSelector = useAppSelector(state => state.auth);
@@ -126,8 +127,12 @@ const Settings = (props: SettingsProps) => {
     }
 
     const handleFileChange = async (e: any) => {
-        // console.log("fileList=", e.target.files);
-        setFile(e.target.files[0]);
+        const selected = e.target.files[0];
+        if (!selected) {
+            return;
+        }
+        setFile(selected);
+        setPreview(URL.createObjectURL(selected));
         toast.info(t("dash.settings.photoSelected"), {
             position: 'top-right',
             autoClose: 3000,
@@ -150,6 +155,8 @@ const Settings = (props: SettingsProps) => {
         try {
             const response = await api.updateUserPhotos(authSelector.token, data);
             if (response.data.success) {
+                setFile(null)
+                setPreview("")
                 getUserDetails()
                 toast.success(t("dash.settings.photoSaved"), {
                     position: 'top-right',
@@ -229,23 +236,51 @@ const Settings = (props: SettingsProps) => {
                     <p className='text-sm text-muted'>{t("dash.settings.personalInfoDesc2")}</p >
                 </div>
                 <div className='md:px-4 flex flex-col md:w-2/3'>
-                    <div className='mb-8 flex flex-col'>
+                    <div className='mb-8'>
                         <form method="post" onSubmit={(e) => sendPhotos(e)}>
-                            <span className='block'>
-                                <label className='flex h-36 w-36 flex-col flex-wrap items-start'>
-                                    <input type="file" name="image" id="image" className='hidden' onChange={handleFileChange} />
-                                </label>
-                                <button type="submit" className='btn btn-ghost my-1 flex-col !items-start gap-2 !p-2'>
-                                    <img className='h-36 w-36 cursor-pointer rounded-xl object-cover' src={!photo ? "./default-user/user.png" : photo} alt="Avatar" />
-                                    {t("dash.settings.saveImage")}
-                                </button>
-                            </span>
+                            <div className='flex flex-wrap items-center gap-6'>
+                                {/* avatar preview (shows the newly selected file before saving) */}
+                                <div className='relative'>
+                                    <img className='h-28 w-28 rounded-2xl border border-slate-200/80 object-cover shadow-sm dark:border-white/10' src={preview ? preview : (!photo ? "./default-user/user.png" : photo)} alt="Avatar" />
+                                    {
+                                        preview ?
+                                            <span className='absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-brand-600 text-white shadow-sm'>
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-3.5 w-3.5">
+                                                    <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" />
+                                                </svg>
+                                            </span>
+                                            :
+                                            null
+                                    }
+                                </div>
 
+                                <div className='flex flex-col items-start gap-3'>
+                                    <div className='flex flex-wrap gap-2'>
+                                        {/* opens the file picker */}
+                                        <label htmlFor='image' className='btn btn-ghost cursor-pointer'>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="h-4 w-4">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                                            </svg>
+                                            {t("dash.settings.uploadImage")}
+                                            <input type="file" accept="image/*" name="image" id="image" className='hidden' onChange={handleFileChange} />
+                                        </label>
+                                        {/* saves the selected file */}
+                                        <button type="submit" disabled={!file} className='btn btn-primary'>
+                                            {t("dash.settings.saveImage")}
+                                        </button>
+                                        <button type='button' onClick={(e) => deletePhoto(e)} className='btn bg-red-500/10 !text-red-600 hover:bg-red-500/20 dark:!text-red-400'>{t("dash.settings.deleteImage")}</button>
+                                    </div>
+                                    <p className='text-xs text-muted'>
+                                        {
+                                            file ?
+                                                <>{t("dash.settings.newImageSelected")} <span className='font-semibold text-heading'>{file.name}</span></>
+                                                :
+                                                t("dash.settings.imageHint")
+                                        }
+                                    </p>
+                                </div>
+                            </div>
                         </form>
-                        <div className='flex flex-col flex-wrap items-start gap-1'>
-                            <button onClick={(e) => deletePhoto(e)} className='btn my-1 bg-red-500/10 !text-red-600 hover:bg-red-500/20 dark:!text-red-400'>{t("dash.settings.deleteImage")}</button>
-                            <p className='text-xs text-muted'>{t("dash.settings.imageHint")}</p>
-                        </div>
                     </div>
                     <form method='POST' onSubmit={(e) => changeInfo(e)}>
                         <div className='flex flex-col mb-3'>
