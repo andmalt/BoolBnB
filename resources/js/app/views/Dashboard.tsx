@@ -67,13 +67,13 @@ const Dashboard = () => {
     }, []);
     return (
         <div id='dashboard' className="page flex flex-row flex-auto antialiased">
-            <div className='w-1/4 lg:w-1/5 h-full'>
+            <div className='w-14 shrink-0 md:w-48 xl:w-60 2xl:w-[300px]'>
                 {/* <!-- Sidebar --> */}
                 <Sidebar emailVerification={emailVerificationSelector.emailVerification} />
             </div>
 
 
-            <div className="h-full mt-4 mb-10 w-3/4 lg:w-4/5 lg:m-6">
+            <div className="mt-4 mb-10 min-w-0 flex-1 lg:m-6">
                 {
 
                     dashSelector.dashboard == variablesDashboard.PROFILE ?

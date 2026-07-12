@@ -45,7 +45,7 @@ const Sidebar = (props: SidebarProps) => {
     }
 
     return (
-        <div className="fixed left-0 z-20 flex h-[100vh] w-14 flex-col border-r border-slate-200/80 bg-white transition-all duration-300 hover:w-40 md:top-0 md:w-48 hover:md:w-52 xl:w-60 xl:hover:w-[280px] 2xl:w-[300px] 2xl:hover:w-[336px] dark:border-white/10 dark:bg-ink-900">
+        <div className="sticky top-16 z-20 flex h-[calc(100vh-4rem)] w-14 flex-col border-r border-slate-200/80 bg-white transition-all duration-300 hover:w-40 md:w-48 hover:md:w-52 xl:w-60 xl:hover:w-[280px] 2xl:w-[300px] 2xl:hover:w-[336px] dark:border-white/10 dark:bg-ink-900">
             <div className='hidden overflow-hidden py-8 px-6 md:block'>
                 <Link to={'/'} className='flex items-center gap-2'>
                     <span className='flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-600 text-white'>
