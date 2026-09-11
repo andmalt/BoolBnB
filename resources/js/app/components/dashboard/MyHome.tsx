@@ -4,7 +4,7 @@ import { House, Photos } from '../../services/interfaces';
 import { clear, error, loading } from '../../store/authSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import 'maplibre-gl/dist/maplibre-gl.css';
-import * as maplibregl from 'maplibre-gl';
+import maplibregl from '../../lib/maplibre';
 import { useTranslation } from 'react-i18next';
 
 const MyHome = () => {

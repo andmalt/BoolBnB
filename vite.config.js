@@ -15,4 +15,8 @@ export default defineConfig({
         tailwindcss(),
         react(),
     ],
+    // maplibre-gl v6 spedisce un worker ESM: senza questo Vite lo emette come IIFE
+    worker: {
+        format: 'es',
+    },
 });
