@@ -6,7 +6,7 @@ import { clear, error, loading } from '../store/authSlice';
 import { useAppDispatch } from '../store/hooks';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import "../../../css/houseMap.css"
-import maplibregl from 'maplibre-gl';
+import * as maplibregl from 'maplibre-gl';
 import { House, Photos } from '../services/interfaces';
 import { useTranslation } from 'react-i18next';
 

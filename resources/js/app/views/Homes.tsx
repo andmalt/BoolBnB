@@ -1,4 +1,4 @@
-import maplibregl from 'maplibre-gl';
+import * as maplibregl from 'maplibre-gl';
 import React, { useEffect, useRef, useState } from 'react'
 import { HouseSmallCard, Pagination } from '../components';
 import api from '../services/connection_manager';
